@@ -1,0 +1,106 @@
+<?php
+
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+
+/**
+ * log.php
+ *
+ * Requires PHP version 5.3
+ *
+ * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
+ * that is available through the world-wide-web at the following URI:
+ * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
+ * the GPL License and are unable to obtain it through the web, please
+ * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
+ *
+ * @category   Library
+ * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * @copyright  1997-2012 Stonyhills HQ
+ * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version    Release: 1.0.0
+ * @link       http://stonyhillshq/documents/index/carbon4/libraries/log
+ * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
+ * 
+ */
+
+namespace Library;
+
+/**
+ * What is the purpose of this class, in one sentence?
+ *
+ * How does this class achieve the desired purpose?
+ *
+ * @category   Library
+ * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * @copyright  1997-2012 Stonyhills HQ
+ * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version    Release: 1.0.0
+ * @link       http://stonyhillshq/documents/index/carbon4/libraries/log
+ * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
+ */
+final class Log{
+    
+    /**
+     * A file resource where log message are stored
+     * @var string 
+     */
+    static $file = '';
+    
+    /**
+     * Determines whether to enable the log or not
+     * @var boolean 
+     */
+    static $enable = FALSE;
+    
+    /**
+     * Stores a message in the log file
+     *  
+     * @param type $string
+     * @param type $type 
+     */
+    public static function message($string='', $type="message"){}
+    
+    /**
+     * Stores an error message in the log file
+     * 
+     * @param type $string
+     * @param type $code 
+     */
+    public static function error($string='',$code=404){}
+    
+    /**
+     * Returns the contents of the log file
+     * 
+     * @return string
+     */
+    public static function getFile(){}
+    
+    /**
+     * Returns the last message stored in the log 
+     * 
+     * @return array
+     */
+    public static function getLastMessage(){}
+    
+    /**
+     * Gets an instance of the logger class
+     * 
+     * @staticvar self $instance
+     * @return self 
+     */
+    public static function getInstance(){
+        
+        static $instance;
+        
+        //If the class was already instantiated, just return it
+        if (isset($instance))
+            return $instance;
+
+        $instance = new self;
+        
+        //Remember to set the file;
+        self::$file = Config::get();
+
+        return $instance;
+    }
+}
