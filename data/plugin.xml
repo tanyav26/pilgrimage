@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config SYSTEM "/data/config.dtd">
+
+<!-- A Plugin DTD constrained definition -->
+<config type="plugin">
+    
+    <plugin id="system.updater" version="1.0.0" provider="Stonyhills HQ">
+        
+        <!-- Define the plugin requirements, The system will check if these are loaded  -->
+        <requires>
+            <import id="system.backup" version="1.0.1" match="compatible" />
+            <import id="system.reset"  version="0.3.1" match="exact" />
+        </requires>
+        
+        <!-- Parameters for the admin panel -->
+        <parameters>
+            <param name="servers" default="http://update.tuiyo.co.uk/">
+                <option value="http://update.tuiyo.co.uk/">Tuiyo update Server<option>
+                <option value="http://repository.stonyhillshq.com">Stonyhills HQ</option>
+            </param>
+            <param name="frequency" label="Update Frequency">
+        </parameters>
+        
+        <!-- Defines where in the system the plugin will run -->
+        <hooks>
+            <hook trigger="onStart" context="system" />
+            <hook trigger="onAppStart" context="system" />
+            <hook trigger="onPluginLoad" context="system" />
+        </hooks>
+        
+    </plugin>
+    
+</config>
