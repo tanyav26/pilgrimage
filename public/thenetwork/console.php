@@ -43,6 +43,7 @@
     .e512,.e128,.e32,.e2{background-color:#FFA53A}
     .e8,.e1024{background-color:#0080A1}
     /*.e8{background-color:#708090}*/
+    .console-box{display:none;}
     pre{display: inline-block; padding: 0; margin: 0 4px; max-width: 90%; word-wrap:break-word}
     .console-log{ padding: 2px 0; border-bottom: 1px solid #ddd; min-height: 25px }
     .console-log:after { clear: both; zoom:1 }
@@ -55,11 +56,11 @@
 </style>
 
 <script type="text/javascript">
-    $(function(){
+    //$(function(){
         $("#toggleconsole").click(function(e){
             e.preventDefault();
             var self = $(this);
             $(".console-box").toggle();
         })
-    })(jQuery)
+    //})(jQuery);
 </script>
