@@ -52,7 +52,8 @@ final class JSON extends Library\Output\Document {
 
         //1. Work on the headers, make sure everything is beautiful
         //json response headers
-        //$this->headers('text/json');
+        $this->headers('text/json');
+        
         $this->response = array(
             "status" => 200,
             "message" => "",

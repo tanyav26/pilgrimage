@@ -494,7 +494,6 @@ final class Router extends Object {
                     ->setView($view)
                     ->setFormat($format);
 
-
             Event::trigger('onAfterRoute', $this);
 
             $this->routeMap = $route;

@@ -291,6 +291,7 @@ class Output extends Object {
         // seconds, minutes, hours, days
         //The requested Response format
         $this->format = $this->router->getFormat(); //Because the output class is loaded before the router, use this to check if the format has changed after routing
+        
         $outputFormat = $this->format;
         $responseFormat = !empty($outputFormat) ? $outputFormat : $format;
 
