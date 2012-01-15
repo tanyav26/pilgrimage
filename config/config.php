@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * authority.php
+ * config.php
  *
  * Requires PHP version 5.3
  *
@@ -53,14 +53,13 @@ $config['encrypt'] = array(
     'key' => 'awesome-secret'
 );
 
-//The system config key can be overloaded with data from the database. 
-//but for now to test things i am just going to use it on file
 $config['environment'] = array(
     'mode' => 0
 ); //0 = DEVELOPER, 1 = TEST, 2 = PRODUCTION 
 
-
-$config['server'] = array(
+//The system config key can be overloaded with data from the database. 
+//but for now to test things i am just going to use it on file
+$config['system'] = array(
     'host' => 'tuiyosocial.tld',
     'path' => '/',
     'template' => 'thenetwork'
