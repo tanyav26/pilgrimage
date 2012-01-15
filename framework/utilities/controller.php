@@ -64,7 +64,7 @@ abstract class Controller extends \Library\Object {
      * 
      * @var boolean 
      */
-    protected $displayed = false;
+    static $displayed = false;
 
     /**
      * Sets for redirect
@@ -282,9 +282,14 @@ abstract class Controller extends \Library\Object {
 
     final public function output($layout = null) {
         
+        static::$displayed = false;
+        
+        if(static::$displayed) return false;
+        
         $this->output->display();
+        //return self::__destruct();
 
-        $this->displayed = true;
+        static::$displayed = true;
     }
 
     /**
@@ -322,7 +327,7 @@ abstract class Controller extends \Library\Object {
         
         //Determine Variables that have not been set
         //Set
-        if (!$this->displayed) {
+        if (!static::$displayed) {
             return $this->output();
         }
     }
