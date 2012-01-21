@@ -37,7 +37,7 @@ $config['database'] = array(
 $config['session'] = array(
     'store' => 'database',
     'table' => '?session',
-    'cookie' => 'tuiyo_session',
+    'cookie' => 'c4session',
     'domain' => '',
     'path' => '/tuiyosocial.tld',
     //The absolute path to the session data file store
