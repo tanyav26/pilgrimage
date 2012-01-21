@@ -35,7 +35,7 @@
 </div>
 
 <style type="text/css">
-    body{position:relative; padding-bottom: 50px}
+    body{position:relative; padding-bottom: 41px}
     .log-code{ background: #528CE0; color: #fff; padding: 2px; margin: 0px 5px 0 0; display: block; float: left; }
     /*.e4{background:#dc2509}*/
     .e256,.e1,.e4,.e64,.e9031,.e9032,.e9033,.e16{background-color:#FF010E}

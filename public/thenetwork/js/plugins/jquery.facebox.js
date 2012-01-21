@@ -87,7 +87,7 @@
       faceboxTitle : '',
       overlay      : true,
       loadingImage : '',
-      closeImage   : 'img/jquery/closelabel.png',
+      closeImage   : '',
       imageTypes   : [ 'png', 'jpg', 'jpeg', 'gif' ],
       faceboxHtml  : '\
     <div id="facebox" style="display:none;"> \
@@ -191,8 +191,8 @@
     $('body').append($.facebox.settings.faceboxHtml)
 
     var preload = [ new Image(), new Image() ]
-    preload[0].src = $.facebox.settings.closeImage
-    preload[1].src = $.facebox.settings.loadingImage
+    //preload[0].src = $.facebox.settings.closeImage
+    preload[0].src = $.facebox.settings.loadingImage
 
     $('#facebox').find('.b:first, .bl').each(function() {
       preload.push(new Image())
@@ -200,7 +200,7 @@
     })
 
     $('#facebox .close').click($.facebox.close)
-    $('#facebox .close_image').attr('src', $.facebox.settings.closeImage)
+    //$('#facebox .close_image').attr('src', $.facebox.settings.closeImage)
   }
 
   // getPageScroll() by quirksmode.com

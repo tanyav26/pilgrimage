@@ -114,14 +114,6 @@ $('.moduleHolder').widgetize();
         $(this).next().slideToggle();
         return false;
     });
-
-    $('.colapsible-nav ul li div').hide();
-    $('.colapsible-nav ul li a[rel=colapsible]').click(function(e) {
-        e.preventDefault();
-        //$(this).parent().siblings().find('div').slideUp();
-        $(this).next().slideToggle();
-        return false;
-    });
 });
 
 

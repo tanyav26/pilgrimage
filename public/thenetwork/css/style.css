@@ -46,10 +46,9 @@ audio[controls], canvas, video { display: inline-block; *display: inline; *zoom:
 html { font-size: 100%; overflow-y: scroll; -webkit-overflow-scrolling: touch; -webkit-tap-highlight-color: rgba(0,0,0,0); -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
 body { margin: 0; font-size: 13px; line-height: 1.5em; background: #F8F8F8; color: #595959; position: relative }
 body, button, input, select, textarea { font:normal 0.8138em/1.5em 'Lucida grande', helvetica, arial, sans-serif; color: #222; }
-::-moz-selection { background: #fe57a1; color: #fff; text-shadow: none; }
-::selection { background: #fe57a1; color: #fff; text-shadow: none; }
-a { color: #3079ED; text-decoration: none }
-a:visited { color: #307983; }
+::-moz-selection { background: #5793BD; color: #fff; text-shadow: none; }
+::selection { background: #5793BD; color: #fff; text-shadow: none; }
+a,a:visited { color: #5793BD; text-decoration: none }
 a:focus { outline: thin dotted; }
 a:hover, a:active { outline: 0; }
 abbr[title] { border-bottom: 1px dotted; }
@@ -180,13 +179,15 @@ table { border-collapse: collapse; border-spacing: 0; }
 
 .margin-top-0{margin-top: 0;}
 .padding-20{padding:20px}
-
+.scroll-x{overflow-x: scroll!important; white-space: nowrap !important }
 /* 2. Header Styles */
-header[role=introduction]{/*box-shadow: 0 4px 6px -2px #999; */background: #272727; position: fixed; top: 0; left: 0; z-index: 100;  width: 100%; margin: 0; padding: 0; color: #fff }
+header[role=introduction]{/*box-shadow: 0 4px 6px -2px #999; */background: #272727; top: 0; left: 0; z-index: 100;  width: 100%; margin: 0; padding: 0; color: #fff }
 
 
-h1.site-logo{font-family: Bello; float: left; display:block; font-size: 30px; margin: 0; padding: 9px 0 5px; min-width: 200px}
-h1.site-logo a{color: #fff; text-decoration: none}
+h1.site-logo{ font-size: 30px; margin: 0; padding: 10px; background: #272727  }
+h1.site-logo a, a.logo{ font-family: Bello;  display:block;text-decoration: none; float: left; text-indent: -999em; background-image:url('../img/logo.png'); background-repeat: no-repeat; background-position: 0 2px; height: 20px; width: 150px;}
+a.logo{ background-position: 0 -37px; height: auto  }
+
 
 .notification{background-position:10px 12px;background-repeat:no-repeat; clear:both;color:#fff;display:block;margin:0;padding:10px 15px}
 .notification p{display: inline}
@@ -210,11 +211,11 @@ nav#nav-bar ul{}
 nav#nav-bar ul li{position:relative; line-height: 30px; display:inline-block;float:left; border-right: 1px solid #000;border-left:1px solid #333; padding: 0}  
 nav#nav-bar ul li a{color:#fff; cursor: pointer; -moz-transition: color 400ms ease;-webkit-transition: color 400ms ease;background-position: 9px 6px;background-repeat: no-repeat;display: block;padding: 5px 10px;text-decoration: none;transition: color 400ms ease;margin: 0}
 nav#nav-bar ul li a img{float: left; margin-right: 10px}
-div#nav-search{float: left; max-width: 400px; position: relative}
-div#nav-search form{margin: 3px 0; padding: 1px 2px 0; border: 1px solid #444; background-color: #272727; box-shadow: 0 0 2px black inset; -kthml-box-shadow: 0 0 2px black inset; -moz-box-shadow: 0 0 2px black inset; color: #fff;}
+div#nav-search{ position: relative; }
+div#nav-search form{ margin: 5px; }
 /*nav#nav-bar ul li form:active,nav#nav-bar ul li form:focus,nav#nav-bar ul li form:hover{background: #fff; -moz-box-shadow: 0px 1px 4px 0px #CCC inset;-o-box-shadow: 0px 1px 4px 0px #CCC inset;-webkit-box-shadow: 0px 1px 4px 0px #CCC inset;border: 1px solid #AAA;box-sizing: border-box; border-bottom-color: #CCC;border-left-color: #CCC;box-sizing:border-box; -moz-box-sizing:border-box; -khtml-box-sizing:border-box; -webkit-box-sizing:border-box;}*/
-div#nav-search form input[type=text]{border: none; background: none; padding: 5px 10px; color: #fff;box-shadow:none}
-div#nav-search form input:focus{outline:none; border:none}
+div#nav-search form input[type=text]{ width: 100%; margin-bottom: 0px}
+div#nav-search form input:focus{}
 
 /*nav#nav-bar ul li form:active input[type=text],nav#nav-bar ul li form:focus input[type=text],nav#nav-bar ul li form:hover input[type=text]{color: #272727}*/
 
@@ -239,21 +240,27 @@ nav#nav-bar ul li div.submenu, div#nav-search div.submenu{ position: absolute; l
 nav#nav-bar ul li:hover div.submenu, div#nav-search:hover div.submenu{display: block;}
 div#nav-search div.submenu{background-color: #fff;box-shadow: 0 0 1px rgba(0, 0, 0, .25), 0 1px 5px 3px rgba(0, 0, 0, .05), 0 5px 4px -3px rgba(0, 0, 0, .06);margin-top: 4px; color: #444}
 /* Administrator Menu */
-nav#admin-side-nav ul li a{cursor:pointer;display: block;padding: 10px 0 10px 20px;border-top: 1px solid white;border-bottom: 1px solid #BEC9D0;color: #5E6A80;text-decoration: none;text-shadow: 0 1px 0 white;font-weight: bold;}
-nav#admin-side-nav ul li div{display:none}
-nav#admin-side-nav ul li ul{padding: 5px 0;padding-left: 15px;background: #EEE;border-bottom: 1px solid #BECAD1;}
-nav#admin-side-nav ul li ul li {border: 0;font-size: 90%;}
-nav#admin-side-nav ul li ul li a {padding: 6px 10px;border: 0; cursor: pointer; font-weight: normal}
-nav#admin-side-nav ul li ul li a span,nav#admin-side-nav ul li a span{min-width: 14px;text-align: center;float: right;background: #E0E5E9;font-size: 11px;border: 1px solid #BEC9D0;padding: 0 2px;box-shadow: 0 1px 0 #fff;-moz-box-shadow: 0 1px 0 #fff;-webkit-box-shadow: 0 1px 0 #fff;border-radius:3px; display: inline-block; line-height: 1.6em; font-weight: normal}
-nav#admin-side-nav ul li a[rel=colapsible] span{margin-right: 10px}
-nav#admin-side-nav ul li.current{background: transparent url('../img/side-nav-active.png') right center no-repeat scroll; margin-right: -1px}
-nav#admin-side-nav ul li.current ul{ border-right: 1px solid #ccc}
+nav#side-nav ul li a{cursor:pointer;display: block;padding: 10px 0 10px 10px;border-top: 1px solid white;border-bottom: 1px solid #eee;color: #5E6A80;text-decoration: none;text-shadow: 0 1px 0 white;font-weight: bold;}
+nav#side-nav ul li:first-child a{border-top: none}
+nav#side-nav ul li div{display:none}
+nav#side-nav ul li ul{padding: 5px 0;padding-left: 15px;background: #EEE;border-bottom: 1px solid #eee;border-top: 1px solid #f9f9f9;}
+nav#side-nav ul li ul li {border: 0;font-size: 90%;}
+nav#side-nav ul li ul li a {padding: 6px 10px;border: 0; cursor: pointer; font-weight: normal}
+nav#side-nav ul li ul li a span,nav#side-nav ul li a span{min-width: 14px;text-align: center;float: right;background: #E0E5E9;font-size: 11px;border: 1px solid #BEC9D0;padding: 0 2px;box-shadow: 0 1px 0 #fff;-moz-box-shadow: 0 1px 0 #fff;-webkit-box-shadow: 0 1px 0 #fff;border-radius:3px; display: inline-block; line-height: 1.6em; font-weight: normal}
+nav#side-nav ul li a[rel=colapsible] span{margin-right: 10px}
+nav#side-nav ul li.current{background: transparent url('../img/side-nav-active.png') right center no-repeat scroll; margin-right: -1px}
+nav#side-nav ul li.current ul{ border-right: 1px solid #ccc}
 
 
 /* 4. Main Content Styles */
-section[role=body]{margin-top: 3em}
-section[role=body] section{margin: 15px auto;}
+body{border-top: 5px solid #272727}
+section[role=body]{}
+section[role=body] section{margin: 0 auto;}
 section[role=body] section div[role=container]{ min-height: 800px; khtml-box-shadow: 0 0 1px rgba(0, 0, 0, .25), 0 1px 5px 3px rgba(0, 0, 0, .05), 0 5px 4px -3px rgba(0, 0, 0, .06); -moz-box-shadow: 0 0 1px rgba(0, 0, 0, .25), 0 1px 5px 3px rgba(0, 0, 0, .05), 0 5px 4px -3px rgba(0, 0, 0, .06); -o-box-shadow: 0 0 1px rgba(0, 0, 0, .25), 0 1px 5px 3px rgba(0, 0, 0, .05), 0 5px 4px -3px rgba(0, 0, 0, .06); box-shadow: 0 0 1px rgba(0, 0, 0, .25), 0 1px 5px 3px rgba(0, 0, 0, .05), 0 5px 4px -3px rgba(0, 0, 0, .06); -moz-box-sizing: border-box; -webkit-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; background: #fff; }
+
+.panel{border-left: 1px solid #ccc; margin-left: 200px; min-height: 800px}
+.panel-box{border-right: 1px solid #ccc; min-height: 1000px}
+.panel-box:first-child{ background:#fff; }
 
 .tabber{ padding: 0 0 px; margin-bottom: 10px; border-bottom: 1px solid #ccc}
 .tabber ul, .tab-switch {list-style: none;padding: 0 15px;margin: 0 0 0px 0;}
@@ -263,28 +270,44 @@ section[role=body] section div[role=container]{ min-height: 800px; khtml-box-sha
 .tabber ul li a.tab-close:hover{ background-position: 0 -20px}
 .tabber ul li:hover a.tab-close{display:block}
 .tabber ul li a, .tab-switch li a{font-size: 95%; border: solid; border-color: #ccc; border-width: 1px 1px 0 1px; padding: 5px 12px; display: inline-block; color: #888;}
-.tabber ul li a.current,.tab-switch li a.current {padding-bottom: 1px;background: #F0F0F0;box-shadow: 0.9px -3px 5px #c9c9c9;color: #666;height: 19px;margin-bottom: -1px;z-index: 1;border-bottom: 1px solid #F0F0F0;}
+.tabber ul li a.current,.tab-switch li a.current {padding-bottom: 1px;background: #F0F0F0;;color: #666;height: 19px;margin-bottom: -1px;z-index: 1;border-bottom: 1px solid #F0F0F0;}
 
 .sidetabs{background-repeat:repeat-y;overflow:hidden; white-space: normal}
 
-.vertical-tabs.sidetabs nav{width: 100%; margin:0; background: #fafafa; padding-top: 10px; border-bottom: 1px solid #c2c2c2;}
+.vertical-tabs.sidetabs nav{width: 100%; margin:0; background: #fafafa; padding-top: 10px; border-bottom: 1px solid #eee;}
 .vertical-tabs .sidetab-switch{float: none; width: 100%; clear:both}
 .vertical-tabs .sidetab-switch ul{margin: 0 10px; }
 .vertical-tabs .sidetab-switch a{display:inline-block;padding:10px 0;text-decoration:none; background: transparent none repeat-x 0 0 scroll;line-height: 29px;padding: 0 21px; border: 1px solid transparent; margin-bottom: -1px; color: normal}
 .vertical-tabs .sidetab-switch li{border-bottom:none; display: inline-block; margin: 0 -5px 0 0; position: relative;cursor: pointer;}
-.vertical-tabs .sidetab-switch li a.current{background: #fff; border: 1px solid #c2c2c2; border-bottom: 1px solid #fff;  color: inherit}
+.vertical-tabs .sidetab-switch li a.current{background: #fff; border: 1px solid #eee; border-bottom: 1px solid #fff;  color: inherit;}
 .vertical-tabs .sidetab-switch p{font-size:85%;margin:20px 20px 0 0}
 
-.horizontal-tabs.sidetabs nav{min-width: 100px; max-width: 150px; margin:0; padding: 10px 10px 0 0; background: #fdfdfd; border-left: 1px solid #c2c2c2; border-bottom: none}
+.horizontal-tabs.sidetabs nav{min-width: 100px; max-width: 150px; margin:0; padding: 10px 10px 0 0; background: #fdfdfd; border-left: 1px solid #eee; border-bottom: none}
 .horizontal-tabs .sidetab-switch{float:right;min-width: 100px; max-width: 150px}
 .horizontal-tabs .sidetab-switch ul{margin: 0}
 .horizontal-tabs .sidetab-switch a{display:block;padding:4px 10px;text-decoration:none; cursor:  pointer}
 .horizontal-tabs .sidetab-switch li{background:none;border-bottom:none; padding-left:0; margin: 0; display: block; }
-.horizontal-tabs .sidetab-switch li a.current{border:1px solid #c2c2c2; border-left: none; margin-left: -1px }
+.horizontal-tabs .sidetab-switch li a.current{border:1px solid #eee; border-left: none; margin-left: -1px; box-shadow:0px 0px 0px #eee }
 .horizontal-tabs .sidetab-switch p{font-size:85%;margin:20px 20px 0 0}
 
-
 .sidetab{ white-space: normal;display:block;overflow:hidden;padding:20px; background: #fff; min-height:700px}
+
+.login { background-image:none; }
+.login section[role=main] {margin:100px auto 0;min-width:380px; width:380px; background:none;}
+.login section[role=main] > a.logo {width:150px;height:50px;text-indent:-9999em;display:block;margin: auto;}
+.login #login-box {margin-top:25px;border-radius:3px;}
+#login-box .article-container {-khtml-box-shadow: 0 0 1px rgba(0, 0, 0, .25), 0 1px 5px 3px rgba(0, 0, 0, .05), 0 5px 4px -3px rgba(0, 0, 0, .06); -moz-box-shadow:0 0 1px rgba(0, 0, 0, .25), 0 1px 5px 3px rgba(0, 0, 0, .05), 0 5px 4px -3px rgba(0, 0, 0, .06);-o-box-shadow:0 0 1px rgba(0, 0, 0, .25), 0 1px 5px 3px rgba(0, 0, 0, .05), 0 5px 4px -3px rgba(0, 0, 0, .06);box-shadow:0 0 1px rgba(0, 0, 0, .25), 0 1px 5px 3px rgba(0, 0, 0, .05), 0 5px 4px -3px rgba(0, 0, 0, .06);-moz-box-sizing: border-box;-webkit-box-sizing: border-box;-ms-box-sizing: border-box;box-sizing: border-box; background: #fff;padding:25px 25px 15px; border-radius:3px;}
+.login form {overflow:hidden;}
+.login form fieldset { }
+.login form dt { width:50px;}
+.login form dt.checkbox {left:85px;width:200px;}
+.login form dd { left:65px; }
+.login-links {margin:10px 0; padding: 0}
+.login-links a { text-decoration:none; line-height: 2em }
+.login-links li {disblay:block; list-style:none;background:none;padding:0;}
+.login-links li:first-child { border-left:none; }
+.login-links li:last-child {padding-right:0;border-right:none; }
+
 /*.vertical-tabs .sidetab{padding: 0}*/
 
 /* 5. Post Content Styles */

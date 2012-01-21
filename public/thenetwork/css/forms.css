@@ -234,8 +234,10 @@ input[type='submit']:not(.custom-appearance) {
     margin-bottom: 0;
     min-width: 4em;
     padding: 0.5em 12px;
+    line-height: 1.3em;
     text-decoration: none;display: inline-block;
 }
+a.button{ color: inherit; text-decoration: none}
 
 button:not(.custom-appearance):hover,.button:hover,
 input[type='button']:not(.custom-appearance):hover,
