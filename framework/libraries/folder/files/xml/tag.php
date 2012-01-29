@@ -1,28 +1,46 @@
 <?php
 
+/* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
+
+/**
+ * tag.php
+ *
+ * Requires PHP version 5.3
+ *
+ * 
+ * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
+ * that is available through the world-wide-web at the following URI:
+ * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
+ * the GPL License and are unable to obtain it through the web, please
+ * send a note to support@stonyhillshq.com so we can mail you a copy immediately.
+ *
+ *
+ * @category   Library
+ * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * @copyright  1997-2012 Stonyhills HQ
+ * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version    Release: 1.0.0
+ * @link       http://stonyhillshq/documents/index/carbon4/libraries/path
+ * @since      Class available since Release 1.0.0 Jan 28, 2012 4:45:51 PM
+ * 
+ */
 namespace Library\Folder\Files\Xml;
 
 use Library\Folder;
 use Library\Folder\Files as Files;
 
 /**
- * Do Framework
+ * What is the purpose of this class, in one sentence?
  *
- * for PHP version 5
+ * How does this class achieve the desired purpose?
  *
- * LICENSE: This source file is subject to version 3.01 of the GPL license
- * that is available through the world-wide-web at the following URI:
- * http://www.gnu.org/licenses/gpl.txt.  If you did not receive a copy of
- * the GPLv3 License and are unable to obtain it through the web, please
- * send a note to license@tuiyo.co.uk so we can mail you a copy immediately.
- *
- * @category   Do
- * @package    DoVersion
- * @author     Original Author <livingstonefultang@gmail.com>
- * @copyright  2011 Stonyhills LLC
+ * @category   Libraries
+ * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
- * @version    SVN: $Id$
- * 
+ * @version    Release: 1.0.0
+ * @link       http://stonyhillshq/documents/index/carbon4/libraries/path
+ * @since      Class available since Release 1.0.0 Jan 28, 2012 4:45:51 PM
  */
 final class Tag extends Document {
     

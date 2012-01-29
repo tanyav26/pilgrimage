@@ -53,13 +53,6 @@ class Document extends Parser {
     }
 
     /**
-     * @return void
-     */
-    public function generateXML() {
-        
-    }
-
-    /**
      * @return string
      */
     public function getLevel() {

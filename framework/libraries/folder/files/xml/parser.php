@@ -25,6 +25,7 @@
 
 namespace Library\Folder\Files\Xml;
 
+use Library;
 use Library\Folder;
 use Library\Folder\Files as Files;
 
@@ -48,47 +49,55 @@ class Parser extends \Library\Object {
      * @var type 
      */
     public static $xml;
-    
+
     /**
      *
      * @var type 
      */
     public static $document;
-    
+
     /**
      *
      * @var type 
      */
     public static $parser;
-    
+
     /**
      *
      * @var type 
      */
     public static $tree = array();
-    
+
     /**
      *
      * @var type 
      */
     public static $stack = array();
-    
+
     /**
      *
      * @var type 
      */
     public static $level;
-    
+
     /**
      *
      * @var type 
      */
     public static $elements;
-    
+
     /*
      *  The document ROOT
      */
-    public static $ROOT ;
+    public static $ROOT;
+
+    /**
+     * A bunch of hooks to run at various stages during parsing
+     * 
+     * @var type 
+     */
+    static $hooks = array();
+    static $eventContext;
 
     /**
      *
@@ -101,12 +110,19 @@ class Parser extends \Library\Object {
         //Pre-requisites
         self::$xml = $xml;
         self::$parser = xml_parser_create();
+        self::$document = null;
+        self::$tree = array();
+        self::$stack = array();
+        self::$level = null;
+        self::$elements = null;
+        self::$ROOT = null;
+        self::$eventContext = _("XML Parser Events");
 
         //self::$tree[0] = array();
         self::$stack[count(self::$stack)] = &self::$tree;
 
-        self::$document = Document::getInstance();
-        
+        self::$document = new Document();
+
         static::$document->ROOT->CHILDREN = &self::$tree['CHILDREN'];
 
         //Parser Tag, Object, character handlers
@@ -149,6 +165,103 @@ class Parser extends \Library\Object {
     }
 
     /**
+     * @return void
+     */
+    public function generateXML($ROOT="", $version='1.0', $encoding="UTF-8") {
+
+        //Use a user supplied root, or try using our root
+        $ROOT = !empty($ROOT) ? $ROOT :
+                (isset(self::$tree['CHILDREN'][0])) ? self::$tree['CHILDREN'][0] : null ;
+
+        //For now just arrays! will look to handle objects later
+        if (!isset($ROOT) || !is_array($ROOT)) {
+            $this->setError(_("The document root is invalid"));
+            return false;
+        }
+
+        //print_R($ROOT);
+        //Using the XMLwriter PHP library;
+        $xmlWriter = new \XMLWriter;
+        $xmlWriter->openMemory();
+        $xmlWriter->startDocument($version, $encoding);
+        $xmlWriter->setIndent(true);
+
+        //$xmlWriter->startElement("ROOT");
+        //Recursively write out the xml;
+        static::writeXML($xmlWriter, $ROOT);
+
+        return $xmlWriter->outputMemory(true);
+    }
+
+    /**
+     * Recursively converst an array to xml
+     * 
+     * @param \XMLWriter $xml
+     * @param type $data 
+     */
+    final private static function writeXML(\XMLWriter $xmlWriter, $root) {
+
+        $tag = null;
+        $content = null;
+        $key = null;
+        $iterator = 0;
+        $children = sizeof($root);
+
+        foreach ($root as $element => $data) {
+
+            //If it is a child element
+            if (is_array($data)) {
+                $key = $element;
+                static::writeXML($xmlWriter, $data);
+                //$xmlWriter->endElement();
+            }
+            //If the element is not array
+            switch ($element):
+                case "ELEMENT": //We found an element tag;
+                    $tag = strtolower($data);
+                    $xmlWriter->startElement($tag);
+                    //continue;
+                    break;
+                case "CDATA":
+                    //$xmlWriter->startCdata( );
+                    $xmlWriter->text(trim($data));
+                    //$xmlWriter->endCdata();
+                    //continue;
+                    break;
+                default:
+                    if (!is_array($data)):
+                        $xmlWriter->startAttribute(strtolower($element));
+                        $xmlWriter->text($data);
+                        $xmlWriter->endAttribute();
+                    //continue;
+                    endif;
+                    //continue;
+                    break;
+            endswitch;
+            //@TODO: WHERE DO WE CLOSE THE TAG
+            //This is a very hackish way of determining if we are at the end of 
+            //an element. But it works.
+            if ($iterator + 1 == $children) {
+                if (empty($key) && !empty($tag) || ($key == 'CHILDREN') && !empty($tag)) {
+
+                    //script etc
+                    switch ($tag):
+                        case "script":
+                            $xmlWriter->text("");
+                            break;
+                        default:
+
+                            break;
+                    endswitch;
+
+                    $xmlWriter->endElement();
+                }
+            }
+            $iterator++;
+        }
+    }
+
+    /**
      * 
      * @param type $parser
      * @param type $name
@@ -159,29 +272,27 @@ class Parser extends \Library\Object {
         $tag = array();
         $tag['ELEMENT'] = strtolower($name);
         $tag['CHILDREN'] = array();
-        
+
         //Document object
-        $_doc  = &self::$document;
-        
+        $_doc = &self::$document;
+
         foreach ($attribs as $key => $value) {
             //echo $key."=".$value;
             $tag[$key] = $value;
         }
-        
+
         //print_R($_tag);
-        
         //Add the element to the tree;
         $last = &self::$stack[count(self::$stack) - 1];
         $last['CHILDREN'][] = &$tag;
 
-        if(empty($tag['CHILDREN'])){
+        if (empty($tag['CHILDREN'])) {
             unset($tag['CHILDREN']);
-        }  
-        
+        }
+
         //Add the tag to the stack
         self::$stack[count(self::$stack)] = &$tag;
         //$_doc->appendTag( $_last);
-
         //Up the level on step 1
         self::$level++;
     }
@@ -208,7 +319,7 @@ class Parser extends \Library\Object {
     public static function getParser() {
         return self::$parser;
     }
-   
+
     /**
      *
      * @return type 
@@ -216,7 +327,6 @@ class Parser extends \Library\Object {
     public static function getDocument() {
         return self::$document;
     }
-    
 
     /**
      * Character Data Handler #CDATA
@@ -227,8 +337,36 @@ class Parser extends \Library\Object {
     public static function cdata($parser, $data) {
 
         //Data Handler
+        $data = trim($data);
+        static $children = 0;
+
+        //Add the data to the tree;
+        $last = &self::$stack[count(self::$stack) - 1];
+        if (!empty($data)) {
+            //Where there are tabs or new lines in cdata, the cdata function
+            //is called several times. As such if you just push to the same
+            //variable all you will see is the last line. To overcome this,
+            //we check if content has previous been set, and just append to existing
+            //Make sure we concatenate;
+            $old = isset($last['CDATA']) && !empty($last['CDATA']) ? $last['CDATA'] : null;
+
+            //We also search for embeded tags in cdata sections to and make sure that we can work something
+            if (isset($last['CHILDREN'])) {
+
+                $howmany = sizeof($last['CHILDREN']);
+
+                for ($i = 0; $i < ($howmany - ($children - 1)); $i++) {
+                    $key = $children + 1; //Have to add i in case we are dealing with consecutive tags;
+                    $old .= " %\${$key}s";
+                    $children = $children + 1;
+                }
+            }
+            $last['CDATA'] = $old . " " . $data;
+
+            $section++;
+        }
     }
-    
+
     /**
      * Character Data Handler #CDATA
      * 
