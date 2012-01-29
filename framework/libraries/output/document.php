@@ -22,11 +22,12 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
+
 namespace Library\Output;
 
 use Library;
 use Library\Output\Format;
-use Library\Output\Format\Module;
+use Library\Output\Filter;
 
 /**
  * What is the purpose of this class, in one sentence?
@@ -42,15 +43,30 @@ use Library\Output\Format\Module;
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
 abstract class Document extends Library\Object {
+    
+    protected static $_prepared = false;
+    protected static $_functions = null;
+    protected static $_source = null;
+    protected static $_path = "/";
 
     /**
      * Parses an HTML document
      * 
      * @return void
      */
-    final public static function parse() {
+    final public function parse($output) {
         //parses the document output buffer 
+        //1. Set the output as source
+        static::$_source = $output;
+
+        //2. Parse layouts
+        static::$_prepared = Parse::_( static::$_source );
+        
+
+        //4. Return source;
+        return static::$_prepared;
     }
+
 
     /**
      * Constructor for the class;
@@ -68,8 +84,7 @@ abstract class Document extends Library\Object {
             $this->$var = $class::getInstance();
         }
     }
-   
-    
+
     /**
      * For active record querying ONLY
      *
@@ -78,20 +93,20 @@ abstract class Document extends Library\Object {
      * @return mixed
      */
     final public function __call($method, $args) {
-        
-        //echo $method;
-        
+
         //Get the AR class;
         $output = $this->output;
-        
-        if(!\method_exists($output, $method)){
-            $this->setError(_('Method does not exists') );
-            return false;
+
+        if (!\method_exists($this, $method)) {
+
+            if (!\method_exists($output, $method)) {
+                $this->setError(_('Method does not exists'));
+                return false;
+            }
+
+            //Call the Method;
+            return @\call_user_func_array(array($output, $method), $args);
         }
-        
-        //Call the Method;
-        return @\call_user_func_array(array($output, $method) , $args);
-        
     }
 
     /**
