@@ -691,7 +691,7 @@ class Output extends Object {
         if (isset($this->pageTitle)) {
             return (string) $this->pageTitle;
         }
-        return "";
+        return "Welcome";
     }
 
     /**
@@ -870,7 +870,7 @@ class Output extends Object {
         if ($this->hasPosition("do:console") && (int) $environment['mode'] < 2) {
 
             foreach ($this->positionVars["do:console"] as $i => $log) {
-                $this->positionVars["do:console"][$i]['string'] = "<div class=\"console-log\">{$log['string']}</div>";
+                $this->positionVars["do:console"][$i]['string'] = "<div class=\"console-log\">{$log['string']}</div>\n";
                 $this->set("debugcount", $this->debugcount++);
             }
             //Layout
