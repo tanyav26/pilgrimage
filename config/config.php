@@ -49,18 +49,27 @@ $config['session'] = array(
     'remember' => 60 * 60 * 24 * 14 //14 day
 );
 
+$config['output'] = array(
+    'filters' => array(
+        "doctags" => true,
+        "minimize"=> true
+    ),
+    'parsers' => array( 
+        "elements" => true
+    )
+);
+
 $config['encrypt'] = array(
     'key' => 'awesome-secret'
 );
 
 $config['environment'] = array(
-    'mode' => 0
+    'mode' => 1
 ); //0 = DEVELOPER, 1 = TEST, 2 = PRODUCTION 
-
 //The system config key can be overloaded with data from the database. 
 //but for now to test things i am just going to use it on file
 $config['system'] = array(
     'host' => 'tuiyosocial.tld',
     'path' => '/',
-    'template' => 'thenetwork'
+    'template' => 'default'
 );
