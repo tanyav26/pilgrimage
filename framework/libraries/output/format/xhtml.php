@@ -71,7 +71,7 @@ class xHtml extends \Library\Output\Document {
     }
     
     
-    final public function render($httpCode=null){
+    final public function render($template="index",$httpCode=null){
         
         
         //The response code, default is 200;
@@ -83,18 +83,22 @@ class xHtml extends \Library\Output\Document {
              
 
         //3.Determine which format of the index we are using
-        $index = FSPATH . 'public' . DS . $this->output->template . DS . 'index'. EXT;
+        $layout = FSPATH . 'public' . DS . $this->output->template . DS . $template. EXT;
 
         //4. Include the main index file
-        include_once $index;
+        include_once $layout;
 
-        //print_R(self::$positions);
+        
         //parse the set layout as the final output;
         //5. Close and Flush buffer
-        $display = ob_get_contents();
+        $output     = $this->restartBuffer();
         
-        //echo "somethingwong";
+        //echo $output;
         
+        $document   = $this->parse( $output );
+     
+        //Print to client
+        print( "<!DOCTYPE html>\n".$document );
         
         ob_flush();
         ob_end_flush();
