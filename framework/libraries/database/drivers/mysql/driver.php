@@ -269,7 +269,8 @@ final class Driver extends Library\Database{
         if ($this->debug) {
             $this->ticker++;
             $this->log[] = $sql;
-            \Platform\Debugger::log( "<span class='log-code'>DB Query {$this->ticker}</span><pre>{$sql}</pre>");
+            $log = htmlentities($sql); //Does not play nice with the parser!
+            \Platform\Debugger::log( "<span class='log-code'>DB Query {$this->ticker}</span><pre>{$log}</pre>");
         }
 
         $this->errorNum = 0;
