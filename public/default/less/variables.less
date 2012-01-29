@@ -1,0 +1,72 @@
+
+/* -- Layout --*/
+@headerHeight: 		40px;
+@footerHeight: 		30px;
+
+
+/* -- Typography --*/
+// Links
+@linkColor:         #0069d6;
+@linkColorHover:    darken(@linkColor, 15);
+
+// Grays
+@black:             #000;
+@grayDark:          lighten(@black, 25%);
+@gray:              lighten(@black, 50%);
+@grayLight:         lighten(@black, 75%);
+@grayLighter:       lighten(@black, 90%);
+@white:             #fff;
+
+// Accent Colors
+@blue:              #049CDB;
+@blueDark:          #0064CD;
+@green:             #46a546;
+@red:               #9d261d;
+@yellow:            #ffc40d;
+@orange:            #f89406;
+@pink:              #c3325f;
+@purple:            #7a43b6; 
+
+/* -- Colours -- */
+@colourA: 			#231F20;
+@colourB: 			#006295;
+@colourC: 			#C5EFFD;
+@colourD: 			#F8F8F8;
+@colourE: 			#FFFFFF;
+@colourF: 			#53B044;
+@colourG: 			#BD2031;
+@colourH: 			#FACB55;
+
+/* -- Grid Settings -- */
+
+@maxWidth: 			1280px; 
+@numCols: 			16; 			
+@colWidth: 			6.25%;	
+@rowMargin: 		100-(@colWidth*@numCols);
+@gutter: 			(@rowMargin)/(@numCols - 1); 
+
+// Baseline grid
+@basefont:          13px;
+@baseline:          18px;
+
+// Color Scheme
+// Use this to roll your own color schemes if you like (unused by Bootstrap by default)
+@baseColor:         @blue;                  // Set a base color
+@complement:        spin(@baseColor, 180);  // Determine a complementary color
+@split1:            spin(@baseColor, 158);  // Split complements
+@split2:            spin(@baseColor, -158);
+@triad1:            spin(@baseColor, 135);  // Triads colors
+@triad2:            spin(@baseColor, -135);
+@tetra1:            spin(@baseColor, 90);   // Tetra colors
+@tetra2:            spin(@baseColor, -90);
+@analog1:           spin(@baseColor, 22);   // Analogs colors
+@analog2:           spin(@baseColor, -22);
+
+
+
+// More variables coming soon:
+// - @basefont to @baseFontSize
+// - @baseline to @baseLineHeight
+// - @baseFontFamily
+// - @primaryButtonColor
+// - anything else? File an issue on GitHub

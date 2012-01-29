@@ -1,0 +1,83 @@
+.grid {
+	margin: 0 auto;
+}
+
+.row {
+	width: 100%;
+	max-width: @maxWidth;
+	margin: 0;
+	overflow: hidden;
+}
+
+.whole { width: 100%; max-width: @maxWidth;}
+.span1 { .column(1); }
+.span2 { .column(2); }
+.span3 { .column(3); }
+.span4 { .column(4); }
+.span5 { .column(5); }
+.span6 { .column(6); }
+.span7 { .column(7); }
+.span8 { .column(8); }
+.span9 { .column(9); }
+.span10 { .column(10); }
+.span11 { .column(11); }
+.span12 { .column(12); }
+.span13 { .column(13); }
+.span14 { .column(14); }
+.span15 { .column(15); }
+.span16 { .column(16); }
+
+
+// Offset column options
+.row {
+  > .offset1   { .offset(1); }
+  > .offset2   { .offset(2); }
+  > .offset3   { .offset(3); }
+  > .offset4   { .offset(4); }
+  > .offset5   { .offset(5); }
+  > .offset6   { .offset(6); }
+  > .offset7   { .offset(7); }
+  > .offset8   { .offset(8); }
+  > .offset9   { .offset(9); }
+  > .offset10  { .offset(10); }
+  > .offset11  { .offset(11); }
+  > .offset12  { .offset(12); }
+}
+
+// Unique column sizes for 16-column grid
+.span-one-third     { width: 300px; display:inline-block }
+.span-two-thirds    { width: 500px; display:inline-block}
+.row {
+  > .offset-one-third   { margin-left: 340px; }
+  > .offset-two-thirds  { margin-left: 540px; }
+}
+
+
+.col:last-child,
+.last { margin-right: 0px; }
+
+
+td {
+  vertical-align: top;
+}
+.ir {
+  display: block;
+  border: 0;
+  text-indent: -999em;
+  overflow: hidden;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  text-align: left;
+  direction: ltr;
+}
+
+
+.ir { display: block; border: 0; text-indent: -999em; overflow: hidden; background-color: transparent; background-repeat: no-repeat; text-align: left; direction: ltr; }
+.ir br { display: none; }
+.hidden { display: none !important; visibility: hidden; }
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+.invisible { visibility: hidden; }
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
