@@ -7,8 +7,8 @@
  *
  * Requires PHP version 5.3
  *
- * 
- * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
+ *
+ * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
@@ -22,13 +22,12 @@
  * @version    Release: 1.0.0
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/Parse
  * @since      Class available since Release 1.0.0 Jan 28, 2012 2:19:55 PM
- * 
+ *
  */
 
 namespace Library\Output;
 
 use Library;
-use Library\Output\Parse;
 use Library\Folder\Files\Xml as Xml;
 
 /**
@@ -46,83 +45,51 @@ use Library\Folder\Files\Xml as Xml;
  */
 class Parse extends Library\Object {
     /*
-     * @var object 
+     * @var object
      */
 
     static $instance;
-    protected static $filters = array();
-    protected static $hooks = array();
-    protected static $locale = array();
 
-    /**
-     * Defines the class constructor
-     * Used to preload pre-requisites for the Parse class
-     * 
-     * @return object Parse
-     */
-    public function __constructor() {
-        
-    }
+    protected static $document;
+    protected static $methods  = array(
+        "tpl"=>array(
+            "layout"=>"\Library\Output\Parse\Template\Layout::execute"
+        )
+    );
+    protected static $locale  = array();
 
-    /**
-     * Backward compatibility for class name constructors 
-     * 
-     * @return object Parse
-     */
-    public static function _($buffer = null) {
 
-        //Load Filters
-        //3. Filter output
-        //+
-        //
-        //
-        //static::loadFilters();
-        //static::$_prepared = Filter::_( static::$_source , $this->filters );
+    public static function _($buffer = null, $document = null) {
 
         $xhtml = $buffer;
-        $XmlParser = new Xml\Parser($xhtml, true);
+        $XmlParser = new Xml\Parser($xhtml, true , true, static::$methods);
 
-        $DOCUMENT = $XmlParser::getDocument();
-        $XML = $DOCUMENT->generateXML();
+        $DOCUMENT   = $XmlParser::getDocument();
+        $XML        = $DOCUMENT->toXML( "", "1.0", "UTF-8" );
 
         return $XML;
     }
 
     /**
      * Loads all defined filters
-     * 
+     *
      * @return void
      */
     final public static function loadFilters() {
 
-        //Get all the filters
-        $filters = \Library\Config::get("filters", array(), "output");
 
-        foreach ($filters as $filter => $enabled) {
-
-            if ($enabled) {
-
-                $_filter = "Library\Output\Filter\\$filter";
-
-                if (class_exists($_filter)) {
-
-                    $_executable = $_filter::getInstance();
-                    $_filters = array_push(static::$filters, $_executable);
-                }
-            }
-        }
     }
 
     /**
      * Returns and instantiated Instance of the Parse class
-     * 
+     *
      * NOTE: As of PHP5.3 it is vital that you include constructors in your class
      * especially if they are defined under a namespace. A method with the same
      * name as the class is no longer considered to be its constructor
-     * 
+     *
      * @staticvar object $instance
      * @property-read object $instance To determine if class was previously instantiated
-     * @property-write object $instance 
+     * @property-write object $instance
      * @return object Parse
      */
     public static function getInstance($buffer = null) {
@@ -136,4 +103,3 @@ class Parse extends Library\Object {
     }
 
 }
-

@@ -7,8 +7,8 @@
  *
  * Requires PHP version 5.3
  *
- * 
- * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
+ *
+ * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
@@ -22,12 +22,13 @@
  * @version    Release: 1.0.0
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/element
  * @since      Class available since Release 1.0.0 Jan 28, 2012 2:06:49 PM
- * 
+ *
  */
-namespace Library\Output\Parse;
+namespace Library\Output\Parse\Template;
 
 use Library;
 use Library\Output;
+use Library\Output\Parse;
 
 /**
  * What is the purpose of this class, in one sentence?
@@ -42,9 +43,9 @@ use Library\Output;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/element
  * @since      Class available since Release 1.0.0 Jan 28, 2012 2:06:49 PM
  */
-class Element extends Output\Filter {
+class Element extends Parse\Template{
     /*
-     * @var object 
+     * @var object
      */
 
     static $instance;
@@ -52,32 +53,37 @@ class Element extends Output\Filter {
     /**
      * Defines the class constructor
      * Used to preload pre-requisites for the element class
-     * 
+     *
      * @return object element
      */
     public function __constructor() {
-        
+
     }
 
     /**
-     * Backward compatibility for class name constructors 
-     * 
+     * Backward compatibility for class name constructors
+     *
      * @return object element
      */
     public static function Element() {
         return self::getInstance();
     }
 
+    public static function text(){}
+    public static function comment(){}
+
+    public static function execute($parser, $element){}
+
     /**
      * Returns and instantiated Instance of the element class
-     * 
+     *
      * NOTE: As of PHP5.3 it is vital that you include constructors in your class
      * especially if they are defined under a namespace. A method with the same
      * name as the class is no longer considered to be its constructor
-     * 
+     *
      * @staticvar object $instance
      * @property-read object $instance To determine if class was previously instantiated
-     * @property-write object $instance 
+     * @property-write object $instance
      * @return object element
      */
     public static function getInstance() {

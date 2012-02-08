@@ -3,12 +3,12 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * minimize.php
+ * layout.php
  *
  * Requires PHP version 5.3
  *
- * 
- * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
+ *
+ * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
@@ -20,15 +20,15 @@
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/minimize
- * @since      Class available since Release 1.0.0 Jan 28, 2012 3:56:36 PM
- * 
+ * @link       http://stonyhillshq/documents/index/carbon4/libraries/layout
+ * @since      Class available since Release 1.0.0 Feb 5, 2012 10:15:29 PM
+ *
  */
-namespace Library\Output\Filter;
+namespace Library\Output\Parse\Template;
 
 use Library;
 use Library\Output;
-
+use Library\Output\Parse;
 /**
  * What is the purpose of this class, in one sentence?
  *
@@ -39,53 +39,60 @@ use Library\Output;
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/minimize
- * @since      Class available since Release 1.0.0 Jan 28, 2012 3:56:36 PM
+ * @link       http://stonyhillshq/documents/index/carbon4/libraries/layout
+ * @since      Class available since Release 1.0.0 Feb 5, 2012 10:15:29 PM
  */
-class Minimize extends Output\Filter {
+class Layout extends Parse\Template{
     /*
-     * @var object 
+     * @var object
      */
 
     static $instance;
 
     /**
      * Defines the class constructor
-     * Used to preload pre-requisites for the minimize class
-     * 
-     * @return object minimize
+     * Used to preload pre-requisites for the layout class
+     *
+     * @return object layout
      */
     public function __constructor() {
-        
+
     }
 
     /**
-     * Backward compatibility for class name constructors 
-     * 
-     * @return object minimize
+     * Backward compatibility for class name constructors
+     *
+     * @return object layout
      */
-    public static function Minimize() {
+    public static function Layout() {
         return self::getInstance();
     }
-    
-    
-    public static function execute( $buffer ){}
+
+
+    public static function execute($parser, $tag){
+
+        $tag['ELEMENT'] = 'span';//this converts a layout to a span
+
+
+        //Always return the modified element
+        return $tag;
+    }
 
     /**
-     * Returns and instantiated Instance of the minimize class
-     * 
+     * Returns and instantiated Instance of the layout class
+     *
      * NOTE: As of PHP5.3 it is vital that you include constructors in your class
      * especially if they are defined under a namespace. A method with the same
      * name as the class is no longer considered to be its constructor
-     * 
+     *
      * @staticvar object $instance
      * @property-read object $instance To determine if class was previously instantiated
-     * @property-write object $instance 
-     * @return object minimize
+     * @property-write object $instance
+     * @return object layout
      */
     public static function getInstance() {
 
-        if (is_object(static::$instance) && is_a(static::$instance, 'Minimize'))
+        if (is_object(static::$instance) && is_a(static::$instance, 'Layout'))
             return static::$instance;
 
         static::$instance = new self();

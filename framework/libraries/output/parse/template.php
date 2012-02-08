@@ -3,12 +3,12 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * filter.php
+ * template.php
  *
  * Requires PHP version 5.3
  *
- * 
- * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
+ *
+ * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
@@ -20,14 +20,14 @@
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/filter
+ * @link       http://stonyhillshq/documents/index/carbon4/libraries/template
  * @since      Class available since Release 1.0.0 Jan 28, 2012 2:03:47 PM
- * 
+ *
  */
-namespace Library\Output;
+namespace Library\Output\Parse;
 
 use Library;
-use Library\Output\Filter;
+use Library\Output;
 
 /**
  * What is the purpose of this class, in one sentence?
@@ -39,51 +39,62 @@ use Library\Output\Filter;
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/filter
+ * @link       http://stonyhillshq/documents/index/carbon4/libraries/template
  * @since      Class available since Release 1.0.0 Jan 28, 2012 2:03:47 PM
  */
-abstract class Filter extends Library\Object {
+abstract class Template extends Output\Parse {
     /*
-     * @var object 
+     * @var object
      */
-
     static $instance;
 
     /**
-     * Defines the class constructor
-     * Used to preload pre-requisites for the filter class
-     * 
-     * @return object filter
+     * Loaded and imported layouts
+     * @var type
      */
-    public function __constructor() {
-        
-    }
-
-
-    final public static function _( $buffer, $filters = array()) {
-        
-        return $buffer; 
-        
-    }
-    
-    
-    abstract static function execute( $buffer );
+    static $layouts;
 
     /**
-     * Returns and instantiated Instance of the filter class
-     * 
+     * Already parsed
+     * @var type
+     */
+    static $parsed;
+
+    /**
+     * Defines the class constructor
+     * Used to preload pre-requisites for the template class
+     *
+     * @return object template
+     */
+    public function __constructor() {
+
+    }
+
+
+    final public static function _( $buffer, $templates = array()) {
+
+        return $buffer;
+
+    }
+
+
+    abstract public static function execute( $parser, $element );
+
+    /**
+     * Returns and instantiated Instance of the template class
+     *
      * NOTE: As of PHP5.3 it is vital that you include constructors in your class
      * especially if they are defined under a namespace. A method with the same
      * name as the class is no longer considered to be its constructor
-     * 
+     *
      * @staticvar object $instance
      * @property-read object $instance To determine if class was previously instantiated
-     * @property-write object $instance 
-     * @return object filter
+     * @property-write object $instance
+     * @return object template
      */
     public static function getInstance() {
 
-        if (is_object(static::$instance) && is_a(static::$instance, 'filter'))
+        if (is_object(static::$instance) && is_a(static::$instance, 'template'))
             return static::$instance;
 
         static::$instance = new self();

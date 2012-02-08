@@ -7,7 +7,7 @@
  *
  * Requires PHP version 5.3
  *
- * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
+ * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
@@ -20,14 +20,12 @@
  * @version    Release: 1.0.0
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/output/document
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
- * 
+ *
  */
 
 namespace Library\Output;
 
 use Library;
-use Library\Output\Format;
-use Library\Output\Filter;
 
 /**
  * What is the purpose of this class, in one sentence?
@@ -43,7 +41,7 @@ use Library\Output\Filter;
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
 abstract class Document extends Library\Object {
-    
+
     protected static $_prepared = false;
     protected static $_functions = null;
     protected static $_source = null;
@@ -51,17 +49,17 @@ abstract class Document extends Library\Object {
 
     /**
      * Parses an HTML document
-     * 
+     *
      * @return void
      */
     final public function parse($output) {
-        //parses the document output buffer 
+        //parses the document output buffer
         //1. Set the output as source
         static::$_source = $output;
 
         //2. Parse layouts
         static::$_prepared = Parse::_( static::$_source );
-        
+
 
         //4. Return source;
         return static::$_prepared;
@@ -70,7 +68,7 @@ abstract class Document extends Library\Object {
 
     /**
      * Constructor for the class;
-     * 
+     *
      * @return void
      */
     final public function __construct() {
@@ -113,17 +111,17 @@ abstract class Document extends Library\Object {
      * Returns the processed output and displays to the browser
      * Final method cannot and should not be overidden
      *
-     * @param string $format 
-     * 
+     * @param string $format
+     *
      */
     abstract public function render();
 
     /**
      * Gets an instance of the registry element
-     * 
+     *
      * @staticvar self $instance
      * @param type $name
-     * @return self 
+     * @return self
      */
     public static function getInstance() {
 
