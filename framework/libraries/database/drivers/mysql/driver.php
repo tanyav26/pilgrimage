@@ -7,7 +7,7 @@
  *
  * Requires PHP version 5.3
  *
- * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
+ * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
@@ -20,13 +20,13 @@
  * @version    Release: 1.0.0
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/database/drivers/mysql/driver
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
- * 
+ *
  */
 
 namespace Library\Database\Drivers\MySQL;
 
 use Library;
-
+use Platform;
 /**
  * What is the purpose of this class, in one sentence?
  *
@@ -114,7 +114,7 @@ final class Driver extends Library\Database{
         // select the database
         if ($select) {
             $this->database($database);
-        } 
+        }
     }
 
    /**
@@ -148,11 +148,11 @@ final class Driver extends Library\Database{
 
     /**
      * Reports on the status of the established Object
-     * 
+     *
      * @return boolean
      */
     public function isConnected(){
-        
+
         if (is_resource($this->resourceId)) {
             return mysql_ping($this->resourceId);
         }
@@ -165,7 +165,7 @@ final class Driver extends Library\Database{
      * @return
      */
     public function getVersion(){
-        
+
     }
 
 
@@ -252,16 +252,16 @@ final class Driver extends Library\Database{
      * @return mixed A database resource if successful, FALSE if not.
      */
     final public function exec( $query ='') {
-        
+
         if (!is_resource($this->resourceId)) {
             $this->setError( _("No valid connection resource found") );
             return false;
         }
-       
+
         // Take a local copy so that we don't modify the original query and cause issues later
         $sql = (empty($query)) ?  $this->query :  $query ;
         $this->query = $sql = $this->replacePrefix( $sql ); //just for reference
-        
+
         if ($this->limit > 0 || $this->offset > 0) {
             $sql .= ' LIMIT ' . max($this->offset, 0) . ', ' . max($this->limit, 0);
         }
@@ -270,7 +270,7 @@ final class Driver extends Library\Database{
             $this->ticker++;
             $this->log[] = $sql;
             $log = htmlentities($sql); //Does not play nice with the parser!
-            \Platform\Debugger::log( "<span class='log-code'>DB Query {$this->ticker}</span><pre>{$log}</pre>");
+            \Platform\Debugger::log( $log, "DB Query {$this->ticker}" , "notice" );
         }
 
         $this->errorNum = 0;
@@ -282,15 +282,15 @@ final class Driver extends Library\Database{
             $this->errorMsg = mysql_error($this->resourceId) . " SQL=$sql";
 
             if ($this->debug) {
-                
+
             }
             $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
             return false;
         }
         $this->resetRun();
-        
+
         //echo $this->cursor;
-        
+
         return $this->cursor;
     }
 
