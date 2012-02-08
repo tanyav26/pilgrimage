@@ -7,7 +7,7 @@
  *
  * Requires PHP version 5.3
  *
- * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
+ * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
@@ -20,7 +20,7 @@
  * @version    Release: 1.0.0
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/object
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
- * 
+ *
  */
 
 namespace Library;
@@ -48,26 +48,26 @@ abstract class Object {
      * @var array
      */
     protected static $errors = array();
-    
+
    /**
      * A bunch of hooks to run at various stages during parsing
-     * 
-     * @var type 
+     *
+     * @var type
      */
     protected static $hooks = array();
 
     /**
      * This method prevents object cloning
-     * 
+     *
      * @return void;
      */
     final private function __clone() {
-        
+
     }
 
     /**
      * Creates an instance of the object
-     * 
+     *
      * @return void
      */
     public function Object() {
@@ -77,10 +77,10 @@ abstract class Object {
 
     /**
      * Determines if an event/hook is defined
-     * 
+     *
      * @param string $event (required) a global group of event e.g onShutdown
-     * @param string $hook (optional) use if looking for a specific hook 
-     * @return boolean True or False Depending on whether the even if found 
+     * @param string $hook (optional) use if looking for a specific hook
+     * @return boolean True or False Depending on whether the even if found
      */
     final private static function isDefined($event) {
 
@@ -97,12 +97,12 @@ abstract class Object {
     }
 
     /**
-     * Registers an Event, to be executed when triggered 
-     * 
+     * Registers an Event, to be executed when triggered
+     *
      * @param string $name (required)
      * @param mixed  $callback (required)
-     * @param mixed  $arguments [args1, args2, ....] or as an array 
-     * @return type 
+     * @param mixed  $arguments [args1, args2, ....] or as an array
+     * @return type
      */
     final public static function register() {
 
@@ -112,7 +112,7 @@ abstract class Object {
             'args' => null
         );
         if (isset($event[0]) && is_string($event[0])) {
-            //even name is 
+            //even name is
             $name = trim($event[0]); //@TODO Possible naming conflicts!
             //Prepare for storage
             if (!static::isDefined($name)) {
@@ -141,21 +141,21 @@ abstract class Object {
 
     /**
      * Triggers a registered Event, and returns results
-     * 
+     *
      * @param type $event
      * @param type $data
-     * @return false if undefined, results from callback hooks 
-     * 
+     * @return false if undefined, results from callback hooks
+     *
      */
     final public static function trigger($event, $data = '') {
-        
+
         //Just arbitrary context so we know who is calling
-        $context = (!isset(static::$eventContext)) ? _("System events") : static::$eventContext ;
-        
+        $context = (!isset(static::$eventContext)) ? _("system events") : static::$eventContext ;
+
         //if the event is defined
         if (static::isDefined($event)) {
             //for each even execute callback
-            
+
             //echo $event;
 
             $events = static::$hooks[$event];
@@ -168,11 +168,11 @@ abstract class Object {
                 $arguments = $hook['args'];
 
                 if (is_callable($callback)) {
-                    
-                    // Log in the console 
-                    \Platform\Debugger::log(sprintf(_("$context | Calling %s() at %2s"), $callback, $event));
 
-                    //@TODO Determine Method Name from 
+                    // Log in the console
+                    \Platform\Debugger::log(sprintf(_("Calling %s() at %2s in %3s context"), $callback, $event, $context), $event, "success");
+
+                    //@TODO Determine Method Name from
                     //CallBack directive to use as indices in results array
                     $results[] = call_user_func($callback, $arguments, $data);
                 }
@@ -181,18 +181,18 @@ abstract class Object {
             return $results;
         } else {
             //There are no events to trigger
-            \Platform\Debugger::log(sprintf(_("$context | No events triggered for %s"), $event));
+            \Platform\Debugger::log(sprintf(_("No events triggered for %s in %2s context"), $event, $context), $event, "notice");
 
             return false;
         }
     }
 
     /**
-     * Get a protected object property 
-     * 
+     * Get a protected object property
+     *
      * @param string $property
      * @param mixed $default
-     * @return mixed 
+     * @return mixed
      */
     public function get($property, $default=null) {
 
@@ -216,8 +216,8 @@ abstract class Object {
 
     /**
      * Aborts the execution of the script
-     * 
-     * @return void 
+     *
+     * @return void
      */
     final public function abort() {
         return exit();
@@ -225,10 +225,10 @@ abstract class Object {
 
     /**
      * Returns a referenced error
-     * 
+     *
      * @param type $i
      * @param type $toString
-     * @return type 
+     * @return type
      */
     final public static function getError($i = null, $toString = true) {
 
@@ -249,8 +249,8 @@ abstract class Object {
 
     /**
      * Returns all the errors
-     * 
-     * @return type 
+     *
+     * @return type
      */
     final public static function getErrors() {
         return self::$errors;
@@ -258,8 +258,8 @@ abstract class Object {
 
     /**
      * Returns the error string
-     * 
-     * @return type 
+     *
+     * @return type
      */
     final public static function getErrorString() {
 
@@ -275,10 +275,10 @@ abstract class Object {
 
     /**
      * Sets an object property
-     * 
+     *
      * @param type $property
      * @param type $value
-     * @return type 
+     * @return type
      */
     public function set($property, $value = null) {
 
@@ -291,9 +291,9 @@ abstract class Object {
 
     /**
      * Set multiple object properties
-     *     
+     *
      * @param type $properties
-     * @return type 
+     * @return type
      */
     final public function setProperties($properties) {
         $properties = (array) $properties; //cast to an array
@@ -310,8 +310,8 @@ abstract class Object {
 
     /**
      * Sets an error
-     * 
-     * @param type $error 
+     *
+     * @param type $error
      */
     final public static function setError($error) {
 
@@ -319,8 +319,8 @@ abstract class Object {
     }
 
     /**
-     * 
-     * @return type 
+     *
+     * @return type
      */
     final public function toString() {
         return get_class($this);

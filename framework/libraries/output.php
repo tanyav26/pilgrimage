@@ -7,7 +7,7 @@
  *
  * Requires PHP version 5.3
  *
- * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
+ * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
@@ -20,7 +20,7 @@
  * @version    Release: 1.0.0
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/output
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
- * 
+ *
  */
 
 namespace Library;
@@ -45,14 +45,14 @@ class Output extends Object {
 
     /**
      * A list of positions in the main theme
-     * 
-     * @var array 
+     *
+     * @var array
      */
     protected static $positions = array();
 
     /**
      *
-     * @var type 
+     * @var type
      */
     protected $isError = FALSE;
 
@@ -64,59 +64,60 @@ class Output extends Object {
 
     /**
      * A message to be displayed on the page
-     * 
+     *
      * @var string
      */
     protected $message;
 
     /**
      * Additional page variables
-     * 
+     *
      * @var array
      */
     private $variables = array(
-        pageid => "_page"
+        "pageid" => "_page"
     );
 
     /**
      * Contains a list of references to scripts
      * to include on this page
-     * 
+     *
      * @var array
      */
     protected $scripts = array();
 
     /**
      * An array of Stylesheet references to be included on page
-     * 
+     *
      * @var array
      */
     protected $styles = array();
 
     /**
      * Reference to the configuration object
-     * 
+     *
      * @var object Library\Config
      */
     protected $config;
 
     /**
      * The response code.
-     * 
-     * @var interger; 
+     *
+     * @var interger;
      */
     protected $code = 200;
     protected $format;
+    protected static $prints;
 
     /**
      *
-     * @var array 
+     * @var array
      */
     protected $positionVars = array();
 
     /**
      * Construcst the output object
-     * 
+     *
      * @return void
      */
     final public function __construct() {
@@ -133,7 +134,7 @@ class Output extends Object {
     /**
      * Recalls all messages sent to client before redirect
      * These are stored in the session
-     * 
+     *
      * @return void
      */
     final public function recallAlerts() {
@@ -159,8 +160,8 @@ class Output extends Object {
 
     /**
      * Sets the output format, overwrites format set in router?
-     * 
-     * @param type $format 
+     *
+     * @param type $format
      * @return void
      */
     final public function setFormat($format) {
@@ -172,7 +173,7 @@ class Output extends Object {
 
     /**
      * Starts the output buffer
-     * 
+     *
      * @return void
      */
     final public static function startBuffer() {
@@ -183,9 +184,9 @@ class Output extends Object {
 
     /**
      * Outputs an internalized resource link
-     * 
+     *
      * @param type $href
-     * @return type 
+     * @return type
      */
     final public function link($href) {
         //@TODO internilization of url etc
@@ -194,26 +195,26 @@ class Output extends Object {
 
     /**
      * Displays the error page
-     * 
+     *
      * @param type $format
-     * @param type $status 
+     * @param type $status
      * @return void
      */
     final public function displayError($format='', $status='404') {
 
         $this->isError = TRUE;
-        //Exactly the same as display, 
+        //Exactly the same as display,
         //Stop the debugger
         \Platform\Debugger::stop();
         //Empties all positions, including except do:position
         $restart = $this->restartBuffer();
         //i.e. get the do:body position; and empty it
         //set the layout to system/error.phtml; and output
-        $this->toConsole();
+        //$this->toConsole();
 
 
-        $console = $this->restartBuffer();
-        $this->addToPosition("do:debugger", $console, '', true);
+        static::$prints = $this->restartBuffer();
+        //$this->addToPosition("do:debugger", $console, '', true);
 
         $this->headers();
 
@@ -242,8 +243,8 @@ class Output extends Object {
 
     /**
      * Restarts the output buffer
-     * 
-     * @return type 
+     *
+     * @return type
      */
     final public function restartBuffer() {
         //anything that had previously been printed
@@ -264,8 +265,8 @@ class Output extends Object {
      * Final method cannot and should not be overidden
      *
      * @param string $format
-     * @return void 
-     * 
+     * @return void
+     *
      */
     final public function display($format = 'xhtml', $httpCode=null) {
 
@@ -282,16 +283,16 @@ class Output extends Object {
 
         //We now start a new buffer, to deal with the template!
         $this->startBuffer();
-        $this->toConsole();
+        //$this->toConsole();
 
 
-        $console = $this->restartBuffer();
-        $this->addToPosition("do:debugger", $console, '', true);
+        static::$prints = $this->restartBuffer();
+        //$this->addToPosition("do:debugger", $console, '', true);
         //1. Work on the headers, make sure everything is beautiful
         // seconds, minutes, hours, days
         //The requested Response format
         $this->format = $this->router->getFormat(); //Because the output class is loaded before the router, use this to check if the format has changed after routing
-        
+
         $outputFormat = $this->format;
         $responseFormat = !empty($outputFormat) ? $outputFormat : $format;
 
@@ -324,9 +325,9 @@ class Output extends Object {
 
     /**
      * Serializes data input
-     * 
+     *
      * @param type $data
-     * @return type 
+     * @return type
      */
     final public function serialize($data) {
         return base64_encode(gzcompress(serialize($data)));
@@ -336,7 +337,7 @@ class Output extends Object {
      * Unserializes are previously serialized input
      *
      * @param type $string
-     * @return type 
+     * @return type
      */
     final public function unserialize($string) {
 
@@ -345,13 +346,13 @@ class Output extends Object {
 
     /**
      * Sets a cookie param
-     * 
+     *
      * @param type $name
      * @param type $cookie
      * @param type $expire
      * @param type $path
      * @param type $domain
-     * @return Output 
+     * @return Output
      */
     final public function setCookie($name, $cookie, $expire= 86400, $path='', $domain='') {
 
@@ -368,11 +369,11 @@ class Output extends Object {
 
     /**
      * Parses a layout and sets the variable ass
-     * 
+     *
      * @param type $layout
      * @param type $variables
      * @param type $set
-     * @param type $setas 
+     * @param type $setas
      */
     public function layout($layout, $app='', $ext='.phtml', $variables = array(), $set = false, $setas ='') {
 
@@ -403,7 +404,7 @@ class Output extends Object {
 
     /**
      * Sets a reference to the layout object being used
-     * 
+     *
      * @param string $layout
      */
     final public function setLayout($layout) {
@@ -413,8 +414,8 @@ class Output extends Object {
 
     /**
      * Alias method to return the string name of the current template
-     * 
-     * @return string 
+     *
+     * @return string
      */
     final public function getTemplateName() {
 
@@ -423,9 +424,9 @@ class Output extends Object {
 
     /**
      * Adds a header type to the output
-     * 
+     *
      * @param type $name
-     * @param type $value 
+     * @param type $value
      */
     final public function setHeader($name, $value) {
         return $this;
@@ -435,13 +436,13 @@ class Output extends Object {
      * Set Header
      *
      * Sets the page header, depending on the requested format
-     * 
+     *
      * @return void
      */
     final public function headers($mimeType = 'text/html', $charset='utf-8') {
 
         //Response codes;
-        //To satisfy the PRG patter, and prevent form resubmissions, we need to 
+        //To satisfy the PRG patter, and prevent form resubmissions, we need to
         //Check whether the input had any post data in it, in other words chcek uri->getMethod();
         $method = Input::getMethod();
 
@@ -475,7 +476,7 @@ class Output extends Object {
     /**
      * Adds a reference to a script resource to include on the
      * page
-     * 
+     *
      * @param string $file
      */
     final public function addScript($file) {
@@ -490,7 +491,7 @@ class Output extends Object {
      *
      * Adds a reference to a stylesheet resource to include on the
      * page
-     * 
+     *
      * @param string $style
      */
     final public function addStyle($style) {
@@ -510,7 +511,7 @@ class Output extends Object {
 
     /**
      * Add Head Tag
-     * 
+     *
      * Adds a custom header tag to the page
      */
     final public function addHeaderTag() {
@@ -519,9 +520,9 @@ class Output extends Object {
 
     /**
      * Add Message
-     * 
+     *
      * Displays a message of specific type on the page
-     * 
+     *
      * @param string $message
      * @param string $type
      */
@@ -534,9 +535,9 @@ class Output extends Object {
 
     /**
      * Add Variable
-     * 
+     *
      * Adds a page variable
-     * 
+     *
      * @param string $name
      * @param string $value
      * @param boolean $returnprevious
@@ -558,7 +559,7 @@ class Output extends Object {
     /**
      * Returns the template folder name
      *
-     * @return type 
+     * @return type
      */
     final public function getTemplate() {
 
@@ -572,7 +573,7 @@ class Output extends Object {
 
     /**
      * Sets the page MimeType
-     * 
+     *
      * @return object Output
      */
     final public function setMimeType($mime) {
@@ -584,7 +585,7 @@ class Output extends Object {
      * Sets the application response code
      *
      * @param type $code
-     * @return Output 
+     * @return Output
      */
     final public function setResponseCode($code = 200) {
         $this->code = $code;
@@ -593,7 +594,7 @@ class Output extends Object {
 
     /**
      * Adds a page title
-     * 
+     *
      * @return string
      */
     final public function setPageTitle($title) {
@@ -605,10 +606,10 @@ class Output extends Object {
 
     /**
      * Sets a final page element, see @method addVariable
-     * 
+     *
      * @param string $param
      * @param mixed $value
-     * 
+     *
      * @return object Output
      */
     final public function set($param, $value) {
@@ -620,7 +621,7 @@ class Output extends Object {
 
     /**
      * Gets a page element
-     * 
+     *
      * @param string $param
      * @param mixed $default
      * @param mixed $format
@@ -645,9 +646,9 @@ class Output extends Object {
 
     /**
      * Output Magic variable Getter
-     * 
+     *
      * @param type $name
-     * @return type 
+     * @return type
      */
     final public function __get($name) {
 
@@ -662,18 +663,18 @@ class Output extends Object {
 
     /**
      * Returns the current page mimiType if any
-     * 
+     *
      * @return string
      */
     final public function getMimeType() {
-        
+
     }
 
     /**
      * Get HTTP code string
-     * 
+     *
      * @param type $code
-     * @return type 
+     * @return type
      */
     final private function getHttpCodeString($code = NULL) {
         if (empty($code)) {
@@ -683,7 +684,7 @@ class Output extends Object {
 
     /**
      * Returns the page title
-     * 
+     *
      * @return string
      */
     final public function getPageTitle() {
@@ -696,43 +697,43 @@ class Output extends Object {
 
     /**
      * Gets the output language
-     * 
+     *
      * @return string
      */
     final public function getLangauge() {
-        
+
     }
 
     /**
      * Returns a description for the current page
-     * 
+     *
      * @return string
      */
     final public function getPageDescription() {
-        
+
     }
 
     /**
      * Returns an Author for the current page
-     * 
+     *
      * @return string
      */
     final public function getPageAuthor() {
-        
+
     }
 
     /**
      * Returns all the messages to be displayed
-     * 
+     *
      * @return string
      */
     final public function getMessages() {
-        
+
     }
 
     /**
      * Returns a description for the current page
-     * 
+     *
      * @return string
      */
     final public function setPageDescription() {
@@ -741,7 +742,7 @@ class Output extends Object {
 
     /**
      * Returns an Author for the current page
-     * 
+     *
      * @return string
      */
     final public function setPageAuthor() {
@@ -751,20 +752,20 @@ class Output extends Object {
     /**
      * Sets the output template, used in views
      * NOTE: These are different from layouts
-     * 
-     * @return Output 
+     *
+     * @return Output
      */
     final public function setTemplate() {
         return $this;
     }
 
     final public function setLanguage($language) {
-        
+
     }
 
     /**
      * Returns an instance of the Library\Output class
-     * 
+     *
      * @staticvar self $instance
      * @return self
      */
@@ -782,10 +783,10 @@ class Output extends Object {
 
     /**
      * Defines positions in the template
-     * 
+     *
      * @param type $name
      * @param type $default
-     * @param type $style 
+     * @param type $style
      */
     public function position($name, $default='', $style='') {
 
@@ -815,8 +816,8 @@ class Output extends Object {
 
     /**
      * Determines if there is stuff to be loaded into that position
-     * 
-     * @param type $name 
+     *
+     * @param type $name
      * @return boolean true if or false if not
      */
     public function hasPosition($name) {
@@ -826,11 +827,11 @@ class Output extends Object {
     }
 
     /**
-     * Adds positional data for output
-     * 
+     * Adds positional data for the output
+     *
      * @param type $name
      * @param type $default
-     * @param type $callback 
+     * @param type $callback
      */
     public function addToPosition($name, $string='', $callback='', $prepend = FALSE) {
 
@@ -854,7 +855,7 @@ class Output extends Object {
 
     /**
      * Generates all the debug output and flushes to console
-     * 
+     *
      * @return void
      */
     final public function toConsole() {
