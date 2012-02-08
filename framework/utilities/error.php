@@ -7,7 +7,7 @@
  *
  * Requires PHP version 5.3
  *
- * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
+ * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
@@ -20,7 +20,7 @@
  * @version    Release: 1.0.0
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/error
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
- * 
+ *
  */
 
 namespace Platform;
@@ -41,8 +41,8 @@ use Library;
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
 class Error extends \Library\Object {
-    
-    
+
+
     const APPLICATION_ERROR = 9033;
 
     const PLATFORM_ERROR = 9032;
@@ -51,12 +51,12 @@ class Error extends \Library\Object {
 
     /**
      * Raises an error
-     * 
+     *
      * @param type $errorCode
-     * @param type $errorMsg 
+     * @param type $errorMsg
      */
     final static function raise($errorCode, $errorMsg) {
-        
+
     }
 
     /**
@@ -65,10 +65,10 @@ class Error extends \Library\Object {
      * @param type $errNo
      * @param type $errMsg
      * @param type $file
-     * @param type $line 
+     * @param type $line
      */
     final static function log($errNo, $errMsg, $file, $line) {
-        
+
     }
 
     final static function shutdown() {
@@ -84,12 +84,12 @@ class Error extends \Library\Object {
 
     /**
      * Displays an Error to the front user
-     * 
+     *
      * @param type $errNo
      * @param type $errMsg
      * @param type $file
      * @param type $line
-     * @return type 
+     * @return type
      */
     final static function handler($errNo, $errMsg, $file, $line, $trace = array()) {
 
@@ -104,13 +104,13 @@ class Error extends \Library\Object {
         $errType = array(
             1 => "Php Error", //Stop the dispatcher! Immediately! At any stage in which its found!!
             2 => "Php Warning",
-            4 => "Parsing Error", //Stop 
+            4 => "Parsing Error", //Stop
             8 => "Php Notice",
             16 => "Core Error", //Stop
             32 => "Core Warning",
-            64 => "Compile Error", //Stop 
+            64 => "Compile Error", //Stop
             128 => "Compile Warning",
-            256 => "Php User Error", //Stop 
+            256 => "Php User Error", //Stop
             512 => "Php User Warning",
             1024 => "Php User Notice",
             //2048 => "Php Strict Error",//**ignore**
@@ -145,12 +145,12 @@ class Error extends \Library\Object {
         //$error      = $load->view( "error" , "system" );
         //Determine the error display level, and whether to show
         //a. Page not found to Guest User; in "Production Mode"
-        //a.1 If production mode with "debug" on, 
+        //a.1 If production mode with "debug" on,
         //-> log the additional error details to log file
         //-> NEVER! show the debug console in production mode
         //b. System Error to Known User in "Test Mode"
-        //b.1 If production mode with "debug" on, 
-        //-> log the additional error details, 
+        //b.1 If production mode with "debug" on,
+        //-> log the additional error details,
         //-> show the debug console at the end of the page
         //-> show the error/warning in debug console
         //c. System Error with greater detail (backtrace) to 'Known', Skilled User; in "Developer Mode";
@@ -167,12 +167,29 @@ class Error extends \Library\Object {
         //$output->addToPosition("do:console");
         //Display a parsed error;
         //$output->displayError();
+        $label = array(
+	        1 => "important", //Stop the dispatcher! Immediately! At any stage in which its found!!
+	        2 => "warning",
+	        4 => "important", //Stop
+	        8 => "notice",
+	        16 => "important", //Stop
+	        32 => "important",
+	        64 => "important", //Stop
+	        128 => "warning",
+	        256 => "important", //Stop
+	        512 => "important",
+	        1024 => "important",
+	        //2048 => "Php Strict Error",//**ignore**
+	        9031 => "important", //Stop
+	        9032 => "important", //Stop
+	        9033 => "important", //Stop
+        );
 
-        $log = "<span class='log-code e$errNo'>{$errType[$errNo]}</span><span style='display:inline; padding-left: 5px'> $errMsg ({$errNo})</span>\t\tOn line <b><a href=\"#\">$line</a></b> of file <span style='display:inline'>$file</span>";
+        $log = "<span style='display:inline; padding-left: 5px'>$errMsg</span>\tOn line <b><a href=\"#\">$line</a></b> of file <span style='display:inline'>$file</span>";
 
-        //echo $log; 
+        //echo $log;
 
-        Debugger::log($log);
+        Debugger::log( $log , strtoupper( $errType[$errNo]."[$errNo]" ) , $label[$errNo] );
 
         $shutdownable = array(1, 4, 16, 64, 256, 9031, 9032, 9033);
 
@@ -184,8 +201,8 @@ class Error extends \Library\Object {
 
     /**
      * Handles a cauth Exception
-     * 
-     * @param type $exception 
+     *
+     * @param type $exception
      */
     final static function exception($exception) {
 

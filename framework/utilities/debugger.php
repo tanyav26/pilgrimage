@@ -7,7 +7,7 @@
  *
  * Requires PHP version 5.3
  *
- * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
+ * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
@@ -20,7 +20,7 @@
  * @version    Release: 1.0.0
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/graph
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
- * 
+ *
  */
 
 namespace Platform ;
@@ -40,37 +40,15 @@ use Library;
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/debugger
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Debugger extends \Library\Object{
-    
-    protected $log;
-    
+final class Debugger extends \Library\Log{
+
     static $time;
-    
+
     static $memory;
-    
+
     public function getCallStackDump(){}
-    
-    public function dump(){}
-    
-    public function log( $msgString, $console=TRUE, $type="Message", $logFile=TRUE){
-        
-        $output     = \Library\Output::getInstance();
-        $output->addToPosition("do:console", $msgString , '', '', FALSE);
-        
-        //echo $msgString;
-        
-        //$output->appendToFile();
-        //No html in log file
-    }
-    
-    public function setLog(){}
-    
-    public function getLog(){}
-    
-    public function setMode(){}
-    
-    public function getConsole(){}
-    
+
+
     public static function getInstance(){
         static $instance;
         //If the class was already instantiated, just return it
@@ -81,42 +59,53 @@ final class Debugger extends \Library\Object{
 
         return $instance;
     }
-    
+
+    /**
+     * Records the debugger and system start time
+     *
+     * @return void
+     */
     public static function start(){
-        
+
         static::$time   = microtime( true );
         static::$memory = memory_get_usage( true );
-        
-        self::log( sprintf(_("Start Processing time: %s") , static::$time ) );
+
+        self::log(  static::$time , _("Start execution time") , "notice" );
     }
-    
+
+    /**
+     * Records the debugger stop and stystem stop time
+     * Ideally the last method to be called before the output is sent to the server
+     *
+     * @return void
+     */
     public static function stop(){
-        
+
         //Get usage data
         $now    = microtime( true );
         $speed  = number_format(1000*($now-static::$time), 2);
         $_memory= memory_get_usage( );
         $units  = array('Bytes','KB','MB','GB','TB','PB');
         $memory = @round($_memory/pow(1024,($i=floor(log($_memory,1024)))),2).' '.$units[$i];
-        
+
         //Get Query usage
         $database = \Library\Database::getInstance();
         $queries  = $database->getTotalQueryCount();
- 
+
         //Set the debugger output
         $output = \Library\Output::getInstance();
         $output->set("debugtime", $speed );
         $output->set("debugmemory", $memory );
         $output->set("debugqueries", $queries );
-        
+
         //Library\Date::difference($now, $speed);
         //print_R(static::getInstance());
-        
+
         //Log usage
-        self::log( sprintf(_("Stop Execution time: %s") ,  $now  ) );
+        self::log( $now , _("Stop execution time") , "notice"  );
     }
-    
+
     public function __construct(){}
-        
+
     public function __desstruct(){}
 }
