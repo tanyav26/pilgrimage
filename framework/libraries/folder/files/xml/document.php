@@ -7,7 +7,7 @@
  *
  * Requires PHP version 5.3
  *
- * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License 
+ * LICENSE: This source file is subject to version 3.01 of the GNU/GPL License
  * that is available through the world-wide-web at the following URI:
  * http://www.gnu.org/licenses/gpl.txt  If you did not receive a copy of
  * the GPL License and are unable to obtain it through the web, please
@@ -20,7 +20,7 @@
  * @version    Release: 1.0.0
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/folder/files/xml/parser
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
- * 
+ *
  */
 
 namespace Library\Folder\Files\Xml;
@@ -56,14 +56,14 @@ class Document extends Parser {
      * @return string
      */
     public function getLevel() {
-        
+
     }
 
     /**
-     * Returns the document ROOT. 
+     * Returns the document ROOT.
      * This is NOT the first tag of the document
-     * 
-     * @return type 
+     *
+     * @return type
      */
     public function getRoot() {
         return $this->ROOT;
@@ -71,17 +71,17 @@ class Document extends Parser {
 
     /**
      * Return a tag
-     * 
-     * @return 
+     *
+     * @return
      */
     public function getTag() {
-        
+
     }
 
     /**
      * Returns the last element in document root;
-     * 
-     * @return type 
+     *
+     * @return type
      */
     public function getLastTag() {
 
@@ -94,34 +94,33 @@ class Document extends Parser {
         if (!empty($this->ROOT->CHILDREN)) {
             return $this->ROOT->CHILDREN[count($this->ROOT->CHILDREN) - 1];
         }
-
         //@TODO return an object of the actual last tag! for testing purposes just return new Tag()
         return false;
     }
 
     public function getFirstTag() {
-        
+
     }
 
     /**
      * Adds a tag to the end of the document tags array
-     * 
-     * @param Tag $tag 
+     *
+     * @param Tag $tag
      */
     public function appendTag(Tag $tag) {
 
-        //Just add the tag to the children    
+        //Just add the tag to the children
         $this->ROOT->CHILDREN[] = $tag;
     }
 
     public static function prependTag(Tag $tag) {
-        
+
     }
 
     /**
      * Returns the current pointer in the XML document
-     * 
-     * @return type 
+     *
+     * @return type
      */
     public function pointer() {
 
@@ -130,8 +129,8 @@ class Document extends Parser {
 
     /**
      * Checks if the document has any elements
-     * 
-     * @return type 
+     *
+     * @return type
      */
     public function hasElements() {
         return (count(self::$tags) > 0) ? true : false;
@@ -139,9 +138,9 @@ class Document extends Parser {
 
     /**
      * Gets an Instance of the XML parser
-     * 
+     *
      * @staticvar self $instance
-     * @return self 
+     * @return self
      */
     public static function getInstance() {
 
