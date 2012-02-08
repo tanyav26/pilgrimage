@@ -132,6 +132,52 @@
   }
 }
 
+// Gradient Bar Colors for buttons and allerts
+.gradientBar(@primaryColor, @secondaryColor) {
+  #gradient > .vertical(@primaryColor, @secondaryColor);
+  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+  border-color: @secondaryColor @secondaryColor darken(@secondaryColor, 15%);
+  border-color: rgba(0,0,0,.1) rgba(0,0,0,.1) fadein(rgba(0,0,0,.1), 15%);
+}
+
+// POPOVER ARROWS
+// --------------
+
+#popoverArrow {
+  .above(@arrowWidth: 5px) {
+    bottom: 0;
+    left: 50%;
+    margin-left: -@arrowWidth;
+    border-left: @arrowWidth solid transparent;
+    border-right: @arrowWidth solid transparent;
+    border-top: @arrowWidth solid @black;
+  }
+  .left(@arrowWidth: 5px) {
+    top: 50%;
+    right: 0;
+    margin-top: -@arrowWidth;
+    border-top: @arrowWidth solid transparent;
+    border-bottom: @arrowWidth solid transparent;
+    border-left: @arrowWidth solid @black;
+  }
+  .below(@arrowWidth: 5px) {
+    top: 0;
+    left: 50%;
+    margin-left: -@arrowWidth;
+    border-left: @arrowWidth solid transparent;
+    border-right: @arrowWidth solid transparent;
+    border-bottom: @arrowWidth solid @black;
+  }
+  .right(@arrowWidth: 5px) {
+    top: 50%;
+    left: 0;
+    margin-top: -@arrowWidth;
+    border-top: @arrowWidth solid transparent;
+    border-bottom: @arrowWidth solid transparent;
+    border-right: @arrowWidth solid @black;
+  }
+}
+
 #translucent {
   .background(@color: @white, @alpha: 1) {
     background-color: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
@@ -157,9 +203,13 @@
 
 // Grid System
 .fixed-container() {
-  width: 100%;
+  width: @maxWidth;
   margin-left: auto;
   margin-right: auto;
+  .clearfix();
+}
+
+.fluid-container(){
   .clearfix();
 }
 
@@ -181,10 +231,16 @@
 	-webkit-border-radius: @radius;
 	-moz-border-radius: @radius;
 	border-radius: @radius;
-	-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box; 
+	.background-clip(padding-box);  
 }
 
-.border-radius(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
+.border-radius(@radius: 5px) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+
+.radius(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
 	-webkit-border-top-right-radius: @topright;
 	-webkit-border-bottom-right-radius: @bottomright;
 	-webkit-border-bottom-left-radius: @bottomleft;
@@ -197,7 +253,7 @@
 	border-bottom-right-radius: @bottomright;
 	border-bottom-left-radius: @bottomleft;
 	border-top-left-radius: @topleft;
-	-moz-background-clip: padding; -webkit-background-clip: padding-box; background-clip: padding-box; 
+	.background-clip(padding-box); 
 }
 
 .opacity(@opacity: 100) {
@@ -236,6 +292,25 @@
 	box-shadow: inset @horizontal @vertical @blur rgba(0, 0, 0, @alpha);
 }
 
+.force-wrap(){
+  white-space: normal;
+  // CSS 2.0
+  white-space: normal;
+  // CSS 2.1
+  white-space: normal;
+  // CSS 3.0
+  white-space: normal;
+  // Opera 4-6
+  white-space: normal;
+  // Opera 7
+  white-space: normal;
+  // Mozilla
+  white-space: normal;
+  // HP Printers
+  word-wrap: break-word;
+  // IE 5+ 
+}
+
 // Font Stacks
 #font {
   .shorthand(@weight: normal, @size: 14px, @lineHeight: 20px) {
@@ -261,4 +336,40 @@
     font-weight: @weight;
     line-height: @lineHeight;
   }
+}
+
+// Mixin for form field states
+.formFieldState(@textColor: #555, @borderColor: #ccc, @backgroundColor: #f5f5f5) {
+  // Set the text color
+  > label,
+  .help-block,
+  .help-inline {
+    color: @textColor;
+  }
+  // Style inputs accordingly
+  input,
+  textarea {
+    color: @textColor;
+    border-color: @borderColor;
+    &:focus {
+      border-color: darken(@borderColor, 10%);
+      .box-shadow(0 0 6px lighten(@borderColor, 20%));
+    }
+  }
+  // Give a small background color for input-prepend/-append
+  .input-prepend .add-on,
+  .input-append .add-on {
+    color: @textColor;
+    background-color: @backgroundColor;
+    border-color: @textColor;
+  }
+}
+
+// Grid style input sizes
+// This is a duplication of the main grid .columns() mixin, but subtracts 10px to account for input padding and border
+.formColumns(@columnSpan: 1) {
+  display: inline-block;
+  float: none;
+  width: ((@colWidth) * @columnSpan) + (@gutter * (@columnSpan - 1));
+  margin-left: 0;
 }
