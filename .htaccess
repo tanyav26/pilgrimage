@@ -1,46 +1,12 @@
-<IfModule mod_rewrite.c>
+Options +FollowSymLinks
+RewriteEngine on
+RewriteBase /
 
-        RewriteEngine on
-        RewriteBase /tuiyo.social/
-        #RewriteRule ^index\.php$ - [L]
+# All front-end files, redirect to the public folder or CDN
+RewriteRule .*\.(jpg|jpeg|gif|png|bmp|html|htm|phtml|ico|css|js|swf)$ ~livingstonefultang/public/$0 [L,NC]
 
-        # No access to the libs and config folder
-        # Should normally show an error
-        RewriteRule ^(?:applications|config|libraries)\b.* index.php/$0 [L]
+RewriteRule ^(?:applications|config|framework)\b.* ~livingstonefultang/index.php/$0 [L]
 
-        # Not accessing a valid file?, redirect to index.php
-        RewriteCond %{REQUEST_FILENAME} !-f
-        RewriteCond %{REQUEST_FILENAME} !-d
-        RewriteRule ^([^/]*)/?(.*)$ - [E=FILE:%{DOCUMENT_ROOT}/$1.php]
-
-
-        # All front-end files, redirect to the public folder or CDN
-        RewriteCond %{REQUEST_FILENAME} !-d
-        RewriteCond %{REQUEST_FILENAME} !-f
-        RewriteCond %{DOCUMENT_ROOT}/public/$0 -f
-        RewriteRule ^.+\.(jpg|jpeg|gif|png|bmp|html|htm|phtml|ico|css|js|swf)$ /public/$0 [L]
-
-        RewriteCond %{ENV:FILE} !^$
-        RewriteCond %{ENV:FILE} -f
-        RewriteRule ^([^/]*)/?(.*)$ /$1.php/$2 [QSA,L]
-
-        RewriteCond %{ENV:FILE} !^$
-        RewriteCond %{ENV:FILE} !-f
-        RewriteRule ^(.*)$ /index.php/$1 [QSA,L]
-
-        # Block out any script trying to base64_encode data within the URL
-        RewriteCond %{QUERY_STRING} base64_encode[^(]*\([^)]*\) [OR]
-
-        # Block out any script that includes a <script> tag in URL
-        RewriteCond %{QUERY_STRING} (<|%3C)([^s]*s)+cript.*(>|%3E) [NC,OR]
-
-        # Block out any script trying to set a PHP GLOBALS variable via URL
-        RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
-
-        # Block out any script trying to modify a _REQUEST variable via URL
-        RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
-
-        # Return 403 Forbidden header and show the content of the root homepage
-        RewriteRule .* index.php [F]
-
- </IfModule>
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d 
+RewriteRule ^(.*)$ ~livingstonefultang/index.php/$1 [L,QSA]
