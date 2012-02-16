@@ -20,14 +20,12 @@
  */
 ?>
 <!DOCTYPE html>
-<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js" lang="en" xmlns="http://www.w3.org/1999/xhtml">
-    <!--<![endif]-->
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
+<tpl:import path="/layouts/console.tpl" />
+
+<html class="no-js" lang="en">
     <head>
-        <title><?php echo $this->getPageTitle(); ?></title>
+        <title><tpl:element type="text" data="page.title">Default Title</tpl:element></title>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content="<?php echo $this->getPageDescription(); ?>" />
@@ -35,18 +33,18 @@
         <meta name="keywords" content="<?php echo $this->getPageAuthor(); ?>" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-        <link rel="stylesheet" href="/<?php echo $this->getTemplateName() ?>/css/default.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/css/default.css" type="text/css" media="screen" />
 
-        <script src='/<?php echo $this->getTemplateName() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
-        <script src='/<?php echo $this->getTemplateName() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
-        <script src="/<?php echo $this->getTemplateName() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
+        <script src='/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
+        <script src='/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
+        <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
     </head>
     <body class="has-header has-footer has-sidebar">
         <div role="header" class="header">
             <div class="topbar fill">
                 <div class="inner">
                     <div class="container">
-                        <h3><a href="<?php echo $this->link('/'); ?>">Social networking</a></h3>
+                        <h3><a href="<?php echo $this->link('/~livingstonefultang/'); ?>">Social networking</a></h3>
 
                         <ul class="nav">
 
@@ -55,14 +53,12 @@
                             <li><a href="#">Interact</a></li>
                         </ul>
 
-
                         <ul class="nav secondary-nav">
                             <li class="dropdown" data-dropdown="dropdown">
                                 <a href="#" class="dropdown-toggle">Livingstone Fultang</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Secondary link</a></li>
                                     <li><a href="#">Something else here</a></li>
-
                                     <li><a href="#">Another link</a></li>
                                 </ul>
                             </li>
@@ -128,9 +124,8 @@
                                     <li class="active">You are here</li>
                                 </ul>
 
-                                <tpl:layout xmlns:tpl="http://tuiyo.co.uk/tpl">
-                                    Here is a layout
-                                </tpl:layout>
+
+
 
                                 <!-- Alerts -->
                                 <div class="alert-message warning">
@@ -243,12 +238,12 @@
                                 <ul class="media-grid">
                                     <li>
                                         <a href="#">
-                                            <img class="thumbnail" src="http://placehold.it/90x90" alt="" />
+                                            <img class="thumbnail" src="http://placehold.it/90x90" alt="" width="90" height="90" />
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <img class="thumbnail" src="http://placehold.it/90x90" alt="" />
+                                            <img class="thumbnail" src="http://placehold.it/90x90" alt="" width="90" height="90" />
                                         </a>
                                     </li>
                                 </ul>
@@ -542,7 +537,7 @@
        	</div>
 
         <!-- scripts concatenated and minified via ant build script-->
-        <script src="/<?php echo $this->getTemplateName() ?>/js/plugins.js" type="text/javascript"></script>
+        <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/plugins.js" type="text/javascript"></script>
         <!-- end scripts-->
 
 
@@ -554,3 +549,4 @@
 
     </body>
 </html>
+</tpl:layout>
