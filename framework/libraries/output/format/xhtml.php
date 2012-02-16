@@ -61,23 +61,22 @@ class xHtml extends \Library\Output\Document {
 
         $this->headers();
 
-
         //3.Determine which format of the index we are using
         $layout = FSPATH . 'public' . DS . $this->output->template . DS . $template. EXT;
-
+        
+        $contents = file_get_contents( $layout );
+        
         //4. Include the main index file
-        include_once $layout;
+        include_once( $layout );
 
 
         //parse the set layout as the final output;
         //5. Close and Flush buffer
         $output     = $this->restartBuffer();
-
+        
         //echo $output
-        $document   = $this->parse( $output );
-
-        $debugger = \Platform\Debugger::getInstance();
-        print_R($debugger::$log);
+        $document   = $this->parse( $output , $this );
+        
 
         //Print to client
         print( "<!DOCTYPE html>\n".$document );

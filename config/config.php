@@ -25,11 +25,11 @@
 $config['database'] = array(
     'host' => 'localhost',
     'user' => 'root',
-    'password' => 'root',
+    'password' => '',
     'charset' => 'utf8',
     'prefix' => 'dd_',
     'collate' => '',
-    'name' => 'diddat',
+    'name' => 'networkapp',
     'select' => TRUE,
     'driver' => 'MySQL'
 );
@@ -39,7 +39,7 @@ $config['session'] = array(
     'table' => '?session',
     'cookie' => 'c4session',
     'domain' => '',
-    'path' => '/tuiyosocial.tld',
+    'path' => '/',
     //The absolute path to the session data file store
     'datafile' => '/',
     //The amount of time to keep for,

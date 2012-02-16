@@ -66,11 +66,11 @@ final class Debugger extends \Library\Log{
      * @return void
      */
     public static function start(){
-
+        
         static::$time   = microtime( true );
         static::$memory = memory_get_usage( true );
-
-        self::log(  static::$time , _("Start execution time") , "notice" );
+	
+        self::log(  static::$time , _("Start execution time") , "notice" );       
     }
 
     /**
@@ -94,9 +94,11 @@ final class Debugger extends \Library\Log{
 
         //Set the debugger output
         $output = \Library\Output::getInstance();
-        $output->set("debugtime", $speed );
-        $output->set("debugmemory", $memory );
-        $output->set("debugqueries", $queries );
+        $output->set("debug", array("start"=>static::$time ) );
+        $output->set("debug", array("stop"=>$speed ) );
+        $output->set("debug", array("memory"=> $memory ) );
+        $output->set("debug", array("queries"=>$queries ) );
+        $output->set("debug", array("log"=>static::$log ) );
 
         //Library\Date::difference($now, $speed);
         //print_R(static::getInstance());

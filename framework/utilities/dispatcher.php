@@ -108,27 +108,27 @@ final class Dispatcher extends \Library\Object{
      * @param <type> $route
      */
     public function execute( $route ) {
-        
+              
         // get the base controller
         require_once FSPATH . 'framework' . DS .'utilities'.DS. 'controller' . EXT;
         //$action  = Controller::getInstance();
         
         //Before Dispatch Event
         Library\Event::trigger('onBeforeDispatch');
-
+        
         $application = $route->getApplication();
         $controller = $route->getController();
         $method = $route->getMethod();
 
         $class = "Application\\" . ucfirst($application) . "\Controllers\\" . ucfirst($controller);
-
+                              
         $this->task     = $class::getInstance();
         $this->route    = $route;
-
+     
         //Execute the method;
         $argmts = $route->getParameter("arguments");
         $argmts = empty($argmts)?array():$argmts;
-        
+                            
         //First check if the method is actually a subtask of the controller, i.e 
         //i.e if a subcontroller exists to the main controller
         

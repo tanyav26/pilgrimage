@@ -74,7 +74,7 @@ class Output extends Object {
      *
      * @var array
      */
-    private $variables = array(
+    protected static $variables = array(
         "pageid" => "_page"
     );
 
@@ -126,9 +126,18 @@ class Output extends Object {
         $this->config = Config::getInstance();
         $this->router = Router::getInstance();
         $this->template = $this->config->get('template', 'default');
+        //$this->pageTitle = $this->config->get('');
 
         //The Router defined format;
         $this->format = $this->router->getFormat();
+    }
+    
+    /**
+    * Returns all the protected output variables
+    * @return array;
+    */
+    final public function getVariables(){
+    	return $this->variables;
     }
 
     /**
@@ -600,6 +609,7 @@ class Output extends Object {
     final public function setPageTitle($title) {
 
         $this->pageTitle = trim($title);
+        $this->set("page", array( "title"=>$this->pageTitle ) );
 
         return $this;
     }
@@ -612,9 +622,19 @@ class Output extends Object {
      *
      * @return object Output
      */
-    final public function set($param, $value) {
+    final public function set($param, $value, $overwrite=false) {
 
-        $this->variables[$param] = $value;
+        //Check if the param already exists
+        $existing = $this->get($param, null );
+        $variable = array($param=>$value );
+        
+        if(!empty($existing)&&is_array($existing)&&!$overwrite){
+            //Just fascilitates using namespaces
+            $value      = is_array($value)? array_merge($existing, $value) : null;
+            $variable   = array($param=>$value);
+            
+        }		
+        $this->variables = array_merge($this->variables, $variable); 
 
         return $this;
     }
@@ -692,7 +712,7 @@ class Output extends Object {
         if (isset($this->pageTitle)) {
             return (string) $this->pageTitle;
         }
-        return "Welcome";
+        return;
     }
 
     /**

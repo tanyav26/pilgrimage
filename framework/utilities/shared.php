@@ -68,6 +68,12 @@ final class Shared {
         return $objects[$groupname];
     }
 
+    /**
+     * Loads all the system configuration
+     * 
+     * @staticvar type $configarray
+     * @return type 
+     */
     public static function getConfig() {
 
         static $configarray;
@@ -98,14 +104,23 @@ final class Shared {
         }
         return $configarray;
     }
-
+    
+    /**
+     * Returns an instance of the loader class
+     * 
+     * @return type 
+     */
     public static function loader() {
 
         return \Platform\Loader::getInstance();
     }
 
 
-
+    /**
+     * 
+     * @staticvar array $objects
+     * @return array|boolean 
+     */
     public static function load() {
 
         static $objects = array();
@@ -154,3 +169,6 @@ final class Shared {
     }
 
 }
+
+
+//If the gettext function does not exists

@@ -1,0 +1,118 @@
+<?php ?>
+<div class="table" style="margin-bottom: 25px">
+    <div class="tableRow" style="border-bottom: 1px solid #ddd; padding: 6px 0">
+        <div class="tableRowCell" style="width: 35%;"><strong><?php echo _('Server Requirements'); ?></strong></div>
+        <div class="tableRowCell required" style="width: 20%" align="left"><strong><?php echo _('Required'); ?></strong></div>
+        <div class="tableRowCell yoursetting" style="width: 20%" align="left"><strong><?php echo _('Current'); ?></strong></div>
+        <div class="tableRowCell yoursetting" style="width: 15%" align="left"><strong><?php echo _('Test'); ?></strong></div>
+        <div class="tableRowCell yoursetting" style="width: 10%" align="left">&nbsp;</div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="tableRow" style="border-bottom: 1px dashed #ddd; padding: 6px 0">
+        <div class="tableRowCell" style="width: 35%;"><?php echo _('PHP version'); ?></div>
+        <div class="tableRowCell required" style="width: 20%" align="left"><?php echo $this->requirements["server"]["PHP"]["minimal"] . $this->requirements["server"]["PHP"]["version"] ?></div>
+        <div class="tableRowCell yoursetting" style="width: 20%" align="left"><?php echo sprintf(_('%s Installed'), PHP_VERSION); ?></div>
+        <div class="tableRowCell yoursetting" style="width: 15%" align="left">
+            <?php if ($this->checker->checkVersion($this->requirements["server"]["PHP"])) : ?>
+                <span style="color:green;font-weight: bold"><?php echo _('Passed'); ?></span>
+            <?php else: ?>
+                <span style="color:red;font-weight: bold"><?php echo _('Failed'); ?></span>
+            <?php endif; ?>
+        </div>
+        <div class="tableRowCell yoursetting" style="width: 10%" align="left">&nbsp;</div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="table" style="margin-bottom: 25px">
+    <div class="tableRow" style="border-bottom: 1px solid #ddd; padding: 6px 0">
+        <div class="tableRowCell" style="width: 35%;"><strong><?php echo _('PHP Extensions'); ?></strong></div>
+        <div class="tableRowCell required" style="width: 20%" align="left">&nbsp;</div>
+        <div class="tableRowCell yoursetting" style="width: 20%" align="left">&nbsp;</div>
+        <div class="tableRowCell yoursetting" style="width: 15%" align="left">&nbsp;</div>
+        <div class="tableRowCell yoursetting" style="width: 10%" align="left">&nbsp;</div>
+        <div class="clear"></div>
+    </div>
+    <?php foreach ($this->requirements['modules'] as $name => $module): $m = $this->checker->testModule($name, $module); ?>
+        <div class="tableRow" style="border-bottom: 1px dashed #ddd; padding: 6px 0">
+            <div class="tableRowCell" style="width: 35%;"><?php echo $m['title'] ?></div>
+            <div class="tableRowCell required" style="width: 20%" align="left"><?php echo $m['name']; ?></div>
+            <div class="tableRowCell yoursetting" style="width: 20%" align="left"><?php echo $m['current']; ?></div>
+            <div class="tableRowCell yoursetting" style="width: 15%" align="left">
+                <?php if ($m['test']) : ?>
+                    <span style="color:green;font-weight: bold"><?php echo _('Passed'); ?></span>
+                <?php else: ?>
+                    <span style="color:red;font-weight: bold"><?php echo _('Failed'); ?></span>
+                <?php endif; ?>
+            </div>
+            <div class="tableRowCell yoursetting" style="width: 10%" align="left">&nbsp;</div>
+            <div class="clear"></div>
+        </div>
+    <?php endforeach; ?>
+</div>
+
+
+<div class="table" style="margin-bottom: 25px">
+    <div class="tableRow" style="border-bottom: 1px solid #ddd; padding: 6px 0">
+        <div class="tableRowCell" style="width: 35%;"><strong><?php echo _('PHP Directives'); ?></strong></div>
+        <div class="tableRowCell required" style="width: 20%" align="left">&nbsp;</div>
+        <div class="tableRowCell yoursetting" style="width: 20%" align="left">&nbsp;</div>
+        <div class="tableRowCell yoursetting" style="width: 15%" align="left">&nbsp;</div>
+        <div class="tableRowCell yoursetting" style="width: 10%" align="left">&nbsp;</div>
+        <div class="clear"></div>
+    </div>
+
+    <?php foreach ($this->requirements['directives'] as $name => $directive): $d = $this->checker->testDirective($name, $directive); ?>
+
+        <div class="tableRow" style="border-bottom: 1px dashed #ddd; padding: 6px 0">
+            <div class="tableRowCell" style="width: 35%;"><?php echo $d['title']; ?></div>
+            <div class="tableRowCell required" style="width: 20%" align="left"><?php echo $d['status']; ?></div>
+            <div class="tableRowCell yoursetting" style="width: 20%" align="left"><?php echo $d['current']; ?></div>
+            <div class="tableRowCell yoursetting" style="width: 15%" align="left">
+                <?php if ($d['test']) : ?>
+                    <span style="color:green;font-weight: bold"><?php echo _('Passed'); ?></span>
+                <?php else: ?>
+                    <span style="color:red;font-weight: bold"><?php echo _('Failed'); ?></span>
+                <?php endif; ?>
+            </div>
+            <div class="tableRowCell yoursetting" style="width: 10%" align="left">&nbsp;</div>
+            <div class="clear"></div>
+        </div>    
+    <?php endforeach; ?>
+
+    <div class="tableRow" style="border-bottom: 1px dashed #ddd; padding: 6px 0">
+        <div class="tableRowCell" style="width: 35%;"><?php echo _('File Uploading'); ?></div>
+        <div class="tableRowCell required" style="width: 20%" align="left">On</div>
+        <div class="tableRowCell yoursetting" style="width: 20%" align="left">On</div>
+        <div class="tableRowCell yoursetting" style="width: 15%" align="left"><span style="color:green;font-weight: bold"><?php echo _('Passed'); ?></span></div>
+        <div class="tableRowCell yoursetting" style="width: 10%" align="left">&nbsp;</div>
+        <div class="clear"></div>
+    </div>
+    <div class="tableRow" style="border-bottom: 1px dashed #ddd; padding: 6px 0">
+        <div class="tableRowCell" style="width: 35%;"><?php echo _('Maximum Upload File Size'); ?></div>
+        <div class="tableRowCell required" style="width: 20%" align="left">64 MB +</div>
+        <div class="tableRowCell yoursetting" style="width: 20%" align="left">100 MB Detected</div>
+        <div class="tableRowCell yoursetting" style="width: 15%" align="left"><span style="color:green;font-weight: bold"><?php echo _('Passed'); ?></span></div>
+        <div class="tableRowCell yoursetting" style="width: 10%" align="left">&nbsp;</div>
+        <div class="clear"></div>
+    </div>
+    <div class="tableRow" style="border-bottom: 1px dashed #ddd; padding: 6px 0">
+        <div class="tableRowCell" style="width: 35%;"><?php echo _('Floating Point Precision'); ?></div>
+        <div class="tableRowCell required" style="width: 20%" align="left">10+</div>
+        <div class="tableRowCell yoursetting" style="width: 20%" align="left">10</div>
+        <div class="tableRowCell yoursetting" style="width: 15%" align="left"><span style="color:green;font-weight: bold"><?php echo _('Passed'); ?></span></div>
+        <div class="tableRowCell yoursetting" style="width: 10%" align="left">&nbsp;</div>
+        <div class="clear"></div>
+    </div>
+    <div class="tableRow" style="border-bottom: 1px dashed #ddd; padding: 6px 0">
+        <div class="tableRowCell" style="width: 35%;"><?php echo _('Memory Capacity Limit'); ?></div>
+        <div class="tableRowCell required" style="width: 20%" align="left">32 MB</div>
+        <div class="tableRowCell yoursetting" style="width: 20%" align="left">32 MB</div>
+        <div class="tableRowCell yoursetting" style="width: 15%" align="left"><span style="color:green;font-weight: bold"><?php echo _('Passed'); ?></span></div>
+        <div class="tableRowCell yoursetting" style="width: 10%" align="left">&nbsp;</div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<a href="#" class="button" type="button" rel="goback">Previous Step</a>

@@ -48,23 +48,24 @@ abstract class Document extends Library\Object {
     protected static $_path = "/";
 
     /**
-     * Parses an HTML document
-     *
-     * @return void
+     * Parses the output document
+     * @param type $output
+     * @param null $object an instance of the document class
+     * 
+     * @return string output 
      */
-    final public function parse($output) {
+    final public function parse($output, $object=null) {
         //parses the document output buffer
         //1. Set the output as source
         static::$_source = $output;
 
         //2. Parse layouts
-        static::$_prepared = Parse::_( static::$_source );
+        static::$_prepared = Parse::_(static::$_source, $object);
 
 
         //4. Return source;
         return static::$_prepared;
     }
-
 
     /**
      * Constructor for the class;
@@ -105,6 +106,23 @@ abstract class Document extends Library\Object {
             //Call the Method;
             return @\call_user_func_array(array($output, $method), $args);
         }
+    }
+    
+        /**
+     * Output Magic variable Getter
+     *
+     * @param type $name
+     * @return type
+     */
+    final public function __get($name) {
+
+        //If is property?
+        if (isset($this->$name)) {
+            return $this->$name;
+        }
+
+        //Else check return in output variables;
+        return $this->output->get($name);
     }
 
     /**

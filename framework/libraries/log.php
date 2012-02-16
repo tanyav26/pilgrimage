@@ -98,6 +98,8 @@ class Log extends Object{
     public function setMode(){}
 
     public function getConsole(){}
+    
+    public function __construct(){}
 
     /**
      * Logs a system message
@@ -111,11 +113,11 @@ class Log extends Object{
      * @param type $logFile
      * @return type
      */
-    public function log( $string,  $title="DEBUG LOG", $type="message",  $typekey="" ,$console=TRUE, $logFile=TRUE){
-
+    public static function log( $string,  $title="DEBUG LOG", $type="message",  $typekey="" ,$console=TRUE, $logFile=TRUE){
+  
         $output     = \Library\Output::getInstance();
         //$output->addToPosition("do:console", $msgString , '', '', FALSE);
-
+        	
         //If isset this $log;
         $logkey = md5(strval( $string.$console.$type.$logFile));
 

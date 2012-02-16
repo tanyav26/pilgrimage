@@ -52,33 +52,59 @@ abstract class Template extends Output\Parse {
      * Loaded and imported layouts
      * @var type
      */
-    static $layouts;
+    static $layouts = array();
 
     /**
      * Already parsed
      * @var type
      */
     static $parsed;
+    
+    
+    static $output = array();
+    
+    
+    static $variables = array();
+    
+    
+    static $writer;
+    
+    
+    static $imports = array();
 
-    /**
-     * Defines the class constructor
-     * Used to preload pre-requisites for the template class
-     *
-     * @return object template
-     */
-    public function __constructor() {
 
+    
+    final public static function getData($path, $default=""){
+    
+    	//Get an instance of the Output Document class. 
+    	//We will need this for templates?
+    	static::$output     = Library\Output::getInstance();
+    	static::$variables  = static::$output->getVariables();
+    	
+    	$id 	= explode('.',$path);
+    	$value 	= static::$variables;
+    	
+    	//From string representation to array;	 
+    	foreach($id as $i=>$index){
+    		if(!isset($value[$index])){
+    			//If we can't find the element, return the default value;
+    			return $default;
+    			break; 
+    		};
+    		$value = $value[$index];
+    	}
+    	
+    	return (!empty($value) ) ? $value : $default ;
     }
+    
+    
+    final public static function getLayout(){}
+    
+    
+    final public static function getImport(){}
 
 
-    final public static function _( $buffer, $templates = array()) {
-
-        return $buffer;
-
-    }
-
-
-    abstract public static function execute( $parser, $element );
+    abstract public static function execute( $parser, $element, $writer );
 
     /**
      * Returns and instantiated Instance of the template class

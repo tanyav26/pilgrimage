@@ -24,6 +24,7 @@
  * @since      Class available since Release 1.0.0 Feb 8, 2012 5:40:16 AM
  *
  */
+
 namespace Library\Output;
 
 use Library;
@@ -48,23 +49,34 @@ class Parse extends Library\Object {
      */
 
     static $instance;
-
     protected static $document;
-    protected static $methods  = array(
-        "tpl"=>array(
-            "layout"=>"\Library\Output\Parse\Template\Layout::execute"
+    protected static $methods = array(
+        "tpl" => array(
+            "layout" => "\Library\Output\Parse\Template\Layout::execute",
+            "element" => "\Library\Output\Parse\Template\Element::execute",
+            "import" => "\Library\Output\Parse\Template\Import::execute",
         )
     );
-    protected static $locale  = array();
 
-
+    /**
+     *
+     * Parses the output buffer
+     * 
+     * @param type $buffer
+     * @param type $document
+     * @return type 
+     */
     public static function _($buffer = null, $document = null) {
 
+        //Just give the parser the document
+        static::$document = $document;
+        
+        
         $xhtml = $buffer;
-        $XmlParser = new Xml\Parser($xhtml, true , true, static::$methods);
+        $XmlParser = new Xml\Parser($xhtml, true, true, static::$methods);
 
-        $DOCUMENT   = $XmlParser::getDocument();
-        $XML        = $DOCUMENT->toXML( "", "1.0", "UTF-8" );
+        $DOCUMENT = $XmlParser::getDocument();
+        $XML = $DOCUMENT->toXML("", "1.0", "UTF-8");
 
         return $XML;
     }
@@ -75,8 +87,7 @@ class Parse extends Library\Object {
      * @return void
      */
     final public static function loadFilters() {
-
-
+        
     }
 
     /**
@@ -102,3 +113,4 @@ class Parse extends Library\Object {
     }
 
 }
+

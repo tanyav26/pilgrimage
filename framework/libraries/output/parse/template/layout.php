@@ -24,11 +24,13 @@
  * @since      Class available since Release 1.0.0 Feb 5, 2012 10:15:29 PM
  *
  */
+
 namespace Library\Output\Parse\Template;
 
 use Library;
 use Library\Output;
 use Library\Output\Parse;
+
 /**
  * What is the purpose of this class, in one sentence?
  *
@@ -42,7 +44,7 @@ use Library\Output\Parse;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/layout
  * @since      Class available since Release 1.0.0 Feb 5, 2012 10:15:29 PM
  */
-class Layout extends Parse\Template{
+class Layout extends Parse\Template {
     /*
      * @var object
      */
@@ -56,7 +58,7 @@ class Layout extends Parse\Template{
      * @return object layout
      */
     public function __constructor() {
-
+        
     }
 
     /**
@@ -68,11 +70,32 @@ class Layout extends Parse\Template{
         return self::getInstance();
     }
 
+    /**
+     * Execute the layout
+     * 
+     * @param type $parser
+     * @param type $tag
+     * @return type
+     */
+    public static function execute($parser, $tag, $writer) {
 
-    public static function execute($parser, $tag){
+        //print_R(static::$layouts);
+        //If there is a name we will save this layout to static::$layouts
+        $name = isset($tag['NAME']) ? $tag['NAME'] : null;
+        //Layouts are just wrapper elements, with names;
+        $cdata = isset($tag['CDATA']) ? $tag['CDATA'] : null;
+        $tag = isset($tag['CHILDREN']) ? $tag['CHILDREN'] : null;
 
-        $tag['ELEMENT'] = 'span';//this converts a layout to a span
+        //Write out the CDATA if we have any
+        if (!is_array($tag) && !empty($cdata)) {
+            //print_r($tag);
+            $writer->writeRaw($cdata);
+        }
 
+        //Save the layout
+        if (!empty($name) && !isset(static::$layouts[$name])): //Unique layout names
+            static::$layouts[$name] = $tag;
+        endif;
 
         //Always return the modified element
         return $tag;

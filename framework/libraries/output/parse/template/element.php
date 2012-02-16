@@ -60,19 +60,45 @@ class Element extends Parse\Template{
 
     }
 
-    /**
-     * Backward compatibility for class name constructors
-     *
-     * @return object element
-     */
-    public static function Element() {
-        return self::getInstance();
+    private static function text($tag){
+    
+    	//Get the data;
+	    if(isset($tag['DATA'])):
+	    	$data 	= self::getData( $tag['DATA'], $tag['CDATA']); //echo $data;
+	    	$tag['CDATA'] = $data ;   			 	
+	    	//die;
+	    endif;  
+    	
+    	//Get the layout name; and save it!
+    	if(isset($tag['CDATA']) && is_a(static::$writer, "XMLWriter")):
+    		static::$writer->writeRaw( $tag['CDATA'] ); 
+    	endif;
+    	
+    	return null; //Removes the element from the tree but returns the text;
     }
+    
+    private static function comment($tag){
+    
+    }
+    
 
-    public static function text(){}
-    public static function comment(){}
-
-    public static function execute($parser, $element){}
+    public static function execute($parser, $tag , $writer){
+        	
+        static::$writer = $writer;
+        	
+    	//If no type is defined return null. !We need a type
+    	if(isset($tag['TYPE'])):	
+    		//@TODO Sad that i have to instantiate this calss 
+    		//To check if it exists. I need a better way of doing this
+    		//To spare some more memory
+    		if(method_exists( self::getInstance(), $tag['TYPE'])) :
+    			$tag 	= static::$tag['TYPE']( $tag );			
+    		endif;
+    	endif;
+    	
+    	return $tag; 
+    	
+    }
 
     /**
      * Returns and instantiated Instance of the element class

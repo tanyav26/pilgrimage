@@ -315,7 +315,8 @@ class Parser extends Files\Xml {
         //Recursively write out the xml;
         static::writeXML($xmlWriter, $ROOT);
 
-        //$xmlWriter->endDocument();
+        $xmlWriter->endDocument();
+		//$writer->flush(); //I think to help windows, lets just use the memory
         return $xmlWriter->outputMemory(true);
     }
 
@@ -333,7 +334,7 @@ class Parser extends Files\Xml {
         $iterator = 0;
         $children = sizeof($root);
 
-        $root = self::callback($root);
+        $root = self::callback($root, $xmlWriter);
 
         foreach ($root as $element => $data) {
 
@@ -381,15 +382,15 @@ class Parser extends Files\Xml {
                         case "script":
                         case "textarea":
                         case "span":
-                            $xmlWriter->text("");
+                            $xmlWriter->fullEndElement();
                             break;
                         default:
-
+                            $xmlWriter->endElement();
                             break;
                     endswitch;
-                    if (!empty($tag)):
-                        $xmlWriter->endElement();
-                    endif;
+                    //if (!empty($tag)):
+
+                    //endif;
                 }
             }
             $iterator++;
@@ -472,7 +473,7 @@ class Parser extends Files\Xml {
      * @param type $element
      * @return type
      */
-    final protected function callback($element) {
+    final protected function callback($element, \XMLWriter $xmlWriter) {
 
         if (isset($element['NAMESPACE'])) {
             reset($element['NAMESPACE']);
@@ -487,7 +488,7 @@ class Parser extends Files\Xml {
             $uri = end($element['NAMESPACE']);
             $method = $element['ELEMENT'];
             if (array_key_exists($prefix, static::$methods) && isset(static::$methods[$prefix][$method]) ) {
-                return call_user_func(static::$methods[$prefix][$method], static::$parser, $element);
+                return call_user_func(static::$methods[$prefix][$method], static::$parser, $element , $xmlWriter );
             }
         }
         return $element;

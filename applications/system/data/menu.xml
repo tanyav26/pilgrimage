@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE config SYSTEM "/data/config.dtd">
+
+<!-- A Navigation DTD constrained definition -->
+<config type="navigation">
+    <menus>
+        <menu name="MainMenu" label="Main Menu" minimum-authority="" default="1">           
+            <items>
+                <item name="ArticlesItemsLists" label="Articles" action="/articles/items/lists" minimum-authority="" />
+                <item name="CalendarEventsLists" label="Calendars" action="/calendar/events/lists" minimum-authority="" />       
+                <item name="LocationMapSpots" label="Locations" action="/location/map/spots" minimum-authority="" />
+                <item name="PhotoItemsLists" label="Photos" action="/photo/items/lists" minimum-authority="" />
+                <item name="VideoItemsLists" label="Videos" action="/video/items/lists" minimum-authority="" />
+                <item name="PostItemsLists" label="Broadcasts" action="/post/items/lists" minimum-authority="" />
+                <item name="UserGroupsLists" label="Groups" action="/user/groups/lists" minimum-authority="" />
+                <item name="ArticlesIndex" label="Articles" action="/articles/view/posts" minimum-authority="" >
+                    <!-- For sub menus you can just redeclare the items tag -->
+                    <!-- The lookup will pull data from the database -->
+                    <items lookup-table="?users">
+                        <item name="username" label="name"  />
+                    </items>
+                </item>
+            </items>
+        </menu>
+        <menu name="AdminMenu" label="Admin Menu" minimum-authority="" updated="04/11/11">        
+            <items>
+                <item name="AdminIndex" label="Dashboard" action="/system/admin/index" minimum-authority="" />
+                <item name="AnalyticsIndex" label="Articles" action="/articles/view/posts" minimum-authority="" />
+                <item name="ContentIndex" label="Articles" action="/articles/view/posts" minimum-authority="" />
+                <item name="ApplicationsIndex" label="Articles" action="/articles/view/posts" minimum-authority="" />
+                <item name="MembersIndex" label="Articles" action="/articles/view/posts" minimum-authority="" />
+                <item name="AppearanceIndex" label="Articles" action="/articles/view/posts" minimum-authority="" />
+                <item name="PluginsIndex" label="Articles" action="/articles/view/posts" minimum-authority="" >
+                    <items lookup="" />
+                </item>
+                <item name="SettingsIndex" label="Articles" action="/articles/view/posts" minimum-authority="" >
+                    <items lookup="" />
+                </item>
+            </items>
+        </menu>
+    </menus>
+</config>

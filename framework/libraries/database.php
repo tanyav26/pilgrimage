@@ -91,6 +91,10 @@ abstract class Database extends Object {
      * @var interger
      */
     protected $limit;
+    
+    
+    
+    var $ticker;
 
     /**
      * Connects to the databse using the default DBMS

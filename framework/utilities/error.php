@@ -40,7 +40,7 @@ use Library;
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/error
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Error extends \Library\Object {
+class Error extends \Library\Log {
 
 
     const APPLICATION_ERROR = 9033;
@@ -58,19 +58,7 @@ class Error extends \Library\Object {
     final static function raise($errorCode, $errorMsg) {
 
     }
-
-    /**
-     * Log's an Error, usually notices and warnings to file,
-     *
-     * @param type $errNo
-     * @param type $errMsg
-     * @param type $file
-     * @param type $line
-     */
-    final static function log($errNo, $errMsg, $file, $line) {
-
-    }
-
+    
     final static function shutdown() {
 
         $shutdownable = array(E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR);
