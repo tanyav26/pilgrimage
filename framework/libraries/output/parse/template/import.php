@@ -28,7 +28,7 @@
 namespace Library\Output\Parse\Template;
 
 use Library;
-use Library\Output;
+use Library\Output; 
 use Library\Output\Parse;
 
 /**
@@ -62,20 +62,28 @@ class Import extends Parse\Template {
 
         //print_R(static::$layouts);
         //If there is a name we will save this layout to static::$layouts
-        $path = isset($tag['PATH']) ? $tag['PATH'] : null;
+        $document   = static::$document;
+        $path       = isset($tag['PATH']) ? $tag['PATH'] : null;
 
         //Save the layout
         if (!empty($path) && !isset(static::$imports[$path])): //Unique layout names
             //static::$imports[$href] = $tag;
-            echo $path;
-            //$path = 
-        
-            print_R(static::$document );
+            $path = str_replace(array('/','\\'), DS , $path);
+            $layout = FSPATH . 'public' . DS . $document->template . DS . $path;
             
+            
+            if(file_exists($layout)):
+                //TODO@ file get contents might not be the best method here 
+                //to import and parse the file
+                $contents = file_get_contents( $layout );
+                $layout   = self::_($contents, $document);
+                //@TODO for lack of a better way to remove the XML declaration 
+                static::$imports[$path] = str_replace('<?xml version="1.0" encoding="UTF-8"?>', "" , $layout);
+                
+                print_R(static::$imports);
+                //print_R(static::$document );
+            endif;
         endif;
-        
-        
-        //print_r(static::$layouts);
 
         //Always return the modified element
         return null;

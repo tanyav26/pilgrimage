@@ -21,7 +21,8 @@
 ?>
 <!DOCTYPE html>
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
-<tpl:import path="/layouts/console.tpl" />
+    
+<tpl:import path="layouts/console.tpl" />
 
 <html class="no-js" lang="en">
     <head>

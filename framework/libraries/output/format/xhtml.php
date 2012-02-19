@@ -64,8 +64,6 @@ class xHtml extends \Library\Output\Document {
         //3.Determine which format of the index we are using
         $layout = FSPATH . 'public' . DS . $this->output->template . DS . $template. EXT;
         
-        $contents = file_get_contents( $layout );
-        
         //4. Include the main index file
         include_once( $layout );
 
