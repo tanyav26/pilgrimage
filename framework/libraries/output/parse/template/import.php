@@ -80,8 +80,8 @@ class Import extends Parse\Template {
                 //@TODO for lack of a better way to remove the XML declaration 
                 static::$imports[$path] = str_replace('<?xml version="1.0" encoding="UTF-8"?>', "" , $layout);
                 
-                print_R(static::$imports);
-                //print_R(static::$document );
+                //print_R(static::$imports);
+                print_R(static::$document );
             endif;
         endif;
 

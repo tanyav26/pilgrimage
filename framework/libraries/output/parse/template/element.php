@@ -24,6 +24,7 @@
  * @since      Class available since Release 1.0.0 Jan 28, 2012 2:06:49 PM
  *
  */
+
 namespace Library\Output\Parse\Template;
 
 use Library;
@@ -43,7 +44,7 @@ use Library\Output\Parse;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/element
  * @since      Class available since Release 1.0.0 Jan 28, 2012 2:06:49 PM
  */
-class Element extends Parse\Template{
+class Element extends Parse\Template {
     /*
      * @var object
      */
@@ -57,47 +58,88 @@ class Element extends Parse\Template{
      * @return object element
      */
     public function __constructor() {
-
-    }
-
-    private static function text($tag){
-    
-    	//Get the data;
-	    if(isset($tag['DATA'])):
-	    	$data 	= self::getData( $tag['DATA'], $tag['CDATA']); //echo $data;
-	    	$tag['CDATA'] = $data ;   			 	
-	    	//die;
-	    endif;  
-    	
-    	//Get the layout name; and save it!
-    	if(isset($tag['CDATA']) && is_a(static::$writer, "XMLWriter")):
-    		static::$writer->writeRaw( $tag['CDATA'] ); 
-    	endif;
-    	
-    	return null; //Removes the element from the tree but returns the text;
+        
     }
     
-    private static function comment($tag){
-    
+    /**
+     * Renders a text element
+     * 
+     * @param type $tag
+     * @return null 
+     */
+    private static function text($tag) {
+ 
+        //Get the data;
+        if (isset($tag['DATA'])):
+            $tag['_DEFAULT'] = $tag['CDATA'];
+            $data = self::getData($tag['DATA'], $tag['CDATA']); //echo $data;
+            
+            //if formatting
+            if(isset($tag['FORMATTING'])&& in_array($tag['FORMATTING'], array("sprintf", "vsprintf"))):
+                 $text = call_user_func( $tag['FORMATTING'] , $tag['_DEFAULT'] , $data );
+                 
+                 //Replace the CDATA;
+                 $data = $text;
+            endif;
+            
+            
+            
+            $tag['CDATA'] = $data;
+            //If we do not have a default empty it
+            if(is_null($tag['_DEFAULT'])) unset($tag['_DEFAULT']);
+        //die;
+        endif;
+        
+        //Get the layout name; and save it!
+        if (isset($tag['CDATA']) && is_a(static::$writer, "XMLWriter")):
+            static::$writer->writeRaw($tag['CDATA']);
+        endif;
+
+        return null; //Removes the element from the tree but returns the text;
     }
     
+    /**
+     * Renders a layout element 
+     * 
+     * @param type $tag 
+     */
+    private static function layout($tag) {
+        
+        $element = null;
+         
+        //Get the layout name; 
+        if (isset($tag['NAME']) && isset(static::$layouts[$tag['NAME']])):
+            //Check if we have the element previously parsed
+            $element = static::$layouts[ $tag['NAME'] ];
+        
+        endif;
 
-    public static function execute($parser, $tag , $writer){
-        	
+        return $element; //Returns the previously parsed element;
+    }
+    
+    /**
+     * Executes the tpl:element method
+     * 
+     * @param type $parser
+     * @param type $tag
+     * @param type $writer
+     * @return type 
+     */
+    public static function execute($parser, $tag, $writer) {
+
         static::$writer = $writer;
-        	
-    	//If no type is defined return null. !We need a type
-    	if(isset($tag['TYPE'])):	
-    		//@TODO Sad that i have to instantiate this calss 
-    		//To check if it exists. I need a better way of doing this
-    		//To spare some more memory
-    		if(method_exists( self::getInstance(), $tag['TYPE'])) :
-    			$tag 	= static::$tag['TYPE']( $tag );			
-    		endif;
-    	endif;
-    	
-    	return $tag; 
-    	
+
+        //If no type is defined return null. !We need a type
+        if (isset($tag['TYPE'])):
+            //@TODO Sad that i have to instantiate this calss 
+            //To check if it exists. I need a better way of doing this
+            //To spare some more memory
+            if (method_exists(self::getInstance(), $tag['TYPE'])) :
+                $tag = static::$tag['TYPE']($tag);
+            endif;
+        endif;
+
+        return $tag;
     }
 
     /**

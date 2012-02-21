@@ -126,8 +126,6 @@
                                 </ul>
 
 
-
-
                                 <!-- Alerts -->
                                 <div class="alert-message warning">
                                     <a class="close" href="#">×</a>
@@ -522,16 +520,10 @@
                                     <span class="checkbox-off">Hide</span>
                                 </span>
                             </label>
-                            <?php if ($this->hasPosition("do:debugger")): ?>
-                                <button data-controls-modal="console" data-backdrop="true" data-keyboard="true" class="button pull-right">
-                                    <?php echo _("Debug console") ?>
-                                </button>
-                                <?php $this->position("do:debugger") ?>
-                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="col span13">
-
+                         <tpl:element type="layout" name="console" />
                     </div>
                 </div>
             </div>

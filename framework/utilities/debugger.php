@@ -95,7 +95,8 @@ final class Debugger extends \Library\Log{
         //Set the debugger output
         $output = \Library\Output::getInstance();
         $output->set("debug", array("start"=>static::$time ) );
-        $output->set("debug", array("stop"=>$speed ) );
+        $output->set("debug", array("stop"=>$now ) );
+        $output->set("debug", array("speed"=>$speed ) );
         $output->set("debug", array("memory"=> $memory ) );
         $output->set("debug", array("queries"=>$queries ) );
         $output->set("debug", array("log"=>static::$log ) );
