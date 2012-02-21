@@ -1,0 +1,290 @@
+<?php ?>
+<section role="dashboard" class="tabs" id="dashboardTabs">
+    <div class="tab default-tab" id="general" style="display: block; ">
+        <div class="dashBoardWidgetBody moduleHolder grid">
+            <div class="row">
+                <div class="col third">
+                    <div class="dashBoardWidgetCol moduleColumn">
+                        <div class="dashBoardWidget module">
+                            <div class="dashBoardWidgetHeader moduleHeader">
+                                <a href="#" class="widgetTitle moduleTitle">Dashboard Title</a>
+                                <a href="#" class="widgetClose">&nbsp;</a>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="moduleContent">
+                                <div class="dashBoardWidgetContent">Dashboard Widget</div>
+                                <div class="dashBoardWidgetFooter">Dashboard Footer</div>
+                            </div>
+                        </div>
+                        <div class="dashBoardWidget module">
+                            <div class="dashBoardWidgetHeader moduleHeader">
+                                <a href="#" class="widgetTitle moduleTitle">Dashboard Title</a>
+                                <a href="#" class="widgetClose">&nbsp;</a>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="moduleContent">
+                                <div class="dashBoardWidgetContent">Dashboard Widget</div>
+                                <div class="dashBoardWidgetFooter">Dashboard Footer</div>
+                            </div>
+                        </div>
+                        <div class="dashBoardWidget module">
+                            <div class="dashBoardWidgetHeader moduleHeader">
+                                <a href="#" class="widgetTitle moduleTitle">Dashboard Title</a>
+                                <a href="#" class="widgetClose">&nbsp;</a>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="moduleContent">
+                                <div class="dashBoardWidgetContent">Dashboard Widget</div>
+                                <div class="dashBoardWidgetFooter">Dashboard Footer</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col third">
+                    <div class="dashBoardWidgetCol moduleColumn">
+                        <div class="dashBoardWidget module">
+                            <div class="dashBoardWidgetHeader moduleHeader">
+                                <a href="#" class="widgetTitle moduleTitle">Dashboard Title</a>
+                                <a href="#" class="widgetClose">&nbsp;</a>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="moduleContent">
+                                <div class="dashBoardWidgetContent">Dashboard Widget</div>
+                                <div class="dashBoardWidgetFooter">Dashboard Footer</div>
+                            </div>
+                        </div>
+                        <div class="dashBoardWidget module">
+                            <div class="dashBoardWidgetHeader moduleHeader">
+                                <a href="#" class="widgetTitle moduleTitle">Dashboard Title</a>
+                                <a href="#" class="widgetClose">&nbsp;</a>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="moduleContent">
+                                <div class="dashBoardWidgetContent">Dashboard Widget</div>
+                                <div class="dashBoardWidgetFooter">Dashboard Footer</div>
+                            </div>
+                        </div>
+                        <div class="dashBoardWidget module">
+                            <div class="dashBoardWidgetHeader moduleHeader">
+                                <a href="#" class="widgetTitle moduleTitle">Dashboard Title</a>
+                                <a href="#" class="widgetClose">&nbsp;</a>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="moduleContent">
+                                <div class="dashBoardWidgetContent">Dashboard Widget</div>
+                                <div class="dashBoardWidgetFooter">Dashboard Footer</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col third"> 
+                    <div class="dashBoardWidgetCol moduleColumn" style="padding-right: 0px">
+                        <div class="dashBoardWidget module">
+                            <div class="dashBoardWidgetHeader moduleHeader">
+                                <a href="#" class="widgetTitle moduleTitle">Dashboard Title</a>
+                                <a href="#" class="widgetClose">&nbsp;</a>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="moduleContent">
+                                <div class="dashBoardWidgetContent">Dashboard Widget</div>
+                                <div class="dashBoardWidgetFooter">Dashboard Footer</div>
+                            </div>
+                        </div>
+                        <div class="dashBoardWidget module">
+                            <div class="dashBoardWidgetHeader moduleHeader">
+                                <a href="#" class="widgetTitle moduleTitle">Dashboard Title</a>
+                                <a href="#" class="widgetClose">&nbsp;</a>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="moduleContent">
+                                <div class="dashBoardWidgetContent">Dashboard Widget</div>
+                                <div class="dashBoardWidgetFooter">Dashboard Footer</div>
+                            </div>
+                        </div>
+                        <div class="dashBoardWidget module">
+                            <div class="dashBoardWidgetHeader moduleHeader">
+                                <a href="#" class="widgetTitle moduleTitle">Dashboard Title</a>
+                                <a href="#" class="widgetClose">&nbsp;</a>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="moduleContent">
+                                <div class="dashBoardWidgetContent">Dashboard Widget</div>
+                                <div class="dashBoardWidgetFooter">Dashboard Footer</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="tab" id="news">News Box</div>
+    <div class="tab" id="tools">Tools Box</div>
+    <div class="tab" id="extras">Extras Fun</div>	
+</section>
+
+
+<div class="clearFloat clear clearfix"></div>
+
+<div id="dashboard-page" style="display:none">
+
+
+    <div class="table" id="widgetboard">
+        <div class="mainwidget">
+            <!--Quick Links to groups widgets and inbox-->
+            <span class="titleheading">Welcome <?php echo $this->get("user")->get("fullname"); ?></span>
+            <p style="line-height: 120%; color: #888;margin: 5px 0"><i>Tuiyo.social</i> enables you to meet, share and collaborate with your friends, family and colleagues</p>
+            <hr style="border-top: 1px solid #88; border-bottom: 1px solid white;border-left: 0;border-right: 0;margin: 11px 0 11px;width: 100%;clear: both;" /> 
+            <div class="dashBoardWidget">
+                <div class="dashBoardWidgetBody">
+                    <div style="float: left; position:relative">
+                        <div class="icon" align="center" title="View your inbox">
+                            <a href="/joomla/index.php?option=com_tuiyo&amp;view=profile&amp;do=settings">
+                                <img alt="#msgs" src="http://localhost/joomla/components/com_tuiyo/client/default//images/stock_person.png" align="middle">
+                                <span>Account</span>
+                            </a>
+                        </div>
+                        <span class="icon-count" style="" >1</span>
+                    </div>
+                    <div style="float: left;">
+                        <div class="icon" align="center" title="Personal calendar of events">
+                            <a href="/joomla/index.php?option=com_tuiyo&amp;view=messages&amp;do=calendar">
+                                <img alt="#cal" src="http://localhost/joomla/components/com_tuiyo/client/default//images/evolution-calendar.png" align="middle">
+                                <span>Calendar</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div style="float: left; position: relative">
+                        <div class="icon" align="center" title="Manage your friends, and activity subscription">
+                            <a href="/joomla/index.php?option=com_tuiyo&amp;view=friends">
+                                <img alt="#phts" src="http://localhost/joomla/components/com_tuiyo/client/default//images/addressbook.png" align="middle">
+                                <span>Address book</span>
+                            </a>
+                        </div>
+                        <span class="icon-count" style="" >92</span>
+                    </div>
+                    <div style="float: left;">
+                        <div class="icon" align="center" title="Photo albums and galleries">
+                            <a href="/joomla/index.php?option=com_tuiyo&amp;view=photos">
+                                <img alt="#phts" src="http://localhost/joomla/components/com_tuiyo/client/default//images/gnome-screenshot.png" align="middle">
+                                <span>Photos</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div style="float: left;">
+                        <div class="icon" align="center" title="Your Uploaded Resources">
+                            <a href="/joomla/index.php?option=com_tuiyo&amp;view=profile&amp;do=filemanager">
+                                <img alt="#phts" src="http://localhost/joomla/components/com_tuiyo/client/default//images/folder-documents.png" align="middle">
+                                <span>Files</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div style="float: left;">
+                        <div class="icon" align="center" title="Your Blog">
+                            <a href="/joomla/index.php?option=com_tuiyo&amp;view=articles">
+                                <img alt="#phts" src="http://localhost/joomla/components/com_tuiyo/client/default//images/wine-notepad.png" align="middle">
+                                <span>Articles</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+
+            <div class="clear"></div>
+            <hr style="border-top: 1px solid #88; border-bottom: 1px solid white;border-left: 0;border-right: 0;margin: 11px 0 11px;width: 100%;clear: both;" />
+            <span class="titleheading">Your Engagement</span> 
+            <section class="table">
+                <div class="tableRow">
+                    <div class="tableRowCell" style="width: 50%">
+                        <!-- Stats Summary -->
+                        <ul class="stats-summary">
+                            <li>
+                                <strong class="stats-count">17</strong>
+                                <p>New registrations</p>
+                                <a href="#" class="button stats-view" title="View new registrations" rel="tooltip">View</a>
+                            </li>
+                            <li>
+                                <strong class="stats-count">89</strong>
+                                <p>New visitors</p>
+                                <a href="#" class="button stats-view" title="View new visitros" rel="tooltip">View</a>
+                            </li>
+                            <li>
+                                <strong class="stats-count">346</strong>
+                                <p>New sales</p>
+                                <a href="#" class="button stats-view" title="View new sales" rel="tooltip">View</a>
+                            </li>
+                            <li>
+                                <strong class="stats-count">266</strong>
+                                <p>New orders</p>
+                                <a href="#" class="button stats-view" title="View new orders" rel="tooltip">View</a>
+                            </li>
+                            <li>
+                                <strong class="stats-count">1024</strong>
+                                <p>New requests</p>
+                                <a href="#" class="button stats-view" title="View new requests" rel="tooltip">View</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tableRowCell" style="width: 50%">
+                        <div style="padding-left: 25px"><!-- Progress Bar -->
+
+
+                            <div class="progress-bar green large">
+                                <div style="width:80%;">
+                                    <span>80<sup>%</sup></span>
+                                </div>
+                            </div>
+                            <!-- /Progress Bar -->
+
+
+                            <p>You Influence</p>
+                            <!-- Progress Bar -->
+                            <div class="progress-bar blue large">
+                                <div style="width:32%;">
+                                    <span>32<sup>%</sup></span>
+                                </div>
+                            </div>
+                            <!-- /Progress Bar -->
+
+                            <p>Community contributions</p>
+                            <!-- Progress Bar -->
+                            <div class="progress-bar blue large">
+                                <div style="width:32%;">
+                                    <span>32<sup>%</sup></span>
+                                </div>
+                            </div>
+                            <!-- /Progress Bar -->
+
+                            <p>You Presence</p>
+                            <!-- Progress Bar -->
+                            <div class="progress-bar blue large">
+                                <div style="width:32%;">
+                                    <span>32<sup>%</sup></span>
+                                </div>
+                            </div>
+                            <!-- /Progress Bar -->
+
+                            <p>Resourcefullness</p>
+                            <!-- Progress Bar -->
+                            <div class="progress-bar blue large">
+                                <div style="width:32%;">
+                                    <span>32<sup>%</sup></span>
+                                </div>
+                            </div>
+                            <!-- /Progress Bar -->
+
+                        </div>
+                    </div>
+                    <!-- /Stats Summary -->
+                    <div class="clear"></div>
+                </div>
+            </section>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
