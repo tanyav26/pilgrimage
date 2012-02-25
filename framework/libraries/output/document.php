@@ -58,7 +58,7 @@ abstract class Document extends Library\Object {
         //parses the document output buffer
         //1. Set the output as source
         static::$_source = $output;
-
+        
         //2. Parse layouts
         static::$_prepared = Parse::_(static::$_source, $object);
 

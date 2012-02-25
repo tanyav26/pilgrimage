@@ -60,14 +60,18 @@ class xHtml extends \Library\Output\Document {
         }
 
         $this->headers();
-
+        $template = empty($template) ? $this->output->layout : $template ;
+        
         //3.Determine which format of the index we are using
-        $layout = FSPATH . 'public' . DS . $this->output->template . DS . $template. EXT;
+        $layout = FSPATH . 'public' . DS . $this->output->template . DS . $template. $this->output->layoutExt;
+        
+        
         
         //4. Include the main index file
         include_once( $layout );
 
-
+        //echo $layout; die; 
+        
         //parse the set layout as the final output;
         //5. Close and Flush buffer
         $output     = $this->restartBuffer();

@@ -55,6 +55,7 @@ class Parse extends Library\Object {
             "layout" => "\Library\Output\Parse\Template\Layout::execute",
             "element" => "\Library\Output\Parse\Template\Element::execute",
             "import" => "\Library\Output\Parse\Template\Import::execute",
+            "loop" => "\Library\Output\Parse\Template\Loop::execute"
         )
     );
 
@@ -66,7 +67,7 @@ class Parse extends Library\Object {
      * @param type $document
      * @return type 
      */
-    public static function _($buffer = null, $document = null) {
+    public static function _($buffer = null, $document = null, $readonly = array() ) {
 
         //Just give the parser the document
         static::$document = $document;
@@ -74,12 +75,20 @@ class Parse extends Library\Object {
         
         $xhtml = $buffer;
         $XmlParser = new Xml\Parser($xhtml, true, true, static::$methods);
-
+        
+        //The XML document
         $DOCUMENT = $XmlParser::getDocument();
-        $XML = $DOCUMENT->toXML("", "1.0", "UTF-8");
+        
+        //Register callbacks
+        Library\Event::register("_XMLAttributeCallback", "Library\Output\Parse\Template\Element::attribute");
+        //Library\Event::register("_XMLContentCallback", "Library\Output\Parse\Template\Element::content");
+        
+        //Readonly contains an array of the only tpl methods which the parser will execute
+        $XML = $DOCUMENT->toXML("", "1.0", "UTF-8", $readonly);
 
         return $XML;
     }
+    
 
     /**
      * Loads all defined filters

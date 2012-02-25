@@ -24,6 +24,7 @@
  * @since      Class available since Release 1.0.0 Jan 28, 2012 2:03:47 PM
  *
  */
+
 namespace Library\Output\Parse;
 
 use Library;
@@ -46,6 +47,7 @@ abstract class Template extends Output\Parse {
     /*
      * @var object
      */
+
     static $instance;
 
     /**
@@ -59,52 +61,90 @@ abstract class Template extends Output\Parse {
      * @var type
      */
     static $parsed;
-    
-    
     static $output = array();
-    
-    
     static $variables = array();
-    
-    
     static $writer;
-    
-    
     static $imports = array();
+    //Tell the getdata method we are loop
+    static $looping = false;
+    //Specify a loopid for the pvariables
+    static $currentloopid = null;
 
+    /**
+     * Persisten variables
+     * @var type 
+     */
+    static $pvariables = array();
 
-    
-    final public static function getData($path, $default=""){
-    
-    	//Get an instance of the Output Document class. 
-    	//We will need this for templates?
-    	static::$output     = Library\Output::getInstance();
-    	static::$variables  = static::$output->getVariables();
-    	
-    	$id 	= explode('.',$path);
-    	$value 	= static::$variables;
-    	
-    	//From string representation to array;	 
-    	foreach($id as $i=>$index){
-    		if(!isset($value[$index])){
-    			//If we can't find the element, return the default value;
-    			return $default;
-    			break; 
-    		};
-    		$value = $value[$index];
-    	}
-    	
-    	return (!empty($value) ) ? $value : $default ;
+    /**
+     *
+     * @param type $path
+     * @param type $default
+     * @return type 
+     */
+    final public static function getPersistentData($path, $default = "") {
+
+        $id = explode('.', $path);
+        $value = isset(static::$currentloopid) ? static::$pvariables[static::$currentloopid] : array();
+        
+        //From string representation to array;	 
+        foreach ($id as $i => $index) {
+            if (!isset($value[$index])) {
+                //If we can't find the element, return the default value;
+                return $default;
+                break;
+            };
+            $value = $value[$index];
+        }
+
+        return (!empty($value) ) ? $value : $default;
     }
-    
-    
-    final public static function getLayout(){}
-    
-    
-    final public static function getImport(){}
 
+    /**
+     *
+     * @param type $path
+     * @param type $default
+     * @return type 
+     */
+    final public static function getData($path, $default = "") {
 
-    abstract public static function execute( $parser, $element, $writer );
+        //Get an instance of the Output Document class. 
+        //We will need this for templates?
+        static::$output = Library\Output::getInstance();
+        static::$variables = static::$output->getVariables();
+     
+        $id = explode('.', $path);
+        $value = static::$variables;
+        
+        //if trying to access parent data from within a loop element, the first element 
+        //in the path should be _ e.g _.blah.blah.
+        $first = reset($id);
+        if (static::$looping && $first<>"_"){ 
+            return self::getPersistentData($path, $default);
+        }
+
+        //From string representation to array;	 
+        foreach ($id as $i => $index) {
+            if (!isset($value[$index])) {
+                //If we can't find the element, return the default value;
+                return $default;
+                break;
+            };
+            $value = $value[$index];
+        }
+
+        return (!empty($value) ) ? $value : $default;
+    }
+
+    final public static function getLayout() {
+        
+    }
+
+    final public static function getImport() {
+        
+    }
+
+    abstract public static function execute($parser, $element, $writer);
 
     /**
      * Returns and instantiated Instance of the template class

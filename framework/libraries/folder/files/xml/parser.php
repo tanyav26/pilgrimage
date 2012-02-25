@@ -119,7 +119,7 @@ class Parser extends Files\Xml {
      * @param type $autorun
      * @return type
      */
-    public function __construct($xml ='', $autorun = false, $namespaced=true, $methods=array()) {
+    public function __construct($xml = '', $autorun = false, $namespaced = true, $methods = array()) {
 
         //Pre-requisites
         self::$xml = $xml;
@@ -201,7 +201,7 @@ class Parser extends Files\Xml {
      * @param type $publicId
      */
     final public static function externalEntity($parser, $openEntityNames, $base, $systemId, $publicId) {
-
+        
     }
 
     /**
@@ -215,7 +215,7 @@ class Parser extends Files\Xml {
      * @param type $notationName
      */
     final public static function unparsedEntity($parser, $entityName, $base, $systemId, $publicId, $notationName) {
-
+        
     }
 
     /**
@@ -226,7 +226,7 @@ class Parser extends Files\Xml {
      * @param type $data
      */
     final public static function processingInstruction($parser, $target, $data) {
-
+        
     }
 
     /**
@@ -239,7 +239,7 @@ class Parser extends Files\Xml {
      * @param type $publicId
      */
     final public static function notation($parser, $notationMame, $base, $systemId, $publicId) {
-
+        
     }
 
     /**
@@ -292,7 +292,7 @@ class Parser extends Files\Xml {
      * @param type $hooks
      * @return type
      */
-    public function toXML($ROOT="", $version='1.0', $encoding="UTF-8") {
+    public function toXML($ROOT = "", $version = '1.0', $encoding = "UTF-8", $readonly = array()) {
 
 
         //Use a user supplied root, or try using our root
@@ -313,10 +313,10 @@ class Parser extends Files\Xml {
         //$xmlWriter->setIndent(true);
         //$xmlWriter->startElement("ROOT");
         //Recursively write out the xml;
-        static::writeXML($xmlWriter, $ROOT);
+        static::writeXML($xmlWriter, $ROOT, $readonly);
 
         $xmlWriter->endDocument();
-		//$writer->flush(); //I think to help windows, lets just use the memory
+        //$writer->flush(); //I think to help windows, lets just use the memory
         return $xmlWriter->outputMemory(true);
     }
 
@@ -326,7 +326,7 @@ class Parser extends Files\Xml {
      * @param \XMLWriter $xml
      * @param type $data
      */
-    final private static function writeXML(\XMLWriter $xmlWriter, $root) {
+    final public static function writeXML(\XMLWriter $xmlWriter, $root, $readonly = array()) {
 
         $tag = null;
         $content = null;
@@ -334,7 +334,7 @@ class Parser extends Files\Xml {
         $iterator = 0;
         $children = sizeof($root);
 
-        $root = self::callback($root, $xmlWriter);
+        $root = self::callback($root, $xmlWriter, $readonly);
 
         foreach ($root as $element => $data) {
 
@@ -357,16 +357,29 @@ class Parser extends Files\Xml {
                     break;
                 case "CDATA":
                     //$xmlWriter->startCdata( );
-                    $xmlWriter->writeRaw(trim($data));
+                    Library\Event::trigger("_XMLContentCallback", $data, $xmlWriter);
+                    if (!Library\Event::isDefined("_XMLContentCallback")) {
+                        $xmlWriter->writeRaw(trim($data));
+                    }
                     //$xmlWriter->endCdata();
                     //continue;
                     break;
                 default:
                     if (!is_array($data)):
-                        $xmlWriter->startAttribute(strtolower($element));
-                        $xmlWriter->text($data);
-                        $xmlWriter->endAttribute();
-                    //continue;
+
+                        //Else
+                        //@TODO Deal with namespaced attributes
+                        //@TODO trigger Last
+                        //echo $element;                 
+                        Library\Event::trigger("_XMLAttributeCallback", $element, $data, $xmlWriter);
+                        //If no default callback is defined
+                        if (!Library\Event::isDefined("_XMLAttributeCallback")) {
+                            $xmlWriter->startAttribute(strtolower($element));
+                            $xmlWriter->text($data);
+                            $xmlWriter->endAttribute();
+                        }
+
+
                     endif;
                     //continue;
                     break;
@@ -389,7 +402,6 @@ class Parser extends Files\Xml {
                             break;
                     endswitch;
                     //if (!empty($tag)):
-
                     //endif;
                 }
             }
@@ -417,9 +429,7 @@ class Parser extends Files\Xml {
             $name = str_replace($uri, "", $name);
             $parts = explode(":", $name);
 
-
             //echo $tag['ELEMENT']."\n";
-
             if (sizeof($parts) > 1) {
                 //$tag['NAMESPACE'][0] = current($parts); //The first bit before the url
                 $tag['ELEMENT'] = end($parts);
@@ -431,6 +441,7 @@ class Parser extends Files\Xml {
 
         foreach ($attribs as $key => $value) {
             //echo $key."=".$value;
+            //echo "$key<br />";
             $tag[$key] = $value;
         }
 
@@ -443,7 +454,6 @@ class Parser extends Files\Xml {
             unset($tag['CHILDREN']);
         }
         //static::$nsDeclaration = array(0=>'',1=>'http://www.w3.org/1999/xhtml');
-
         //Add the tag to the stack
         self::$stack[count(self::$stack)] = &$tag;
         //$_doc->appendTag( $_last);
@@ -463,17 +473,16 @@ class Parser extends Files\Xml {
 
         ////Check if we already have a CDATA in the parent of this tag
         //Check if the element name is a method in the namespaced and call it
-
         //Reset the level, if we've hit the end of the tag
         self::$level--;
     }
 
     /**
-     *
+     * @param array readonly An inclusive of the only callback methods to run
      * @param type $element
      * @return type
      */
-    final protected function callback($element, \XMLWriter $xmlWriter) {
+    final protected function callback($element, \XMLWriter $xmlWriter, $readonly = array()) {
 
         if (isset($element['NAMESPACE'])) {
             reset($element['NAMESPACE']);
@@ -487,8 +496,14 @@ class Parser extends Files\Xml {
 
             $uri = end($element['NAMESPACE']);
             $method = $element['ELEMENT'];
-            if (array_key_exists($prefix, static::$methods) && isset(static::$methods[$prefix][$method]) ) {
-                return call_user_func(static::$methods[$prefix][$method], static::$parser, $element , $xmlWriter );
+
+            if (is_array($readonly) && !empty($readonly)) {
+
+                if (!in_array($method, $readonly))
+                    return $element;
+            }
+            if (array_key_exists($prefix, static::$methods) && isset(static::$methods[$prefix][$method])) {
+                return call_user_func(static::$methods[$prefix][$method], static::$parser, $element, $xmlWriter);
             }
         }
         return $element;
@@ -560,7 +575,7 @@ class Parser extends Files\Xml {
                 }
             }
             //cocatenate
-            $last['CDATA'] = $old.$data;
+            $last['CDATA'] = $old . $data;
 
             //$section++;
         }
@@ -573,7 +588,7 @@ class Parser extends Files\Xml {
      * @param type $array
      * @param type $wrap
      */
-    private static function flatten($array, $wrap="") {
+    private static function flatten($array, $wrap = "") {
 
         $xml = '';
         static $tag = '';

@@ -61,6 +61,13 @@ class Output extends Object {
      * @var string
      */
     protected $layout = 'index';
+    
+    
+    /**
+     * Defines the layout to be used
+     * @var string
+     */
+    protected $layoutExt = EXT;
 
     /**
      * A message to be displayed on the page
@@ -209,42 +216,24 @@ class Output extends Object {
      * @param type $status
      * @return void
      */
-    final public function displayError($format='', $status='404') {
+    final public function displayError($format='xhtml', $status='404') {
+        
+        //anything that had previously been printed
+        $printed = ob_get_contents();
+        $this->addToPosition("body", $printed, '', true);
 
-        $this->isError = TRUE;
-        //Exactly the same as display,
-        //Stop the debugger
-        \Platform\Debugger::stop();
-        //Empties all positions, including except do:position
-        $restart = $this->restartBuffer();
-        //i.e. get the do:body position; and empty it
-        //set the layout to system/error.phtml; and output
+        //Anything that was previously displayed in scripts, is discarded
+        //from the buffer, and will be displayed on the body of the page
+        ob_end_clean();
+
+        //We now start a new buffer, to deal with the template!
+        $this->startBuffer();
         //$this->toConsole();
 
-
         static::$prints = $this->restartBuffer();
-        //$this->addToPosition("do:debugger", $console, '', true);
-
-        $this->headers();
-
-        //@TODO refactor the use of $_server global
-        @header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
-
-        //3.Determine which format of the index we are using
-
-        $error = FSPATH . 'public' . DS . $this->template . DS . 'error' . $format . EXT;
-
-        //4. Include the main index file
-        include_once $error;
-
-        //print_R(self::$positions);
-        //parse the set layout as the final output;
-        //5. Close and Flush buffer
-        $errorPage = ob_get_contents();
-
-
-        ob_flush();
-        ob_end_flush();
+        
+        $this->layout = "error";
+        $this->display($format, 404 , "error");
 
         //Stop any further execution?
         $this->abort();
@@ -277,10 +266,7 @@ class Output extends Object {
      * @return void
      *
      */
-    final public function display($format = 'xhtml', $httpCode=null) {
-
-        if ($this->isError)
-            return false;
+    final public function display($format = 'xhtml', $httpCode=200,  $template='index') {
 
         //anything that had previously been printed
         $printed = ob_get_contents();
@@ -327,7 +313,7 @@ class Output extends Object {
 
                 $Document = $renderer::getInstance();
 
-                return $Document->render();
+                return $Document->render($template, $httpCode);
             }
         }
     }
@@ -597,7 +583,7 @@ class Output extends Object {
      * @return Output
      */
     final public function setResponseCode($code = 200) {
-        $this->code = $code;
+        $this->code = is_null($code)? 200 : $code;
         return $this;
     }
 
