@@ -44,7 +44,7 @@ class Event extends \Library\Object {
      * Stores all registered Event hooks
      * @var array 
      */
-    protected static $hooks = array();
+    public static $hooks = array();
    
     
     /**

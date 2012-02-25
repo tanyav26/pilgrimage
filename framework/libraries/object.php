@@ -82,7 +82,7 @@ abstract class Object {
      * @param string $hook (optional) use if looking for a specific hook
      * @return boolean True or False Depending on whether the even if found
      */
-    final private static function isDefined($event) {
+    final public static function isDefined($event) {
 
         //checks if the event is defined in static hook
         if (isset(static::$hooks[$event]) && sizeof(static::$hooks[$event]) > 0) {
@@ -147,16 +147,27 @@ abstract class Object {
      * @return false if undefined, results from callback hooks
      *
      */
-    final public static function trigger($event, $data = '') {
+    final public static function trigger() { //$event, [$data = '', ]...
 
         //Just arbitrary context so we know who is calling
         $context = (!isset(static::$eventContext)) ? _("system events") : static::$eventContext ;
-
+         
+        // get func args
+        $args = func_get_args(); //eventName, [callBackargs, ]
+        
+        //First argument must be a string with the name of the event
+        if (!is_array($args) || !isset($args[0]) || !is_string($args[0]))  return false;
+        
+        $event = array_shift($args);  //remove it once we know the event; 
+        $data  = $args; //rest of the arguments;
+        
         //if the event is defined
         if (static::isDefined($event)) {
             //for each even execute callback
 
             //echo $event;
+            
+            //print_R($data);
 
             $events = static::$hooks[$event];
             $results = array();
@@ -174,14 +185,14 @@ abstract class Object {
 
                     //@TODO Determine Method Name from
                     //CallBack directive to use as indices in results array
-                    $results[] = call_user_func($callback, $arguments, $data);
+                    $results[] = call_user_func_array($callback, $data );
                 }
             }
             //print_R($events);
             return $results;
         } else {
             //There are no events to trigger
-            \Platform\Debugger::log(sprintf(_("No events triggered for %s in %2s context"), $event, $context), $event, "notice");
+            \Platform\Debugger::log(sprintf(_("No events triggered for %s in %2s context"), $event, $context), $event, "info");
 
             return false;
         }
