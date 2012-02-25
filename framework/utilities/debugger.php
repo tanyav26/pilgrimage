@@ -70,7 +70,7 @@ final class Debugger extends \Library\Log{
         static::$time   = microtime( true );
         static::$memory = memory_get_usage( true );
 	
-        self::log(  static::$time , _("Start execution time") , "notice" );       
+        self::log(  static::$time , _("Start execution time") , "info" );       
     }
 
     /**
@@ -91,7 +91,10 @@ final class Debugger extends \Library\Log{
         //Get Query usage
         $database = \Library\Database::getInstance();
         $queries  = $database->getTotalQueryCount();
-
+        
+        //Log usage
+        self::log( $now , _("Stop execution time") , "info"  );
+        
         //Set the debugger output
         $output = \Library\Output::getInstance();
         $output->set("debug", array("start"=>static::$time ) );
@@ -104,8 +107,7 @@ final class Debugger extends \Library\Log{
         //Library\Date::difference($now, $speed);
         //print_R(static::getInstance());
 
-        //Log usage
-        self::log( $now , _("Stop execution time") , "notice"  );
+        
     }
 
     public function __construct(){}

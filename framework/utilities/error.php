@@ -90,17 +90,17 @@ class Error extends \Library\Log {
         //print_r($printed);
         //Error Types;
         $errType = array(
-            1 => "Php Error", //Stop the dispatcher! Immediately! At any stage in which its found!!
-            2 => "Php Warning",
+            1 => "PHP Error", //Stop the dispatcher! Immediately! At any stage in which its found!!
+            2 => "PHP Warning",
             4 => "Parsing Error", //Stop
-            8 => "Php Notice",
+            8 => "PHP Notice",
             16 => "Core Error", //Stop
             32 => "Core Warning",
             64 => "Compile Error", //Stop
             128 => "Compile Warning",
-            256 => "Php User Error", //Stop
-            512 => "Php User Warning",
-            1024 => "Php User Notice",
+            256 => "PHP User Error", //Stop
+            512 => "PHP User Warning",
+            1024 => "PHP User Notice",
             //2048 => "Php Strict Error",//**ignore**
             9031 => "Library Error", //Stop
             9032 => "Platform Error", //Stop
@@ -156,33 +156,38 @@ class Error extends \Library\Log {
         //Display a parsed error;
         //$output->displayError();
         $label = array(
-	        1 => "important", //Stop the dispatcher! Immediately! At any stage in which its found!!
+	        1 => "error", //Stop the dispatcher! Immediately! At any stage in which its found!!
 	        2 => "warning",
-	        4 => "important", //Stop
+	        4 => "error", //Stop
 	        8 => "notice",
-	        16 => "important", //Stop
-	        32 => "important",
-	        64 => "important", //Stop
+	        16 => "error", //Stop
+	        32 => "error",
+	        64 => "error", //Stop
 	        128 => "warning",
-	        256 => "important", //Stop
-	        512 => "important",
-	        1024 => "important",
+	        256 => "error", //Stop
+	        512 => "error",
+	        1024 => "error",
 	        //2048 => "Php Strict Error",//**ignore**
-	        9031 => "important", //Stop
-	        9032 => "important", //Stop
-	        9033 => "important", //Stop
+	        9031 => "error", //Stop
+	        9032 => "error", //Stop
+	        9033 => "error", //Stop
         );
 
         $log = "<span style='display:inline; padding-left: 5px'>$errMsg</span>\tOn line <b><a href=\"#\">$line</a></b> of file <span style='display:inline'>$file</span>";
 
         //echo $log;
 
-        Debugger::log( $log , strtoupper( $errType[$errNo]."[$errNo]" ) , $label[$errNo] );
+        Debugger::log( $log , trim( $errType[$errNo]." ($errNo)" ) , $label[$errNo] );
 
         $shutdownable = array(1, 4, 16, 64, 256, 9031, 9032, 9033);
 
         //shutdown and display error;
         if (in_array($errNo, $shutdownable)) {
+            
+            //print_R($output);
+            //You need to stop the debugger;
+            Debugger::stop();
+            
             return $output->displayError();
         }
     }

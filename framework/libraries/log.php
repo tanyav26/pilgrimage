@@ -113,7 +113,7 @@ class Log extends Object{
      * @param type $logFile
      * @return type
      */
-    public static function log( $string,  $title="DEBUG LOG", $type="message",  $typekey="" ,$console=TRUE, $logFile=TRUE){
+    public static function log( $string,  $title="DEBUG LOG", $type="info",  $typekey="" ,$console=TRUE, $logFile=TRUE){
   
         $output     = \Library\Output::getInstance();
         //$output->addToPosition("do:console", $msgString , '', '', FALSE);
