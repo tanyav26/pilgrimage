@@ -62,34 +62,81 @@ class Element extends Parse\Template {
     }
     
     /**
+     * Writes out the attribute element
+     * 
+     * @param type $attribute
+     * @param type $content
+     * @param type $writer
+     * @return boolean 
+     */
+    public static function attribute($attribute, $content, $writer) {
+
+        //echo($attribute);
+        $writer->startAttribute(strtolower($attribute));
+        
+        //Search for (?<=\$\{)([a-zA-Z]+)(?=\}) and replace with data
+        if( preg_match_all('/(?:(?<=\$\{)).*?(?=\})/i', $content, $matches) ){
+              
+            $searches= array();
+            $replace = array(); 
+            
+            $placemarkers = (is_array($matches) && isset($matches[0])) ? $matches[0] : array();
+            
+            foreach($placemarkers as $k=>$dataid){
+                $replace[] = self::getData( strval($dataid) ); //default is null 
+                $searches[]= '${'.$dataid.'}';
+            }
+            //Replace with data;
+            $content = str_ireplace($searches, $replace, $content);     
+        }
+        
+        $writer->text($content);
+        $writer->endAttribute();
+
+        return true;
+    }
+    
+    /**
+     * Writes out CDATA
+     * 
+     * @param type $text
+     * @param type $writer 
+     */
+    public static function content($text, $writer) {
+        
+        $writer->writeRaw(trim($text));
+        
+    }
+
+    /**
      * Renders a text element
      * 
      * @param type $tag
      * @return null 
      */
     private static function text($tag) {
- 
+
         //Get the data;
         if (isset($tag['DATA'])):
             $tag['_DEFAULT'] = $tag['CDATA'];
             $data = self::getData($tag['DATA'], $tag['CDATA']); //echo $data;
-            
             //if formatting
-            if(isset($tag['FORMATTING'])&& in_array($tag['FORMATTING'], array("sprintf", "vsprintf"))):
-                 $text = call_user_func( $tag['FORMATTING'] , $tag['_DEFAULT'] , $data );
-                 
-                 //Replace the CDATA;
-                 $data = $text;
+            if (isset($tag['FORMATTING']) && in_array($tag['FORMATTING'], array("sprintf", "vsprintf"))):
+                $text = call_user_func($tag['FORMATTING'], $tag['_DEFAULT'], $data);
+
+                //Replace the CDATA;
+                $data = $text;
             endif;
-            
-            
-            
+
+
+
             $tag['CDATA'] = $data;
             //If we do not have a default empty it
-            if(is_null($tag['_DEFAULT'])) unset($tag['_DEFAULT']);
+            if (is_null($tag['_DEFAULT']))
+                unset($tag['_DEFAULT']);
         //die;
         endif;
-        
+
         //Get the layout name; and save it!
         if (isset($tag['CDATA']) && is_a(static::$writer, "XMLWriter")):
             static::$writer->writeRaw($tag['CDATA']);
@@ -97,26 +144,26 @@ class Element extends Parse\Template {
 
         return null; //Removes the element from the tree but returns the text;
     }
-    
+
     /**
-     * Renders a layout element 
+     * Renders and reparses a layout element 
      * 
      * @param type $tag 
      */
     private static function layout($tag) {
-        
+
         $element = null;
-         
+
         //Get the layout name; 
         if (isset($tag['NAME']) && isset(static::$layouts[$tag['NAME']])):
             //Check if we have the element previously parsed
-            $element = static::$layouts[ $tag['NAME'] ];
-        
+            $element = static::$layouts[$tag['NAME']];
+
         endif;
 
         return $element; //Returns the previously parsed element;
     }
-    
+
     /**
      * Executes the tpl:element method
      * 
@@ -133,8 +180,9 @@ class Element extends Parse\Template {
         if (isset($tag['TYPE'])):
             //@TODO Sad that i have to instantiate this calss 
             //To check if it exists. I need a better way of doing this
+            $submethods = array("text", "layout");
             //To spare some more memory
-            if (method_exists(self::getInstance(), $tag['TYPE'])) :
+            if (method_exists(self::getInstance(), $tag['TYPE']) && in_array(strtolower($tag['TYPE']) , $submethods) ) :
                 $tag = static::$tag['TYPE']($tag);
             endif;
         endif;

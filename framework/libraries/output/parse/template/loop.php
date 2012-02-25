@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * layout.php
+ * loop.php
  *
  * Requires PHP version 5.3
  *
@@ -44,12 +44,13 @@ use Library\Output\Parse;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/layout
  * @since      Class available since Release 1.0.0 Feb 5, 2012 10:15:29 PM
  */
-class Import extends Parse\Template {
+class Loop extends Parse\Template {
     /*
      * @var object
      */
 
     static $instance;
+    
 
     /**
      * Execute the layout
@@ -59,37 +60,38 @@ class Import extends Parse\Template {
      * @return type
      */
     public static function execute($parser, $tag, $writer) {
+
+        //print_R($tag['CHILDREN']);
+        //First we get the data, and check it is an array or object
+        //Get the data;
+        if (!isset($tag['DATA'])) return null;
+        $id = isset($tag['ID'])? $tag['ID'] : strval($tag['DATA']);
         
-        //print_R(static::$layouts);
-        //If there is a name we will save this layout to static::$layouts
-        $document   = static::$document;
-        $path       = isset($tag['PATH']) ? $tag['PATH'] : null;
-
-        //Save the layout
-        if (!empty($path) && !isset(static::$imports[$path])): //Unique layout names
-            //static::$imports[$href] = $tag;
-            $path = str_replace(array('/','\\'), DS , $path);
-            $layout = FSPATH . 'public' . DS . $document->template . DS . $path;
+        $element   = null;
+        $_elements = array();
+        
+        $data = self::getData($tag['DATA'], array()); //echo $data;
+        
+        static::$looping = true;
+        $existing = static::$currentloopid; //get the current loop id we will replace this at the end
+        $current  = static::$currentloopid = $id; //tell the parser what loop we are working with now
+        
+        //'looping method call';
+        foreach( $data as $item){
+          
+            //Reset the pvariable param;
+            static::$pvariables[$id] = $item;
             
-           
-            if(file_exists($layout)):
-                //TODO@ file get contents might not be the best method here 
-                //to import and parse the file
-                $contents = file_get_contents( $layout );
-                $layout   = self::_($contents, $document ); //read only
-                //@TODO for lack of a better way to remove the XML declaration 
-                static::$imports[$path] = $layout = str_replace('<?xml version="1.0" encoding="UTF-8"?>', "" , $layout);
-                
-                //print_R($layout);
-                $writer->writeRaw( $layout );
-                //print_R(static::$document );
-            endif;
+            //Now multiply the tag in $_elements;
+            Library\Folder\Files\Xml\Parser::writeXML($writer, $tag['CHILDREN']);
             
-        //So we import only ounce
-        elseif(isset(static::$imports[$path])):
-            $writer->writeRaw( static::$imports[$path] );
-        endif;
-
+        };
+        
+        //When we are done with the loop;
+        static::$pvariables = array();
+        static::$looping = false;
+        static::$currentloopid = $existing;
+        
         //Always return the modified element
         return null;
     }
@@ -108,7 +110,7 @@ class Import extends Parse\Template {
      */
     public static function getInstance() {
 
-        if (is_object(static::$instance) && is_a(static::$instance, 'Import'))
+        if (is_object(static::$instance) && is_a(static::$instance, 'Loop'))
             return static::$instance;
 
         static::$instance = new self();
