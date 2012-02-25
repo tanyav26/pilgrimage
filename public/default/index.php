@@ -21,8 +21,6 @@
 ?>
 <!DOCTYPE html>
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
-    
-<tpl:import path="layouts/console.tpl" />
 
 <html class="no-js" lang="en">
     <head>
@@ -39,6 +37,7 @@
         <script src='/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
         <script src='/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
         <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
+        
     </head>
     <body class="has-header has-footer has-sidebar">
         <div role="header" class="header">
@@ -523,7 +522,7 @@
                         </div>
                     </div>
                     <div class="col span13">
-                         <tpl:element type="layout" name="console" />
+                         <tpl:import path="layouts/console.tpl" />
                     </div>
                 </div>
             </div>
