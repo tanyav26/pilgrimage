@@ -94,7 +94,7 @@ final class Navigator extends Model {
         $Xml            = \Library\Folder\Files\Xml::read( FSPATH.'data/menu.xml' );    
         $Definition     = \Library\Config::getDefinition( $Xml , "menu");
         $Page           = \Library\Uri::getInstance()->getQuery();
-        $Output         = \Library\Output::getInstance();
+        $output         = \Library\Output::getInstance();
         
         //All menu items
         $Menus          = $Definition->menus->getChildren();
@@ -127,7 +127,7 @@ final class Navigator extends Model {
         }
 
         $navigator = $current->ITEMS->getChildren();     
-        $Output->set('navigator', $navigator );
+        $output->set('navigator', $navigator );
         
         return self::display();
         
