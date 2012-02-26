@@ -175,7 +175,7 @@ final class Uri {
      * @return string 
      */
     public static function _($url) {
-        return self::internal($uri);
+        return self::internal($url);
     }
 
     /**
@@ -191,26 +191,40 @@ final class Uri {
             $url = implode('/', $url);
         }
 
-        //Do we have the path info included?
-        $sPath = Config::get("path", "/", "server");
+        //@TODO make sure that this url does not have the scheme
+        //@TODO make sure that this url does not have the host already
+        //@TODO make sure we are internalizing a path and nothing else
+        //die;
 
-        if (!empty($uri)) {
+        //Do we have the path info included?
+        $sPath = Config::get("path", "/", "system");
+        
+        if (!empty($url)) {
 
             $parts = explode("/", $sPath);
             $segments = explode("/", $url);
-
-            if (is_array($parts) && is_array($segments)) {
-                if (isset($parts[1]) && !empty($parts[1])) {
-                    if ($parts[1] !== reset($segments)) {
-                        array_unshift($segments, $parts[1]);
-                        $url = implode("/", $segments);
-                        return $url;
-                    }
+            
+            //Remove all empty elements
+            $segments = array_filter($segments, 'strlen');
+            $parts    = array_filter($parts, 'strlen');
+            //die;
+            
+            //This is in case we have a system deep in multiple supdirectories
+            array_unshift($parts, null);
+            $fragment = implode("/", $parts);
+            
+            if (is_array($segments)) {   
+               
+                array_unshift($segments, null); //Adds the / to the start of the url
+                $url = implode("/", $segments);
+                
+                //now look for $fragment at the start of $url
+                $pos = strpos($url, $fragment);
+                if( $pos!==0 || $pos===FALSE){
+                    $url = $fragment.$url;
                 }
             }
         }
-
-
         return $url;
     }
 
@@ -391,7 +405,6 @@ final class Uri {
             //5. Compile the resource
             $resource = $scheme . "://" . $host . $path;
 
-
             //6. A Joomla style clean up
             $halt = 0;
             while (true) {
@@ -415,11 +428,9 @@ final class Uri {
             $resource = preg_replace('/[\\\"\\\'][\\s]*javascript:(.*)[\\\"\\\']/', '""', $resource);
 
             //@TODO, leave this to the router
-            //We can also check to make get the view and format out of the request?
+            //We can also check to get the view and format out of the request?
         } else {
             $link = parse_url($resource);
-
-            //print_R($link);
         }
 
         //If the class was already instantiated, just return it
@@ -428,7 +439,6 @@ final class Uri {
         }
 
         $instance[$link['path']] = new self($link);
-
 
         return $instance[$link['path']];
     }

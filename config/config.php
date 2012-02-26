@@ -69,7 +69,7 @@ $config['environment'] = array(
 //The system config key can be overloaded with data from the database. 
 //but for now to test things i am just going to use it on file
 $config['system'] = array(
-    'host' => 'tuiyosocial.tld',
-    'path' => '/',
+    'host' => 'imac.local',
+    'path' => '/~livingstonefultang/',
     'template' => 'default'
 );
