@@ -44,8 +44,11 @@
             <div class="topbar fill">
                 <div class="inner">
                     <div class="container">
-                        <h3><a href="<?php echo $this->link('/~livingstonefultang/'); ?>">Social networking</a></h3>
-
+                        <h3><a href="<?php echo $this->link('/'); ?>">Social networking</a></h3>
+                        
+                        <form class="pull-left" action="">
+                            <input type="text" placeholder="Search" />
+                        </form>
                         <ul class="nav">
 
                             <li class="active"><a href="#" >Featured</a></li>
@@ -58,15 +61,13 @@
                                 <a href="#" class="dropdown-toggle">Livingstone Fultang</a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Secondary link</a></li>
-                                    <li><a href="#">Something else here</a></li>
+                                    <li><a href="#">Something else here ë</a></li>
                                     <li><a href="#">Another link</a></li>
                                 </ul>
                             </li>
                         </ul>
 
-                        <form class="pull-right" action="">
-                            <input type="text" placeholder="Search" />
-                        </form>
+                        
 
                     </div>
                 </div>
@@ -110,12 +111,12 @@
                 </div>
 
                 <div role="content" class="content fillfix">
-
+                    
                     <div class="row fillfix scrollx clearfix">
 
-                        <div role="widget" class="widget col size-1024 fullheight scrolly">
-                            <div class="widget-body">
-
+                        <div role="widget" class="widget col size-940 fullheight scrolly">
+                            <div class="widget-header">
+                                <a href="#" class="close">×</a>
                                 <!-- Breadcrumbs -->
                                 <ul class="breadcrumb">
                                     <li><a href="#">Home</a> <span class="divider">/</span></li>
@@ -123,6 +124,14 @@
                                     <li><a href="#">Another one</a> <span class="divider">/</span></li>
                                     <li class="active">You are here</li>
                                 </ul>
+                            </div>
+                            <div class="widget-body"><?php $this->position("body") ?></div>
+                        </div>
+                        <div role="widget" class="widget col size-640 fullheight scrolly">
+                            <div class="widget-header"><a href="#" class="close">×</a>Latest</div>
+                            <div class="widget-body">
+
+                                
 
 
                                 <!-- Alerts -->
@@ -150,7 +159,7 @@
                                     <a class="close" href="#">×</a>
                                     <p><strong>Holy guacamole! This is a warning!</strong> Best check yo self, you’re not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</p>
                                     <div class="alert-actions">
-                                        <a class="btn small" href="#">Take this action</a> <a class="btn small" href="#">Or do this</a>
+                                        <a class="btn small" href="#">Take this action</a>&nbsp;<a class="btn small" href="#">Or do this</a>
                                     </div>
                                 </div>
                                 <div class="alert-message block-message error">
@@ -162,7 +171,7 @@
                                         <li>Eget lacinia odio sem nec elit</li>
                                     </ul>
                                     <div class="alert-actions">
-                                        <a class="btn small" href="#">Take this action</a> <a class="btn small" href="#">Or do this</a>
+                                        <a class="btn small" href="#">Take this action</a>&nbsp;<a class="btn small" href="#">Or do this</a>
                                     </div>
                                 </div>
 
@@ -170,7 +179,7 @@
                                     <a class="close" href="#">×</a>
                                     <p><strong>Well done!</strong> You successfully read this alert message. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas faucibus mollis interdum.</p>
                                     <div class="alert-actions">
-                                        <a class="btn small" href="#">Take this action</a> <a class="btn small" href="#">Or do this</a>
+                                        <a class="btn small" href="#">Take this action</a>&nbsp;<a class="btn small" href="#">Or do this</a>
                                     </div>
                                 </div>
 
@@ -178,7 +187,7 @@
                                     <a class="close" href="#">×</a>
                                     <p><strong>Heads up!</strong> This is an alert that needs your attention, but it’s not a huge priority just yet.</p>
                                     <div class="alert-actions">
-                                        <a class="btn small" href="#">Take this action</a>
+                                        <a class="btn small" href="#">Take this action</a>&nbsp;
                                         <a class="btn small" href="#">Or do this</a>
                                     </div>
                                 </div>
@@ -225,10 +234,6 @@
                             </div>
 
 
-                        </div>
-                        <div role="widget" class="widget col size-640 fullheight scrolly">
-                            <div class="widget-header"><a href="#" class="close">×</a>Widget title bar</div>
-                            <div class="widget-body"><?php $this->position("body") ?></div>
                         </div>
                         <div role="widget" class="widget col size-640 fullheight scrolly">
                             <div class="widget-header"><a href="#" class="close">×</a>Widget title bar</div>
@@ -514,9 +519,9 @@
                         <div style="padding: 1px;" class="clearfix">
                             <label class="fluid no-padding">
                                 <input type="checkbox" class="checkbox-toggler" name="togglesidebar" data-content-on="Hide the sidebar" data-content-off="Show the sidebar" value="false" />
-                                <span class="checkbox checked">
-                                    <span class="checkbox-on">Show</span>
+                                <span class="checkbox checked">                                   
                                     <span class="checkbox-off">Hide</span>
+                                    <span class="checkbox-on">Show</span>
                                 </span>
                             </label>
                         </div>
