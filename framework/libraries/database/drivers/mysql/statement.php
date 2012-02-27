@@ -59,14 +59,10 @@ final class Statement extends \Library\Database\Results {
     public function execute() {
 
         $DB = $this->getDBO();
-
         //Run the Query;
         $resultId = $DB->exec();
-
-        $this->setResultId($resultId);
-        $this->setConnectionId($DB->getResourceId());
-        $this->setAffectedRows($this->getAffectedRows());
-
+        $this->setResultId( $resultId )->setConnectionId($DB->getResourceId())->setAffectedRows($this->getAffectedRows());
+        
         $DB->resetRun();
 
         return $this;

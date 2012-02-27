@@ -79,7 +79,7 @@ class xHtml extends \Library\Output\Document {
         //echo $output
         $document   = $this->parse( $output , $this );
         
-
+        //print_R(\Platform\Debugger::$log);
         //Print to client
         print( "<!DOCTYPE html>\n".$document );
 

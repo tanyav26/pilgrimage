@@ -96,7 +96,7 @@ class Settings extends Platform\View {
         
     }
     
-            public function maintenanceConfigForm() {
+   public function maintenanceConfigForm() {
         
         $this->output->setPageTitle(_("Input Settings"));
         
@@ -110,7 +110,7 @@ class Settings extends Platform\View {
     
     public function display( $panel ="" ){
         
-        return $this->output->addToPosition("admin:panel", $panel);
+        return $this->output->addToPosition("body", $panel);
        
     }
 

@@ -22,6 +22,7 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
+
 namespace Platform;
 
 use Library;
@@ -40,26 +41,24 @@ use Library;
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
 final class Navigator extends Model {
-    
+
     /**
      * The current state or possition in the system
      * @var static $state 
      */
     static $state;
-    
+
     /**
      * The current total in a navigable record set
      * @var static total
      */
     static $total;
-    
-    
+
     /**
      * The current state of the pages menu
      * @var static pagination
      */
     static $pagination;
-    
 
     /**
      * Instantiate the cnavigator
@@ -77,101 +76,94 @@ final class Navigator extends Model {
         $instance = new self();
 
         return $instance;
-        
     }
-    
+
     /**
      * Automatically generates a menu, based on the page
      * 
      * @return type 
      */
-    public static function menu(){
-        
-        //@TODO: Returns data for the menu in the view layout
-        //Loads menu items from 
-            //the database
-            //the config files
-        $Xml            = \Library\Folder\Files\Xml::read( FSPATH.'data/menu.xml' );    
-        $Definition     = \Library\Config::getDefinition( $Xml , "menu");
-        $Page           = \Library\Uri::getInstance()->getQuery();
-        $output         = \Library\Output::getInstance();
-        
-        //All menu items
-        $Menus          = $Definition->menus->getChildren();
+    public static function menu($uniqueId = "mainmenu") {
 
-        
-        //print_r($Menus);
-        $default = array();
-        $current = null;
-        
-        foreach($Menus as $i=>$nav){
-            //print_r($nav->menu);
-            $Page = strtolower($Page);
-            if( intval($nav->DEFAULT) > 0){
-                $default = $nav;
-            }
-            $items = $nav->ITEMS->getChildren();
-            
-            //print_R($items);          
-            foreach($items as $item){
-                if( strtolower($item->ACTION) === $Page){
-                    $current = $nav; //If we have a page with no nav then break;
-                    break;
+        $self = static::getInstance();
+
+        //1. Get all menu items for this menu id from the table
+        $statement = $self->database->select("m.*")->from("?menu m")->join("?menu_group g", "m.menu_group_id=g.menu_group_id", "LEFT")->where("g.menu_group_uid=", $self->database->quote($uniqueId, false))->orderBy("m.lft", "ASC")->prepare();
+        $results = $statement->execute();
+
+        $nodes = array();
+        $right = array();
+
+
+        while($menu = $results->fetchArray()) {
+            //while($authority = $results->fetchAssoc()){
+            $menu['children'] = array();
+            $menu['indent'] = 0;
+
+            //Now indent
+            if (sizeof($right) > 0) {
+                $lastrgt = end($right);
+                $largestrgt = max($right);
+
+                if ($menu['rgt'] > $lastrgt) {
+                    array_pop($right);
+                }
+                if ($menu['rgt'] > $largestrgt) {
+                    $right = array();
                 }
             }
-        }
-        
-        //Do we have a menu?
-        if(empty($current)){
-            $current = $default;
-        }
+            $menu['indent'] = sizeof($right);
 
-        $navigator = $current->ITEMS->getChildren();     
-        $output->set('navigator', $navigator );
-        
-        return self::display();
-        
+            $right[] = $menu['rgt'];
+
+            $parent = $menu['menu_parent_id'];
+            $id = $menu['menu_id'];
+
+            if (array_key_exists($parent, $nodes)) {
+                $nodes[$parent]["children"][$id] = $menu;
+            } else {
+                $nodes[$id] = $menu;
+            }
+        }
+        return $nodes;
     }
-    
-    public static function sitemap(){
+
+    public static function sitemap() {
         //@TODO: Renders a site map for the website;
         return self::display();
-        
     }
-    
-    public static function link(){
+
+    public static function link() {
         //@TODO: Renders a navigational link
         return self::display();
-        
     }
-    
-    public static function pathway(){
+
+    public static function pathway() {
         //@TODO: Renders the pathway or current location of the site
-       
+
         return self::display();
     }
-    
+
     /**
      * a.k.a pagination
      * 
      * @return type 
      */
-    public static function pages(){
+    public static function pages() {
         //@TODO: Calculates the pages from a recordset or an array of results
-        
         //Get the current page state from the request;
         $limit = self::getState();
         $start = self::getState();
-        
+
         // In case limit has been changed, adjust it
-        self::setState('limit', $limit); 
+        self::setState('limit', $limit);
         self::setState('limitstart', $limitstart);
-        
-        
+
+
         return self::display();
     }
-    
-    public function display(){
+
+    public function display() {
         //@TODO: Renders the display data, as per other models
     }
 
@@ -183,16 +175,17 @@ final class Navigator extends Model {
      * e.g Navigator::add( array("type"=>"menu" , "uid"=>"mainmenu" , "label"=>"Main Menu", "link"=>array() ) )
      * 
      */
-    public static function add(){
+    public static function add() {
         
     }
-    
-    private static function getState(){
+
+    private static function getState() {
         
     }
-    
-    private static function setState(){
-       
+
+    private static function setState() {
+        
     }
+
 }
 

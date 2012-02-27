@@ -51,12 +51,7 @@ class Parse extends Library\Object {
     static $instance;
     protected static $document;
     protected static $methods = array(
-        "tpl" => array(
-            "layout" => "\Library\Output\Parse\Template\Layout::execute",
-            "element" => "\Library\Output\Parse\Template\Element::execute",
-            "import" => "\Library\Output\Parse\Template\Import::execute",
-            "loop" => "\Library\Output\Parse\Template\Loop::execute"
-        )
+        "tpl" => "\Library\Output\Parse\Template\\"
     );
 
     /**

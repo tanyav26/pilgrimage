@@ -55,37 +55,37 @@ abstract class Results extends \Library\Object {
     /**
      * @var mixed
      */
-    private $resultId = NULL;
+    public $resultId = NULL;
 
     /**
      *
      * @var object = NULL;
      */
-    private $resultData;
+    public $resultData;
 
     /**
      *
      * @var interger
      */
-    private $currentRow = 0;
+    public $currentRow = 0;
 
     /**
      *
      * @var interger
      */
-    private $numrows = 0;
+    public $numrows = 0;
 
     /**
      *
      * @var connectionId
      */
-    private $connectionId = NULL;
+    public $connectionId = NULL;
 
     /**
      *
      * @var interger
      */
-    private $affectedRows = 0;
+    public $affectedRows = 0;
 
     /**
      *
@@ -112,19 +112,19 @@ abstract class Results extends \Library\Object {
     private $_cache = array(
     );
 
-    final protected function getQuery() {
+    final public function getQuery() {
         
     }
 
-    final protected function getResource() {
+    final public function getResource() {
         
     }
 
-    final protected function setDBO($dbo) {
+    final public function setDBO($dbo) {
         $this->dbo = $dbo;
     }
 
-    final protected function getDBO() {
+    final public function getDBO() {
         return $this->dbo;
     }
 

@@ -63,34 +63,34 @@ abstract class Database extends Object {
      * The database connection resource id
      * @var resource
      */
-    protected $resourceId;
+    public $resourceId;
 
     /**
      * The current driver being used
      * @var string
      */
-    protected $driver;
+    public $driver;
 
     /**
      * The last query to be executed in this connection
      * 
      * @var string
      */
-    protected $query;
+    public $query;
 
     /**
      * Offset Value
      *
      * @var interger
      */
-    protected $offset;
+    public $offset;
 
     /**
      * A limit for the resultset
      *
      * @var interger
      */
-    protected $limit;
+    public $limit;
     
     
     
@@ -349,6 +349,9 @@ abstract class Database extends Object {
      * @return void
      */
     abstract public function __destruct();
+    
+    
+    abstract public function close();
 
     /**
      * Determine if the database object is connected to a DBMS

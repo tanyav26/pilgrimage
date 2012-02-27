@@ -118,8 +118,8 @@ class Element extends Parse\Template {
 
         //Get the data;
         if (isset($tag['DATA'])):
-            $tag['_DEFAULT'] = $tag['CDATA'];
-            $data = self::getData($tag['DATA'], $tag['CDATA']); //echo $data;
+            $tag['_DEFAULT'] = isset($tag['CDATA'])?$tag['CDATA']:null;
+            $data = self::getData($tag['DATA'], $tag['_DEFAULT']); //echo $data;
             //if formatting
             if (isset($tag['FORMATTING']) && in_array($tag['FORMATTING'], array("sprintf", "vsprintf"))):
                 $text = call_user_func($tag['FORMATTING'], $tag['_DEFAULT'], $data);

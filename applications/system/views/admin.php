@@ -35,7 +35,7 @@ final class Admin extends Platform\View {
         
         //Draw the table at the end when all the parameters have been entered!
         //register_shutdown_function( array('Application\System\Views\Admin' , 'drawAdminPage'));
-        \Library\Event::register("onShutdown", "Application\System\Views\Admin::drawAdminPage" );
+        //\Library\Event::register("onShutdown", "Application\System\Views\Admin::drawAdminPage" );
       
     }
     
@@ -47,7 +47,7 @@ final class Admin extends Platform\View {
         
         $dashpanel = $this->output->layout("dashpanel");
         
-        $this->output->addToPosition("admin:panel" , $dashpanel );
+        $this->output->addToPosition("body" , $dashpanel );
         
     }
 

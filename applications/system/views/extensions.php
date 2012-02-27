@@ -80,7 +80,7 @@ class Extensions extends Platform\View {
 
     public function display($panel = "") {
 
-        return $this->output->addToPosition("admin:panel", $panel);
+        return $this->output->addToPosition("body", $panel);
     }
 
     final static function getInstance() {

@@ -55,8 +55,7 @@ abstract class View extends \Library\Object {
         $authenticated  = \Platform\User::getAuthenticated();
         $this->output->set("authenticated", $authenticated );
         
-        //Static Elements
-        self::menu();
+        //Navigator::menu();
         
     }
 
@@ -85,31 +84,6 @@ abstract class View extends \Library\Object {
     }
 
 
-    final public static function menu() {
-        
-        static $loaded = false;
-        
-        
-        if($loaded) return;
-        
-        $output         = Library\Output::getInstance();
-
-        $pageid = $output->get("pageid");
-
-        //@TODO Also only display if this is a raw html output
-        Navigator::menu();
-
-        $menu = $output->layout("menu", "system");
-        
-        $output->set('menu', $menu);
-
-        $navigator = $output->layout("navigator", "system");
-        
-        $output->addToPosition("toolbar", $navigator);
-        
-        $loaded = true;
-
-    }
 
     /**
      * The default method for each controller

@@ -165,7 +165,7 @@ final class Driver extends Library\Database{
      * @return
      */
     public function getVersion(){
-
+        
     }
 
 
@@ -175,7 +175,10 @@ final class Driver extends Library\Database{
      *
      * @return boolean
      */
-    final public function __destruct() {
+    final public function __destruct() {}
+    
+    
+    final public function close(){
         $return = false;
         if (is_resource($this->resourceId)) {
             $return = mysql_close($this->resourceId);
@@ -252,7 +255,7 @@ final class Driver extends Library\Database{
      * @return mixed A database resource if successful, FALSE if not.
      */
     final public function exec( $query ='') {
-
+        
         if (!is_resource($this->resourceId)) {
             $this->setError( _("No valid connection resource found") );
             return false;

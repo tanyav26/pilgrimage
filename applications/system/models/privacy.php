@@ -52,7 +52,6 @@ class Privacy extends Platform\Model {
         
         //Check the Permission Area URI, make sure its not a route id,
         //We need exact URI paths, Throw an error is it does not make sense
-        print_R($aData);
         
         if ($table->isNewRow()) {
             

@@ -201,7 +201,25 @@ class Parser extends Files\Xml {
      * @param type $publicId
      */
     final public static function externalEntity($parser, $openEntityNames, $base, $systemId, $publicId) {
-        
+
+        //die;
+
+        if ($systemId) {
+            if (!list($parser, $fp) = new_xml_parser($systemId)) {
+                self::setError("Could not open entity %s at %s\n", $openEntityNames, $systemId);
+                return false;
+            }
+            while ($data = fread($fp, 4096)) {
+                if (!xml_parse($parser, $data, feof($fp))) {
+                    self::setError("XML error: %s at line %d while parsing entity %s\n", xml_error_string(xml_get_error_code($parser)), xml_get_current_line_number($parser), $openEntityNames);
+                    xml_parser_free($parser);
+                    return false;
+                }
+            }
+            xml_parser_free($parser);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -268,9 +286,28 @@ class Parser extends Files\Xml {
      *
      * @return void
      */
-    final public static function run() {
+    final public static function run($xml=null, $reverse = FALSE) {
+
+        static $literal2NumericEntity;
+        
+        $xml = !empty($xml) ? $xml : self::$xml ;
+
+        if (empty($literal2NumericEntity)) {
+            $transTbl = get_html_translation_table(HTML_ENTITIES);
+            foreach ($transTbl as $char => $entity) {
+                if (strpos('&"<>', $char) !== FALSE)
+                    continue;
+                $literal2NumericEntity[$entity] = '&#' . ord($char) . ';';
+            }
+        }
+        if ($reverse) {
+            $xml = strtr($xml, array_flip($literal2NumericEntity));
+        } else {
+            $xml = strtr($xml, $literal2NumericEntity);
+        }
+
         //If we can't parse the element
-        if (!xml_parse(self::$parser, self::$xml)) {
+        if (!xml_parse(self::$parser, $xml)) {
             $error = "[Error:" . xml_get_error_code(self::$parser)
                     . "|line:" . xml_get_current_line_number(self::$parser)
                     . "|column:" . xml_get_current_column_number(self::$parser) . "] "
@@ -335,6 +372,8 @@ class Parser extends Files\Xml {
         $children = sizeof($root);
 
         $root = self::callback($root, $xmlWriter, $readonly);
+        
+        if(!is_array($root)) return ;
 
         foreach ($root as $element => $data) {
 
@@ -482,7 +521,7 @@ class Parser extends Files\Xml {
      * @param type $element
      * @return type
      */
-    final protected function callback($element, \XMLWriter $xmlWriter, $readonly = array()) {
+    final protected function callback($element, \XMLWriter $xmlWriter) {
 
         if (isset($element['NAMESPACE'])) {
             reset($element['NAMESPACE']);
@@ -497,13 +536,13 @@ class Parser extends Files\Xml {
             $uri = end($element['NAMESPACE']);
             $method = $element['ELEMENT'];
 
-            if (is_array($readonly) && !empty($readonly)) {
+            if (array_key_exists($prefix, static::$methods)){
+                
+                $class  = static::$methods[$prefix].ucfirst($method); 
 
-                if (!in_array($method, $readonly))
-                    return $element;
-            }
-            if (array_key_exists($prefix, static::$methods) && isset(static::$methods[$prefix][$method])) {
-                return call_user_func(static::$methods[$prefix][$method], static::$parser, $element, $xmlWriter);
+                if(!method_exists($class, "execute")) return $element;
+   
+                return call_user_func("$class::execute", static::$parser, $element, $xmlWriter);
             }
         }
         return $element;
