@@ -1,6 +1,6 @@
 <tpl:layout name="console" xmlns:tpl="http://tuiyo.co.uk/tpl">
     <tpl:if condition="debug.log"> 
-        <button data-controls-modal="console" data-backdrop="true" data-keyboard="true" class="button pull-right">Debug console</button>
+        <button data-controls-modal="console" data-backdrop="true" data-keyboard="true" class="button danger pull-right">Debug console</button>
         <div id="console" class="modal"  style="white-space: wrap; display: none;">
             <div class="modal-header">
                 <a href="#" class="close">×</a>

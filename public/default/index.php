@@ -39,7 +39,7 @@
             <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
 
         </head>
-        <body class="has-header has-footer has-sidebar">
+        <body class="has-header has-footer has-sidebar"> <!--has-subnav-->
             <div role="header" class="header">
                 <div class="topbar fill">
                     <div class="inner">
@@ -50,13 +50,13 @@
                                 <input type="text" placeholder="Search" />
                             </form>
                             <ul class="nav">
-
-                                <li class="active"><a href="#" >Featured</a></li>
+                                <li><a href="#">Featured</a></li>
                                 <li><a href="#">Explore</a></li>
                                 <li><a href="#">Interact</a></li>
                             </ul>
 
                             <tpl:menu id="mainmenu" />
+                            <tpl:menu id="usermenu" />
 
                             <ul class="nav secondary-nav">
                                 <li class="dropdown" data-dropdown="dropdown">
@@ -68,25 +68,44 @@
                                     </ul>
                                 </li>
                             </ul>
-
-
-
                         </div>
                     </div>
                 </div>
             </div>
+<!--            <div role="subnav" class="subnav subnav-fixed">
+                <ul class="nav nav-pills">
+                    <li class="dropdown open">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Buttons <b class="caret">d</b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#buttonGroups">Button groups</a></li>
+                            <li><a href="#buttonDropdowns">Button dropdowns</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Navigation <b class="caret">d</b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#navs">Nav, tabs, pills</a></li>
+                            <li><a href="#navbar">Navbar</a></li>
+                            <li><a href="#breadcrumbs">Breadcrumbs</a></li>
+                            <li><a href="#pagination">Pagination</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#labels">Labels</a></li>
+                    <li><a href="#typography">Typography</a></li>
+                    <li class="active"><a href="#thumbnails">Thumbnails</a></li>
+                    <li><a href="#alerts">Alerts</a></li>
+                    <li><a href="#progress">Progress bars</a></li>
+                    <li><a href="#misc">Miscellaneous</a></li>
+                </ul>
+            </div>-->
 
             <div role="container" class="grid fillfix clearfix ">
                 <div class="row clearfix fillfix">
 
                     <div role="sidebar" class="sidebar fillfix">
-
                         <tpl:menu id="dashboardmenu" />
-
                         <hr class="h-seperator" />
-
                         <tpl:menu id="adminmenu" />
-
                     </div>
 
                     <div role="content" class="content fillfix">
@@ -95,7 +114,6 @@
 
                             <div role="widget" class="widget col size-940 fullheight scrolly">
                                 <div class="widget-header">
-                                    <a href="#" class="close">×</a>
                                     <!-- Breadcrumbs -->
                                     <ul class="breadcrumb">
                                         <li><a href="#">Home</a> <span class="divider">/</span></li>
@@ -109,10 +127,6 @@
                             <div role="widget" class="widget col size-640 fullheight scrolly">
                                 <div class="widget-header"><a href="#" class="close">×</a>Latest</div>
                                 <div class="widget-body">
-
-
-
-
                                     <!-- Alerts -->
                                     <div class="alert-message warning">
                                         <a class="close" href="#">×</a>
@@ -187,7 +201,7 @@
                                         <div class="tab-pane" id="contact">Contact</div>
                                     </div>
 
-                                 
+
 
                                     <!-- Pop-overs -->
                                     <div class="well" style="background-color: #888; border: none; padding: 40px;">
@@ -504,6 +518,7 @@
                 <div class="grid">
                     <div class="row">
                         <div class="col span3">
+                            <tpl:import path="layouts/console.tpl" />
                             <div style="padding: 1px;" class="clearfix">
                                 <label class="fluid no-padding">
                                     <input type="checkbox" class="checkbox-toggler" name="togglesidebar" data-content-on="Hide the sidebar" data-content-off="Show the sidebar" value="false" />
@@ -515,7 +530,7 @@
                             </div>
                         </div>
                         <div class="col span13">
-                            <tpl:import path="layouts/console.tpl" />
+
                         </div>
                     </div>
                 </div>

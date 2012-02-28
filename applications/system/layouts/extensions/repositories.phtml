@@ -3,15 +3,11 @@
     <form class="wrap">
         <fieldset >
             <h3><?php echo _('Extension Repositories'); ?></h3>
-
             <p><?php echo _('Add more repositories, from whence to discover popular extensions for your platform'); ?></p>
-
-            <!--            <hr class="hr-ccc" />-->
-
             <div class="grid">
                 <div class="row wrap">
                     <div class="col third" align="left">
-                        <a class="button" title="<?php echo _('Add New Repository') ?> " rel="modal" href="#newRepository" style="width:60px"><?php echo _('Add New'); ?></a>
+                        <a class="button" title="<?php echo _('Add New Repository') ?> " data-controls-modal="newrepository" data-backdrop="true" data-keyboard="true" ><?php echo _('Add New'); ?></a>
                     </div>
                     <div class="col third" align="center">&nbsp;</div>
                     <div class="col third" align="right">
@@ -29,10 +25,10 @@
                 <table id="post_table" width="100%">
                     <!-- Colgroup -->  
                     <colgroup>  
-                        <col class="col-odd">  
-                        <col class="col-even">  
-                        <col class="col-odd">  
-                        <col class="col-even">  
+                        <col class="col-odd" />  
+                        <col class="col-even" />  
+                        <col class="col-odd" />  
+                        <col class="col-even" />  
                     </colgroup> 
                     <thead>
                         <tr>
@@ -45,8 +41,7 @@
                             <th scope="col" id="post_date">Date</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                    </tfoot>
+                    <tfoot></tfoot>
                     <tbody>
                         <tr>
                             <td><input type="checkbox" /></td>
@@ -66,9 +61,13 @@
 </div>
 
 
-<div id="newRepository" style="display: none">
-    <form>
-<!--        <fieldset class="white-background">-->
+<div id="newrepository" class="modal"  style="display: none">
+    <div class="modal-header">
+        <a href="#" class="close">×</a>
+        <h3>Add Repository</h3>
+    </div>
+    <div class="modal-body">
+        <form>
             <label><?php echo _('Repository Address'); ?><em class="mandatory">*</em>
                 <span class="small"><?php echo _('URL to the repository source'); ?></span>
             </label>
@@ -84,9 +83,8 @@
                 <?php echo _('Match to repository before intall, to get automatic updates'); ?>
                 <span class="small"></span>
             </label>
-            
             <button type="submit" style="margin-top: 10px; margin-left: 0px"><?php echo _('Add Repository'); ?></button>
-
-<!--        </fieldset>-->
-    </form>
+        </form>
+    </div>
+    <div class="modal-footer">Footer</div>
 </div>

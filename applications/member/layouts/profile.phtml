@@ -1,15 +1,13 @@
 <div class="grid">
     <div class="row">
-        <div class="col quater">
-            <a href="#">
-                <img class="thumbnail width-200" src="http://placehold.it/200x200" width="200" />
+        <div class="col span4">
+            <a href="#" class="thumbnail" style="width:200px">
+                <img  src="http://placehold.it/200x200" width="200" height="200" />
             </a>
         </div>
-        <div class="col three-quaters">
+        <div class="col span12">
             <div class="padding-left-25 wrap">
-                <h1 style="position:relative; padding-right: 50px;">
-                    <span style="font-weight: bold">Captain Newcastle</span>
-                </h1>
+                <h1 style="position:relative; padding-right: 50px;" class="clearfix">Fultang Livingstone Kimbi Fatele</h1>
                 <ul class="page-info">
                     <li class="signup-date">Member since 10 months ago</li>
                     <li class="signin-date">Last logged in about 6 days ago</li>
@@ -19,9 +17,51 @@
                     <li class="email-element"><a href="mailto:livingstonefultang@gmail.com">livingstonefultang@gmail.com</a></li>
                     <!--CUSTOM SOCIAL INFORMATION-->
                 </ul>
+            </div>
+        </div>
+    </div>
+    <hr class="hr-ccc" />
 
-                <hr class="hr-ccc" />
-                
+    <div class="row">
+        <div class="col span4"><h2>Followers&nbsp;<small><a href="#">View all</a></small></h2></div>
+        <div class="col span12">
+            <div class="padding-left-25 wrap">
+                <ul class="media-grid">
+                    <?php for ($i = 0; $i < 12; $i++): ?>
+                        <li>
+                            <a href="#">
+                                <img class="thumbnail" src="http://placehold.it/90x90" alt="" width="90" height="90" />
+                            </a>
+                        </li>
+                    <?php endfor; ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <hr class="hr-ccc" />
+    <div class="row">
+        <div class="col span4"><h2>Following&nbsp;<small><a href="#">View all</a></small></h2></div>
+        <div class="col span12">
+            <div class="padding-left-25 wrap">
+                <ul class="media-grid">
+                    <?php for ($i = 0; $i < 12; $i++): ?>
+                        <li>
+                            <a href="#">
+                                <img class="thumbnail" src="http://placehold.it/90x90" alt="" width="90" height="90" />
+                            </a>
+                        </li>
+                    <?php endfor; ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <hr class="hr-ccc" />
+    <div class="row">
+        <div class="col span4"><h2>About Me</h2></div>
+        <div class="col span12">
+            <div class="padding-left-25 wrap">
+
+
                 <div class="entry">
                     <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, <a href="#">links look like this</a>. tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
                     <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, <strong>bolded word</strong> <a href="#">tempor sit amet</a>, ante. Donec eu <em>this area in italics</em> libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>

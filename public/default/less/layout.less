@@ -48,7 +48,16 @@ a {
 
 /* -- Header -- */
 
-.has-header div[role=container]{ top: @headerHeight; }
+.has-header{
+    div[role=container]{ 
+        top: @headerHeight; 
+    }
+    &.has-subnav{
+        div[role=container]{ 
+            top: @headerHeight+38; 
+        }
+    }
+}
 div[role=header]{height:@headerHeight; max-height: @headerHeight;}
 
 // TOPBAR
@@ -258,6 +267,15 @@ div[role=header]{height:@headerHeight; max-height: @headerHeight;}
 .topbar ul .menu-dropdown li a,
 .topbar ul .dropdown-menu li a {
 	padding: 4px 15px;
+}
+
+.subnav{
+    width: 100%;
+    height: 36px;
+    background-color: #EEE;
+    background-repeat: repeat-x;
+    border: 1px solid #ddd;
+    #gradient > .vertical(whiteSmoke, #EEE)
 }
 
 // Dropdown Menus
@@ -1075,16 +1093,16 @@ footer {
   a {
     float: left;
     padding: 4px;
-    margin: 0 10px @baseline 0;
-    border: 1px solid #ddd;
-    .border-radius(4px);
-    .box-shadow(0 1px 1px rgba(0,0,0,.075));
+    //margin: 0 10px @baseline 0;
+    //border: 1px solid #ddd;
+    //.border-radius(4px);
+    //.box-shadow(0 1px 1px rgba(0,0,0,.075));
     img {
       display: block;
     }
     &:hover {
-      border-color: @linkColor;
-      .box-shadow(0 1px 4px rgba(0,105,214,.25));
+      //border-color: @linkColor;
+      //.box-shadow(0 1px 4px rgba(0,105,214,.25));
     }
   }
 }
@@ -1140,4 +1158,38 @@ div[role=footer]{
 	}
 }
 
+// THUMBNAILS
+// ----------
 
+.thumbnails {
+  margin-left: -@gutter;
+  list-style: none;
+  .clearfix();
+}
+.thumbnails > li {
+  float: left;
+  margin: 0 0 @baseline @gutter;
+}
+.thumbnail {
+  display: block;
+  padding: 4px;
+  line-height: 1;
+  border: 1px solid #ddd;
+  //.border-radius(4px);
+  .box-shadow(0 1px 1px rgba(0,0,0,.075));
+}
+// Add a hover state for linked versions only
+a.thumbnail:hover {
+  border-color: @linkColor;
+  .box-shadow(0 1px 4px rgba(0,105,214,.25));
+}
+// Images and captions
+.thumbnail > img {
+  display: block;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.thumbnail .caption {
+  padding: 9px;
+}
