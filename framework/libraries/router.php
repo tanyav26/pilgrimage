@@ -692,14 +692,14 @@ final class Router extends Object {
 
         //Exceptional: Store alerts for future display
         $session->set("alerts", $alerts);
-
+        
+        //We now start a new buffer, to deal with the template!
+        $output->restartBuffer();
+        
         //print_R($alerts);
-        header("Location: " . $url);
+        header("HTTP/1.1 $code Moved Permanently");
+        header("Location: ".$url);
 
-        //Get ALl alterts and save to state?
-        ob_end_flush();
-
-        //All output to be added to the status?
         $this->abort();
     }
 

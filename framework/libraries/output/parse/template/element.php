@@ -107,6 +107,16 @@ class Element extends Parse\Template {
         $writer->writeRaw(trim($text));
         
     }
+    
+    /**
+     * Alias for html, but does not allows tags
+     * 
+     * @param type $tag
+     * @return type 
+     */
+    public static function text($tag){
+        return static::html($tag);
+    }
 
     /**
      * Renders a text element
@@ -114,7 +124,7 @@ class Element extends Parse\Template {
      * @param type $tag
      * @return null 
      */
-    private static function text($tag) {
+    private static function html($tag) {
 
         //Get the data;
         if (isset($tag['DATA'])):
@@ -180,7 +190,7 @@ class Element extends Parse\Template {
         if (isset($tag['TYPE'])):
             //@TODO Sad that i have to instantiate this calss 
             //To check if it exists. I need a better way of doing this
-            $submethods = array("text", "layout");
+            $submethods = array("text", "layout", "html");
             //To spare some more memory
             if (method_exists(self::getInstance(), $tag['TYPE']) && in_array(strtolower($tag['TYPE']) , $submethods) ) :
                 $tag = static::$tag['TYPE']($tag);

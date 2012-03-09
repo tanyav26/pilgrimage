@@ -177,7 +177,7 @@ final class Loader{
      * @param type $vars
      * @param type $return if false returns the url
      */
-    public function layout($layout,  $app='', $ext='.php',$include= FALSE){
+    public function layout($layout,  $app='', $ext='.tpl', $include= FALSE){
         
                 
         //Set the Application
@@ -185,15 +185,27 @@ final class Loader{
         
         //1st Search in the default layout folder?
             //This is the current templates layout folder;
+        $output     = Library\Output::getInstance();
         
         //2nd Search ini the application specific layout folder;
-        $application = (!empty($app))?$app : $this->application ;
         
-        //The file path
-        $path   = FSPATH."applications".DS.$application.DS."layouts".DS.$layout.$ext ;
+        $layout = str_replace(array('/','\\'), DS , $layout); 
+        $application = (!empty($app))?$app : $this->application ;       
         
-        if(!file_exists($path)){
-            return null; //@TODO throw an exception..! say error
+        $_layouts    = array( 
+            FSPATH . 'public' . DS . $output->template .DS.'layouts'.DS.$layout.$ext,
+            FSPATH . 'public' . DS . $output->template .DS.'layouts'.DS.$application.DS.$layout.$ext,
+            FSPATH."applications".DS.$application.DS."layouts".DS.$layout.$ext        
+        );
+        
+        //@TODO the ability to add more search paths;
+        $path = null;
+        
+        foreach($_layouts as $i=>$_path){
+           if(file_exists($_path)){         
+               $path  = $_path;
+               break;
+           } 
         }
         
         //include once the file if include, else return the resource link;

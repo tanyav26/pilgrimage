@@ -71,5 +71,5 @@ $config['environment'] = array(
 $config['system'] = array(
     'host' => 'imac.local',
     'path' => '/~livingstonefultang/',
-    'template' => 'default'
+    'template' => 'bootstrap'
 );

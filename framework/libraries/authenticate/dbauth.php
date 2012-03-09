@@ -90,9 +90,8 @@ class DbAuth extends \Library\Authenticate {
         //Get the user object;
         $userobject = $result->fetchObject();
         $passparts = explode(":", $userobject->user_password);
-
-
-        $passhash = $encrypt->hash($credentials['usernamepass'], @$passparts[1]);
+  
+        $passhash = $encrypt->hash( $credentials['usernamepass'], $passparts[1]);
 
         //Are the passhashes similar?
         if ($passhash !== $userobject->user_password) {

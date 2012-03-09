@@ -1,5 +1,5 @@
 <tpl:layout name="console" xmlns:tpl="http://tuiyo.co.uk/tpl">
-    <tpl:if condition="debug.log"> 
+    <tpl:if condition="debug.displaylog"> 
         <button data-controls-modal="console" data-backdrop="true" data-keyboard="true" class="button danger pull-right">Debug console</button>
         <div id="console" class="modal"  style="white-space: wrap; display: none;">
             <div class="modal-header">
@@ -7,7 +7,7 @@
                 <h3>Console</h3>
             </div>
             <div class="modal-body">
-                <tpl:loop data="debug.log"><!--You must give your loop an id -->
+                <tpl:loop data="debug.log">
                     <div class="alert-message block-message ${type}">
                         <strong><tpl:element type="text" data="title" /></strong><p><code><tpl:element type="text" data="string" /></code></p>
                     </div>

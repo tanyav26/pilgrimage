@@ -155,7 +155,6 @@ final class Dispatcher extends \Library\Object{
        $route->setParameter("arguments", array_merge(array(),$argmts) ); //Using array merge to reset the indices
        
        
-
         if (!method_exists($class, $method)) {
             if (method_exists($class, "index")) {
                 $method = 'index';

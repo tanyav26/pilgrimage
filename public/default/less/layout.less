@@ -73,6 +73,7 @@ div[role=header]{height:@headerHeight; max-height: @headerHeight;}
 	right: 0;
 	z-index: 10000;
 	overflow: visible;
+        border-right: 1px solid;
 	
 	// Links get text shadow
 	a {
@@ -101,7 +102,7 @@ div[role=header]{height:@headerHeight; max-height: @headerHeight;}
 		float: left;
 		display: block;
 		padding: 8px 20px 12px;
-		min-width: (2.5*@colWidth);
+		min-width: (2.49*@colWidth);
 		color: @white;
 		font-size: 20px;
 		font-weight: 200;
@@ -110,6 +111,7 @@ div[role=header]{height:@headerHeight; max-height: @headerHeight;}
 		background-image:url('../logo.png');
 		text-indent:-9999em;
 		background-repeat:no-repeat;
+                border-right: 1px solid #272727;
 		background-position: 20px 12px;
 	}
 	
@@ -323,7 +325,7 @@ a.menu:after,
   border-color: rgba(0,0,0,.2);
   border-style: solid;
   border-width: 0 1px 1px;
-  .border-radius(0 0 6px 6px);
+  //.border-radius(0 0 6px 6px);
   .box-shadow(0 2px 4px rgba(0,0,0,.2));
   .background-clip(padding-box);
 
@@ -576,9 +578,10 @@ footer {
 /* -- Sidebar -- */
 .sidebar{ 
 	border-right:1px solid #cacaca; 	
-	background: #E2E8EE; 
+	background: lighten(@grayLight,20%); 
 	.box-sizing(border-box); 
 	.column(3); 
+        min-width: (2.49*@colWidth);
 	hr, .divider,{
 		border-top: 1px solid #C1CBD2;
         border-bottom: 1px solid #F3F5F7;
@@ -600,7 +603,7 @@ footer {
 			a{
 				cursor:pointer;
 				display: block;
-				padding: 6px 6px 6px 25px ;
+				padding: 6px 16px ;
 				color:#939CAB;
 				font-size:85%;
 				text-decoration: none;
@@ -621,7 +624,7 @@ footer {
 					border-top: 1px solid transparent;
 					border-bottom: 1px solid transparent;
 					a {
-						padding: 2px 5px 2px 25px;
+						padding: 2px 16px;
 						text-transform:  inherit;
 						border: 0; 
 						cursor: pointer; 
@@ -629,7 +632,7 @@ footer {
 						font-size:100%;
 						color: #5E6A80;
 						
-					   	span{
+					   	span.label{
 					   		min-width: 14px;
 					   		text-align: center;
 					   		float: right;
@@ -945,6 +948,14 @@ footer {
   .next a {
     border: 0;
   }
+    &.no-margin{
+        margin:0;
+    }
+    &.no-border{
+        ul{
+            border:none;
+        }
+    }
 }
 
 
@@ -1135,13 +1146,16 @@ footer {
 			//margin-top:5px;
 		}
 	}
+        &:last-child{
+            border-right:none;
+        }
 }
 
 /* -- Footer -- */
 
 .has-footer div[role=container]{ bottom: @footerHeight;}
 
-
+div[role=hscroll]{border-right: 1px solid #cacaca;}
 div[role=footer]{
 	height:@footerHeight; 
 	max-height: @footerHeight; 
@@ -1153,6 +1167,7 @@ div[role=footer]{
 	position:absolute; 
 	background:#f8f8f8; 
 	border-top: 1px solid #cacaca;
+        border-right:1px solid #CACACA;
 	button{
 		margin: 3px
 	}

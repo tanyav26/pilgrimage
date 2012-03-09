@@ -1,0 +1,35 @@
+
+
+<!-- Side Tab Navigation -->
+
+<ul class="tabs">
+    <li class="active"><a data-toggle="tab" href="#account">Account</a></li>
+    <li><a data-toggle="tab" href="#profile">Profile</a></li>            
+    <li><a data-toggle="tab" href="#privacy">Privacy</a></li>
+    <li><a data-toggle="tab" href="#appearance">Appearance</a></li>
+    <li><a data-toggle="tab" href="#notifications">Notifications</a></li>
+</ul>
+
+
+<div class="tab-content">
+    <div class="tab-pane" id="profile" style="display:none">
+        <h3>Profile</h3>
+    </div>
+    <div class="tab-pane active" id="account">
+        <?php echo $this->layout('settings_account'); ?>
+    </div>
+    <div class="tab-pane" id="privacy" style="display:none">
+        content;
+        <?php //echo $this->layout('settings_privacy'); ?>
+    </div>
+    <div class="tab-pane" id="notifications" style="display:none">
+        content;
+        <?php //echo $this->layout('settings_notifications'); ?>
+    </div>
+    <div class="tab-pane wrap" id="appearance" style="display:none">
+        <?php echo "the appearance tab"; ?>
+    </div>
+    <div class="tab-pane" id="connections" style="display:none">
+        <h3>Connections, groups, friends, external profiles</h3>
+    </div>
+</div>

@@ -203,7 +203,7 @@
 
 // Grid System
 .fixed-container() {
-  width: @maxWidth;
+  max-width: @maxWidth;
   margin-left: auto;
   margin-right: auto;
   .clearfix();
@@ -372,4 +372,11 @@
   float: none;
   width: ((@colWidth) * @columnSpan) + (@gutter * (@columnSpan - 1));
   margin-left: 0;
+}
+
+
+.appearance(@style:button){
+    -webkit-appearance: @style;
+    -moz-appearance: @style;
+    appearance: @style;
 }

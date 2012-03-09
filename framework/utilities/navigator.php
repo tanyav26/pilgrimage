@@ -113,11 +113,10 @@ final class Navigator extends Model {
                 }
             }
             $menu['indent'] = sizeof($right);
+            $right[]        = $menu['rgt'];
 
-            $right[] = $menu['rgt'];
-
-            $parent = $menu['menu_parent_id'];
-            $id = $menu['menu_id'];
+            $parent         = $menu['menu_parent_id'];
+            $id             = $menu['menu_id'];
 
             if (array_key_exists($parent, $nodes)) {
                 $nodes[$parent]["children"][$id] = $menu;

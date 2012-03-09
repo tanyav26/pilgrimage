@@ -76,7 +76,7 @@ class Menu extends Parse\Template {
         unset($tag['NAMESPACE']);
         
         $tag['ELEMENT'] = 'ul';
-        $tag['CLASS'] = 'nav';
+        $tag['CLASS'] = 'nav nav-pills';
         $tag['CHILDREN'] = static::element( (array)$menuItems );
         
         //print_R($tag);
@@ -105,7 +105,7 @@ class Menu extends Parse\Template {
                 "CHILDREN" => array(
                     array(
                         "ELEMENT" => "a",                          
-                        "HREF" => static::$document->link( $item['menu_url']),
+                        "HREF" => !empty($item['menu_url'] ) ? static::$document->link( $item['menu_url']) : '#',
                         "CDATA" => $item['menu_title']
                     )
                 )
@@ -117,9 +117,20 @@ class Menu extends Parse\Template {
             
             //Count children
             if(isset($item['children']) && count($item['children'])>0){
-                $link['CHILDREN'][] = array(
+                $dropdown = array(
+                    "CLASS"=> "dropdown-toggle",
+                    "DATA-TOGGLE"=>"dropdown"
+                );
+                $link['CLASS'] .= ' dropdown';
+                $link['CHILDREN'][0] = array_merge( $link['CHILDREN'][0]  , $dropdown );
+                $title = $link['CHILDREN'][0]['CDATA'];
+                unset($link['CHILDREN'][0]['CDATA']);
+                $link['CHILDREN'][0]['CDATA'] = $title.'<b class="caret"></b>'; 
+                //Move children to the very end of the array
+                
+                $link['CHILDREN'][]  = array(
                     "ELEMENT"   =>'ul',
-                    "CLASS"     =>'slidedown-menu',
+                    "CLASS"     =>'dropdown-menu',
                     "CHILDREN"  =>static::element( $item['children'] )
                 ); 
             }
@@ -130,7 +141,7 @@ class Menu extends Parse\Template {
     }
 
     /**
-     * Returns and instantiated Instance of the layout class
+     * Returns an instantiated Instance of the layout class
      *
      * NOTE: As of PHP5.3 it is vital that you include constructors in your class
      * especially if they are defined under a namespace. A method with the same

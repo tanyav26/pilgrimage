@@ -368,8 +368,8 @@ textarea[readonly] {
 // Inline Fields (input fields that appear as inline objects
 .inline-inputs {
   color: @gray;
-  span {
-    padding: 0 2px 0 1px;
+  span, input, select, textarea {
+    margin: 0 5px 0 0px ;
   }
 }
 
@@ -512,7 +512,22 @@ textarea[readonly] {
   }
 }
 
-
+//SELECT, DROP DOWNS
+select.drop{
+    .appearance(button);
+    -webkit-padding-end: 20px;
+    -webkit-padding-start: 8px;
+    -webkit-user-select: none;
+    background-image: url("../img/select.png"), -webkit-linear-gradient(#FAFAFA, #F4F4F4 40%, #E5E5E5);
+    background-position: center right;
+    background-repeat: no-repeat;
+    border: 1px solid #AAA;
+    color: #555;
+    font-size: inherit;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
 
 

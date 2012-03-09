@@ -34,6 +34,16 @@ class Index extends Platform\View {
         return $this->display();
         
     }
+    
+    
+    public function index(){
+        
+        $indexpage  = $this->output->layout("welcome");
+        $indexpage2 = "Side panel";
+        
+        $this->output->addToPosition("body", $indexpage,  "index panel 1");
+        $this->output->addToPosition("side", $indexpage2, "index panel 2");
+    }
  
     public function display(){
         
@@ -65,7 +75,7 @@ class Index extends Platform\View {
         //$sidebar    = $this->output->layout( "index_sidebar" );
         $dashboard  = $this->output->layout( "dashboard" );
         //$titlebar   = $this->output->layout( "titlebar"  );
-
+        //
         //The default installation box;
         //$this->output->addToPosition("left",    $sidebar);
         //$this->output->addToPosition("topsection",   $titlebar);

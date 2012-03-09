@@ -16,18 +16,14 @@ class Account extends Platform\Model {
         $encrypt    = \Library\Encrypt::getInstance();
         $table      = $this->load->table("?users");
         
-        //echo $data['user_password'];
-        
-        $data['user_password'] = $encrypt->hash( $data['user_password'] );
+        $data['user_password'] = $encrypt->hash( $data['user_password'] );       
        
         if(!$table->bindData( $data )){  
             //print_R($table->getErrors());
             throw new \Platform\Exception( $table->getError() );
             return false;
         }
-        
-        
-        
+       
         if(!$table->save()){
             echo $this->getError();
         }

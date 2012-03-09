@@ -40,7 +40,7 @@ class Index extends \Platform\View {
 
         
         //The default installation box;
-        $this->output->setFormat("raw");
+        //$this->output->setFormat("raw");
         $this->output->setLayout("signin");
         
         //$this->output->addToPosition("body",   $body);
@@ -57,7 +57,7 @@ class Index extends \Platform\View {
 
         
         //The default installation box;
-        $this->output->setFormat("raw");
+        //$this->output->setFormat("raw");
         $this->output->setLayout("signup");
         
     }

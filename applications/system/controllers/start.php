@@ -48,7 +48,7 @@ class Start extends Platform\Controller {
 
         //Get the view;
         $view = $this->load->view('index');
-
+        
         $user = \Platform\User::getInstance();
 
         \Library\Authorize::getAuthroityTree();
@@ -69,7 +69,9 @@ class Start extends Platform\Controller {
         //Loads the index view
         $view = $this->load->view('index');
         
-        echo "the index page";
+        //echo "the index page";
+        
+        $view->index();
     }
 
     /**

@@ -122,10 +122,11 @@ abstract class Template extends Output\Parse {
         if (static::$looping && $first<>"_"){ 
             return self::getPersistentData($path, $default);
         }
-
+        
         //From string representation to array;	 
         foreach ($id as $i => $index) {
             if (!isset($value[$index])) {
+                
                 //If we can't find the element, return the default value;
                 return $default;
                 break;

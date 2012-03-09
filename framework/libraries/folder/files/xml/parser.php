@@ -381,10 +381,11 @@ class Parser extends Files\Xml {
             if (is_array($data) && $element !== 'NAMESPACE') {
                 $key = $element;
                 static::writeXML($xmlWriter, $data);
+         
                 //$xmlWriter->endElement();$tag
             }
             //If the element is not array
-            switch ($element):
+            switch ((string)$element):
                 case "ELEMENT": //We found an element tag;
                     $tag = $data;
                     if (!empty($tag)):
@@ -413,9 +414,10 @@ class Parser extends Files\Xml {
                         Library\Event::trigger("_XMLAttributeCallback", $element, $data, $xmlWriter);
                         //If no default callback is defined
                         if (!Library\Event::isDefined("_XMLAttributeCallback")) {
-                            $xmlWriter->startAttribute(strtolower($element));
-                            $xmlWriter->text($data);
-                            $xmlWriter->endAttribute();
+                            $xmlWriter->writeAttribute($element, $data);
+                            //$xmlWriter->startAttribute(strtolower($element));
+                            //$xmlWriter->text($data);
+                            //$xmlWriter->endAttribute();
                         }
 
 

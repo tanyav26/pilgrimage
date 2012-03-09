@@ -104,6 +104,13 @@ $Router = Library\Router::getInstance();
 $Uri    = Library\Uri::getInstance();
 $Output = Library\Output::getInstance();
 
+//$Router->getURL("standard");
+/*
+ * ------------------------------------------------------
+ *  Output
+ * ------------------------------------------------------
+ */
+$Output->recallAlerts();
 
 /*
  * ------------------------------------------------------
@@ -116,13 +123,6 @@ $Dispatcher = Platform\Dispatcher::getInstance();
 $Dispatcher->execute($Router->findRoute($Uri->getQuery()));
 $Dispatcher->redirect();
 
-//$Router->getURL("standard");
-/*
- * ------------------------------------------------------
- *  Output
- * ------------------------------------------------------
- */
-$Output->recallAlerts();
 
 /*
  * ------------------------------------------------------

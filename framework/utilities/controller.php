@@ -132,18 +132,12 @@ abstract class Controller extends \Library\Object {
      * @param type $message
      * @param type $type | information, error, success, attention, note etc.
      */
-    final public function alert($message, $title='', $type='information') {
+    final public function alert($message, $title='', $type='info') {
 
         //Set the message variables;
-        $this->set("alertType", $type);
-        $this->set("alertBody", $message);
-        $this->set("alertTitle", $title);
-
-        //get the output;
-        $formatted = $this->output->layout("alert", "system");
-
-        //add the message
-        $this->output->addMessage($formatted, $type);
+        $this->set("alerts", array( array("alertType"=>$type, "alertBody"=>$message,"alertTitle"=>$title )  ));
+        
+        return $this;
     }
 
     /**
@@ -204,6 +198,7 @@ abstract class Controller extends \Library\Object {
     final public function redirect($url = '', $code=302, $message='') {
 
         //$this->setredirect($url)
+        static::$displayed = true; //Just so it does not send any furthre output before redirect
         $dispatcher = Dispatcher::getInstance();
         $dispatcher->redirect($url, $code, $message);
     }
@@ -214,7 +209,7 @@ abstract class Controller extends \Library\Object {
      */
     final public function login() {
         
-  
+        //@TODO Kill any logged in session
         //@TODO If already logged in, redirect to homepage or somewhere else;
         //$this->redirect( '/index.php' );
         //login and authorize
@@ -248,12 +243,12 @@ abstract class Controller extends \Library\Object {
                         //get the user data
                         $this->user = User::getInstance();
 
-                        $this->alert( _('Log-In was successful. Welcome on board') , _('Horray!!'), "success");
-                        $this->redirect("/system/start/dashboard");
+                        $this->alert( _('Welcome on board') , sprintf(_('Howdy %s!!'), $this->user->fullname), "success");
+                        $this->redirect( $this->output->link( "/system/start/dashboard") );
                         
                     } else {
                         //if not show the form...with messages maybe?;
-                        $this->alert($failure, _("Login Failed :("), "error");
+                        $this->alert($failure, _("We were unable to log you in"), "error");
                     }
                 }
             }
@@ -273,9 +268,10 @@ abstract class Controller extends \Library\Object {
         
         $return = $this->uri->getURL('signin');
         
-        echo $return;
+        //echo $return;
         
         //Send back to homepage
+        $this->alert(_("You have been logged out"), "", "info");
         //$this->redirect("/");
         $this->redirect($this->uri->getURL('signin'));
     }

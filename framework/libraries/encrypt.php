@@ -244,7 +244,8 @@ final class Encrypt extends \Library\Object {
     public function hash($string, $key = null) {
 
         $publicKey = is_null($key) ? $this->generateKey($string) : $key;
-
+        
+        //echo $publicKey;
         $hashKey1 = sha1($string . $publicKey);
         $hashKey2 = md5($hashKey1);
         $hashKey3 = hash('sha224', $hashKey2);

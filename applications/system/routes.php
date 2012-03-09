@@ -11,6 +11,12 @@ $route["action"]["execute"] = array(
     )
 );
 
+$route["dashboard"] = array(
+    "path" => '/dashboard/',
+    "application" => 'system',
+    "controller" => 'start',
+    "method" => 'dashboard'
+);
 
 $route["search"] = array(
     "path" => '/search/',

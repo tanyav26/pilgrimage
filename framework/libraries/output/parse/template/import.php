@@ -62,14 +62,17 @@ class Import extends Parse\Template {
         
         //print_R(static::$layouts);
         //If there is a name we will save this layout to static::$layouts
-        $document   = static::$document;
-        $path       = isset($tag['PATH']) ? $tag['PATH'] : null;
+        $loader     = \Platform\Shared::loader();
 
+        $document   = static::$document;
+        $path       = isset($tag['LAYOUT']) ? $tag['LAYOUT'] : null;
+        $layout     = $loader->layout($path, null, ".tpl", FALSE);
+        
         //Save the layout
-        if (!empty($path) && !isset(static::$imports[$path])): //Unique layout names
+        if (!empty($layout) && !isset(static::$imports[$layout])): //Unique layout names
             //static::$imports[$href] = $tag;
-            $path = str_replace(array('/','\\'), DS , $path);
-            $layout = FSPATH . 'public' . DS . $document->template . DS . $path;
+            //$path = str_replace(array('/','\\'), DS , $path);
+            //$layout = FSPATH . 'public' . DS . $document->template . DS . $path;
             
            
             if(file_exists($layout)):

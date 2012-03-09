@@ -117,12 +117,6 @@ class Output extends Object {
     protected static $prints;
 
     /**
-     *
-     * @var array
-     */
-    protected $positionVars = array();
-
-    /**
      * Construcst the output object
      *
      * @return void
@@ -162,11 +156,10 @@ class Output extends Object {
 
         //Restore alerts
         if (!empty($oldAlerts)) {
-            $newAlerts = is_array($this->get("alerts")) ? $this->get("alerts") : array();
-            $alerts = array_merge($oldAlerts, $newAlerts);
-
-            $this->positionVars["alerts"] = $alerts;
-
+            //$newAlerts = is_array($this->get("alerts")) ? $this->get("alerts") : array();
+            //$alerts = array_merge($oldAlerts, $newAlerts);
+            //The set method will merge automatically
+            $this->set("alerts" , $oldAlerts );
             //echo $this->session->getId();
             //Remove all the old alerts
             $this->session->remove("alerts");
@@ -285,11 +278,14 @@ class Output extends Object {
      * @return void
      *
      */
-    final public function display($format = 'xhtml', $httpCode=200,  $template='index') {
+    final public function display($format = 'xhtml', $httpCode=200,  $template='') {
 
         //anything that had previously been printed
         $printed = ob_get_contents();
-        $this->addToPosition("body", $printed, '', true);
+        
+        if(!empty($printed)):
+            $this->addToPosition("body", $printed, '', true);
+        endif;
 
         //Anything that was previously displayed in scripts, is discarded
         //from the buffer, and will be displayed on the body of the page
@@ -301,6 +297,14 @@ class Output extends Object {
 
 
         static::$prints = $this->restartBuffer();
+        
+        //Format alerts
+        //get the output;
+        $alerts = $this->layout("alert", "system");
+
+        //add the message
+        $this->addToPosition("alerts", $alerts);
+        
         //$this->addToPosition("do:debugger", $console, '', true);
         //1. Work on the headers, make sure everything is beautiful
         // seconds, minutes, hours, days
@@ -540,9 +544,10 @@ class Output extends Object {
      * @param string $message
      * @param string $type
      */
-    final public function addMessage($alert, $type='') {
+    final public function addMessage( $message, $title='', $type='info' ) {
 
-        $this->addToPosition("alerts", $alert);
+        //Set the message variables;
+        $this->set("alerts",  array( array("alertType"=>$type, "alertBody"=>$message,"alertTitle"=>$title ) ) );
 
         return $this;
     }
@@ -815,19 +820,15 @@ class Output extends Object {
      */
     public function position($name, $default='', $style='') {
 
-        self::$positions[$name] = array(
-            "default" => $default,
-            "style" => $style
-        );
         //if is array loop through each;
         if ($this->hasPosition($name)) {
-            foreach ($this->positionVars[$name] as $block) {
-                if (!is_array($block) || !isset($block['string']) || !isset($block['callback'])) {
+            foreach ($this->variables["page"]["block"][$name] as $block) {
+                if (!is_array($block) || !isset($block['content']) || !isset($block['callback'])) {
                     continue;
                 }
                 //process the callback
                 $callback = $block['callback'];
-                $string = $block['string'];
+                $string = $block['content'];
 
                 //@TODO rework this, for now just print() the string
                 print($string);
@@ -846,9 +847,9 @@ class Output extends Object {
      * @return boolean true if or false if not
      */
     public function hasPosition($name) {
-
         //If we have data that goes into this position, return true else false;
-        return (isset($this->positionVars[$name]) && sizeof($this->positionVars[$name]) > 0 ) ? true : false;
+        //return (isset($this->positionVars[$name]) && sizeof($this->positionVars[$name]) > 0 ) ? true : false;
+        return (isset($this->variables["page"]["block"][$name]) && sizeof($this->variables["page"]["block"][$name]) > 0 ) ? true : false;
     }
 
     /**
@@ -858,54 +859,25 @@ class Output extends Object {
      * @param type $default
      * @param type $callback
      */
-    public function addToPosition($name, $string='', $callback='', $prepend = FALSE) {
+    public function addToPosition($name, $content='', $title="", $params=array(), $prepend = FALSE) {
 
-        if (!isset($this->positionVars[$name])) {
-            $this->positionVars[$name] = array();
+        if (!isset($this->variables["page"]["block"][$name])) {
+            $this->variables["page"]["block"][$name] = array();
         }
 
         if ($prepend) {
-            array_unshift($this->positionVars[$name], array(
-                "string" => $string,
-                "callback" => $callback
+            array_unshift($this->variables["page"]["block"][$name], array(
+                "content" => $content,
+                "title" => $title,
+                "params"=> $params
             ));
         } else {
-            array_push($this->positionVars[$name], array(
-                "string" => $string,
-                "callback" => $callback
+            array_push($this->variables["page"]["block"][$name], array(
+                "content" => $content,
+                "title" => $title,
+                "params"=> $params
             ));
         }
         return $this;
     }
-
-    /**
-     * Generates all the debug output and flushes to console
-     *
-     * @return void
-     */
-    final public function toConsole() {
-
-        //if has possition do:console, output the console!
-        $environment = Config::group("environment");
-
-        //reverse the array so the latest console msg show first;
-        $this->positionVars["do:console"] = $this->positionVars["do:console"];
-        $this->set("debugcount", 0);
-        $this->set("debugmode", (int) $environment['mode']);
-        //@TODO never show the console in production mode!!
-        if ($this->hasPosition("do:console") && (int) $environment['mode'] < 2) {
-
-            foreach ($this->positionVars["do:console"] as $i => $log) {
-                $this->positionVars["do:console"][$i]['string'] = "<div class=\"console-log\">{$log['string']}</div>\n";
-                $this->set("debugcount", $this->debugcount++);
-            }
-            //Layout
-            //3.Determine which format of the index we are using
-            $console = FSPATH . 'public' . DS . $this->template . DS . 'console' . EXT;
-
-            //include the layout;
-            include $console;
-        }
-    }
-
 }
