@@ -76,16 +76,33 @@
                 $(function() {
                     // Also works with: var yourStartLatLng = '59.3426606750, 18.0736160278';
                     var yourStartLatLng = new google.maps.LatLng(59.3426606750, 18.0736160278);
-                    $('.map-canvas').gmap({'center': yourStartLatLng, 'maxZoom':15, 'callback': function() {
-                        var self = this;
-                        self.getCurrentPosition(function(position, status) {
-                            if ( status === 'OK' ) {
-                                self.set('clientPosition', new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-                                self.addMarker({'position': self.get('clientPosition'), 'bounds': true});
-                                self.addShape('Circle', { 'strokeWeight': 0, 'fillColor': "#008595", 'fillOpacity': 0.25, 'center': self.get('clientPosition'), 'radius': 15, clickable: false });
+                    $('.map-canvas').gmap({'streetViewControl': false, 'mapTypeControl':false, 'center': yourStartLatLng,'styles':[
+                            {
+                                featureType: "all",
+                                stylers: [
+                                    { saturation: -50 },
+                                    { lightness: 3}
+                                ]
+                            },{
+                                featureType: "road.arterial",
+                                elementType: "geometry"
+                            },{
+                                featureType: "poi.business",
+                                elementType: "labels",
+                                stylers: [
+                                    { visibility: "off" }
+                                ]
                             }
-                        });   
-                    }});
+                        ], 'maxZoom':16, 'callback': function() {
+                            var self = this;
+                            self.getCurrentPosition(function(position, status) {
+                                if ( status === 'OK' ) {
+                                    self.set('clientPosition', new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+                                    self.addMarker({'position': self.get('clientPosition'), 'bounds': true});
+                                    self.addShape('Circle', { 'strokeWeight': 0, 'fillColor': "#008595", 'fillOpacity': 0.25, 'center': self.get('clientPosition'), 'radius': 15, clickable: false });
+                                }
+                            });   
+                        }});
                 });
             </script>
         </body>
