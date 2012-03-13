@@ -143,7 +143,8 @@
             <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/plugins.js" type="text/javascript"></script>
             <!-- end scripts-->
 
-
+            <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+            <script type="text/javascript" src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/plugins/jquery.ui.map.full.min.js"></script>
 
             <!--[if lt IE 7 ]>
               <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
-
-    <html class="no-js" lang="en">
+    <html lang="en">
         <head>
             <title><tpl:element type="text" data="page.title">Default Title</tpl:element></title>
             <meta charset="utf-8" />
@@ -18,24 +17,32 @@
             <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" />
 
             <link rel="stylesheet" href="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/css/bootstrap.css" type="text/css" media="screen" />
+            
+            <script src='/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
+            <script src='/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
+            <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
         </head>
+
         <body>
             <tpl:import layout="navbar" />
             <tpl:block data="page.block.alerts" />
-            <div class="container">             
+            <div class="container">   
+                <header class="subhead" id="overview">
+                    <div class="subnav">
+                        <tpl:menu id="sitemenu" />
+                        <tpl:menu id="adminmenu" />
+                    </div>
+                </header>
                 <tpl:block data="page.block.banner">Banner</tpl:block>
-                <section class="layout-block boxed has-bg">  
+                <section class="layout-block boxed"> 
+                    <div class="lead-unit">
+                        <h1><tpl:element type="text" data="page.title">Administrator</tpl:element></h1>
+                        <p class="lead">Changes you make here will affect the global system performance</p>
+                        <hr />
+                    </div>
                     <div class="row-fluid">
                         <div class="span12">           
-                            <div class="row-fluid">
-                                <div class="span8"> 
-                                    <tpl:block data="page.block.body">Content</tpl:block></div>
-                                <div class="span4">
-                                    <div class="left-pad">                                 
-                                        <tpl:block data="page.block.side">Sidebar</tpl:block>
-                                    </div>
-                                </div>
-                            </div>
+                            <tpl:block data="page.block.body" />
                         </div>
                     </div>
                 </section>
@@ -58,36 +65,13 @@
                                 <li><a href="#">© Stonyhills 2012</a></li>
                             </ul>
                         </div>
-                    </div>
-                    <tpl:import layout="console" />
-                    <a href="<?php echo $this->link('/system/admin/index'); ?>" class="btn btn-primary pull-right">Administrator Panel</a>
+                    </div>   
                     <tpl:block data="page.block.footer">Footer</tpl:block>
+                    <tpl:import layout="console" />
+                    <a href="<?php echo $this->link('/'); ?>" class="btn btn-primary pull-right">Front-Page</a>
                 </section>
             </div>
-
-            <script src='/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
-            <script src='/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
-            <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
             <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/bootstrap.min.js" type="text/javascript"></script>
-            <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-            <script type="text/javascript" src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/plugins/jquery.ui.map.full.min.js"></script>
-            <script type="text/javascript" src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/plugins/jquery.ui.map.extensions.js"></script>
-            <script type="text/javaScript">
-                $(function() {
-                    // Also works with: var yourStartLatLng = '59.3426606750, 18.0736160278';
-                    var yourStartLatLng = new google.maps.LatLng(59.3426606750, 18.0736160278);
-                    $('.map-canvas').gmap({'center': yourStartLatLng, 'maxZoom':15, 'callback': function() {
-                        var self = this;
-                        self.getCurrentPosition(function(position, status) {
-                            if ( status === 'OK' ) {
-                                self.set('clientPosition', new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-                                self.addMarker({'position': self.get('clientPosition'), 'bounds': true});
-                                self.addShape('Circle', { 'strokeWeight': 0, 'fillColor': "#008595", 'fillOpacity': 0.25, 'center': self.get('clientPosition'), 'radius': 15, clickable: false });
-                            }
-                        });   
-                    }});
-                });
-            </script>
         </body>
     </html>
 </tpl:layout>

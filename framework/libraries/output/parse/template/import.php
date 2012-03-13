@@ -74,7 +74,6 @@ class Import extends Parse\Template {
             //$path = str_replace(array('/','\\'), DS , $path);
             //$layout = FSPATH . 'public' . DS . $document->template . DS . $path;
             
-           
             if(file_exists($layout)):
                 //TODO@ file get contents might not be the best method here 
                 //to import and parse the file

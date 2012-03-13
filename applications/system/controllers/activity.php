@@ -50,7 +50,9 @@ class Activity extends Platform\Controller {
      */
     public function index() {
         
-        echo "System activity";
+        $activity = $this->output->layout("timeline");
+        
+        $this->output->addToPosition("body", $activity);
     }
 
     /**

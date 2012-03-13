@@ -180,8 +180,6 @@ class Privacy extends Platform\Model {
         $right = array();
         
         //print_R($rows);
-        
-        //die;
 
         foreach ($rows as $authority) {
         //while($authority = $results->fetchAssoc()){
@@ -207,6 +205,8 @@ class Privacy extends Platform\Model {
             $authorities[] = $node;
             $right[] = $authority['rgt'];
         }
+        
+        //print_R($authorities);
 
         return $authorities;
     }

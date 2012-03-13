@@ -698,7 +698,7 @@ final class Router extends Object {
         
         //print_R($alerts);
         header("HTTP/1.1 $code Moved Permanently");
-        header("Location: ".$url);
+        header("Location: ".$output->link($url) );
 
         $this->abort();
     }

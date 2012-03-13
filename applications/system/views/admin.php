@@ -32,6 +32,7 @@ final class Admin extends Platform\View {
         
         //To set the pate title use
         $this->output->setPageTitle("Administrator Panel");
+        $this->output->setLayout("admin");
         
         //Draw the table at the end when all the parameters have been entered!
         //register_shutdown_function( array('Application\System\Views\Admin' , 'drawAdminPage'));

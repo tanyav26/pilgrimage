@@ -68,8 +68,8 @@ class Settings extends System\Admin {
             if(!$privacy->store( $edit , $params)){
                 $errors = $this->getErrorString();
                 $this->alert($errors, null , "error");
-            }  
-            $this->redirect("/system/admin/settings/privacy");
+            }  $this->alert(_("Changes have been saved successfully"), "", "success");        
+            $this->redirect( $this->output->link("/system/admin/settings/privacy") );
         endif;
       
         $form->privacyConfigForm();
