@@ -50,8 +50,10 @@ class Activity extends Platform\Controller {
      */
     public function index() {
         
-        $activity = $this->output->layout("timeline");
+        $activity   = $this->output->layout("timeline");
+        $tips       = $this->output->layout("tips");
         
+        $this->output->addToPosition("side", $tips);
         $this->output->addToPosition("body", $activity);
     }
 
