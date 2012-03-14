@@ -77,6 +77,53 @@ ol.timeline-items{
         }
         
     }
+}
 
-    
+//RECOMMENDATIONS & TIPS
+
+.timeline-tips-title{ margin-bottom: 15px; display: block; padding-bottom: 5px; border-bottom: 1px solid #c2c2c2 }
+.timeline-tips-list{
+    //list-style: none;
+    margin-left: 18px;
+    li{ 
+        position: relative;  min-height: 50px; margin-bottom: 5px;
+        .tip-title{
+            display: block;
+            padding-right: 40px;
+        }
+        .tip-response{ 
+            opacity: 0.2;
+            &:hover{ 
+                opacity: 1
+            }
+        }
+        .tip-popularity{ 
+            font-size: 150%;
+            font-weight: bold;
+            padding-top: 4px;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+         }
+        .progress{ 
+            margin: 8px 0 15px; 
+        }
+        .suggestion-info{
+            display:block;
+            font-size: 90%; line-height: 80%; color: @grayLight;
+        }
+        .tip-actions{
+            width: 16px;
+            position: absolute;
+            left: -20px;
+            top: 0;
+            background: #fcfcfc;
+            display: none;
+        }
+        &:hover{
+            .tip-actions{
+                display: block;
+            }
+        }
+    }
 }
