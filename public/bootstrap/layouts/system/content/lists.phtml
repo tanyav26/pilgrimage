@@ -1,69 +1,65 @@
-<div id="contenttable" class="padding-20">
 
-    <form class="wrap">
-        <fieldset >
-            <h3><?php echo sprintf(_('%s List'), ucfirst($this->get("content-type"))); ?></h3>
-
-            <p>The details requested here are important in governing how the platform works. Read through and complete each accordingly</p>
-            <div class="grid">
-                <div class="row wrap">
-                    <div class="col third" align="left">
-                        <a class="button" title="Add new" href="<?php echo $this->link('/system/admin/content/add'); ?>" style="width:60px">Add New</a>
-                    </div>
-                    <div class="col third" align="left">
-                        <select style="width:100%">
-                            <option><?php echo _('Filter by...'); ?></option>
-                            <option><?php echo _('Published Status'); ?></option>
-                            <option><?php echo _('Name'); ?></option>
-                        </select>
-                    </div>
-                    <div class="col third" align="right">
-                        <button style="margin-right:-3px"><span class="button-img list">List</span></button>
-                        <button style="margin-left:-3px" class="active"><span class="button-img grid">Grid</span></button>
-                    </div>
-
+<form class="form-horizontal">
+    <fieldset>
+        <div class="row-fluid">
+            <div class="span6">
+                <div id="example_length" class="dataTables_length">
+                    <label><select name="example_length" class="input-small inline-input"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select>&nbsp;Records per page</label>
                 </div>
-                <div class="row wrap"></div>
             </div>
-
-            <hr class="hr-ccc" />
-
-            <div class="grid">
-                <table id="post_table" width="100%">
-                    <!-- Colgroup -->  
-                    <colgroup>  
-                        <col class="col-odd" />  
-                        <col class="col-even" />  
-                        <col class="col-odd" />  
-                        <col class="col-even" />  
-                    </colgroup> 
-                    <thead>
-                        <tr>
-                            <th scope="col" id="post_selector"><input type="checkbox" /></th>
-                            <th scope="col" id="post_title">Title</th>
-                            <th scope="col" id="post_author">Author</th>
-                            <th scope="col" id="post_category">Category</th>
-                            <th scope="col" id="post_tags">Tags</th>
-                            <th scope="col" id="post_comments">Comments</th>
-                            <th scope="col" id="post_date">Date</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                    </tfoot>
-                    <tbody>
-                        <tr>
-                            <td><input type="checkbox" /></td>
-                            <td>Post Title and a summary</td>
-                            <td>Author</td>
-                            <td>Category</td>
-                            <td>Tags</td>
-                            <td>Comments</td>
-                            <td>Date</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="span6">
+                <div class="dataTables_filter pull-right" id="example_filter">
+                    <label>Search: <input type="text" aria-controls="example" /></label>
+                </div>
             </div>
-        </fieldset>
-    </form>
+        </div>
+    </fieldset>
+    <fieldset>
+        <div class="content-list">
+            <table class="table table-striped">
+                <!-- Colgroup -->  
+                <colgroup>  
+                    <col class="col-odd" />  
+                    <col class="col-even" />  
+                    <col class="col-odd" />  
+                    <col class="col-even" />  
+                </colgroup> 
+                <thead>
+                    <tr>
+                        <th scope="col" id="post_selector"><input type="checkbox" /></th>
+                        <th scope="col" id="post_title">Title</th>
+                        <th scope="col" id="post_author">Author</th>
+                        <th scope="col" id="post_category">Category</th>
+                        <th scope="col" id="post_tags">Tags</th>
+                        <th scope="col" id="post_comments">Comments</th>
+                        <th scope="col" id="post_date">Date</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                </tfoot>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox" /></td>
+                        <td>Post Title and a summary</td>
+                        <td>Author</td>
+                        <td>Category</td>
+                        <td>Tags</td>
+                        <td>Comments</td>
+                        <td>Date</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination">
+            <ul>
+                <li class="disabled"><a href="#">« Previous</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">Next »</a></li>
+            </ul>
+        </div>
+    </fieldset>
+</form>
 
-</div>

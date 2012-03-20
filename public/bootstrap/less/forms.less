@@ -362,7 +362,7 @@ select:focus:required:invalid {
   .clearfix(); // Clear the float to prevent wrapping
   input,
   .uneditable-input {
-    .border-radius(0 3px 3px 0);
+    //.border-radius(0 3px 3px 0);
     &:focus {
       position: relative;
       z-index: 2;
@@ -386,7 +386,7 @@ select:focus:required:invalid {
     text-shadow: 0 1px 0 @white;
     background-color: #f5f5f5;
     border: 1px solid #ccc;
-    .border-radius(3px 0 0 3px);
+    //.border-radius(3px 0 0 3px);
   }
   .active {
     background-color: lighten(@green, 30);
@@ -402,7 +402,7 @@ select:focus:required:invalid {
   input,
   .uneditable-input {
     float: left;
-    .border-radius(3px 0 0 3px);
+    //.border-radius(3px 0 0 3px);
   }
   .uneditable-input {
     border-left-color: #eee;
@@ -411,7 +411,7 @@ select:focus:required:invalid {
   .add-on {
     margin-right: 0;
     margin-left: -1px;
-    .border-radius(0 3px 3px 0);
+    //.border-radius(0 3px 3px 0);
   }
   input:first-child {
     // In IE7, having a hasLayout container (from clearfix's zoom:1) can make the first input

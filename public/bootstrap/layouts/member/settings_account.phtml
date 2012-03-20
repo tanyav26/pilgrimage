@@ -1,40 +1,40 @@
-<form>
+<form class="form-horizontal">
     <fieldset>
         <legend>Account Information</legend>
-        <div class="clearfix">
-            <label for="username">Username</label>
-            <div class="input">
+        <div class="control-group">
+            <label class="control-label"  for="username">Username</label>
+            <div class="controls input">
                 <input class="medium" id="username" name="username" size="20" type="text" />
                 <span class="help-block">Alpha-numeric only (aA-zZ,0-9)</span>
             </div>
-        </div><!-- /clearfix -->
-        <div class="clearfix">
-            <label for="first-name">First Name</label>
-            <div class="input">
+        </div><!-- /control-group -->
+        <div class="control-group">
+            <label class="control-label"  for="first-name">First Name</label>
+            <div class="controls input">
                 <input class="xlarge" id="first-name" name="first-name" size="30" type="text" />
                 <span class="help-block">Common, or given names</span>
             </div>
-        </div><!-- /clearfix -->
-        <div class="clearfix">
-            <label for="middle-name">Middle Name</label>
-            <div class="input">
+        </div><!-- /control-group -->
+        <div class="control-group">
+            <label class="control-label"  for="middle-name">Middle Name</label>
+            <div class="controls input">
                 <div class="input-prepend">
-                    <label class="add-on"><input type="checkbox" name="show-middle-name" id="show-middle-name" value="1" /></label>
+                    <span class="add-on"><input type="checkbox" name="show-middle-name" id="show-middle-name" value="1" /></span>
                     <input class="xlarge" id="middle-name" name="middle-name" size="30" type="text" />
                     <span class="help-block">Tick to display your middle name on profile</span>
                 </div>
             </div>
-        </div><!-- /clearfix -->
-        <div class="clearfix">
-            <label for="last-name">Last Name</label>
-            <div class="input">
+        </div><!-- /control-group -->
+        <div class="control-group">
+            <label class="control-label"  for="last-name">Last Name</label>
+            <div class="controls input">
                 <input class="xlarge" id="first-name" name="last-name" size="30" type="text" />
                 <span class="help-block">Surname, or Family name</span>
             </div>
-        </div><!-- /clearfix -->
-        <div class="clearfix">
-            <label>Date of Birth</label>
-            <div class="input inline-inputs">
+        </div><!-- /control-group -->
+        <div class="control-group">
+            <label class="control-label" >Date of Birth</label>
+            <div class="controls input inline-inputs">
                 <select name="dob[day]" id="dob-day" style="width: 90px" class="drop">
                     <option>Day</option>
                     <option value="01">01</option>
@@ -201,52 +201,52 @@
                 </select>
                 <span class="help-block">We will not show your date of birth on your profile, unless you&nbsp;<a href="#">tell us to</a></span>
             </div>
-        </div><!-- /clearfix -->
-        <div class="clearfix">
-            <label for="email">Email address</label>
-            <div class="input">
+        </div><!-- /control-group -->
+        <div class="control-group">
+            <label class="control-label"  for="email">Email address</label>
+            <div class="controls input">
                 <div class="input-prepend">
                     <span class="add-on">@</span>
                     <input class="xlarge" id="email" name="email" size="100" type="text" />
                 </div>
                 <span class="help-block">Its important that this be valid</span>
             </div>
-        </div><!-- /clearfix -->
+        </div><!-- /control-group -->
     </fieldset>
     <fieldset>
         <legend>Change Password</legend>
-        <div class="clearfix">
-            <label for="old-password">Old password</label>
-            <div class="input">
+        <div class="control-group">
+            <label class="control-label"  for="old-password">Old password</label>
+            <div class="controls input">
                 <input class="xlarge" id="old-password" name="old-password" size="30" type="password" />
             </div>
-        </div><!-- /clearfix -->
-        <div class="clearfix">
-            <label for="new-password">New password</label>
-            <div class="input">
+        </div><!-- /control-group -->
+        <div class="control-group">
+            <label class="control-label"  for="new-password">New password</label>
+            <div class="controls input">
                 <input class="xlarge" id="new-password" name="new-password" size="30" type="password" />
             </div>
-        </div><!-- /clearfix -->
-        <div class="clearfix">
-            <label for="new-password-repeat">Verify new password</label>
-            <div class="input">
+        </div><!-- /control-group -->
+        <div class="control-group">
+            <label class="control-label"  for="new-password-repeat">Verify new password</label>
+            <div class="controls input">
                 <input class="xlarge" id="new-password-repeat" name="new-password-repeat" size="30" type="password" />
             </div>
-        </div><!-- /clearfix -->
+        </div><!-- /control-group -->
     </fieldset>
     <fieldset>
         <legend>Location settings</legend>
-        <div class="clearfix">
-            <label for="timezone">Time Zone</label>
-            <div class="input">
+        <div class="control-group">
+            <label class="control-label"  for="timezone">Time Zone</label>
+            <div class="controls input">
                 <select name="timezone" id="timezone" class="xxlarge drop">
                     <option value="-12.0">(GMT -12:00) Eniwetok, Kwajalein</option><option value="-11.0">(GMT -11:00) Midway Island, Samoa</option><option value="-10.0">(GMT -10:00) Hawaii</option><option value="-9.0">(GMT -9:00) Alaska</option><option value="-8.0">(GMT -8:00) Pacific Time (US&amp;Canada)</option><option value="-7.0">(GMT -7:00) Mountain Time (US&amp;Canada)</option><option value="-6.0">(GMT -6:00) Central Time (US&amp;Canada), Mexico City</option><option value="-5.0">(GMT -5:00) Eastern Time (US&amp;Canada), Bogota, Lima</option><option value="-4.0">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</option><option value="-3.5">(GMT -3:30) Newfoundland</option><option value="-3.0">(GMT -3:00) Brazil, Buenos Aires, Georgetown</option><option value="-2.0">(GMT -2:00) Mid-Atlantic</option><option value="-1.0">(GMT -1:00 hour) Azores, Cape Verde Islands</option><option value="0.0" selected="selected">(GMT) Western Europe Time, London, Lisbon, Casablanca</option><option value="1.0">(GMT +1:00 hour) Brussels, Copenhagen, Madrid, Paris</option><option value="2.0">(GMT +2:00) Kaliningrad, South Africa</option><option value="3.0">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</option><option value="3.5">(GMT +3:30) Tehran</option><option value="4.0">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</option><option value="4.5">(GMT +4:30) Kabul</option><option value="5.0">(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</option><option value="5.5">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</option><option value="5.75">(GMT +5:45) Kathmandu</option><option value="6.0">(GMT +6:00) Almaty, Dhaka, Colombo</option><option value="7.0">(GMT +7:00) Bangkok, Hanoi, Jakarta</option><option value="8.0">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</option><option value="9.0">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</option><option value="9.5">(GMT +9:30) Adelaide, Darwin</option><option value="10.0">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option><option value="11.0">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option><option value="12.0">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
                 </select>
             </div>
-        </div><!-- /clearfix -->
-        <div class="clearfix">
-            <label for="mediumSelect">Select</label>
-            <div class="input">
+        </div><!-- /control-group -->
+        <div class="control-group">
+            <label class="control-label"  for="mediumSelect">Select</label>
+            <div class="controls input">
                 <select class="medium" name="mediumSelect" id="mediumSelect">
                     <option>1</option>
                     <option>2</option>
@@ -255,10 +255,10 @@
                     <option>5</option>
                 </select>
             </div>
-        </div><!-- /clearfix -->
-        <div class="clearfix">
-            <label for="multiSelect">Multiple select</label>
-            <div class="input">
+        </div><!-- /control-group -->
+        <div class="control-group">
+            <label class="control-label"  for="multiSelect">Multiple select</label>
+            <div class="controls input">
                 <select class="medium" size="5" multiple="multiple" name="multiSelect" id="multiSelect">
                     <option>1</option>
                     <option>2</option>
@@ -267,28 +267,28 @@
                     <option>5</option>
                 </select>
             </div>
-        </div><!-- /clearfix -->
+        </div><!-- /control-group -->
     </fieldset>
     <fieldset>
         <legend>API Settings</legend>
-        <div class="clearfix">
-            <label>Uneditable input</label>
-            <div class="input">
+        <div class="control-group">
+            <label class="control-label" >Uneditable input</label>
+            <div class="controls input">
                 <span class="uneditable-input">Some value here</span>
             </div>
-        </div><!-- /clearfix -->
-        <div class="clearfix">
-            <label for="disabledInput">Disabled input</label>
-            <div class="input">
+        </div><!-- /control-group -->
+        <div class="control-group">
+            <label class="control-label"  for="disabledInput">Disabled input</label>
+            <div class="controls input">
                 <input class="xlarge disabled" id="disabledInput" name="disabledInput" size="30" type="text" placeholder="Disabled input here… carry on." disabled="" />
             </div>
-        </div><!-- /clearfix -->
+        </div><!-- /control-group -->
     </fieldset>
     <fieldset>
         <legend>External Applications</legend>
-        <div class="clearfix">
-            <label>Disabled textarea</label>
-            <div class="input">
+        <div class="control-group">
+            <label class="control-label" >Disabled textarea</label>
+            <div class="controls input">
                 <select name="language" id="connected" style="width: 200px">
                     <option value="">Connect to..</option>
                     <option value="facebook">Facebook</option>
@@ -297,131 +297,123 @@
                     <option value="google">Google</option>
                 </select>
             </div>
-        </div><!-- /clearfix -->
-        <div class="clearfix error">
-            <label for="errorInput">Input with error</label>
-            <div class="input">
+        </div><!-- /control-group -->
+        <div class="control-group error">
+            <label class="control-label"  for="errorInput">Input with error</label>
+            <div class="controls input">
                 <input class="xlarge error" id="errorInput" name="errorInput" size="30" type="text" />
                 <span class="help-inline">Small snippet of help text</span>
             </div>
-        </div><!-- /clearfix -->
-        <div class="clearfix success">
-            <label for="successInput">Input with success</label>
-            <div class="input">
+        </div><!-- /control-group -->
+        <div class="control-group success">
+            <label class="control-label"  for="successInput">Input with success</label>
+            <div class="controls input">
                 <input class="xlarge error" id="successInput" name="successInput" size="30" type="text" />
                 <span class="help-inline">Success!</span>
             </div>
-        </div><!-- /clearfix -->
-        <div class="clearfix warning">
-            <label for="warningInput">Input with warning</label>
-            <div class="input">
+        </div><!-- /control-group -->
+        <div class="control-group warning">
+            <label class="control-label"  for="warningInput">Input with warning</label>
+            <div class="controls input">
                 <input class="xlarge error" id="warningInput" name="warningInput" size="30" type="text" />
                 <span class="help-inline">Ruh roh!</span>
             </div>
-        </div><!-- /clearfix -->
+        </div><!-- /control-group -->
     </fieldset>
     <fieldset>
         <legend>Example form legend</legend>
-        <div class="clearfix">
-            <label for="prependedInput">Prepended text</label>
-            <div class="input">
+        <div class="control-group">
+            <label class="control-label"  for="prependedInput">Prepended text</label>
+            <div class="controls input">
                 <div class="input-prepend">
                     <span class="add-on">@</span>
                     <input class="medium" id="prependedInput" name="prependedInput" size="16" type="text" />
                 </div>
                 <span class="help-block">Here's some help text</span>
             </div>
-        </div><!-- /clearfix -->
-        <div class="clearfix">
-            <label for="prependedInput2">Prepended checkbox</label>
-            <div class="input">
+        </div><!-- /control-group -->
+        <div class="control-group">
+            <label class="control-label"  for="prependedInput2">Prepended checkbox</label>
+            <div class="controls input">
                 <div class="input-prepend">
-                    <label class="add-on"><input type="checkbox" name="" id="" value="" /></label>
+                    <span class="add-on"><input type="checkbox" name="" id="" value="" /></span>
                     <input class="mini" id="prependedInput2" name="prependedInput2" size="16" type="text" />
                 </div>
             </div>
-        </div><!-- /clearfix -->
-        <div class="clearfix">
-            <label for="appendedInput">Appended checkbox</label>
-            <div class="input">
+        </div><!-- /control-group -->
+        <div class="control-group">
+            <label class="control-label"  for="appendedInput">Appended checkbox</label>
+            <div class="controls input">
                 <div class="input-append">
                     <input class="mini" id="appendedInput" name="appendedInput" size="16" type="text" />
-                    <label class="add-on active"><input type="checkbox" name="" id="" value="" checked="checked" /></label>
+                    <span class="add-on"><input type="checkbox" name="" id="" value="" checked="checked" /></span>
                 </div>
             </div>
-        </div><!-- /clearfix -->
-        <div class="clearfix">
-            <label for="fileInput">File input</label>
-            <div class="input">
+        </div><!-- /control-group -->
+        <div class="control-group">
+            <label class="control-label"  for="fileInput">File input</label>
+            <div class="controls input">
                 <input class="input-file" id="fileInput" name="fileInput" type="file" />
             </div>
-        </div><!-- /clearfix -->
+        </div><!-- /control-group -->
     </fieldset>
     <fieldset>
         <legend>Example form legend</legend>
-        <div class="clearfix">
-            <label id="optionsCheckboxes">List of options</label>
-            <div class="input">
-                <ul class="inputs-list">
-                    <li>
-                        <label>
-                            <input type="checkbox" name="optionsCheckboxes" value="option1" />
-                            <span>Option one is this and that—be sure to include why it’s great</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="checkbox" name="optionsCheckboxes" value="option2" />
-                            <span>Option two can also be checked and included in form results</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="checkbox" name="optionsCheckboxes" value="option2" />
-                            <span>Option three can—yes, you guessed it—also be checked and included in form results. Let's make it super long so that everyone can see how it wraps, too.</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label class="disabled">
-                            <input type="checkbox" name="optionsCheckboxes" value="option2" disabled="" />
-                            <span>Option four cannot be checked as it is disabled.</span>
-                        </label>
-                    </li>
-                </ul>
+        <div class="control-group">
+            <label class="control-label"  id="optionsCheckboxes">List of options</label>
+            <div class="controls input">
+
+                <label class="checkbox" >
+                    <input type="checkbox" name="optionsCheckboxes" value="option1" />
+                    <span>Option one is this and that—be sure to include why it’s great</span>
+                </label>
+
+                <label class="checkbox" >
+                    <input type="checkbox" name="optionsCheckboxes" value="option2" />
+                    <span>Option two can also be checked and included in form results</span>
+                </label>
+
+                <label class="checkbox" >
+                    <input type="checkbox" name="optionsCheckboxes" value="option2" />
+                    <span>Option three can—yes, you guessed it—also be checked and included in form results. Let's make it super long so that everyone can see how it wraps, too.</span>
+                </label>
+
+                <label class="checkbox"  class="disabled">
+                    <input type="checkbox" name="optionsCheckboxes" value="option2" disabled="" />
+                    <span>Option four cannot be checked as it is disabled.</span>
+                </label>
+
                 <span class="help-block">
                     <strong>Note:</strong> Labels surround all the options for much larger click areas and a more usable form.
                 </span>
             </div>
-        </div><!-- /clearfix -->
-        <div class="clearfix">
-            <label for="textarea">Textarea</label>
-            <div class="input">
+        </div><!-- /control-group -->
+        <div class="control-group">
+            <label class="control-label"  for="textarea">Textarea</label>
+            <div class="controls input">
                 <textarea class="xlarge" id="textarea2" name="textarea2" rows="3"></textarea>
                 <span class="help-block">
                     Block of help text to describe the field above if need be.
                 </span>
             </div>
-        </div><!-- /clearfix -->
-        <div class="clearfix">
-            <label id="optionsRadio">List of options</label>
-            <div class="input">
-                <ul class="inputs-list">
-                    <li>
-                        <label>
-                            <input type="radio" checked="" name="optionsRadios" value="option1" />
-                            <span>Option one is this and that—be sure to include why it’s great</span>
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="radio" name="optionsRadios" value="option2" />
-                            <span>Option two can is something else and selecting it will deselect options 1</span>
-                        </label>
-                    </li>
-                </ul>
+        </div><!-- /control-group -->
+        <div class="control-group">
+            <label class="control-label"  id="optionsRadio">List of options</label>
+            <div class="controls input">
+
+                <label class="radio" >
+                    <input type="radio" checked="" name="optionsRadios" value="option1" />
+                    <span>Option one is this and that—be sure to include why it’s great</span>
+                </label>
+
+                <label class="radio" >
+                    <input type="radio" name="optionsRadios" value="option2" />
+                    <span>Option two can is something else and selecting it will deselect options 1</span>
+                </label>
+
             </div>
-        </div><!-- /clearfix -->
-        <div class="actions">
+        </div><!-- /control-group -->
+        <div class="form-actions">
             <input type="submit" class="btn primary" value="Save changes" />&#160;<button type="reset" class="btn">Cancel</button>
         </div>
     </fieldset>

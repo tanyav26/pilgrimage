@@ -37,7 +37,7 @@
                 <section class="layout-block boxed"> 
                     <div class="lead-unit">
                         <h1><tpl:element type="text" data="page.title">Administrator</tpl:element></h1>
-                        <p class="lead">Changes you make here will affect the global system performance</p>
+<!--                        <p class="lead">Changes you make here will affect the global system performance</p>-->
                         <hr />
                     </div>
                     <div class="row-fluid">

@@ -55,7 +55,7 @@
                         </div>
                         <div class="span4">
                             <ul class="nav nav-pills pull-right">
-                                <li><a href="#">© Stonyhills 2012</a></li>
+                                <li><a href="#"><i class="icon-heart"></i>Stonyhills HQ 2012.</a></li>
                             </ul>
                         </div>
                     </div>
@@ -75,8 +75,8 @@
             <script type="text/javaScript">
                 $(function() {
                     // Also works with: var yourStartLatLng = '59.3426606750, 18.0736160278';
-                    var yourStartLatLng = new google.maps.LatLng(59.3426606750, 18.0736160278);
-                    $('.map-canvas').gmap({'streetViewControl': false, 'mapTypeControl':false, 'center': yourStartLatLng,'styles':[
+                    var yourStartLatLng = new google.maps.LatLng(51.5094, -0.127358);
+                    $('.map-canvas').gmap({'streetViewControl': false, 'mapTypeControl':false, 'zoom':15, 'center': yourStartLatLng,'styles':[
                             {
                                 featureType: "all",
                                 stylers: [
