@@ -65,6 +65,37 @@
   margin-right: 2px;
 }
 
+// NAV BLOCK LIST
+// --------
+
+.nav-block {
+  border-top: 1px solid #E8E9EB;
+  margin: 0 -@gridGutterWidth;
+}
+.nav-block > li > a,
+.nav-block .nav-header {
+  text-shadow: 0 1px 0 rgba(255,255,255,.5);
+}
+.nav-block > li{
+    background: #F5F5F5;
+    border-bottom: 1px solid #E8E9EB;
+}
+.nav-block > li > a {
+    line-height: 40px;
+    text-indent: 20px;
+}
+.nav-block .active > a,
+.nav-block .active > a:hover {
+  //color: @white;
+  //text-shadow: 0 -1px 0 rgba(0,0,0,.2);
+  background-color: @white;
+  margin-left: -2px;
+  padding-left: 2px
+}
+.nav-block [class^="icon-"] {
+  margin-right: 2px;
+}
+
 
 
 // TABS AND PILLS

@@ -23,7 +23,7 @@
                                 <li><a href="/~livingstonefultang/dashboard">Dashboard</a></li>
                                 <li><a href="/~livingstonefultang/member/profile/view">View your profile</a></li>
                                 <li class="divider"></li>
-                                <li><a href="/~livingstonefultang/member/account/settings">Profile settings</a></li>
+                                <li><a href="/~livingstonefultang/member/settings/account">Profile settings</a></li>
                                 <li><a href="#">Privacy</a></li>
                                 <li class="divider"></li>
                                 <li><a href="/~livingstonefultang/member/messages/inbox">Direct messages</a></li>

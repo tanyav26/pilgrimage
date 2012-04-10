@@ -8,7 +8,7 @@
 
 // Make all forms have space below them
 form {
-  margin: 0 0 @baseLineHeight;
+  margin: 0 0;
 }
 
 fieldset {
@@ -313,7 +313,7 @@ select:focus:required:invalid {
 .form-actions {
   padding: (@baseLineHeight - 1) 20px @baseLineHeight;
   margin-top: @baseLineHeight;
-  margin-bottom: @baseLineHeight;
+  //margin-bottom: @baseLineHeight;
   background-color: #f5f5f5;
   border-top: 1px solid #ddd;
 }
@@ -501,7 +501,7 @@ legend + .control-group {
 .form-horizontal {
   // Increase spacing between groups
   .control-group {
-    margin-bottom: @baseLineHeight;
+    margin-bottom: @baseLineHeight/2;
     .clearfix();
   }
   // Float the labels left
@@ -519,5 +519,5 @@ legend + .control-group {
   .form-actions {
     padding-left: 160px;
   }
-  fieldset legend{padding-left:160px}
+  fieldset legend{text-indent:160px}
 }

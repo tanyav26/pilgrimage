@@ -2,7 +2,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * index.php
+ * settings.php
  *
  * Requires PHP version 5.3
  *
@@ -24,46 +24,39 @@ namespace Application\Member\Views;
 use Platform;
 use Library;
 
-class Index extends \Platform\View {
-    
-        
-    final public function display(){
+class Settings extends \Platform\View {
+
+    /**
+     * Default display 
+     */
+    final public function display() {
         //The default method
     }
-    
-    
-    public function userLoginForm(){
-        
-        $this->output->setPageTitle("Login to account");
-        
-        //parse Layout Demo;
-        $sidebar    = $this->output->layout( "index_sidebar", "system");
-        $body       = $this->output->layout( "default_form_login" );
 
-        
-        //The default installation box;
-        //$this->output->setFormat("raw");
-        $this->output->setLayout("signin");
-        
-        //$this->output->addToPosition("body",   $body);
-        
-    }
-    
-    public function newUserAccountForm(){
-                //To set the pate title use
-        $this->output->setPageTitle("Create a new Account");
-        
-        //parse Layout Demo;
-        $sidebar    = $this->output->layout( "index_sidebar", "system");
-        $body       = $this->output->layout( "default_form_create" );
+    /**
+     * Settings form
+     * 
+     * @param type $form
+     * @param type $app 
+     */
+    final public function form($form = 'settings/account', $app = 'member') {
 
-        
-        //The default installation box;
-        //$this->output->setFormat("raw");
-        $this->output->setLayout("signup");
-        
+        $this->output->setPageTitle("Account Settings");
+
+
+        $sidebar = $this->output->layout("settings/settings", "member");
+        $body = $this->output->layout($form, $app);
+
+        $this->output->addToPosition("body", $body);
+        $this->output->addToPosition("side", $sidebar);
     }
 
+    /**
+     * Instance 
+     * 
+     * @staticvar self $instance
+     * @return \Application\Member\Views\self 
+     */
     public static function getInstance() {
         static $instance;
 
