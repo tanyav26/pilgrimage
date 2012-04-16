@@ -205,6 +205,21 @@
 .navbar .nav > li {
   display: block;
   float: left;
+  &.notification{
+    a{
+        background: #F00;
+        margin-top: 7px;
+        //margin-bottom: 4px;
+        padding: 5px 10px 4px;
+        //border: 1px solid #BD362F;
+        color: @white;
+        font-weight: bold;
+        &:hover{ background: #F00; }
+    }
+    &.open{
+        a{ background: #F00; }
+    }
+  }
 }
 
 // Links

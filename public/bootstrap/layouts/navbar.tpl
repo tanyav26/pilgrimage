@@ -9,6 +9,14 @@
                 </a>
                 <a class="brand logo" href="/~livingstonefultang/">Pilgrimage</a>
                 <div class="nav-collapse">
+                    <ul class="nav">                     
+                        <li class="notification dropdown">
+                            <a href="/~livingstonefultang/sign-in" class="dropdown-toggle" data-toggle="dropdown">4</a>
+                            <ul class="dropdown-menu">
+                                <li>No new</li>
+                            </ul>
+                        </li>
+                    </ul>
                     <form class="navbar-search pull-left" action="/~livingstonefultang/search" method="get">
                           <input type="text" class="search-query span4" name="query" placeholder="Search" />
                     </form>
