@@ -24,6 +24,19 @@ namespace Application\Member\Views;
 use Platform;
 use Library;
 
+/**
+ * What is the purpose of this class, in one sentence?
+ *
+ * How does this class achieve the desired purpose?
+ *
+ * @category   View
+ * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * @copyright  1997-2012 Stonyhills HQ
+ * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version    Release: 1.0.0
+ * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
+ * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
+ */
 class Settings extends \Platform\View {
 
     /**

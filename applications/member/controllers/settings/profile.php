@@ -26,15 +26,18 @@ use Library;
 use Application\Member\Views as View;
 use Application\Member\Controllers as Member;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of user
+ * What is the purpose of this class, in one sentence?
  *
- * @author livingstonefultang
+ * How does this class achieve the desired purpose?
+ *
+ * @category   Controller
+ * @author     Livingstone Fultang <livingstone.fultang@stonyhillshq.com>
+ * @copyright  1997-2012 Stonyhills HQ
+ * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
+ * @version    Release: 1.0.0
+ * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
+ * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
 final class Profile extends Member\Settings {
 
