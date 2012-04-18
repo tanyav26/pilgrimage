@@ -121,6 +121,16 @@ final class Dispatcher extends \Library\Object{
         $method = $route->getMethod();
 
         $class = "Application\\" . ucfirst($application) . "\Controllers\\" . ucfirst($controller);
+        
+        //Check for singularity;
+        if(!class_exists( $class )){
+            
+            $word = Inflector::pluralize( $controller );
+            if($word == $controller){ 
+                $word = Inflector::singularize( $word );
+            }
+            $class = "Application\\" . ucfirst($application) . "\Controllers\\" . ucfirst($word);  
+        }
                               
         $this->task     = $class::getInstance();
         $this->route    = $route;
@@ -149,7 +159,8 @@ final class Dispatcher extends \Library\Object{
                    unset( $argmts[0] );
                }
            }
-       } 
+       }
+       
        
        //If the request arguments have changed, modify in Router
        $route->setParameter("arguments", array_merge(array(),$argmts) ); //Using array merge to reset the indices
