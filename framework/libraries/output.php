@@ -393,7 +393,7 @@ class Output extends Object {
      * @param type $set
      * @param type $setas
      */
-    public function layout($layout, $app='', $ext='.phtml', $variables = array(), $set = false, $setas ='') {
+    public function layout($layout, $app='', $ext='.tpl', $variables = array(), $set = false, $setas ='') {
 
         $load = \Platform\Shared::loader();
 
