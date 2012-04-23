@@ -210,7 +210,7 @@ http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/},cur:function(a){if(thi
                     </div>   
                     <tpl:block data="page.block.footer">Footer</tpl:block>
                     <tpl:import layout="console" />
-                    <a href="<?php echo $this->link('/'); ?>" class="btn btn-primary pull-right">Front-Page</a>
+                    <a href="<?php echo $this->link('/system/admin/index'); ?>" class="btn btn-primary pull-right">Administrator</a>
                 </section>
             </div>
             <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/bootstrap.min.js" type="text/javascript"></script>

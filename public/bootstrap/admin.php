@@ -17,7 +17,7 @@
             <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" />
 
             <link rel="stylesheet" href="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/css/bootstrap.css" type="text/css" media="screen" />
-            
+
             <script src='/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
             <script src='/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
             <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
@@ -34,15 +34,19 @@
                     </div>
                 </header>
                 <tpl:block data="page.block.banner">Banner</tpl:block>
-                <section class="layout-block boxed"> 
-                    <div class="lead-unit">
-                        <h1><tpl:element type="text" data="page.title">Administrator</tpl:element></h1>
-<!--                        <p class="lead">Changes you make here will affect the global system performance</p>-->
-                        <hr />
-                    </div>
+                <section class="layout-block boxed">
                     <div class="row-fluid">
-                        <div class="span12">           
-                            <tpl:block data="page.block.body" />
+                        <div class="span12">
+                            <div class="lead-unit">
+                                <h1><tpl:element type="text" data="page.title">Administrator</tpl:element></h1>
+        <!--                        <p class="lead">Changes you make here will affect the global system performance</p>-->
+                                <hr />
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12">           
+                                    <tpl:block data="page.block.body" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>

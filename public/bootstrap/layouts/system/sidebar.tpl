@@ -1,45 +1,111 @@
-<nav id="side-nav">
-    <ul> 
+
+<div class="btn-toolbar no-top-margin">
+    <div class="btn-group">
+        <button class="btn">Add New ...</button>
+        <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+        </ul>
+    </div>
+    <div class="btn-group">
+        <button class="btn"><i class="icon icon-cog"></i>&nbsp;Edit Information</button>
+    </div>
+</div>
 
 
-        <?php $user = $this->get('authenticated');
-        if (!empty($user)) : ?>
-            <li >
-                <a id="dashboard-menu" href="#" rel="colapsible"><?php echo $user->get('fullname') ?></a>
 
-                <div>
-                    <ul class="clearfix child">
-                        <li class="current"><a href="<?php echo $this->link('/system/start/dashboard'); ?>" id="dashboard-menu"><?php echo _('Dashboard'); ?></a></li>
-                        <li><a id="notifice-menu" href="<?php echo $this->link('/member/notifications/lists'); ?>"><?php echo _('Notifications'); ?><span class="smaller bold" rel="tooltip" title="<?php echo _('New'); ?>">81</span></a></li>
-                        <li><a href="<?php echo $this->link('/system/admin/index'); ?>"><?php echo _('Administrator panel'); ?></a></li>
-                        <li><a href="<?php echo $this->link('/member/messages/index'); ?>"><?php echo _('Messages' ); ?></a></li>
-                        <li><a href="<?php echo $this->link('/sign-out'); ?>" rel="nofollow"><?php echo _('Sign Out'); ?></a></li>
-                    </ul>    
-                </div>
-            </li>
-            <li >
-                <a id="preferences-menu" href="#" rel="colapsible"><?php echo _('Preferences') ?></a>
+<!-- System Wide Menu -->
+<div style="margin-top:15px">
+    <ul id="profile-tab" class="nav nav-block">
+        <li class="active"><a href="#permissions" data-toggle="tab">Dashboard</a></li>
+        <li><a href="#authorities" data-toggle="tab">Activity</a></li>
+        <li><a href="#roles" data-toggle="tab">Photos</a></li>
 
-                <div>
-                    <ul class="child">
-                        <li><a href="<?php echo $this->link('/member/account/settings'); ?>"><?php echo _('Settings'); ?></a></li>
-                        <li><a href="<?php echo $this->link('/member/account/settings/#privacy'); ?>"><?php echo _('Privacy'); ?></a></li>
-                        <li><a href="<?php echo $this->link('/member/account/settings/#notifications'); ?>"><?php echo _('Notifiations'); ?></a></li>
-                        <li><a href="<?php echo $this->link('/member/account/settings/#appearance'); ?>"><?php echo _('Appearance'); ?></a></li>
-                    </ul>
-                </div>
-            </li>
-        <?php else: ?>
-            <li>
-                <a href="<?php echo $this->link('/sign-in'); ?>"><?php echo _('Log-into Account') ?></a>
-            </li>
-            <li class="last-child">
-                <a href="<?php echo $this->link('/sign-up'); ?>"><?php echo _('Create Account') ?></a>
-            </li>
-        <?php endif; ?>
-        <div class="clearFloat"></div>
+        <li><a data-toggle="tab" href="#add-authority-role">Explorer</a></li>
+        <li><a data-toggle="tab" href="#add-authority">Extended Profile</a></li>
     </ul>
-</nav>
+</div>
 
 
+<div class="widget top-pad">
+    <h4>Following</h4> 
+    <div class="widget-body top-pad">
 
+        <ul class="thumbnails">
+            <?php for ($i = 0; $i < 15; $i++): ?>
+            <li>
+                <a href="#">
+                    <img class="thumbnail" src="http://placehold.it/32x32" alt="" width="32" height="32" />
+                </a>
+            </li>
+            <?php endfor; ?>
+        </ul>
+    </div>
+
+</div>
+
+<hr />
+
+<div class="widget">
+    <h4>What to try next? </h4>
+    <div class="widget-body top-pad">
+        <form>
+            <fieldset>
+
+                <ol class="timeline-tips-list">
+                    <li>
+                        <div class="tip-title">Attend the <a href="#">pancake eating comp.</a></div>
+                        <div class="tip-popularity pull-right">20%</div>
+                        <div class="suggestion-info">Suggested by @drstonyhills</div>
+                        <div class="progress mini-bar progress-danger progress-bar">
+                            <div class="bar" style="width: 20%;"></div>
+                        </div>
+                        <div class="tip-actions"><a href="#" class="tip-response"><i class="icon-ok"></i></a> <a href="#" class="tip-response"><i class="icon-remove"></i></a></div>
+                    </li>
+                    <li>
+                        <div class="tip-title">Try a discounted <a href="#">pint of Tuborg</a>.</div>  
+                        <div class="tip-popularity pull-right">53%</div>
+                        <div class="suggestion-info">Suggested by @drstonyhills</div>
+                        <div class="progress mini-bar progress-success progress-bar">
+                            <div class="bar" style="width: 53%;"></div>
+                        </div>
+                        <div class="tip-actions"><a href="#" class="tip-response"><i class="icon-ok"></i></a> <a href="#" class="tip-response"><i class="icon-remove"></i></a></div>
+                    </li>
+                    <li>
+                        <div class="tip-title">Meet <a href="#">Rudolf Edinau</a>.</div>
+                        <div class="tip-popularity pull-right">20%</div>
+                        <div class="suggestion-info">Suggested by @drstonyhills</div>
+                        <div class="progress mini-bar progress-danger progress-bar">
+                            <div class="bar" style="width: 20%;"></div>
+                        </div>
+                        <div class="tip-actions"><a href="#" class="tip-response"><i class="icon-ok"></i></a> <a href="#" class="tip-response"><i class="icon-remove"></i></a></div>
+                    </li>
+                    <li>
+                        <div class="tip-title">Play a <a href="#">game of darts</a>.</div>
+                        <div class="tip-popularity pull-right">50%</div>
+                        <div class="suggestion-info">Suggested by @drstonyhills</div>
+                        <div class="progress mini-bar progress-bar">
+                            <div class="bar" style="width: 50%;"></div>
+                        </div>
+                        <div class="tip-actions"><a href="#" class="tip-response"><i class="icon-ok"></i></a> <a href="#" class="tip-response"><i class="icon-remove"></i></a></div>
+                    </li>
+                    <li>
+                        <div class="tip-title">Play a <a href="#">game of backgamon</a>.</div>
+                        <div class="tip-popularity pull-right">43%</div>
+                        <div class="suggestion-info">Suggested by @drstonyhills</div>
+                        <div class="progress mini-bar progress-danger progress-bar">
+                            <div class="bar" style="width: 43%;"></div>
+                        </div>
+                        <div class="tip-actions"><a href="#" class="tip-response"><i class="icon-ok"></i></a> <a href="#" class="tip-response"><i class="icon-remove"></i></a></div>
+                    </li>
+                </ol>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+<hr />

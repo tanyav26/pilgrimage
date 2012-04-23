@@ -72,13 +72,11 @@ class Index extends Platform\View {
         //$this->output->json();
         
         //parse Layout Demo;
-        //$sidebar    = $this->output->layout( "index_sidebar" );
-        $dashboard  = $this->output->layout( "dashboard" );
-        //$titlebar   = $this->output->layout( "titlebar"  );
-        //
-        //The default installation box;
-        //$this->output->addToPosition("left",    $sidebar);
-        //$this->output->addToPosition("topsection",   $titlebar);
+        //$sidebar      = $this->output->layout( "index_sidebar" );
+        $dashboard      = $this->output->layout( "dashboard" );
+        $sidebar        = $this->output->layout( "sidebar"  );
+  
+        $this->output->addToPosition("side",   $sidebar);
         $this->output->addToPosition("body",    $dashboard);
         
     }
