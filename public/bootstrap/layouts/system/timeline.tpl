@@ -1,22 +1,16 @@
 <form action="<?php echo $this->link('/'); ?>" method="POST">
     <fieldset class="timeline-item-publisher">
         <div class="row-fluid">
-            <div class="span12 map-canvas" style="height:250px"></div>
-        </div>
-        <div class="row-fluider">
-            <div class="input-prepend">
-                <span class="add-on"><i class=" icon-map-marker"></i></span>
-                <input type="text" name="activity-location" style="width: 95%" />  
-            </div>
-        </div>
-        <div class="row-fluid">
             <textarea class="span12 focused" rows="3" placeholder="What are u doing at this location?"></textarea>
         </div>
-        <div class="row-fluid">
-            <!-- The global progress bar -->
-            <div class="progress progress-success progress-striped active mini-bar fade">
-                <div class="bar" style="width:90%;"></div>
+        <div class="row-fluid hide">
+            <div class="row-fluid">
+                <div class="input-prepend">
+                    <span class="add-on"><i class=" icon-map-marker"></i></span>
+                    <input type="text" name="activity-location" style="width: 95%" />  
+                </div>
             </div>
+            <!-- The global progress bar -->
             <div class="btn-toolbar">
                 <span class="btn btn-success fileinput-button">
                     <i class="icon-plus icon-white"></i>
@@ -35,7 +29,6 @@
                 </button>
 
             </div>
-
             <table class="table table-condensed table-striped no-margin">
                 <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery">
                     <tr class="template-upload fade in">
@@ -64,12 +57,15 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="progress progress-info progress-striped active mini-bar hide">
+                <div class="bar" style="width:90%;"></div>
+            </div>
         </div>
         <hr class="no-margin" />
         <div class="timeline-item-publisher-actions">
             <div class="btn-toolbar">
                 <div class="btn-group">
-                    <button class="btn btn-success"><i class="icon-white icon-map-marker"></i> Check-in</button>
+                    <button class="btn"><i class="icon icon-map-marker"></i> Check-in</button>
                 </div>
                 <div class="btn-group">
                     <button type="submit" class="btn">Upload</button>
@@ -80,14 +76,13 @@
                     </ul>     
                 </div>
                 <div class="btn-group pull-right">
-                    <button type="submit" class="btn btn-primary" href="#">Publish</button>
-                    <button  class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon-white icon-lock"></span></button>
+                    <button type="submit" class="btn btn-success" href="#">Publish</button>
+                    <button  class="btn btn-success dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon-white icon-eye-open"></span></button>
                     <ul class="dropdown-menu">
-                        <li><a href="#"><i class="icon-pencil"></i> To everyone</a></li>
-                        <li><a href="#"><i class="icon-trash"></i>  To friends only</a></li>
-                        <li><a href="#"><i class="icon-ban-circle"></i> Ban</a></li>
+                        <li><a href="#"><i class="icon-eye-open"></i> To everyone</a></li>
+                        <li><a href="#"><i class="icon-eye-close"></i>  To followers only</a></li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="i"></i> Save as draft</a></li>
+                        <li><a href="#"><i class="icon icon-bookmark"></i> Save as draft</a></li>
                     </ul>     
                 </div>
             </div>
@@ -100,6 +95,45 @@
                 <div class="timeline-item-header">
                     <a class="publisher-profile" href="#">
                         <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1734672571/logo_normal.png" alt="Livingstone Fultang">
+
+                        <strong class="profile-name">Livingstone Fultang</strong>
+                        <span class="profile-nameid">@drstonyhills</span>                      
+                    </a>
+                    <a class="timeline-item-source" href="#"><small class="label label-info">twitter</small></a>
+                    <a href="/#!/Torettox84/status/161005839744897025" title="8:42 AM - 22 Jan 12" class="published-time"><span class="_timestamp" data-time="1327221758000" data-long-form="true">1h ago</span></a>
+
+                    <ul class="actions">
+                        <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
+                        <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
+
+                        <li class="action-delete"><a href="#"><span class="delete" title="Repost">Delete</span></a></li>
+
+                    </ul>
+                </div>
+                <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
+                <div class="timeline-item-media">
+                    <div class="timeline-item-gallery carousel slide" id="item-slider-id">
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src="http://placehold.it/550x300" />
+                                <div class="carousel-caption">This is an interesint picture caption, of what this is all about</div>
+                            </div>
+                        </div>
+                        <a class="left carousel-control" href="#item-slider-id" data-slide="prev">‹</a>
+                        <a class="right carousel-control" href="#item-slider-id" data-slide="next">›</a>
+                    </div>
+                </div>
+                <div class="timeline-item-footer">
+                    <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
+                </div>
+            </div>
+        </li>
+        <li class="timeline-item-li">
+            <div class="timeline-item-container">
+                <div class="timeline-item-header">
+                    <a class="publisher-profile" href="#">
+                        <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1734672571/logo_normal.png" alt="Livingstone Fultang">
+
                         <strong class="profile-name">Livingstone Fultang</strong>
                         <span class="profile-nameid">@drstonyhills</span>
                     </a>
@@ -109,7 +143,7 @@
                     <ul class="actions">
                         <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
                         <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-                        <li class="action-repost"><a href="#"><span class="repost" title="Repost">Repost</span></a></li>
+
                         <li class="action-delete"><a href="#"><span class="delete" title="Repost">Delete</span></a></li>
 
                     </ul>
@@ -134,41 +168,17 @@
                     <ul class="actions">
                         <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
                         <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-                        <li class="action-repost"><a href="#"><span class="repost" title="Repost">Repost</span></a></li>
+
                         <li class="action-delete"><a href="#"><span class="delete" title="Repost">Delete</span></a></li>
 
                     </ul>
                 </div>
                 <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
-                <div class="timeline-item-footer">
-                    <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
-                </div>
-            </div>
-        </li>
-        <li class="timeline-item-li">
-            <div class="timeline-item-container">
-                <div class="timeline-item-header">
-                    <a class="publisher-profile" href="#">
-                        <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1734672571/logo_normal.png" alt="Livingstone Fultang">
-                        <strong class="profile-name">Livingstone Fultang</strong>
-                        <span class="profile-nameid">@drstonyhills</span>
-                    </a>
-                    <small class="published-time">
-                        <a href="/#!/Torettox84/status/161005839744897025" title="8:42 AM - 22 Jan 12"><span class="_timestamp" data-time="1327221758000" data-long-form="true">1h ago</span></a>
-                    </small>
-                    <ul class="actions">
-                        <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
-                        <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-                        <li class="action-repost"><a href="#"><span class="repost" title="Repost">Repost</span></a></li>
-                        <li class="action-delete"><a href="#"><span class="delete" title="Repost">Delete</span></a></li>
-
-                    </ul>
-                </div>
-                <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
-                <div class="timeline-item-footer">
-                    <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
-                </div>
                 <div class="timeline-item-media"></div>
+                <div class="timeline-item-footer">
+                    <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
+                </div>
+
             </div>
             <div class="timeline-item-interaction">
                 <ul class="timeline-items">
@@ -186,14 +196,39 @@
                                 <ul class="actions">
                                     <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
                                     <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-                                    <li class="action-repost"><a href="#"><span class="repost" title="Repost">Repost</span></a></li>
+
                                     <li class="action-delete"><a href="#"><span class="delete" title="Repost">Delete</span></a></li>
 
                                 </ul>
                             </div>
                             <div class="timeline-item-body">This is just a comments</div>
                             <div class="timeline-item-footer">
-                                <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
+                                <div class="context"></div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="timeline-item-li">
+                        <div class="timeline-item-container">
+                            <div class="timeline-item-header">
+                                <a class="publisher-profile" href="#">
+                                    <img class="profile-avatar" src="https://si0.twimg.com/profile_images/1734672571/logo_normal.png" alt="Livingstone Fultang">
+                                    <strong class="profile-name">Livingstone Fultang</strong>
+                                    <span class="profile-nameid">@drstonyhills</span>
+                                </a>
+                                <small class="published-time">
+                                    <a href="/#!/Torettox84/status/161005839744897025" title="8:42 AM - 22 Jan 12"><span class="_timestamp" data-time="1327221758000" data-long-form="true">1h ago</span></a>
+                                </small>
+                                <ul class="actions">
+                                    <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
+                                    <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
+
+                                    <li class="action-delete"><a href="#"><span class="delete" title="Repost">Delete</span></a></li>
+
+                                </ul>
+                            </div>
+                            <div class="timeline-item-body">This is just a comments</div>
+                            <div class="timeline-item-footer">
+                                <div class="context"></div>
                             </div>
                         </div>
                     </li>
@@ -214,11 +249,24 @@
                     <ul class="actions">
                         <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
                         <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-                        <li class="action-repost"><a href="#"><span class="repost" title="Repost">Repost</span></a></li>
+
                         <li class="action-delete"><a href="#"><span class="delete" title="Repost">Delete</span></a></li>
                     </ul>
                 </div>
                 <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
+                <div class="timeline-item-media">
+                    <hr />
+                    <div class="row-fluid">  
+                        <div class="span4"><img src="http://placehold.it/160x160" /></div> 
+                        <div class="span8">
+                            <blockquote>
+                                <h4><a href="#">Redknapp admits Modric may leave</a></h4>
+                                <div>Tottenham manager Harry Redknapp says Luka Modric may leave White Hart Lane when the transfer window opens.</div>
+                                <small class="author">Some Author</small>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
                 <div class="timeline-item-footer">
                     <div class="context"><a class="profile-link" href="/#!/drstonyhills" data-user-id="15968381"><span>View 38 responses</span></a></div>
                 </div>
@@ -238,7 +286,7 @@
                     <ul class="actions">
                         <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
                         <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-                        <li class="action-repost"><a href="#"><span class="repost" title="Repost">Repost</span></a></li>
+
                         <li class="action-delete"><a href="#"><span class="delete" title="Repost">Delete</span></a></li>
 
                     </ul>
@@ -263,7 +311,7 @@
                     <ul class="actions">
                         <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
                         <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-                        <li class="action-repost"><a href="#"><span class="repost" title="Repost">Repost</span></a></li>
+
                         <li class="action-delete"><a href="#"><span class="delete" title="Repost">Delete</span></a></li>
 
                     </ul>
@@ -288,7 +336,7 @@
                     <ul class="actions">
                         <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
                         <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-                        <li class="action-repost"><a href="#"><span class="repost" title="Repost">Repost</span></a></li>
+
                         <li class="action-delete"><a href="#"><span class="delete" title="Repost">Delete</span></a></li>
                     </ul>
                 </div>
@@ -312,7 +360,7 @@
                     <ul class="actions">
                         <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
                         <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
-                        <li class="action-repost"><a href="#"><span class="repost" title="Repost">Repost</span></a></li>
+
                         <li class="action-delete"><a href="#"><span class="delete" title="Repost">Delete</span></a></li>
                     </ul>
                 </div>

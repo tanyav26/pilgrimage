@@ -24,27 +24,59 @@
         </head>
 
         <body>
+            <tpl:menu id="sitemenu" />
             <tpl:import layout="navbar" />
-            <tpl:block data="page.block.alerts" />
-            <div class="container">   
-                <header class="subhead" id="overview">
-                    <div class="subnav">
-                        <tpl:menu id="sitemenu" />
-                        <tpl:menu id="adminmenu" />
-                    </div>
-                </header>
+            
+            <div class="container">  
+                <tpl:block data="page.block.alerts" /> 
                 <tpl:block data="page.block.banner">Banner</tpl:block>
-                <section class="layout-block boxed">
+                <section class="layout-block boxed has-bg">
                     <div class="row-fluid">
                         <div class="span12">
-                            <div class="lead-unit">
-                                <h1><tpl:element type="text" data="page.title">Administrator</tpl:element></h1>
-        <!--                        <p class="lead">Changes you make here will affect the global system performance</p>-->
-                                <hr />
-                            </div>
                             <div class="row-fluid">
-                                <div class="span12">           
+                                <div class="span8">  
+                                    <div class="page-header">
+                                        <h1>Administrator Panel<small>&nbsp;23/04/2012</small></h1>
+                                    </div>
                                     <tpl:block data="page.block.body" />
+                                </div>
+                                <div class="span4">
+                                    <div class="left-pad"> 
+                                        <div class="btn-toolbar no-top-margin">
+                                            <div class="btn-group">
+                                                <button class="btn">View As...</button>
+                                                <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="#">Action</a></li>
+                                                    <li><a href="#">Another action</a></li>
+                                                    <li><a href="#">Something else here</a></li>
+                                                    <li class="divider"></li>
+                                                    <li><a href="#">Separated link</a></li>
+                                                </ul>
+                                            </div>
+                                            <div class="btn-group">
+                                                <button class="btn">Edit Info</button>
+                                            </div>
+                                            <div class="btn-group">
+                                                <button class="btn"><i class="icon icon-lock"></i>Privacy</button>
+                                            </div>
+                                        </div>
+                                        <div style="margin-top:15px">
+                                            <tpl:menu id="adminmenu" type="nav-block" />
+                                        </div>
+                                        <tpl:block data="page.block.side">Sidebar</tpl:block>
+
+                                        <div class="widget top-pad">
+                                            <div class="well">
+                                                <a href="#" class="clearfix">
+                                                    <span class="count-head">Website Visits</span>
+                                                    <h1 class="count-body">189</h1>
+                                                    <span class="count-footer">% of Total: 5% (3702 in total)</span>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +104,7 @@
                     </div>   
                     <tpl:block data="page.block.footer">Footer</tpl:block>
                     <tpl:import layout="console" />
-                    <a href="<?php echo $this->link('/'); ?>" class="btn btn-primary pull-right">Front-Page</a>
+                    <a href="<?php echo $this->link('/'); ?>" class="btn pull-right">Front-Page</a>
                 </section>
             </div>
             <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/bootstrap.min.js" type="text/javascript"></script>

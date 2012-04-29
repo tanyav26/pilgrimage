@@ -21,8 +21,9 @@
         </head>
         <body>
             <tpl:import layout="navbar" />
-            <tpl:block data="page.block.alerts" />
-            <div class="container">             
+            
+            <div class="container">
+                <tpl:block data="page.block.alerts" />             
                 <tpl:block data="page.block.banner">Banner</tpl:block>
                 <section class="layout-block boxed has-bg">  
                     <div class="row-fluid">
@@ -60,7 +61,7 @@
                         </div>
                     </div>
                     <tpl:import layout="console" />
-                    <a href="<?php echo $this->link('/system/admin/index'); ?>" class="btn btn-primary pull-right">Administrator Panel</a>
+                    <a href="<?php echo $this->link('/system/admin/index'); ?>" class="btn pull-right">Administrator Panel</a>
                     <tpl:block data="page.block.footer">Footer</tpl:block>
                 </section>
             </div>

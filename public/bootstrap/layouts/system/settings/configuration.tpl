@@ -18,14 +18,14 @@
         <div class="control-group">
             <label class="control-label" for="site-offline-message"> <?php echo _('Offline message'); ?></label>
             <div class="controls">
-                <textarea name="site-offline-message" class="wysiwyg input-xxlarge span7" rows="6" placeholder="<?php echo _('This message will be displayed when the site is offline'); ?>" ></textarea>
+                <textarea name="site-offline-message" class="wysiwyg input-xlarge" rows="6" placeholder="<?php echo _('This message will be displayed when the site is offline'); ?>" ></textarea>
                 <span class="help-block"><?php echo _('Brief maintenance message to be displayed to all other users'); ?></span>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="site-name"> <?php echo _('Community Name'); ?></label>
             <div class="controls">
-                <input type="text" name="site-name"  class="input-xxlarge" placeholder="e.g MySocialNetwork" />
+                <input type="text" name="site-name"  class="input-xlarge" placeholder="e.g MySocialNetwork" />
                 <span class="help-block">A unique catchy name to identify your community. This will show as the default page titles</span>
             </div>
         </div>         
@@ -43,7 +43,7 @@
         <div class="control-group">
             <label class="control-label" for="site-address"> <?php echo _('Website URL'); ?></label>
             <div class="controls">
-                <input type="text" name="site-address" class="input-xxlarge" placeholder="http://www.mydomain.com/" />
+                <input type="text" name="site-address" class="input-xlarge" placeholder="http://www.mydomain.com/" />
                 <span class="help-block">Unless you are using a subdirectory you really don't need to change this.</span>
             </div>
         </div>
@@ -51,14 +51,14 @@
         <div class="control-group">
             <label class="control-label" for="site-meta-description"> <?php echo _('Website description'); ?></label>
             <div class="controls">
-                <textarea name="site-meta-description" class="wysiwyg input-xxlarge" rows="8" ></textarea>
+                <textarea name="site-meta-description" class="wysiwyg input-xlarge" rows="8" ></textarea>
                 <span class="help-block">Describe your community, its interest and purpose. </span>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="site-meta-keywords"> <?php echo _('Website Keywords'); ?></label>
             <div class="controls">
-                <textarea name="site-meta-keywords" class="wysiwyg input-xxlarge" ></textarea>
+                <textarea name="site-meta-keywords" class="wysiwyg input-xlarge" ></textarea>
                 <span class="help-block">Lists as many keywords that may promote your listing in some search engines</span>
             </div>
         </div>
@@ -66,7 +66,7 @@
         <div class="control-group">
             <label class="control-label" for="site-address"> <?php echo _('Website URL'); ?></label>
             <div class="controls">
-                <input type="text" name="site-address" class="input-xxlarge" placeholder="http://www.mydomain.com/" />
+                <input type="text" name="site-address" class="input-xlarge" placeholder="http://www.mydomain.com/" />
             </div>
         </div>
         <div class="control-group">
@@ -92,13 +92,13 @@
         <div class="control-group">
             <label class="control-label" for="mail-address"> <?php echo _('System E-Mail'); ?></label>
             <div class="controls">
-                <input type="text" name="mail-address" class="input-xxlarge" placeholder="e.g info@mydomain.com" />
+                <input type="text" name="mail-address" class="input-xlarge" placeholder="e.g info@mydomain.com" />
             </div>
         </div>
         <div class="control-group">
             <label class="control-label" for="mail-server"> <?php echo _('System Mail Server'); ?></label>
             <div class="controls">
-                <input type="text" name="mail-server" class="input-xxlarge" placeholder="e.g http://webmail.mydomain.com" />
+                <input type="text" name="mail-server" class="input-xlarge" placeholder="e.g http://webmail.mydomain.com" />
             </div>
         </div>
         <div class="control-group">
@@ -119,7 +119,7 @@
         <div class="control-group">
             <label class="control-label" for="locale-timezone"> <?php echo _('Locale timezone'); ?></label>
             <div class="controls">
-                <select name="locale-timezone" class="input-xxlarge">
+                <select name="locale-timezone" class="input-xlarge">
                     <option value="-12.0">(GMT -12:00) Eniwetok, Kwajalein</option>
                     <option value="-11.0">(GMT -11:00) Midway Island, Samoa</option>
                     <option value="-10.0">(GMT -10:00) Hawaii</option>

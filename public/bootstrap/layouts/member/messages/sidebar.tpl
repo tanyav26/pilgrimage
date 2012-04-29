@@ -1,7 +1,11 @@
 
 <div class="btn-toolbar no-top-margin">
+
     <div class="btn-group">
-        <button class="btn">Add New ...</button>
+        <a class="btn" href="<?php echo $this->link('/member/settings/account') ?>"><i class="icon icon-edit"></i>&nbsp;Compose new...</a>
+    </div>    
+    <div class="btn-group">
+        <button class="btn">Live Chat ...</button>
         <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
         <ul class="dropdown-menu">
             <li><a href="#">Action</a></li>
@@ -11,9 +15,6 @@
             <li><a href="#">Separated link</a></li>
         </ul>
     </div>
-    <div class="btn-group">
-        <button class="btn"><i class="icon icon-cog"></i>&nbsp;Edit Information</button>
-    </div>
 </div>
 
 
@@ -21,18 +22,18 @@
 <!-- System Wide Menu -->
 <div style="margin-top:15px">
     <ul id="profile-tab" class="nav nav-block">
-        <li class="active"><a href="#permissions" data-toggle="tab">Dashboard</a></li>
-        <li><a href="#authorities" data-toggle="tab">Activity</a></li>
-        <li><a href="#roles" data-toggle="tab">Photos</a></li>
+        <li class="active"><a href="#permissions" data-toggle="tab">Inbox</a></li>
+        <li><a href="#authorities" data-toggle="tab">Sent Messages</a></li>
+        <li><a href="#roles" data-toggle="tab">Live Chat</a></li>
 
-        <li><a data-toggle="tab" href="#add-authority-role">Explorer</a></li>
-        <li><a data-toggle="tab" href="#add-authority">Extended Profile</a></li>
+        <li><a data-toggle="tab" href="#add-authority-role">Deleted Messages</a></li>
+        <li><a data-toggle="tab" href="#add-authority">Drafts</a></li>
     </ul>
 </div>
 
 
 <div class="widget top-pad">
-    <h4>Following</h4> 
+    <h4>Live chat with followers</h4> 
     <div class="widget-body top-pad">
 
         <ul class="thumbnails">
@@ -46,66 +47,6 @@
         </ul>
     </div>
 
-</div>
-
-<hr />
-
-<div class="widget">
-    <h4>What to try next? </h4>
-    <div class="widget-body top-pad">
-        <form>
-            <fieldset>
-
-                <ol class="timeline-tips-list">
-                    <li>
-                        <div class="tip-title">Attend the <a href="#">pancake eating comp.</a></div>
-                        <div class="tip-popularity pull-right">20%</div>
-                        <div class="suggestion-info">Suggested by @drstonyhills</div>
-                        <div class="progress mini-bar progress-danger progress-bar">
-                            <div class="bar" style="width: 20%;"></div>
-                        </div>
-                        <div class="tip-actions"><a href="#" class="tip-response"><i class="icon-ok"></i></a> <a href="#" class="tip-response"><i class="icon-remove"></i></a></div>
-                    </li>
-                    <li>
-                        <div class="tip-title">Try a discounted <a href="#">pint of Tuborg</a>.</div>  
-                        <div class="tip-popularity pull-right">53%</div>
-                        <div class="suggestion-info">Suggested by @drstonyhills</div>
-                        <div class="progress mini-bar progress-success progress-bar">
-                            <div class="bar" style="width: 53%;"></div>
-                        </div>
-                        <div class="tip-actions"><a href="#" class="tip-response"><i class="icon-ok"></i></a> <a href="#" class="tip-response"><i class="icon-remove"></i></a></div>
-                    </li>
-                    <li>
-                        <div class="tip-title">Meet <a href="#">Rudolf Edinau</a>.</div>
-                        <div class="tip-popularity pull-right">20%</div>
-                        <div class="suggestion-info">Suggested by @drstonyhills</div>
-                        <div class="progress mini-bar progress-danger progress-bar">
-                            <div class="bar" style="width: 20%;"></div>
-                        </div>
-                        <div class="tip-actions"><a href="#" class="tip-response"><i class="icon-ok"></i></a> <a href="#" class="tip-response"><i class="icon-remove"></i></a></div>
-                    </li>
-                    <li>
-                        <div class="tip-title">Play a <a href="#">game of darts</a>.</div>
-                        <div class="tip-popularity pull-right">50%</div>
-                        <div class="suggestion-info">Suggested by @drstonyhills</div>
-                        <div class="progress mini-bar progress-bar">
-                            <div class="bar" style="width: 50%;"></div>
-                        </div>
-                        <div class="tip-actions"><a href="#" class="tip-response"><i class="icon-ok"></i></a> <a href="#" class="tip-response"><i class="icon-remove"></i></a></div>
-                    </li>
-                    <li>
-                        <div class="tip-title">Play a <a href="#">game of backgamon</a>.</div>
-                        <div class="tip-popularity pull-right">43%</div>
-                        <div class="suggestion-info">Suggested by @drstonyhills</div>
-                        <div class="progress mini-bar progress-danger progress-bar">
-                            <div class="bar" style="width: 43%;"></div>
-                        </div>
-                        <div class="tip-actions"><a href="#" class="tip-response"><i class="icon-ok"></i></a> <a href="#" class="tip-response"><i class="icon-remove"></i></a></div>
-                    </li>
-                </ol>
-            </fieldset>
-        </form>
-    </div>
 </div>
 
 <hr />

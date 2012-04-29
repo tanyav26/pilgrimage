@@ -41,7 +41,6 @@ use Application\System\Views as View;
 class Activity extends Platform\Controller {
 
 
-
     /**
      * The default page, consider this the homepage
      * of the application, You can change this to anything else in the config/routes.php 
@@ -55,6 +54,47 @@ class Activity extends Platform\Controller {
         
         $this->output->addToPosition("side", $tips);
         $this->output->addToPosition("body", $activity);
+    }
+    
+    /**
+     * Creates a new activity feed $post
+     * 
+     * @return array $post 
+     */
+    public function create(){}
+    
+    /**
+     * Alias for listing all activity posts;
+     * @TODO If params, read individual items;
+     * 
+     * @return type 
+     */
+    public function read(){
+        
+        return $this->index();
+    } 
+    
+    /**
+     * Updates an existing activity posts;
+     * 
+     * @return void; 
+     */
+    public function update(){
+        
+        
+    }
+    
+    
+    /**
+     * Deletes an activity posts;
+     *  
+     * @return void;
+     */
+    public function delete(){
+        
+        $this->alert( _("Could not delete that post"), _("We were unable to log you in"), "error");
+        
+        return $this->read();
     }
 
     /**

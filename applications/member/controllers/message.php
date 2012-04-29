@@ -53,14 +53,12 @@ final class Message extends \Platform\Controller {
 
         $this->output->setPageTitle(_("Inbox"));
 
-
-        $sidebar = $this->output->layout("index_sidebar", "system");
-        $body = $this->output->layout('messages');
-        $right      = _("Inbox filter");
+        $sidebar    = $this->output->layout("messages/sidebar");
+        $body       = $this->output->layout('messages');
+       
 
         $this->output->addToPosition("body", $body);
-        $this->output->addToPosition("left", $sidebar);
-        //$this->output->addToPosition("right", $right );
+        $this->output->addToPosition("side", $sidebar);
         
     }
 

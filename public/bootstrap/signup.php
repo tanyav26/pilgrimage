@@ -23,8 +23,9 @@
         </head>
         <body>
             <tpl:import layout="navbar" />
-            <tpl:block data="page.block.alerts" />
-            <div class="container">             
+            
+            <div class="container">  
+                <tpl:block data="page.block.alerts" />           
                 <tpl:block data="page.block.banner">Banner</tpl:block>
                 <section class="layout-block boxed has-bg">  
                     <div class="row-fluid">
@@ -93,10 +94,10 @@
                                                 </fieldset>
                                                 <div class="btn-toolbar">
                                                     <div class="btn-group">
-                                                        <button type="submit" class="btn btn-primary">Create an Account</button> 
+                                                        <button type="submit" class="btn">Create an Account</button> 
                                                     </div>
                                                     <div class="btn-group">
-                                                        <button type="reset" class="btn btn-warning">Cancel</button> 
+                                                        <button type="reset" class="btn">Cancel</button> 
                                                     </div>
                                                 </div>
                                             </form>

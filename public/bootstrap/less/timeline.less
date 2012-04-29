@@ -35,7 +35,31 @@ ol.timeline-items{
         min-height: 51px;
         padding: 9px 12px 9px;
         border-bottom: 1px solid #E8E8E8;
-
+        .timeline-item-media{
+            margin-top: 5px;
+            blockquote{ 
+                min-height: 160px; 
+                h4{
+                    margin-bottom: 10px;
+                }
+                .author{ margin-top: 10px;}
+            }
+            .carousel{
+                .carousel-caption{
+                    color: @white;
+                    padding: 15px;
+                }
+                .carousel-control{
+                    display: none;
+                }
+                &:hover{
+                    .carousel-control{
+                        display: block;
+                    }
+                }
+            }
+            
+        }
         .timeline-item-container{
             margin-left: 48px;
                 
@@ -61,13 +85,28 @@ ol.timeline-items{
                         position: absolute;
                         left: 0;
                     }
-                    
+                    &:hover{text-decoration: none}
+                    .profile-nameid{
+                        color: lighten(@gray, 30%);
+                    }
                 }
+                .published-time{
+                    color: lighten(@gray, 30%);
+                    float: right;
+                }
+                    
+            }
+            .timeline-item-body{}
+            .timeline-item-footer{
+                margin-top: 5px;
             }
             &:hover{
                 .timeline-item-header{
                     ul.actions{
                         display: block;
+                    }
+                    .published-time{
+                        display: none;
                     }
                 }
             }
@@ -78,9 +117,26 @@ ol.timeline-items{
         }
         //Comments
         .timeline-item-interaction{
-            margin-left: 48px;
+            margin-left: -12px;
+            margin-right: -12px;
+            margin-top:10px;
+            border-top: 1px solid #ddd;
+            background: #f5f5f5;
+            position: relative;
+            .profile-avatar{left: 3px !important;}
             ul{ 
                 list-style:none; margin:0
+            }
+            &:before {
+                content: '';
+                display: inline-block;
+                border-left:   7px solid transparent;
+                border-right:  7px solid transparent;
+                border-bottom: 7px solid #ccc;
+                border-bottom-color: #ddd;
+                position: absolute;
+                top: -7px;
+                left: 17px;
             }
         }
         

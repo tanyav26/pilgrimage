@@ -12,7 +12,7 @@
         </ul>
     </div>
     <div class="btn-group">
-        <button class="btn"><i class="icon icon-cog"></i>&nbsp;Edit Information</button>
+        <a class="btn" href="<?php echo $this->link('/member/settings/account') ?>"><i class="icon icon-cog"></i>&nbsp;Edit Information</a>
     </div>
 </div>
 
@@ -25,7 +25,7 @@
         <li><a href="#authorities" data-toggle="tab">Activity</a></li>
         <li><a href="#roles" data-toggle="tab">Photos</a></li>
 
-        <li><a data-toggle="tab" href="#add-authority-role">Explorer</a></li>
+        <li><a data-toggle="tab" href="#add-authority-role">Notifications</a></li>
         <li><a data-toggle="tab" href="#add-authority">Extended Profile</a></li>
     </ul>
 </div>

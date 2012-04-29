@@ -63,6 +63,8 @@ class Menu extends Parse\Template {
         //We must have the menu id
         if (!isset($tag['ID']))
             return null;
+        
+        $menuType = (isset($tag['TYPE'])) ? trim( $tag['TYPE'] ) : "nav-pills" ;
 
         $database = Library\Database::getInstance();
         $uniqueId = $tag['ID'];
@@ -74,10 +76,11 @@ class Menu extends Parse\Template {
 
         //print_R($menuItems);
         unset($tag['NAMESPACE']);
+        unset($tag['TYPE']);
         
         $tag['ELEMENT'] = 'ul';
-        $tag['CLASS'] = 'nav nav-pills';
-        $tag['CHILDREN'] = static::element( (array)$menuItems );
+        $tag['CLASS'] = "nav $menuType";
+        $tag['CHILDREN'] = static::element( (array)$menuItems , $menuType );
         
         //print_R($tag);
      
@@ -91,7 +94,7 @@ class Menu extends Parse\Template {
      * @param type $menuItems
      * @return type 
      */
-    private static function element( $menuItems ) {
+    private static function element( $menuItems , $menuType = "nav-pill" ) {
         
         $li = array();
         
@@ -125,7 +128,7 @@ class Menu extends Parse\Template {
                 $link['CHILDREN'][0] = array_merge( $link['CHILDREN'][0]  , $dropdown );
                 $title = $link['CHILDREN'][0]['CDATA'];
                 unset($link['CHILDREN'][0]['CDATA']);
-                $link['CHILDREN'][0]['CDATA'] = $title.'<b class="caret"></b>'; 
+                $link['CHILDREN'][0]['CDATA'] = $title.(( $menuType <> "nav-block") ? '<b class="caret"></b>': ""); 
                 //Move children to the very end of the array
                 
                 $link['CHILDREN'][]  = array(

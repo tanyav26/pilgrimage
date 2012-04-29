@@ -25,8 +25,9 @@
 
         <body>
             <tpl:import layout="navbar" />
-            <tpl:block data="page.block.alerts" />
-            <div class="container">   
+            
+            <div class="container"> 
+                <tpl:block data="page.block.alerts" />  
                 <tpl:block data="page.block.banner">Banner</tpl:block>
                 <section class="layout-block boxed has-bg">
                     <div class="row-fluid">
@@ -62,7 +63,7 @@
                         </div>
                     </div>
                     <div class="profile-cover">
-                        <a href="#" class="clearfix cover"><img  src="http://placehold.it/940x300" width="940" height="300" /></a>
+                        <a href="#" class="clearfix cover"><img  src="http://www.xt3radio.nl/wp-content/uploads/2011/09/Varianz015_Cover2.jpg" width="940" height="300" /></a>
                         <div class="profile-avatar">
                             <a href="#" class="clearfix">
                                 <img  src="http://placehold.it/260x250" width="260" height="250" />
@@ -72,7 +73,28 @@
                     <div class="row-fluid">
                         <div class="span12"> 
                             <div class="row-fluid">
-                                <div class="span8">&nbsp;</div>
+                                <div class="span8">
+                                    <div class="row-fluid top-pad">
+                                        <div class="span4">
+                                            <div class="well">
+                                                <h1 class="count-body">189</h1>
+                                                <small>&nbsp;Friends</small>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="span4">
+                                            <div class="well">
+                                                Detail
+                                            </div>
+                                        </div>
+                                        <div class="span4">
+                                            <div class="well">
+                                                Detail
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
                                 <div class="span4">
                                     <div class="left-pad top-pad">
                                         <ul class="page-info">
@@ -89,9 +111,10 @@
                                 </div>
                             </div>
                             <div class="row-fluid">
-                                <div class="span8">
+                                <div class="span8 tab-content">
                                     <hr />
-                                    <div class="entry">
+                                    <div class="entry tab-pane" id="timelinepane">Timeline</div>
+                                    <div class="entry tab-pane active" id="aboutmepane">
                                         <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, <a href="#">links look like this</a>. tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
                                         <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, <strong>bolded word</strong> <a href="#">tempor sit amet</a>, ante. Donec eu <em>this area in italics</em> libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
                                         <p><span id="more-5"></span></p>
@@ -138,18 +161,38 @@ http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/);this.elem.style.displa
 http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/],rb=s.defaultView&amp;&amp;s.defaultView.getComputedStyle,Pa=c.support.cssFloat?
 http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/},cur:function(a){if(this.elem[this.prop]!=null&amp;&amp;(!this.elem.style||this.elem.style[this.prop]==null))return%20this.elem[this.prop];return(a=parseFloat(c.css(this.elem,this.prop,a)))&amp;&amp;a&gt;-10000?a:parseFloat(c.curCSS(this.elem,this.prop))||0},custom:function(a,b,d){function%20f(j){return%20e.step(j)}this.startTime=J();this.start=a;this.end=b;this.unit=d||this.unit||</code></pre>
                                     </div> 
+                                    <div class="entry tab-pane" id="achievementspane">Achievements</div>
+                                    <div class="entry tab-pane" id="blogpane">Blog</div>
+                                    <div class="entry tab-pane" id="multimediapane">Photos</div>
+                                    <div class="entry tab-pane" id="extendedpane">Extended profile</div>
                                 </div>
                                 <div class="span4">
                                     <div class="left-pad top-pad">
                                         <ul id="profile-tab" class="nav nav-block">
-                                            <li class="active"><a href="#permissions" data-toggle="tab">Timeline</a></li>
-                                            <li><a href="#authorities" data-toggle="tab">Achievements</a></li>
-                                            <li><a href="#roles" data-toggle="tab">Blog</a></li>
-
-                                            <li><a data-toggle="tab" href="#add-authority-role">Multimedia</a></li>
-                                            <li><a data-toggle="tab" href="#add-authority">Extended Profile</a></li>
+                                            <li><a href="#timelinepane" data-toggle="tab">Timeline</a></li>
+                                            <li class="active"><a href="#aboutmepane" data-toggle="tab">About Me</a></li>
+                                            <li><a href="#achievementspane" data-toggle="tab">Achievements</a></li>
+                                            <li><a href="#blogpane" data-toggle="tab">Blog</a></li>
+                                            <li><a data-toggle="tab" href="#multimediapane">Photos</a></li>
+                                            <li><a data-toggle="tab" href="#extendedpane">Extended Profile</a></li>
                                         </ul>
                                         <div class="widget top-pad">
+                                            <h4>Badges and Rewards</h4> 
+                                            <div class="widget-body top-pad">
+
+                                                <ul class="thumbnails">
+                                                    <?php for ($i = 0; $i < 15; $i++): ?>
+                                                        <li>
+                                                            <a href="#">
+                                                                <img class="thumbnail" src="http://placehold.it/32x32" alt="" width="32" height="32" />
+                                                            </a>
+                                                        </li>
+                                                    <?php endfor; ?>
+                                                </ul>
+                                            </div>
+                                            <hr />
+                                        </div>
+                                        <div class="widget">
                                             <h4>Followers</h4> 
                                             <div class="widget-body top-pad">
 
@@ -165,7 +208,6 @@ http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/},cur:function(a){if(thi
                                             </div>
                                             <hr />
                                         </div>
-
                                         <div class="widget">
                                             <h4>Following</h4> 
                                             <div class="widget-body top-pad">
@@ -210,7 +252,7 @@ http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/},cur:function(a){if(thi
                     </div>   
                     <tpl:block data="page.block.footer">Footer</tpl:block>
                     <tpl:import layout="console" />
-                    <a href="<?php echo $this->link('/system/admin/index'); ?>" class="btn btn-primary pull-right">Administrator</a>
+                    <a href="<?php echo $this->link('/system/admin/index'); ?>" class="btn pull-right">Administrator Panel</a>
                 </section>
             </div>
             <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/bootstrap.min.js" type="text/javascript"></script>
