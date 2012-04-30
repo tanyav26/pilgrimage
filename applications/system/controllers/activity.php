@@ -61,7 +61,31 @@ class Activity extends Platform\Controller {
      * 
      * @return array $post 
      */
-    public function create(){}
+    public function create(){
+        
+        if ($this->input->methodIs("post")) {
+            
+            //@1 Check where the form is comming from
+            //@2 Validate the user permission
+            if(! $this->user->can("system/activity/create") ){
+               
+            }
+            //@3 Privacy settings, If posting to wall can the user post to the wall
+           
+            //@4 Add the post;
+            if(( $post = $this->load->model("activity")->add() ) == FALSE){
+                
+                $this->alert( _("Could not add your post"), null, "error" );
+            }else{
+                
+                $this->alert( _("You activity post has been saved and publised"), null, "success"); 
+            }
+        }
+       
+        $this->redirect("/system/activity/read");
+        
+        return true;
+    }
     
     /**
      * Alias for listing all activity posts;
@@ -92,7 +116,7 @@ class Activity extends Platform\Controller {
      */
     public function delete(){
         
-        $this->alert( _("Could not delete that post"), _("We were unable to log you in"), "error");
+        $this->alert( _("Could not delete your post."), _("There seems to be a problem with authenticating this session"), "error");
         
         return $this->read();
     }

@@ -98,8 +98,8 @@ class User extends Library\Object {
                         $this->$property = $value;
                     }
                 }
-                //$this->userid = $authenticate->get("userid");
-                //$this->email  = $authenticate->get("email"); 
+                $this->userid = $authenticate->get("userid");
+                $this->email  = $authenticate->get("email"); 
             }
             //get authority;
             $this->authority = Library\Session::getInstance()->getAuthority();    

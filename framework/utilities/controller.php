@@ -88,6 +88,7 @@ abstract class Controller extends \Library\Object {
             'lang' => 'Library\i18n',
             'router' => 'Library\Router',
             'load' => 'Platform\Loader',
+            'user'  => 'Platform\User',
             'validate' => 'Library\Validate',
             'output' => 'Library\Output'
         );

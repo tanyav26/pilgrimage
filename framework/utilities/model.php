@@ -61,6 +61,7 @@ abstract class Model extends \Library\Object {
             'config' => 'Library\Config',
             'input' => 'Library\Input',
             'load' => 'Platform\Loader',
+            'user'  => 'Platform\User',
             'validate' => 'Library\Validate',
             'output' => 'Library\Output',
             'database'=> 'Library\Database'

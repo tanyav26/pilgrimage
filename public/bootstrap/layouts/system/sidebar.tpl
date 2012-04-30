@@ -45,7 +45,7 @@
             <?php endfor; ?>
         </ul>
     </div>
-
+    <small><a href="#">View all</a></small>
 </div>
 
 <hr />
