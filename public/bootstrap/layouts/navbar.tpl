@@ -24,7 +24,7 @@
 
                     <ul class="nav pull-left">                     
                         <li><a href="/~livingstonefultang/sign-in">Featured</a></li>
-                        <li><a href="/~livingstonefultang/">Explore</a></li>
+                        <li><a href="/~livingstonefultang/system/start/explore">Explore</a></li>
                         <li><a href="/~livingstonefultang/system/activity/stream">Activity</a></li>
                         <li class="divider-vertical"></li>
                         <li class="dropdown">
