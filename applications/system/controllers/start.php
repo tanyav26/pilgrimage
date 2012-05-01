@@ -64,7 +64,7 @@ class Start extends Platform\Controller {
         $this->output->setLayout("explorer");
         $this->output->setPageTitle("Explore");
         
-        //$form  = $this->output->layout("form" );
+        $form  = $this->output->layout("explorer");
        
 
         $this->output->addToPosition("body" , $form); 

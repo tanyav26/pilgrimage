@@ -22,28 +22,29 @@
         <body class="explorer">
 
             <tpl:import layout="navbar" />
+            <form>
+                <div class="modal " style="position:relative; top: auto; bottom:auto; left:auto; right: auto; margin:100px auto;">
 
-            <div class="modal " style="position:relative; top: auto; bottom:auto; left:auto; right: auto; margin:100px auto;">
+                    <div class="modal-header">
+                        <a href="#" class="close" data-dismiss="modal">×</a>
+                        <h3><tpl:element type="text" data="page.title">Explorer</tpl:element></h3>
+                    </div>
+                    <div class="modal-body">
+                        <tpl:block data="page.block.alerts" />             
+                        <tpl:block data="page.block.banner" />
+                        <tpl:block data="page.block.body" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn">Search</button>
+                        <tpl:block data="page.block.footer" />
+                        <tpl:import layout="console" />
 
-                <div class="modal-header">
-                    <a href="#" class="close" data-dismiss="modal">×</a>
-                    <h3><tpl:element type="text" data="page.title">Explorer</tpl:element></h3>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <tpl:block data="page.block.alerts" />             
-                    <tpl:block data="page.block.banner" />
-                    <tpl:block data="page.block.body" />
-                </div>
-                <div class="modal-footer">
-                    <tpl:block data="page.block.footer" />
-                    <tpl:import layout="console" />
+                <div class="container-fixed map-canvas">
 
                 </div>
-            </div>
-            <div class="container-fixed map-canvas">
-
-            </div>
-
+            </form>
 
             <script src='/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
             <script src='/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
@@ -74,139 +75,139 @@
 
 <script>
     
-var STYLES = [
-[
-  {
-    stylers: [
-      { saturation: -73 },
-      { visibility: "simplified" }
-    ]
-  }
-],
-[
-  {
-    featureType: "road",
-    stylers: [
-      { hue: "#dd00ff" }
-    ]
-  },{
-    featureType: "water",
-    stylers: [
-      { hue: "#00f6ff" },
-      { lightness: -18 },
-      { saturation: 62 }
-    ]
-  },{
-    featureType: "landscape",
-    stylers: [
-      { hue: "#ffc300" },
-      { saturation: 63 },
-      { lightness: -16 }
-    ]
-  }
-],
-[
-  {
-    elementType: "geometry",
-    stylers: [
-      { gamma: 3.16 }
-    ]
-  },{
-    featureType: "transit",
-    stylers: [
-      { visibility: "on" },
-      { hue: "#ff0008" },
-      { saturation: 95 },
-      { lightness: -40 }
-    ]
-  },{
-    featureType: "road",
-    elementType: "labels",
-    stylers: [
-      { visibility: "off" }
-    ]
-  },{
-    featureType: "water",
-    stylers: [
-      { saturation: 59 },
-      { lightness: -8 }
-    ]
-  }
-],
-[
-  {
-    stylers: [
-      { invert_lightness: true }
-    ]
-  }
-]];
+    var STYLES = [
+        [
+            {
+                stylers: [
+                    { saturation: -73 },
+                    { visibility: "simplified" }
+                ]
+            }
+        ],
+        [
+            {
+                featureType: "road",
+                stylers: [
+                    { hue: "#dd00ff" }
+                ]
+            },{
+                featureType: "water",
+                stylers: [
+                    { hue: "#00f6ff" },
+                    { lightness: -18 },
+                    { saturation: 62 }
+                ]
+            },{
+                featureType: "landscape",
+                stylers: [
+                    { hue: "#ffc300" },
+                    { saturation: 63 },
+                    { lightness: -16 }
+                ]
+            }
+        ],
+        [
+            {
+                elementType: "geometry",
+                stylers: [
+                    { gamma: 3.16 }
+                ]
+            },{
+                featureType: "transit",
+                stylers: [
+                    { visibility: "on" },
+                    { hue: "#ff0008" },
+                    { saturation: 95 },
+                    { lightness: -40 }
+                ]
+            },{
+                featureType: "road",
+                elementType: "labels",
+                stylers: [
+                    { visibility: "off" }
+                ]
+            },{
+                featureType: "water",
+                stylers: [
+                    { saturation: 59 },
+                    { lightness: -8 }
+                ]
+            }
+        ],
+        [
+            {
+                stylers: [
+                    { invert_lightness: true }
+                ]
+            }
+        ]];
 
-function initialize() {
-  var locations = [
-    // zurich:
-    new google.maps.LatLng(47.37405437099026, 728.5609082641602),
-    // sydney:
-    new google.maps.LatLng( -33.8667, 151.1954)
-  ];
-  var myOptions = {
-    zoom: 12,
-    center: locations[parseInt(Math.random() * locations.length)],
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    streetViewControl: false,
-    mapTypeControl: false
-  };
-  var maps = [];
-  maps.push(new google.maps.Map(document.getElementById('map_canvas1'),
-    myOptions));
-  maps.push(new google.maps.Map(document.getElementById('map_canvas2'),
-    myOptions));
-  maps.push(new google.maps.Map(document.getElementById('map_canvas3'),
-    myOptions));
-  maps.push(new google.maps.Map(document.getElementById('map_canvas4'),
-    myOptions));
+    function initialize() {
+        var locations = [
+            // zurich:
+            new google.maps.LatLng(47.37405437099026, 728.5609082641602),
+            // sydney:
+            new google.maps.LatLng( -33.8667, 151.1954)
+        ];
+        var myOptions = {
+            zoom: 12,
+            center: locations[parseInt(Math.random() * locations.length)],
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            streetViewControl: false,
+            mapTypeControl: false
+        };
+        var maps = [];
+        maps.push(new google.maps.Map(document.getElementById('map_canvas1'),
+        myOptions));
+        maps.push(new google.maps.Map(document.getElementById('map_canvas2'),
+        myOptions));
+        maps.push(new google.maps.Map(document.getElementById('map_canvas3'),
+        myOptions));
+        maps.push(new google.maps.Map(document.getElementById('map_canvas4'),
+        myOptions));
 
-  var model = new google.maps.Map(document.createElement('div'), myOptions);
+        var model = new google.maps.Map(document.createElement('div'), myOptions);
 
-  for (var i = 0, map; map = maps[i]; i++) {
-    map.setOptions({
-      styles: STYLES.splice(parseInt(Math.random() * STYLES.length), 1)[0]
-    });
-    map.bindTo('zoom', model);
-    map.bindTo('center', model);
-  }
+        for (var i = 0, map; map = maps[i]; i++) {
+            map.setOptions({
+                styles: STYLES.splice(parseInt(Math.random() * STYLES.length), 1)[0]
+            });
+            map.bindTo('zoom', model);
+            map.bindTo('center', model);
+        }
 
-  // shim layer with setTimeout fallback
-  window.requestAnimFrame = (function(){
-    return  window.requestAnimationFrame       ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame    ||
-            window.oRequestAnimationFrame      ||
-            window.msRequestAnimationFrame     ||
-            function(/* function */ callback, /* DOMElement */ element){
-              window.setTimeout(callback, 1000 / 60);
+        // shim layer with setTimeout fallback
+        window.requestAnimFrame = (function(){
+            return  window.requestAnimationFrame       ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame    ||
+                window.oRequestAnimationFrame      ||
+                window.msRequestAnimationFrame     ||
+                function(/* function */ callback, /* DOMElement */ element){
+                window.setTimeout(callback, 1000 / 60);
             };
-    })();
+        })();
 
-  var theta = 0;
-  var change = 0.01; // circle radius
+        var theta = 0;
+        var change = 0.01; // circle radius
 
-  function randompanby() {
-    return (Math.random() - .5) * 3;
-  }
+        function randompanby() {
+            return (Math.random() - .5) * 3;
+        }
 
-  function render() {
-    var speed = .5;
-    model.panBy(speed * Math.cos(theta), speed * Math.sin(theta));
-    theta += speed * change;
-    theta %= Math.PI * 2;
-  }
+        function render() {
+            var speed = .5;
+            model.panBy(speed * Math.cos(theta), speed * Math.sin(theta));
+            theta += speed * change;
+            theta %= Math.PI * 2;
+        }
 
-  (function animloop(){
-    requestAnimFrame(animloop, document.body);
-    render();
-  })();
-}
+        (function animloop(){
+            requestAnimFrame(animloop, document.body);
+            render();
+        })();
+    }
 
-google.maps.event.addDomListener(window, 'load', initialize);
+    google.maps.event.addDomListener(window, 'load', initialize);
 
-    </script>
+</script>
