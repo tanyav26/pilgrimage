@@ -27,7 +27,7 @@
 
                     <div class="modal-header">
                         <a href="#" class="close" data-dismiss="modal">×</a>
-                        <h3><tpl:element type="text" data="page.title">Explorer</tpl:element></h3>
+                        <h3><tpl:element type="text" data="page.title">Explore</tpl:element>&nbsp;<small>The world at your fingertips</small></h3>
                     </div>
                     <div class="modal-body">
                         <tpl:block data="page.block.alerts" />             
@@ -57,7 +57,7 @@
                 $(function() {
                     // Also works with: var yourStartLatLng = '59.3426606750, 18.0736160278';
                     var yourStartLatLng = new google.maps.LatLng(51.5094, -0.127358);
-                    $('.map-canvas').gmap({'streetViewControl': false, 'mapTypeControl':false, 'zoom':15, 'center': yourStartLatLng,'styles':[], 'maxZoom':16, 'callback': function() {
+                    $('.map-canvas').gmap({'streetViewControl': false, 'mapTypeControl':false, 'zoom':15,  zoomControl:false, panControl:false,'center': yourStartLatLng,'styles':[], 'maxZoom':16, 'callback': function() {
                             var self = this;
                             self.getCurrentPosition(function(position, status) {
                                 if ( status === 'OK' ) {

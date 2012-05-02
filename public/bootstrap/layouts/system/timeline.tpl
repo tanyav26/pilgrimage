@@ -255,8 +255,8 @@
                 <div class="timeline-item-media">
                     <hr />
                     <div class="row-fluid">  
-                        <div class="span4"><img src="http://placehold.it/160x160" /></div> 
-                        <div class="span8">
+                        <div class="span3"><img src="http://placehold.it/120x120" /></div> 
+                        <div class="span9">
                             <blockquote>
                                 <h4><a href="#">Redknapp admits Modric may leave</a></h4>
                                 <div>Tottenham manager Harry Redknapp says Luka Modric may leave White Hart Lane when the transfer window opens.</div>
