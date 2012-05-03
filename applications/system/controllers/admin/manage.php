@@ -3,7 +3,7 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
- * manager.php
+ * manage.php
  *
  * Requires PHP version 5.3
  *
@@ -20,6 +20,7 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
+
 namespace Application\System\Controllers\Admin;
 
 use Platform;
@@ -39,25 +40,24 @@ use Application\System\Controllers as System;
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-class Manager extends System\Admin {
+class Manage extends System\Admin {
 
-    public static function getInstance() {
-
-        static $instance;
-        //If the class was already instantiated, just return it
-        if (isset($instance))
-            return $instance;
-
-        $instance = new self;
-
-        return $instance;
-    }
 
     public function info() {
         $view = $this->load->view('manager');
 
 
         $view->information(); //sample call;        
+        //$this->output();
+    }
+
+    public function categories() {
+        $view = $this->load->view('manager');
+        
+        //die;
+
+
+        //$view->information(); //sample call;        
         //$this->output();
     }
 
@@ -94,5 +94,17 @@ class Manager extends System\Admin {
         //$this->output();
     }
 
+    
+    public static function getInstance() {
+
+        static $instance;
+        //If the class was already instantiated, just return it
+        if (isset($instance))
+            return $instance;
+
+        $instance = new self;
+
+        return $instance;
+    }
 }
 
