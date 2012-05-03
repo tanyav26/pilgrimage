@@ -50,6 +50,7 @@ class Menu extends Parse\Template {
      */
 
     static $instance;
+    
 
     /**
      * Execute the layout
@@ -100,11 +101,13 @@ class Menu extends Parse\Template {
         
         foreach ($menuItems as $item) {
 
-            //link
+            //@TODO check if this is the current menu item and set it as active
+            $query   = \Library\Uri::getInstance()->getQuery();
+            $active  = ( \Library\Uri::internal( $item['menu_url'] ) <> \Library\Uri::internal( $query ) ) ? false : true;
            
-            $link = array(
+            $link  = array(
                 "ELEMENT" => 'li',
-                "CLASS"=> (isset($item['menu_classes'])&&!empty($item['menu_classes'])) ?  $item['menu_classes'] : "link",
+                "CLASS"=> ((isset($item['menu_classes'])&&!empty($item['menu_classes'])) ?  $item['menu_classes'] : "link").(($active)?" active":""),
                 "CHILDREN" => array(
                     array(
                         "ELEMENT" => "a",                          
@@ -112,7 +115,10 @@ class Menu extends Parse\Template {
                         "CDATA" => $item['menu_title']
                     )
                 )
-            );      
+            );  
+            //Ammend active path if tab is active;
+            //@TODO am i a child? who is my parent?
+            
             
             //@TODO build a tag
             $id     = $item['menu_id'];
@@ -120,11 +126,16 @@ class Menu extends Parse\Template {
             
             //Count children
             if(isset($item['children']) && count($item['children'])>0){
+                
+                //Close active path
+                //static::$has_active = false;
+                
                 $dropdown = array(
                     "CLASS"=> "dropdown-toggle",
                     "DATA-TOGGLE"=>"dropdown"
                 );
                 $link['CLASS'] .= ' dropdown';
+                
                 $link['CHILDREN'][0] = array_merge( $link['CHILDREN'][0]  , $dropdown );
                 $title = $link['CHILDREN'][0]['CDATA'];
                 unset($link['CHILDREN'][0]['CDATA']);
@@ -140,6 +151,7 @@ class Menu extends Parse\Template {
             
             $li[] = $link;
         }
+        
         return $li;
     }
 

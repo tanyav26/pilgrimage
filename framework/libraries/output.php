@@ -407,7 +407,6 @@ class Output extends Object {
         if (file_exists($file)) {
             include $file;
         }
-
         $parsed = ob_get_contents();
         //Close Buffer!
         ob_end_clean();

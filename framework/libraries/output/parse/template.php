@@ -133,6 +133,9 @@ abstract class Template extends Output\Parse {
             };
             $value = $value[$index];
         }
+        
+        //Parse  here?
+        //$value = Template::_( $value );
 
         return (!empty($value) ) ? $value : $default;
     }

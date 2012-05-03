@@ -347,7 +347,7 @@ class Parser extends Files\Xml {
         $xmlWriter = new \XMLWriter;
         $xmlWriter->openMemory();
         $xmlWriter->startDocument($version, $encoding);
-        //$xmlWriter->setIndent(true);
+        $xmlWriter->setIndent(true);
         //$xmlWriter->startElement("ROOT");
         //Recursively write out the xml;
         static::writeXML($xmlWriter, $ROOT, $readonly);
