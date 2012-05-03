@@ -38,7 +38,7 @@
                                     <div class="left-pad">  
                                         <div class="row-fluid">
                                             <form id="form" name="form" method="post" action="<?php echo $this->link('/member/account/update'); ?>">
-                                                <fieldset>
+                                                <fieldset class="no-margin">
                                                     <legend>Register a new account</legend><tpl:block data="page.block.alerts" />
                                                     <div class="control-group">
                                                         <label class="control-label" for="user_name"><?php echo _('Full Name'); ?><em class="mandatory">*</em></label>

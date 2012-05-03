@@ -43,7 +43,7 @@
                                 <li><a href="/~livingstonefultang/sign-out">Sign out</a></li>
                             </ul>
                         </li>
-                    </ul>                    
+                    </ul> 
                     <form class="navbar-search pull-right" action="/~livingstonefultang/search" method="get">
                           <input type="text" class="search-query span4" name="query" placeholder="Search" />
                     </form>

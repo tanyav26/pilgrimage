@@ -1,8 +1,9 @@
+<div class="page-header">
+    <h1>Notification settings</h1>
+</div>
+
 <form>
     <fieldset>
-        <h3>Contact and Notification settings</h3>
-        <p>Be notified by email or on your dashboard when someone...</p>
-
 
         <div class="grid" style="margin-bottom: 25px">
             <div class="row" style="border-bottom: 1px dashed #ddd; padding-top: 6px">

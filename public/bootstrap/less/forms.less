@@ -13,7 +13,7 @@ form {
 
 fieldset {
   padding: 0;
-  margin: 0;
+  margin: 0 0 @baseLineHeight * 2 0;
   border: 0;
 }
 
@@ -65,19 +65,23 @@ select,
 .uneditable-input {
   display: inline-block;
   width: 210px;
-  height: @baseLineHeight;
-  padding: 4px;
+  height: @baseLineHeight+10;
+  padding: 5px;
   margin-bottom: 0px;
   font-size: @baseFontSize;
   line-height: @baseLineHeight;
   color: @gray;
   border: 1px solid #ccc;
   .border-radius(1px);
+    .box-sizing(border-box);
 }
 .uneditable-textarea {
   width: auto;
   height: auto;
 }
+
+textarea{ padding: 10px }
+.uneditable-input, select { padding: 4px; }
 
 // Inputs within a label
 label input,
@@ -238,6 +242,7 @@ select:focus {
 .input-large      { width: 210px; }
 .input-xlarge     { width: 270px; }
 .input-xxlarge    { width: 530px; }
+.input-xxxlarge   { width: 100%; }
 
 // Grid style input sizes
 input[class*="span"],
@@ -392,6 +397,7 @@ select:focus:required:invalid {
     background-color: lighten(@green, 30);
     border-color: @green;
   }
+  .input-xxxlarge   { width: 95%; }
 }
 .input-prepend {
   .add-on {
@@ -440,6 +446,8 @@ select:focus:required:invalid {
 
 // HORIZONTAL & VERTICAL FORMS
 // ---------------------------
+
+.control-label{ font-weight: bold;}
 
 // Common properties
 // -----------------
@@ -491,7 +499,7 @@ select:focus:required:invalid {
 
 // Legend collapses margin, so next element is responsible for spacing
 legend + .control-group {
-  margin-top: @baseLineHeight;
+  margin-top: @baseLineHeight/2;
   -webkit-margin-top-collapse: separate;
 }
 

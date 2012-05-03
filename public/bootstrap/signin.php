@@ -35,7 +35,7 @@
                                     <div class="left-pad">  
                                         <div class="row-fluid">
                                             <form id="form" name="login_form" method="post" action="<?php echo $this->link('/member/session/start'); ?>">                       
-                                                <fieldset>
+                                                <fieldset class="no-margin">
                                                     <legend>Sign in to your account</legend>
                                                     <div class="control-group">
                                                         <label class="control-label" for="user_name_id"><?php echo _('Registered Username or Email'); ?><em class="mandatory">*</em></label>

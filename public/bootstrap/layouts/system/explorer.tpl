@@ -1,6 +1,4 @@
-
-<fieldset>
-    
+<fieldset class="no-margin">   
     <div class="control-group">
         <div class="controls input">
             <div class="row-fluid">
