@@ -95,7 +95,7 @@ class Menu extends Parse\Template {
      * @param type $menuItems
      * @return type 
      */
-    private static function element( $menuItems , $menuType = "nav-pill" ) {
+    public static function element( $menuItems , $menuType = "nav-pill" ) {
         
         $li = array();
         
@@ -111,7 +111,7 @@ class Menu extends Parse\Template {
                 "CHILDREN" => array(
                     array(
                         "ELEMENT" => "a",                          
-                        "HREF" => !empty($item['menu_url'] ) ? static::$document->link( $item['menu_url']) : '#',
+                        "HREF" => !empty($item['menu_url'] ) ? \Library\Uri::internal( $item['menu_url']) : '#',
                         "CDATA" => $item['menu_title']
                     )
                 )

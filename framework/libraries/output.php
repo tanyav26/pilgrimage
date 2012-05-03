@@ -250,6 +250,32 @@ class Output extends Object {
         //Stop any further execution?
         $this->abort();
     }
+    
+    /**
+     * Outputs a menu  item to the output buffer 
+     * 
+     * @param type $menuid
+     * @param type $menutype 
+     */
+    final public function navigation($menuId="", $menuType = "nav-block"){
+        
+        $menuItems = \Platform\Navigator::menu( $menuId );
+        
+        if(empty($menuItems)) return null;
+
+        //print_R($menuItems);
+        $tag = array();
+        
+        $tag['ELEMENT'] = 'ul';
+        $tag['CLASS'] = "nav $menuType";
+        $tag['CHILDREN'] = Output\Parse\Template\Menu::element( (array)$menuItems , $menuType );
+
+        //Get the parser;
+        $parser = Folder\Files\Xml\Parser::getInstance();  
+        $parsed = $parser->toXml( $tag  );
+        
+        return $parsed;
+    }
 
     /**
      * Restarts the output buffer

@@ -329,20 +329,19 @@ class Parser extends Files\Xml {
      * @param type $hooks
      * @return type
      */
-    public function toXML($ROOT = "", $version = '1.0', $encoding = "UTF-8", $readonly = array()) {
+    final public function toXML($ROOT = "", $version = '1.0', $encoding = "UTF-8", $readonly = array()) {
 
 
         //Use a user supplied root, or try using our root
-        $ROOT = !empty($ROOT) ? $ROOT :
-                (isset(self::$tree['CHILDREN'][0])) ? self::$tree['CHILDREN'][0] : null ;
+        $ROOT = !empty($ROOT) ? $ROOT :  ((isset(self::$tree['CHILDREN'][0])) ? self::$tree['CHILDREN'][0] : null );
 
         //For now just arrays! will look to handle objects later
         if (!isset($ROOT) || !is_array($ROOT)) {
+            //print_R($ROOT);
             $this->setError(_("The document root is invalid"));
             return false;
         }
 
-        //print_R($ROOT);
         //Using the XMLwriter PHP library;
         $xmlWriter = new \XMLWriter;
         $xmlWriter->openMemory();
@@ -353,7 +352,7 @@ class Parser extends Files\Xml {
         static::writeXML($xmlWriter, $ROOT, $readonly);
 
         $xmlWriter->endDocument();
-        //$writer->flush(); //I think to help windows, lets just use the memory
+        
         return $xmlWriter->outputMemory(true);
     }
 

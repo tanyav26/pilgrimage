@@ -57,7 +57,7 @@ class Settings extends \Platform\View {
         $this->output->setPageTitle("Account Settings");
 
 
-        $sidebar = $this->output->layout("settings/settings", "member");
+        $sidebar = $this->output->layout("settings/sidebar");
         $body = $this->output->layout($form, $app);
 
         $this->output->addToPosition("body", $body);
