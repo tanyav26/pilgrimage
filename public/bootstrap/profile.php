@@ -40,7 +40,7 @@
                             <div class="left-pad"> 
                                 <div class="btn-toolbar no-top-margin">
                                     <div class="btn-group">
-                                        <button class="btn">View As...</button>
+                                        <button class="btn">View As</button>
                                         <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                                         <ul class="dropdown-menu">
                                             <li><a href="#">Action</a></li>
@@ -167,7 +167,7 @@ http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/},cur:function(a){if(thi
                                     <div class="entry tab-pane" id="extendedpane">Extended profile</div>
                                 </div>
                                 <div class="span4">
-                                    <div class="left-pad top-pad">
+                                    <div class="left-pad">
                                         <ul id="profile-tab" class="nav nav-block">
                                             <li><a href="#timelinepane" data-toggle="tab">Timeline</a></li>
                                             <li class="active"><a href="#aboutmepane" data-toggle="tab">About Me</a></li>
@@ -234,6 +234,7 @@ http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/},cur:function(a){if(thi
                     <div class="row-fluid">
                         <div class="span8">
                             <ul class="nav nav-pills">
+                                <li><a href="<?php echo $this->link('/system/admin/index'); ?>">Administrator</a></li>
                                 <li><a href="<?php echo $this->link('/about'); ?>">About</a></li>
                                 <li><a href="<?php echo $this->link('/apps'); ?>">Apps</a></li>
                                 <li><a href="http://blog.stonyhillshq.com">Blog</a></li>
@@ -241,7 +242,6 @@ http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/},cur:function(a){if(thi
                                 <li><a href="<?php echo $this->link('/help'); ?>">Help</a></li>
                                 <li><a href="<?php echo $this->link('/legal/privacy'); ?>">Privacy</a></li>
                                 <li><a href="<?php echo $this->link('/legal/terms'); ?>">Terms</a></li>
-                                <li><a href="http://store.stonyhillshq.com">Store</a></li>
                             </ul>
                         </div>
                         <div class="span4">
@@ -252,7 +252,7 @@ http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/},cur:function(a){if(thi
                     </div>   
                     <tpl:block data="page.block.footer">Footer</tpl:block>
                     <tpl:import layout="console" />
-                    <a href="<?php echo $this->link('/system/admin/index'); ?>" class="btn pull-right">Administrator Panel</a>
+                   
                 </section>
             </div>
             <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/bootstrap.min.js" type="text/javascript"></script>

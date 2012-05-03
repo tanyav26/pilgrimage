@@ -1,61 +1,17 @@
 
 <form action="<?php echo $this->link('/system/admin/index!#summary') ?>">
-    <div class="row-fluid">
-        <div class="span6" align="left"><h4><?php echo _('Welcome back. Here is a summary for activity on your site') ?></h4></div>
-        <div class="span6" align="right">
-            <select  class="medium" name="date-range">
-                <option id="-30"><?php echo _('The last 30 days'); ?></option>
-                <option id="-7"><?php echo _('The last Week'); ?></option>
-                <option id="-1"><?php echo _('Yesterday'); ?></option>
-                <option id="0"><?php echo _('Today - Live'); ?></option>
-            </select>
-        </div>
-    </div>
-    <hr />
     <fieldset>
-        <div id="in-numbers" class="row-fluid">
-
-            <div class="span3">
-                <a href="#" class="clearfix well">
-                    <span class="count-head">Website Visits</span>
-                    <h1 class="count-body">189</h1>
-                    <span class="count-footer">% of Total: 5% (3702 in total)</span>
-                </a>
-            </div>
-            <div class="span3">
-                <a href="#" class="clearfix well">
-                    <span class="count-head">Page Views</span>
-                    <h1 class="count-body">1893</h1>
-                    <span class="count-footer">Site avg. 1(189%)</span>
-                </a>
-            </div>
-            <div class="span3">
-                <a href="#" class="clearfix well">
-                    <span class="count-head">Average Time on Site</span>
-                    <h1 class="count-body">00:00:00</h1>
-                    <span class="count-footer">Site avg. 00:00:00 : 0% </span>
-                </a>
-            </div>
-            <div class="span3">
-                <a href="#" class="clearfix well">
-                    <span class="count-head">% of new visits</span>
-                    <h1 class="count-body">0.00%</h1>
-                    <span class="count-footer">Site avg. 0.00%: 0%</span>
-                </a>
-            </div>
-
-        </div>
         <div id="placeholder" class="row-fluid" style="height: 300px; margin-bottom: 10px"></div>
     </fieldset>
     <fieldset>
         <hr />
         <div class="row-fluid top-pad">
-            <div class="span9">
+            <div class="span12">
                 
                 <div class="">
                     <h4 class="bottom-pad">Welcome your newest members</h4>
                     <ul class="thumbnails">
-                        <?php for ($i = 0; $i < 16; $i++): ?>
+                        <?php for ($i = 0; $i < 14; $i++): ?>
                             <li>
                                 <a href="#" class="thumbnail">
                                     <img src="http://placehold.it/64x64" alt=""/>
@@ -67,7 +23,7 @@
                 <h4>Welcome your newest members</h4>
                 <div class="top-pad">
                     <ul class="thumbnails">
-                        <?php for ($i = 0; $i < 16; $i++): ?>
+                        <?php for ($i = 0; $i < 14; $i++): ?>
                             <li>
                                 <a href="#" class="thumbnail">
                                     <img src="http://placehold.it/64x64" alt=""/>
@@ -77,59 +33,11 @@
                     </ul>
                 </div>
             </div>
-            <div class="span3">
-                <h2>2,190<small class="pull-right">60%</small></h2>
-                <div class="progress small-bar progress-success">
-                    <div class="bar" style="width: 60%;"></div>
-                </div>
-                <span class="help-block">New members in the last 30 days</span>
-
-                <h2 class="top-pad">64<small class="pull-right">10%</small></h2>
-                <div class="progress small-bar progress-danger">
-                    <div class="bar" style="width: 10%;"></div>
-                </div>
-                <span class="help-block">New content. Post, Check-ins etc. </span>
-
-
-                <h2 class="top-pad">583<small class="pull-right">53%</small></h2>
-                <div class="progress small-bar progress-bar">
-                    <div class="bar" style="width: 53%;"></div>
-                </div>
-                <span class="help-block">Relationships forged</span>
-
-
-                <h2 class="top-pad">8,943,985<small class="pull-right">90%</small></h2>
-                <div class="progress small-bar">
-                    <div class="bar" style="width: 90%;"></div>
-                </div>
-                <span class="help-block">Unique visitors this month</span>
-
-                <h2 class="top-pad">2,190<small class="pull-right">60%</small></h2>
-                <div class="progress small-bar progress-success">
-                    <div class="bar" style="width: 60%;"></div>
-                </div>
-                <span class="help-block">New members in the last 30 days</span>
-
-                <h2 class="top-pad">64<small class="pull-right">10%</small></h2>
-                <div class="progress small-bar progress-danger">
-                    <div class="bar" style="width: 10%;"></div>
-                </div>
-                <span class="help-block">New content. Post, Check-ins etc. </span>
-
-            </div>
 
         </div>
     </fieldset>
 </form>
 
-
-
-<style>
-    #in-numbers div a {display: block; padding-bottom: 18px; text-decoration: none}
-    #in-numbers div a span{display:block}
-    #in-numbers div a span.count-body{font-size: 20px; font-weight: bolder; margin: 4px 0; color: inherit}
-    #in-numbers div a span.count-footer{font-size: 10px}
-</style>
 
 <script type="text/javascript" src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/plugins/jquery.flot.min.js"></script>
 <script type="text/javascript">

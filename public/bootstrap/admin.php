@@ -26,17 +26,17 @@
         <body>
             <tpl:menu id="sitemenu" />
             <tpl:import layout="navbar" />
-            
+
             <div class="container">  
                 <tpl:block data="page.block.alerts" /> 
                 <tpl:block data="page.block.banner">Banner</tpl:block>
-                <section class="layout-block boxed has-bg">
+                <section class="layout-block boxed has-bg has-admin-warning">
                     <div class="row-fluid">
                         <div class="span12">
                             <div class="row-fluid">
                                 <div class="span8">  
                                     <div class="page-header">
-                                        <h1>Administrator Panel<small>&nbsp;23/04/2012</small></h1>
+                                        <h1>System Manager<small>&nbsp;23/04/2012</small></h1>
                                     </div>
                                     <tpl:block data="page.block.body" />
                                 </div>
@@ -44,7 +44,7 @@
                                     <div class="left-pad"> 
                                         <div class="btn-toolbar no-top-margin">
                                             <div class="btn-group">
-                                                <button class="btn">View As...</button>
+                                                <button class="btn">View As</button>
                                                 <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                                                 <ul class="dropdown-menu">
                                                     <li><a href="#">Action</a></li>
@@ -63,10 +63,57 @@
                                         </div>
                                         <div style="margin-top:15px">
                                             <tpl:menu id="adminmenu" type="nav-block" />
+                                            
                                         </div>
                                         <tpl:block data="page.block.side">Sidebar</tpl:block>
 
+                                        
+
                                         <div class="widget top-pad">
+                                            <div class="widget-body">
+                                                <h2>2,190<small class="pull-right">60%</small></h2>
+                                                <div class="progress mini-bar progress-success">
+                                                    <div class="bar" style="width: 60%;">&nbsp;</div>
+                                                </div>
+                                                <span class="help-block">New members in the last 30 days</span>
+
+                                                <h2 class="top-pad">64<small class="pull-right">10%</small></h2>
+                                                <div class="progress mini-bar progress-danger">
+                                                    <div class="bar" style="width: 10%;">&nbsp;</div>
+                                                </div>
+                                                <span class="help-block">New content. Post, Check-ins etc. </span>
+
+
+                                                <h2 class="top-pad">583<small class="pull-right">53%</small></h2>
+                                                <div class="progress mini-bar progress-bar">
+                                                    <div class="bar" style="width: 53%;">&nbsp;</div>
+                                                </div>
+                                                <span class="help-block">Relationships forged</span>
+
+
+                                                <h2 class="top-pad">8,943,985<small class="pull-right">90%</small></h2>
+                                                <div class="progress mini-bar">
+                                                    <div class="bar" style="width: 90%;">&nbsp;</div>
+                                                </div>
+                                                <span class="help-block">Unique visitors this month</span>
+
+                                                <h2 class="top-pad">2,190<small class="pull-right">60%</small></h2>
+                                                <div class="progress mini-bar progress-success">
+                                                    <div class="bar" style="width: 60%;">&nbsp;</div>
+                                                </div>
+                                                <span class="help-block">New members in the last 30 days</span>
+
+                                                <h2 class="top-pad">64<small class="pull-right">10%</small></h2>
+                                                <div class="progress mini-bar progress-danger">
+                                                    <div class="bar" style="width: 10%;">&nbsp;</div>
+                                                </div>
+                                                <span class="help-block">New content. Post, Check-ins etc. </span>
+
+                                            </div>
+                                        </div>
+                                        
+                                        <hr />
+                                        <div class="widget">
                                             <div class="well">
                                                 <a href="#" class="clearfix">
                                                     <span class="count-head">Website Visits</span>
@@ -75,6 +122,8 @@
                                                 </a>
                                             </div>
                                         </div>
+
+
 
                                     </div>
                                 </div>
@@ -86,6 +135,7 @@
                     <div class="row-fluid">
                         <div class="span8">
                             <ul class="nav nav-pills">
+                                <li><a href="<?php echo $this->link('/'); ?>">Home</a></li>
                                 <li><a href="<?php echo $this->link('/about'); ?>">About</a></li>
                                 <li><a href="<?php echo $this->link('/apps'); ?>">Apps</a></li>
                                 <li><a href="http://blog.stonyhillshq.com">Blog</a></li>
@@ -93,7 +143,6 @@
                                 <li><a href="<?php echo $this->link('/help'); ?>">Help</a></li>
                                 <li><a href="<?php echo $this->link('/legal/privacy'); ?>">Privacy</a></li>
                                 <li><a href="<?php echo $this->link('/legal/terms'); ?>">Terms</a></li>
-                                <li><a href="http://store.stonyhillshq.com">Store</a></li>
                             </ul>
                         </div>
                         <div class="span4">
@@ -104,7 +153,6 @@
                     </div>   
                     <tpl:block data="page.block.footer">Footer</tpl:block>
                     <tpl:import layout="console" />
-                    <a href="<?php echo $this->link('/'); ?>" class="btn pull-right">Front-Page</a>
                 </section>
             </div>
             <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/bootstrap.min.js" type="text/javascript"></script>

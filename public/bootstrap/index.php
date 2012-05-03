@@ -44,6 +44,9 @@
                     <div class="row-fluid">
                         <div class="span8">
                             <ul class="nav nav-pills">
+                                
+                                <li><a href="<?php echo $this->link('/system/admin/index'); ?>">Administrator</a></li>
+                                
                                 <li><a href="<?php echo $this->link('/about'); ?>">About</a></li>
                                 <li><a href="<?php echo $this->link('/apps'); ?>">Apps</a></li>
                                 <li><a href="http://blog.stonyhillshq.com">Blog</a></li>
@@ -51,17 +54,16 @@
                                 <li><a href="<?php echo $this->link('/help'); ?>">Help</a></li>
                                 <li><a href="<?php echo $this->link('/legal/privacy'); ?>">Privacy</a></li>
                                 <li><a href="<?php echo $this->link('/legal/terms'); ?>">Terms</a></li>
-                                <li><a href="http://store.stonyhillshq.com">Store</a></li>
                             </ul>
                         </div>
                         <div class="span4">
                             <ul class="nav nav-pills pull-right">
-                                <li><a href="#"><i class="icon-heart"></i>Stonyhills HQ 2012.</a></li>
+                                <li><a href="#">© Stonyhills HQ 2012.</a></li>
                             </ul>
                         </div>
                     </div>
                     <tpl:import layout="console" />
-                    <a href="<?php echo $this->link('/system/admin/index'); ?>" class="btn pull-right">Administrator Panel</a>
+                    
                     <tpl:block data="page.block.footer">Footer</tpl:block>
                 </section>
             </div>

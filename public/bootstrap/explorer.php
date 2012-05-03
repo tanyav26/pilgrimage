@@ -57,7 +57,7 @@
                 $(function() {
                     // Also works with: var yourStartLatLng = '59.3426606750, 18.0736160278';
                     var yourStartLatLng = new google.maps.LatLng(51.5094, -0.127358);
-                    $('.map-canvas').gmap({'streetViewControl': false, 'mapTypeControl':false, 'zoom':15,  zoomControl:false, panControl:false,'center': yourStartLatLng,'styles':[], 'maxZoom':16, 'callback': function() {
+                    $('.map-canvas').gmap({'streetViewControl': false, 'mapTypeControl':false, 'zoom':12,  zoomControl:false, panControl:false,'center': yourStartLatLng,'styles':[], 'maxZoom':15, 'callback': function() {
                             var self = this;
                             self.getCurrentPosition(function(position, status) {
                                 if ( status === 'OK' ) {
