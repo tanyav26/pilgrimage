@@ -1,4 +1,5 @@
 <?php
+
 /* vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4: */
 
 /**
@@ -19,6 +20,7 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
+
 namespace Application\Member\Controllers;
 
 use Platform;
@@ -46,20 +48,50 @@ final class Message extends \Platform\Controller {
     // domain.com/account/1934353
     // domain.com/account/johndoe
     public function index() {
-        return $this->view();
+
+
+
+        $sidebar = $this->output->layout("messages/sidebar");
+        $body = $this->output->layout('messages');
+
+
+        $this->output->addToPosition("body", $body);
+        $this->output->addToPosition("side", $sidebar);
     }
 
     public function inbox() {
 
         $this->output->setPageTitle(_("Inbox"));
 
-        $sidebar    = $this->output->layout("messages/sidebar");
-        $body       = $this->output->layout('messages');
-       
+        return $this->index();
+    }
 
-        $this->output->addToPosition("body", $body);
-        $this->output->addToPosition("side", $sidebar);
-        
+    public function sent() {
+
+        $this->output->setPageTitle(_("Sent Messages"));
+
+        return $this->index();
+    }
+
+    public function trash() {
+
+        $this->output->setPageTitle(_("Trashed Messages"));
+
+        return $this->index();
+    }
+
+    public function live() {
+
+        $this->output->setPageTitle(_("Live discussions"));
+
+        return $this->index();
+    }
+
+    public function drafts() {
+
+        $this->output->setPageTitle(_("Saved Messages"));
+
+        return $this->index();
     }
 
     //domain.com/user/account/create

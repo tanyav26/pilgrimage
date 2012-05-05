@@ -3,7 +3,7 @@
 
     <html class="no-js" lang="en">
         <head>
-            <title><tpl:element type="text" data="page.title">Default Title</tpl:element></title>
+            <title><tpl:element type="text" data="page.title">Sign up</tpl:element></title>
             <meta charset="utf-8" />
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
             <meta name="description" content="<?php echo $this->getPageDescription(); ?>" />

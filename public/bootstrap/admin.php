@@ -2,7 +2,7 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
     <html lang="en">
         <head>
-            <title><tpl:element type="text" data="page.title">Default Title</tpl:element></title>
+            <title><tpl:element type="text" data="page.title">Administrator</tpl:element></title>
             <meta charset="utf-8" />
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
             <meta name="description" content="<?php echo $this->getPageDescription(); ?>" />
@@ -30,13 +30,13 @@
             <div class="container">  
                 <tpl:block data="page.block.alerts" /> 
                 <tpl:block data="page.block.banner">Banner</tpl:block>
-                <section class="layout-block boxed has-bg has-admin-warning">
+                <section class="layout-block boxed has-bg">
                     <div class="row-fluid">
                         <div class="span12">
                             <div class="row-fluid">
                                 <div class="span8">  
                                     <div class="page-header">
-                                        <h1>System Manager<small>&nbsp;23/04/2012</small></h1>
+                                        <h1><tpl:element type="text" data="page.title">Administrator</tpl:element><small>&nbsp;23/04/2012</small></h1>
                                     </div>
                                     <tpl:block data="page.block.body" />
                                 </div>
@@ -156,6 +156,7 @@
                 </section>
             </div>
             <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/bootstrap.min.js" type="text/javascript"></script>
+
         </body>
     </html>
 </tpl:layout>

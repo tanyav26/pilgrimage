@@ -18,7 +18,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">@drstonyhills<b class="caret">&nbsp;</b></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/~livingstonefultang/dashboard">Dashboard</a></li>
+                                <li><a href="/~livingstonefultang/system/start/dashboard">Dashboard</a></li>
                                 <li><a href="/~livingstonefultang/member/profile/view">View your profile</a></li>
                                 <li class="divider"></li>
                                 <li><a href="/~livingstonefultang/member/settings/account">Profile settings</a></li>

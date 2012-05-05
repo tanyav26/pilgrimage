@@ -2,7 +2,7 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
     <html lang="en">
         <head>
-            <title><tpl:element type="text" data="page.title">Default Title</tpl:element></title>
+            <title><tpl:element type="text" data="page.title">Profile</tpl:element></title>
             <meta charset="utf-8" />
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
             <meta name="description" content="<?php echo $this->getPageDescription(); ?>" />
@@ -168,14 +168,9 @@ http://angry-birds.net/maps/chapter-4/theme-9/level-9-8/},cur:function(a){if(thi
                                 </div>
                                 <div class="span4">
                                     <div class="left-pad">
-                                        <ul id="profile-tab" class="nav nav-block">
-                                            <li><a href="#timelinepane" data-toggle="tab">Timeline</a></li>
-                                            <li class="active"><a href="#aboutmepane" data-toggle="tab">About Me</a></li>
-                                            <li><a href="#achievementspane" data-toggle="tab">Achievements</a></li>
-                                            <li><a href="#blogpane" data-toggle="tab">Blog</a></li>
-                                            <li><a data-toggle="tab" href="#multimediapane">Photos</a></li>
-                                            <li><a data-toggle="tab" href="#extendedpane">Extended Profile</a></li>
-                                        </ul>
+                                       
+                                        <tpl:menu id="profilemenu" type="nav-block" />
+                                        
                                         <div class="widget top-pad">
                                             <h4>Badges and Rewards</h4> 
                                             <div class="widget-body top-pad">

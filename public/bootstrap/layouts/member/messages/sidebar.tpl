@@ -18,17 +18,8 @@
 </div>
 
 
-
-<!-- System Wide Menu -->
 <div style="margin-top:15px">
-    <ul id="profile-tab" class="nav nav-block">
-        <li class="active"><a href="#permissions" data-toggle="tab">Inbox</a></li>
-        <li><a href="#authorities" data-toggle="tab">Sent Messages</a></li>
-        <li><a href="#roles" data-toggle="tab">Live Chat</a></li>
-
-        <li><a data-toggle="tab" href="#add-authority-role">Deleted Messages</a></li>
-        <li><a data-toggle="tab" href="#add-authority">Drafts</a></li>
-    </ul>
+    <?php echo $this->navigation("messagesmenu"); ?>
 </div>
 
 
