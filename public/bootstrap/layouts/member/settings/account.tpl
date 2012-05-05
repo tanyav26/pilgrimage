@@ -6,14 +6,14 @@
         <div class="control-group">
             <label class="control-label"  for="username">Username</label>
             <div class="controls input">
-                <input class="input-xlarge" id="username" name="username" size="20" type="text" />
+                <input class="input-xlarge" id="username" name="username" size="20" type="text" value="<?php echo $this->user->get('username') ; ?>" />
                 <span class="help-block">Alpha-numeric only (aA-zZ,0-9)</span>
             </div>
         </div><!-- /control-group -->
         <div class="control-group">
             <label class="control-label"  for="first-name">First Name</label>
             <div class="controls input">
-                <input class="input-xxxlarge" id="first-name" name="first-name" size="30" type="text" />
+                <input class="input-xxxlarge" id="first-name" name="first-name" size="30" type="text" value="<?php echo $this->user->get('fullname'); ?>" />
                 <span class="help-block">Common, or given names</span>
             </div>
         </div><!-- /control-group -->
@@ -28,7 +28,7 @@
             <label class="control-label"  for="email">Email address</label>
             <div class="controls input">
                 <div class="input-prepend">
-                    <input class="input-xxxlarge" id="email" name="email" size="100" type="text" />
+                    <input class="input-xxxlarge" id="email" name="email" size="100" type="text" value="<?php echo $this->user->get('email'); ?>" />
                 </div>
                 <span class="help-block">Its important that this be valid</span>
             </div>

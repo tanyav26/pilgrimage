@@ -1,7 +1,7 @@
 <form action="<?php echo $this->link('/system/activity/create'); ?>" method="POST">
     <fieldset class="timeline-item-publisher">
         <div class="row-fluid">
-            <textarea class="span12 focused" rows="3" name="post_content" placeholder="Where are you now and what are you doing?"></textarea>
+            <textarea class="input-xxxlarge focused" rows="3" name="post_content" placeholder="Where are you now and what are you doing?"></textarea>
         </div>
         <div class="row-fluid hide">
             <div class="row-fluid">

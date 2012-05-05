@@ -9,19 +9,7 @@
                 </a>
                 <a class="brand logo" href="/~livingstonefultang/">Pilgrimage</a>
                 <div class="nav-collapse">
-                    <ul class="nav">                     
-                        <li class="notification dropdown">
-                            <a href="/~livingstonefultang/sign-in" class="dropdown-toggle" data-toggle="dropdown">4</a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <div class="alert-info alert no-margin">
-                                        No new notifications
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-
+                    
                     <ul class="nav pull-left">                     
                         <li><a href="/~livingstonefultang/sign-in">Featured</a></li>
                         <li><a href="/~livingstonefultang/system/start/explore">Explore</a></li>
@@ -44,6 +32,20 @@
                             </ul>
                         </li>
                     </ul> 
+                    
+                    <ul class="nav">                     
+                        <li class="notification dropdown">
+                            <a href="/~livingstonefultang/sign-in" class="dropdown-toggle" data-toggle="dropdown">4</a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="alert-info alert no-margin">
+                                        No new notifications
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
                     <form class="navbar-search pull-right" action="/~livingstonefultang/search" method="get">
                           <input type="text" class="search-query span4" name="query" placeholder="Search" />
                     </form>
