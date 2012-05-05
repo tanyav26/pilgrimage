@@ -76,7 +76,8 @@ abstract class Document extends Library\Object {
 
         $classes = array(
             'config' => 'Library\Config',
-            'output' => 'Library\Output'
+            'output' => 'Library\Output',
+            'user'  => '\Platform\User'
         );
 
         foreach ($classes as $var => $class) {

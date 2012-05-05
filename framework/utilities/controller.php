@@ -104,6 +104,8 @@ abstract class Controller extends \Library\Object {
         $this->method = $this->router->getMethod();
         $this->authority = $this->getAuthority();
         $this->authhandler = "dbauth";
+        
+        $this->output->set("user", $this->user );
     }
 
     /**

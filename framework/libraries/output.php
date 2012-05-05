@@ -124,13 +124,13 @@ class Output extends Object {
     final public function __construct() {
 
         $this->variables = array();
-        $this->config = Config::getInstance();
-        $this->router = Router::getInstance();
+        $this->config   = Config::getInstance();
+        $this->router   = Router::getInstance();
         $this->template = $this->config->get('template', 'default');
         //$this->pageTitle = $this->config->get('');
-
+        //$this->user     = \Platform\User::getInstance(); //Cannot use this here, because the output class is loaded way before auth and session
         //The Router defined format;
-        $this->format = $this->router->getFormat();
+        $this->format   = $this->router->getFormat();
     }
     
     /**
