@@ -64,6 +64,18 @@ class User extends Library\Object {
      */
     public static function _($userid = NULL) {}
     
+    
+    /**
+     * Method to determine if the user is authenticated;
+     * 
+     * @return type 
+     */
+    public function isAuthenticated(){
+        
+        return (bool)$this->authenticated;
+        
+    }
+    
     /**
      * Determins if a user is authenticated
      * 
@@ -98,8 +110,9 @@ class User extends Library\Object {
                         $this->$property = $value;
                     }
                 }
-                $this->userid = $authenticate->get("userid");
-                $this->email  = $authenticate->get("email"); 
+                $this->userid   = $authenticate->get("userid");
+                $this->email    = $authenticate->get("email"); 
+                $this->isauthenticated = $this->authenticated;
             }
             //get authority;
             $this->authority = Library\Session::getInstance()->getAuthority();    

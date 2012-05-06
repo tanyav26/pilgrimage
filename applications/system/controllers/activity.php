@@ -63,6 +63,11 @@ class Activity extends Platform\Controller {
      */
     public function create(){
         
+        //Is the user authenticated?
+        $this->requireAuthentication();
+        
+        $postid = null;
+        //Is the input method submitted via POST;
         if ($this->input->methodIs("post")) {
             
             //@1 Check where the form is comming from
@@ -73,16 +78,16 @@ class Activity extends Platform\Controller {
             //@3 Privacy settings, If posting to wall can the user post to the wall
            
             //@4 Add the post;
-            if(( $post = $this->load->model("activity")->add() ) == FALSE){
-                
+            if(( $post = $this->load->model("activity")->add() ) == FALSE){              
                 $this->alert( _("Could not add your post"), null, "error" );
-            }else{
-                
+            }else{         
                 $this->alert( _("You activity post has been saved and publised"), null, "success"); 
             }
+            //Return the user to a post page
+            $postid = $post->post_id;
         }
        
-        $this->redirect("/system/activity/read");
+        $this->redirect("/system/activity/read/$postid");
         
         return true;
     }

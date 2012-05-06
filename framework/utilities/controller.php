@@ -121,6 +121,26 @@ abstract class Controller extends \Library\Object {
     final public function getController() {
         return $this->controller;
     }
+    
+    /**
+     * Checks authenticated status of $this->user;
+     * 
+     * @return type 
+     */
+    final public function requireAuthentication(){
+        
+        //1. Check the user is authenticated,
+        //2. If the user is not authenticated, redirect them to authenticate,
+        if(!$this->user->isAuthenticated()){
+            $this->alert( _("You need to be logged in to complete this task"), _("Authentication required"), "info" );
+            
+            //@TODO user $this->login() for persistent data;
+            //Is there a means to redirect back from the login form once authentiation is complete?
+            //I.E just authenticate the user and return back to the task at hand
+            return $this->redirect("/member/session/start");
+        }
+        //3. Once authenticated redirect back to the requested url with the data send
+    }
 
     /**
      * 
@@ -132,8 +152,9 @@ abstract class Controller extends \Library\Object {
     /**
      * Displays messages on output
      * 
-     * @param type $message
-     * @param type $type | information, error, success, attention, note etc.
+     * @param string $message
+     * @param string $title
+     * @param string $type | information, error, success, attention, note etc.
      */
     final public function alert($message, $title='', $type='info') {
 

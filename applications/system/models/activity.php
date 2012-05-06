@@ -49,7 +49,7 @@ class Activity extends Platform\Model {
     public function add(){
         
         //@TODO determine the user has permission to post;
-        print_R($this->user);
+        //print_R($this->user);
         
         $post = array(
            "post_author"    => $this->user->get("userid"),

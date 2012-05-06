@@ -125,6 +125,16 @@ abstract class Template extends Output\Parse {
         
         //From string representation to array;	 
         foreach ($id as $i => $index) {
+            
+            if(is_object($value)){
+                if(!isset($value->$index)){
+                    return $default;
+                    break;
+                }
+                $value = $value->$index;
+                continue;
+            }
+            
             if (!isset($value[$index])) {
                 
                 //If we can't find the element, return the default value;

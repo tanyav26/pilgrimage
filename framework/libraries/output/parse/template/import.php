@@ -77,7 +77,7 @@ class Import extends Parse\Template {
             if(file_exists($layout)):
                 //TODO@ file get contents might not be the best method here 
                 //to import and parse the file
-                $contents = file_get_contents( $layout );
+                $contents =  file_get_contents( $layout );
                 $layout   = self::_($contents, $document ); //read only
                 //@TODO for lack of a better way to remove the XML declaration 
                 static::$imports[$path] = $layout = str_replace('<?xml version="1.0" encoding="UTF-8"?>', "" , $layout);

@@ -53,20 +53,53 @@ class Condition extends Parse\Template {
 
     /**
      * Defines the class constructor
-     * Used to preload pre-requisites for the layout class
+     * Used to preload pre-requisites for the element class
      *
-     * @return object layout
+     * @return object element
      */
     public function __constructor() {
         
     }
-    
-    private static function _count($data, $value=0){}
-    private static function _boolean($data, $value=FALSE){}
-    private static function _compare(){}
-    private static function _isset($data, $value=""){}
-    private static function _empty($data){}
-   
+
+    private static function _count($tag) {
+        
+    }
+
+    private static function _boolean($tag) {
+
+        $data = isset($tag['DATA']) ? self::getData($tag['DATA']) : null;
+        $value =  $tag['VALUE'] ;
+        $element = null;
+        
+        //If the boolean value of value is equal to data then condition is met
+        if ((bool)$data == (bool)$value) {
+            //Get the layout name; and save it!
+            if (isset($tag['CDATA']) && is_a(static::$writer, "XMLWriter")):
+                static::$writer->writeRaw($tag['CDATA']);
+            endif;
+            
+            //Get the layout name; and save it!
+            if (isset($tag['CHILDREN']) ):
+                $element =  $tag['CHILDREN'] ;
+            endif;
+            
+        } 
+        //Else remove the tag from the tree;
+        return $element;
+        
+    }
+
+    private static function _compare($tag) {
+        
+    }
+
+    private static function _isset($tag) {
+        
+    }
+
+    private static function _empty($tag) {
+        
+    }
 
     /**
      * Execute the layout
@@ -76,10 +109,24 @@ class Condition extends Parse\Template {
      * @return type
      */
     public static function execute($parser, $tag, $writer) {
-        
-        $method = isset($tag['METHOD'])? $tag['METHOD'] : 'compare';
-        $data   = isset($tag['DATA'])? self::getData( $tag['DATA'] ) : null;
-        
+
+        static::$writer = $writer;
+
+        $method = isset($tag['TEST']) ? $tag['TEST'] : 'compare';
+        $submethods = array("count", "boolean", "compare", "isset", "empty");
+        $_method = "_" . $method;
+
+        //Check that the method exists!
+        //If there is no value remove from the true;
+        if (!isset($tag['VALUE']) || !isset($tag['DATA'])) {
+            return null;
+        }
+
+        if (method_exists(self::getInstance(), $_method) && in_array(strtolower($method), $submethods)) :
+            $tag = static::$_method($tag);
+        endif;
+
+        return $tag;
     }
 
     /**
