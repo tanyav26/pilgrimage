@@ -1,5 +1,9 @@
 nbproject
 .DS_Store
 .localized
+<<<<<<< HEAD
 .com.apple.timemachine.supported
 documentation
+=======
+.com.apple.timemachine.supported
+>>>>>>> Updating the Pilgrimage documentation
