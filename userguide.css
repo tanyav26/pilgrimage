@@ -1,7 +1,7 @@
 body {
  margin: 0;
  padding: 0;
- font-family: Lucida Grande, Verdana, Geneva, Sans-serif;
+ font-family: /*Lucida Grande, Verdana, Geneva, Sans-serif*/'Droid Sans', sans-serif;
  font-size: 14px;
  color: #333;
  background-color: #fff;
@@ -39,7 +39,7 @@ a:hover {
  float: right;
  width: 175px;
  background-color: transparent;
- padding: 8px 8px 3px 0;
+ padding: 8px 40px 3px 0;
  text-align: right;
  font-size: 10px;
  color: #666;
@@ -59,7 +59,7 @@ a:hover {
  background-color: transparent;
  padding: 8px 12px 0 20px;
  margin: 0;
- font-family: Lucida Grande, Verdana, Geneva, Sans-serif;
+ font-family: /*Lucida Grande, Verdana, Geneva, Sans-serif*/'Droid Sans', sans-serif;
  font-size: 11px;
 }
 
@@ -125,15 +125,16 @@ a:hover {
 #masthead h1 {
 background-color: transparent;
 color: #e13300;
-font-size: 18px;
-font-weight: normal;
+font-size: 25px;
+font-weight: bold;
 margin: 0;
+text-transform: capitalize;
 padding: 0 0 6px 0;
 }
 
 #searchbox {
  background-color: transparent;
- padding: 6px 40px 0 0;
+ padding: 6px 0px 0 0;
  text-align: right;
  font-size: 10px;
  color: #666;
@@ -153,6 +154,7 @@ padding: 0 0 6px 0;
 
 #content p {
  margin: 12px 20px 12px 0;
+ line-height: 1.8em;
 }
 
 #content h1 {
@@ -160,7 +162,7 @@ color: #e13300;
 border-bottom: 1px solid #666;
 background-color: transparent;
 font-weight: normal;
-font-size: 24px;
+font-size: 18px;
 margin: 0 0 20px 0;
 padding: 3px 0 7px 3px;
 }
