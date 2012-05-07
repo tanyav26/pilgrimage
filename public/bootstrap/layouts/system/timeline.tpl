@@ -1,4 +1,5 @@
 <form action="<?php echo $this->link('/system/activity/create'); ?>" method="POST">
+    <?php if($this->user->isauthenticated) : ?>
     <fieldset class="timeline-item-publisher">
         <div class="row-fluid">
             <textarea class="input-xxxlarge focused" rows="3" name="post_content" placeholder="Where are you now and what are you doing?"></textarea>
@@ -87,6 +88,11 @@
             </div>
         </div>
     </fieldset>
+    <?php else : ?>
+    <div class="alert alert-warning">
+        <a href="<?php echo $this->link('/member/session/start'); ?>">Login now</a> to share a story from your current location, or upload photos
+    </div>
+    <?php endif ; ?>
     <ol class="timeline-items" id="main-timeline">
         <li class="timeline-item-li">
             <div class="timeline-item-container">
