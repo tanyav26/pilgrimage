@@ -180,7 +180,7 @@ a:hover {
     padding: 0px 15px 10px;
 }
 #toc h3{ margin-top: 5px !important; border-bottom: 1px solid #ccc; line-height: 2em}
-#toc ul, #toc ol{ padding: 0 0 0 15px; margin-left: 5px;}
+#toc ul, #toc ol{ padding: 0 0 0 15px; margin-left: 5px; list-style-image: none !important}
 
 #content h1 {
     color: #e13300;
