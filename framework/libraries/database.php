@@ -349,8 +349,12 @@ abstract class Database extends Object {
      * @return void
      */
     abstract public function __destruct();
-    
-    
+      
+   /**
+     * Closes the database connection
+     * 
+     * @return void
+     */ 
     abstract public function close();
 
     /**

@@ -46,7 +46,7 @@ class Admin extends Platform\Controller {
      * @return void
      */
     public function __construct() {
-        
+       
         parent::__construct();
         
         //Construct the parent

@@ -73,7 +73,7 @@ class Config {
             return $config->items[$name];
         }
         //Attempt to get from the database?
-        $items = $config->group($group);
+        $items = $config->group( $group );
 
         //If we have a group;
         if (is_array($items) && isset($items[$name])) {

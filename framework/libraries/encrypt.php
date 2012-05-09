@@ -230,9 +230,7 @@ final class Encrypt extends \Library\Object {
      * 
      * @return boolean True or False if encrypt exists
      */
-    public function mcryptExists() {
-        
-    }
+    public static function mcryptExists() {}
 
     /**
      * Returns an sha1, MD5 and sha224 hash (in that order) of a given string
@@ -270,5 +268,4 @@ final class Encrypt extends \Library\Object {
 
         return $instance;
     }
-
 }

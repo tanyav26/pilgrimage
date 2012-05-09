@@ -172,8 +172,7 @@ class Authorize extends \Library\Object {
      * @param type $definition 
      */
     final public function __construct() {
-
-        //Check if authenticated and store authenticated;
+        //silence is golden;
     }
 
     /**

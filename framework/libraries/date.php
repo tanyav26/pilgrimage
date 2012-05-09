@@ -50,18 +50,14 @@ class Date extends Object {
      * 
      * @return string
      */
-    public static function today() {
-        
-    }
+    public static function today(){}
 
     /**
-     * Returns yesterdays date
+     * Returns yesterdays date timestamp
      * 
      * @return string
      */
-    public static function yesterday() {
-        
-    }
+    public static function yesterday() {}
 
     /**
      * Translated from string to date
