@@ -6,7 +6,7 @@
         <title>Pilgrimage Documentation</title>
         <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css' />
         <style type='text/css' media='all'>@import url('userguide.css');</style>
-        <link rel='stylesheet' type='text/css' media='all' href='http://drstonyhills.github.com/pilgrimage/userguide.css' />
+        <link rel='stylesheet' type='text/css' media='all' href='userguide.css' />
 
         <meta http-equiv='expires' content='-1' />
         <meta http-equiv= 'pragma' content='no-cache' />
@@ -51,125 +51,94 @@
             <div id="toc">
                 <h3>Table of Contents</h3>
                 <ol>
-                    <li><a href="#">What is Pilgrimage?</a></li>
-                    <li><a href="#">What can I use Pilgrimage for?</a></li>
-                    <li><a href="#">What are the system requirements?</a></li>
-                    <li><a href="#">Where do I download Pilgrimage?</a></li>
-                    <li><a href="#">How do I set up Pilgrimage?</a></li>
-                    <li><a href="#">How to I install themes?</a></li>
-                    <li><a href="#">How do I make my own extensions?</a></li>
-                    <li><a href="#">Where is the API Reference?</a></li>
-                    <li><a href="#">How do I support the project?</a></li>
-                    <li><a href="#">How long till the next version?</a></li>
-                    <li><a href="#">What license does Pilgrimage use?</a></li>
-                    <li><a href="#">Where do I report bug issues?</a></li>
-                    <li><a href="#">Who else is using Pilgrimage?</a></li>
-                    <li><a href="#">What does Pilgrimage look like?</a></li>
-                    <li><a href="#">Who maintains Pilgrimage</a></li>
-                    <li><a href="#">Is there support for other languages?</a></li>
-                    <li><a href="#">Is Pilgrimage Object Oriented PHP</a></li>
-                    <li><a href="#">What about privacy?</a></li>
-                    <li><a href="#">What about security?</a></li>
-                    <li><a href="#">I still need more information</a></li>
+                    <li><a href="#q1">What is Pilgrimage?</a></li>
+                    <li><a href="#q2">What can I use Pilgrimage for?</a></li>
+                    <li><a href="#q3">What are the system requirements?</a></li>
+                    <li><a href="#q4">Where do I download Pilgrimage?</a></li>
+                    <li><a href="#q5">How do I set up Pilgrimage?</a></li>
+                    <li><a href="#q6">How to I install themes?</a></li>
+                    <li><a href="#q7">How do I make my own extensions?</a></li>
+                    <li><a href="#q8">Where is the API Reference?</a></li>
+                    <li><a href="#q9">How do I support the project?</a></li>
+                    <li><a href="#q10">How long till the next version?</a></li>
+                    <li><a href="#q11">What license does Pilgrimage use?</a></li>
+                    <li><a href="#q12">Where do I report bug issues?</a></li>
+                    <li><a href="#q13">Who else is using Pilgrimage?</a></li>
+                    <li><a href="#q14">What does Pilgrimage look like?</a></li>
+                    <li><a href="#q15">Who maintains Pilgrimage</a></li>
+                    <li><a href="#q16">Is there support for other languages?</a></li>
+                    <li><a href="#q17">Is Pilgrimage Object Oriented PHP</a></li>
+                    <li><a href="#q18">What about privacy?</a></li>
+                    <li><a href="#q19">What about security?</a></li>
+                    <li><a href="#q20">I still need more information</a></li>
                 </ol>
             </div>
 
             <h1>Getting Started Guide</h1>
 
-            <p>This section is for those who have just recently discovered Pilgrimage or to serve as a quick reference for other users. Pilgrimage is a location-aware PHP Platform and Object Oriented PHP Framework for building social networking applications. Pilgrimage is about people and the places they attend. On these pages, we hope to keep an active documentation before and during development. Please check back as often as possible for updates, and new features. Hope you find this worthwhile</p>
+            <p>This section is for those who have just recently discovered Pilgrimage or to serve as a quick reference for other users. In All, this is a summary from several pages from these docs compiled in the form of the 20 most frequently asked questions. Where more information is required a link will guide you to the extended narrative. We understand that the answers to these 20 question might not suffice your needs, and are available via email for any further issues. Remember our <a href="http://github.com/drstonyhills/pilgrimage/issues">issues/bugs</a> page has lots of undocumented answers you might find useful </p>
             <p class="important"><strong>Important:</strong>&nbsp; Please note that pilgrimage is <kbd>NOT</kbd> production ready.</p>
-            <h2>Features</h2>
+            <h2 id="q1">What is Pilgrimage?</h2>
 
-            <p>Here are some of the reasons why we think you should pay attention to Pilgrimage. We will try to keep this short, but invite you to dig beneath the surface and discover more greatness. So here goes... Pilgrimage is:</p>
+            <p>Pilgrimage is a free open-source location-aware PHP Platform and Object Oriented PHP Framework for building social networking applications. Pilgrimage is about people and the places they attend. </p>
+            <p>Pilgrimage requires a Database to run and supports multiple DBMS including MySQL, PostgreSQL and SQLitee3. Pilgrimage is built using the hierarchical model view approach which separates presentation from logic as well as facilitating the task of building your own extension.</p>
 
+            <p>For other features we hope to implement, and when please check our <a href="index.html#road_map">road-map</a>. Note that at this stage we are not accepting any feature request beyond our road-map.</p>
+
+
+            <h2 id="q2">What can I use Pilgrimage for?</h2>
+
+            <p>Pilgrimage is built primarily for social networking, helping users to explore the world around them. It is however powered by a very versatile framework and API serving as a social platform for almost all sorts of collaborative applications, including project management, academic course portals, event planning and promotion, collaborative software  etc.</p>
+            <p>Whilst it is not our direct intention to develop such applications in the near future, we hope to provide a solid platform extensible and open enough to allow for a fantastic ecosystem of such applications. </p>
+
+            <h2 id="q3">What are the system requirements?</h2>
+            <p>Pilgrimage is still undergoing exponential changes in its early development stage, as such the requirements listed below <kbd>WILL</kbd> change. We promise to keep them updated as best as we can.</p>
             <ul>
-                <li>Free - You know; as in free bread</li>
-                <li>Fast and has a very low memory footprint.</li>
-                <li>Built using an Hierarchical Model-View-Controller approach which separates logic from presentation</li>
-                <li>Clean and tidy, from URLs to code presentation</li>
-                <li>Highly extensible.</li>
-
-                <li>Stand-alone PHP/MySQL(i)|PostgreSQL|SQLite3 application</li>
-                <li>Geolocation aware. (via .OSM data, OpenStreetMap.org)</li>
-                <li>Extensible user Profiles and profile fields</li>
-
-                <li>Multi-site with multiple database support</li>
-                <li>Object oriented HMVC approach</li>
-                <li>Low memory footprint</li>
-                <li>Extensible Database Abstraction from multiple DBMS, with Active-record and query caching</li>
+                <li>PHP 5.3.0 or later &mdash; We use PHP Namespaces and other extensions only available to these versions. Sorry!
+                    <ul>
+                        <li>PHP Gettext extension or Library</li>
+                        <li>PHP Mcrypt extension</li>
+                    </ul>
+                </li>
+                <li>Apache 2.0 or later &mdash; So far we only develop and test on this server. 
+                    <ul>
+                        <li>mod_rewrite &mdash; For all the clean URLs. Nothing else will work</li>
+                    </ul>
+                </li>
+                <li>A RDBMS with PHP extensions &mdash; MySQL(i), PostgreSQL and SQLite3 will work in order of preference </li>
+                <li>At least 5 MB of free disk space and 32 MB of memory</li>
             </ul>
-
-            <p>For features we hope to implement, and when please check our <a href="#road_map">road-map</a> below. Note that at this stage we are not accepting any feature request beyond our road-map.</p>
-
-
-            <h2 id="road_map">Road-map</h2>
-
-            <p>Our mission is to create a platform thats easy enough to use but complete with all the futures you will expect from a social platform. .</p>
-
-            <h3>Version #0.9.0</h3>
-
+            <h2 id="q4">Where do I download Pilgrimage?</h2>
+            <p>The Pilgrimage codebase is maintained on <a href="http://github.com/drstonyhills/pilgrimage">github</a>. All milestones and major releases can be download <a href="https://github.com/drstonyhills/pilgrimage/tags">here</a>. If you feel adventurous and will like to down the latest of the latest, grab our <a href="https://github.com/drstonyhills/pilgrimage/downloads">master branch HEAD</a></p>
+            <p>If you will like to contribute to the codebase, we suggest you</p>
             <ul>
-                <li>First public release</li>
-                <li>Member profiles and messaging</li>
-                <li>Activity and data streams</li>
-                <li>Photo and Video gallery</li>
-                <li>Complete Access Control and Authorization</li>
-                <li>Privacy work-flows and implementation</li>
-                <li>Member Relationships and networking</li>
-                <li>System/Platform management and settings</li>
+                <li><a href="">Fork the repository</a> on github</li>
+                <li>Clone to your computer: <dfn> git clone -b http://github.com/{username}/pilgrimage</dfn></li>
+                <li>Create and checkout new branch in your fork'd repository: <dfn> git checkout -b my_pilgrimage_branch</dfn></li>
+                <li>Make your changes to the code</li>
+                <li>Commit your changes: <dfn>git commit -am "Added a new protocol"</dfn></li>
+                <li>Push (Upload) your changes to github: <dfn>git push origin my_pilgrimage_branch</dfn></li>
+                <li><a href="http://github.com/drstonyhills/pilgrimage/issues">Create an Issue</a> on our repository, describing the problem you tried to solve and a link to your commit and changes</li>
+                <li>Once we spot your patch we will <a href="#">take it on from there</a></li>
             </ul>
-
-            <h3>Version #0.9.1</h3>
-
-            <ul>
-                <li>Bug and security fixes</li>
-                <li>Grouping, Categorization, Lists and Subnetworks</li>
-                <li>In-depth activity analysis and statistics</li>
-            </ul>
-
-
-            <h3>Version #0.9.2</h3>
-
-            <ul>
-                <li>Bug and security fixes</li>
-                <li>Themes, User profile appearance settings and re-styling</li>
-                <li>Testing Phase 1 opens (TP1)</li>
-            </ul>
-
+            <h2 id="q5">How do I set up Pilgrimage?</h2>
+            <h2 id="q6">How to I install themes?</h2>
+            <h2 id="q7">How do I make my own extensions?</h2>
+            <h2 id="q8">Where is the API Reference?</h2>
+            <h2 id="q9">How do I support the project?</h2>
+            <h2 id="q10">How long till the next version?</h2>
+            <h2 id="q11">What license does Pilgrimage use?</h2>
+            <h2 id="q12">Where do I report bug issues?</h2>
+            <h2 id="q13">Who else is using Pilgrimage?</h2>
+            <h2 id="q14">What does Pilgrimage look like?</h2>
+            <h2 id="q15">Who maintains Pilgrimage?</h2>
+            <h2 id="q16">Is there support for other languages?</h2>
+            <h2 id="q17">Is Pilgrimage Object Oriented PHP</h2>
+            <h2 id="q18">What about privacy?</h2>
+            <h2 id="q19">What about security?</h2>
+            <h2 id="q20">I still need more information</h2>
 
 
-            <h3>Version #0.9.3</h3>
-
-            <ul>
-                <li>Bug and security fixes</li>
-                <li>Testing survey phase1 report and implementation</li>
-                <li>Deployment: Platform/Application installation work-flows and auto-updates</li>
-                <li>Protocols, API, RESTful, etc..</li>
-                <li>Testing Phase 2 opens (TP2)</li>
-            </ul>
-
-            <h3>Version #0.9.4</h3>
-
-            <ul>
-                <li>Bug and security fixes ONLY</li>
-                <li>Complete documentation</li>
-            </ul>
-
-            <h3>Version #1.0.0</h3>
-
-            <ul>
-                <li>First stable release</li>
-                <li>Testing Phase 2 opens (TP3)</li>
-                <li>Feature Request Phase 1 opens (FRP1)</li>
-            </ul>
-
-            <p>Following the first stable release, Pilgrimage will adopt a consistent release cycle which will be announced here in due time.</p>
-
-            <!--            <h2>References and External links</h2>
-            
-                        <h3>$this->foo->bar()</h3>
-                        <p>Description</p>
-                        <code>$this->foo->bar('<var>baz</var>')</code>-->
 
         </div>
         <!-- END CONTENT -->
