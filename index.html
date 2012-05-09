@@ -30,9 +30,9 @@
 
 
         <!-- START BREADCRUMB -->
-        <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
-            <tr>
-                <td id="breadcrumb">
+        <table id="breadcrumb" cellpadding="0" cellspacing="0" border="0" style="width:100%">
+            <tr >
+                <td id="breadcrumb_left">
                     <a href="http://drstonyhills.github.com/pilgrimage/">Project Home</a> &nbsp;&#8250;&nbsp;
                     <a href="#">User Guide Home</a> &nbsp;&#8250;&nbsp;
                     Introduction
@@ -48,6 +48,39 @@
         <!-- START CONTENT -->
         <div id="content">
 
+            <div id="toc">
+                <h3>Table of Contents</h3>
+                <ol>
+                    <li><strong>Introduction</strong>
+                        <ul>
+                            <li><a href="#">What is Pilgrimage</a></li>
+                            <li><a href="#">Download and Install</a></li>
+                            <li><a href="#">Getting Started</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">About the application</a>
+                        <ul>
+                            <li><a href="#">User Manual</a></li>
+                            <li><a href="#">API Reference</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Framework Guide</a>
+                        <ul>
+                            <li><a href="#">Architecture overview</a></li>
+                            <li><a href="#">Library Classes</a></li>
+                            <li><a href="#">Utility Classes</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Other things to note</a>
+                        <ul>
+                            <li><a href="#">Usage License</a></li>
+                            <li><a href="#">Credits</a></li>
+                            <li><a href="#">Links and Resources</a></li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
 
             <h1>Introduction</h1>
 
@@ -67,15 +100,15 @@
                 <li>Stand-alone PHP/MySQL(i)|PostgreSQL|SQLite3 application</li>
                 <li>Geolocation aware. (via .OSM data, OpenStreetMap.org)</li>
                 <li>Extensible user Profiles and profile fields</li>
-                
+
                 <li>Multi-site with multiple database support</li>
                 <li>Object oriented HMVC approach</li>
                 <li>Low memory footprint</li>
                 <li>Extensible Database Abstraction from multiple DBMS, with Active-record and query caching</li>
             </ul>
-            
+
             <p>For features we hope to implement, and when please check our <a href="#road_map">road-map</a> below. Note that at this stage we are not accepting any feature request beyond our road-map.</p>
-           
+
 
             <h2 id="road_map">Road-map</h2>
 
@@ -93,7 +126,7 @@
                 <li>Member Relationships and networking</li>
                 <li>System/Platform management and settings</li>
             </ul>
-            
+
             <h3>Version #0.9.1</h3>
 
             <ul>
@@ -101,8 +134,8 @@
                 <li>Grouping, Categorization, Lists and Subnetworks</li>
                 <li>In-depth activity analysis and statistics</li>
             </ul>
-            
-            
+
+
             <h3>Version #0.9.2</h3>
 
             <ul>
@@ -110,9 +143,9 @@
                 <li>Themes, User profile appearance settings and re-styling</li>
                 <li>Testing Phase 1 opens (TP1)</li>
             </ul>
-            
-            
-            
+
+
+
             <h3>Version #0.9.3</h3>
 
             <ul>
@@ -122,14 +155,14 @@
                 <li>Protocols, API, RESTful, etc..</li>
                 <li>Testing Phase 2 opens (TP2)</li>
             </ul>
-            
+
             <h3>Version #0.9.4</h3>
 
             <ul>
                 <li>Bug and security fixes ONLY</li>
                 <li>Complete documentation</li>
             </ul>
-            
+
             <h3>Version #1.0.0</h3>
 
             <ul>
@@ -139,12 +172,12 @@
             </ul>
 
             <p>Following the first stable release, Pilgrimage will adopt a consistent release cycle which will be announced here in due time.</p>
-            
-<!--            <h2>References and External links</h2>
 
-            <h3>$this->foo->bar()</h3>
-            <p>Description</p>
-            <code>$this->foo->bar('<var>baz</var>')</code>-->
+            <!--            <h2>References and External links</h2>
+            
+                        <h3>$this->foo->bar()</h3>
+                        <p>Description</p>
+                        <code>$this->foo->bar('<var>baz</var>')</code>-->
 
         </div>
         <!-- END CONTENT -->
