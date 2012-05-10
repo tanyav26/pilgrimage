@@ -1,20 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
-
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Pilgrimage Documentation</title>
+        <title>Pilgrimage Documentation | Library</title>
         <link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css' />
         <style type='text/css' media='all'>@import url('userguide.css');</style>
-        <link rel='stylesheet' type='text/css' media='all' href='userguide.css' />
+        <link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
 
         <meta http-equiv='expires' content='-1' />
         <meta http-equiv= 'pragma' content='no-cache' />
         <meta name='robots' content='all' />
-
     </head>
     <body>
-
         <!-- START NAVIGATION -->
         <div id="nav"><div id="nav_inner"></div></div>
         <div id="nav2"><a name="top">&nbsp;</a></div>
@@ -22,20 +19,20 @@
             <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
                 <tr>
                     <td><h1 class="page_title">Pilgrimage documentation</h1></td>
-                    <td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="example.com/user_guide/" />Search Project User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
+                    <td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="http://drstonyhills.github.com/pilgrimage/" />Search Project User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
                 </tr>
             </table>
         </div>
         <!-- END NAVIGATION -->
 
-
         <!-- START BREADCRUMB -->
         <table id="breadcrumb" cellpadding="0" cellspacing="0" border="0" style="width:100%">
             <tr >
                 <td id="breadcrumb_left">
-                    <a href="http://drstonyhills.github.com/pilgrimage/">Project Home</a> &nbsp;&#8250;&nbsp;
-                    <a href="#">User Guide Home</a> &nbsp;&#8250;&nbsp;
-                    Introduction
+                    <a href="../index.html">Project Home</a> &nbsp;&#8250;&nbsp;
+                    <a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+                    <a href="introudction.html">Framework</a> &nbsp;&#8250;&nbsp;
+                    Library
                 </td>
                 <td id="breadcrumb_right"><a href="#">Table of content</a></td>
             </tr>
@@ -47,151 +44,85 @@
 
         <!-- START CONTENT -->
         <div id="content">
-
             <div id="toc">
                 <h3>Table of Contents</h3>
-                <ol>
-                    <li><strong>Introduction</strong>
+                <ul>
+                    <li><strong>Library</strong>
                         <ul>
-                            <li><a href="#">What is Pilgrimage</a></li>
-                            <li><a href="#">Download and Install</a></li>
-                            <li><a href="#">Getting Started</a></li>
+                            <li><a href="library.authenticate.html">Authenticate</a>
+                                <ul>
+                                     <li><a href="library.authenticate.dbauth.html">DBAuth</a></li>
+                                     <li><a href="library.authenticate.ldap.html">LDAP</a></li>
+                                     <li><a href="library.authenticate.oauth.html">OAuth</a></li>
+                                     <li><a href="library.authenticate.openid.html">OpenID</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="library.authorize.html">Authorize</a>
+                                <ul>
+                                    <li><a href="library.authorize.type.html">Types</a>
+                                        <ul>
+                                            <li><a href="library.authorize.type.age.html">Age</a></li>
+                                            <li><a href="library.authorize.type.location.html">Location</a></li>
+                                            <li><a href="library.authorize.type.role.html">Role</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="library.authorize.authority.html">Authority</a></li>
+                                    <li><a href="library.authorize.permission.html">Permission</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="library.database.html">Database</a>
+                                <ul>
+                                    <li><a href="library.database.drivers.html">Drivers</a>
+                                        <ul>
+                                            <li><a href="library.database.drivers.mysql.html">MySQL</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="library.date.html">Date</a></li>
+                            <li><a href="library.folder.html">Folder</a>
+                                <ul>
+                                    <li><a href="library.folder.files.html">Files</a>
+                                        <ul>
+                                            <li><a href="library.folder.files.xml.html">Xml</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="library.output.html">Output</a>
+                                <ul>
+                                    <li><a href="library.output.format.html">Format</a></li>
+                                    <li><a href="library.output.parse.html">Parse</a>
+                                        <ul>
+                                            <li><a href="library.output.parse.template.html">Template</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="library.protocol.html">Protocol</a></li>
+                            <li><a href="library.session.html">Session</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="#">About the application</a>
-                        <ul>
-                            <li><a href="#">User Manual</a></li>
-                            <li><a href="#">API Reference</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Framework Guide</a>
-                        <ul>
-                            <li><a href="#">Architecture overview</a></li>
-                            <li><a href="#">Library Classes</a></li>
-                            <li><a href="#">Utility Classes</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Other things to note</a>
-                        <ul>
-                            <li><a href="#">Usage License</a></li>
-                            <li><a href="#">Credits</a></li>
-                            <li><a href="#">Links and Resources</a></li>
-                        </ul>
-                    </li>
-                </ol>
+                </ul>
             </div>
 
-            <h1>Introduction</h1>
+            <h1>Library Classes</h1>
 
-            <p>Pilgrimage is a location-aware PHP Platform and Object Oriented PHP Framework for building social networking applications. Pilgrimage is about people and the places they attend. On these pages, we hope to keep an active documentation before and during development. Please check back as often as possible for updates, and new features. Hope you find this worthwhile</p>
-            <p class="important"><strong>Important:</strong>&nbsp; Please note that pilgrimage is <kbd>NOT</kbd> production ready.</p>
-            <h2>Features</h2>
-
-            <p>Here are some of the reasons why we think you should pay attention to Pilgrimage. We will try to keep this short, but invite you to dig beneath the surface and discover more greatness. So here goes... Pilgrimage is:</p>
-
-            <ul>
-                <li>Free - You know; as in free bread</li>
-                <li>Fast and has a very low memory footprint.</li>
-                <li>Built using an Hierarchical Model-View-Controller approach which separates logic from presentation</li>
-                <li>Clean and tidy, from URLs to code presentation</li>
-                <li>Highly extensible.</li>
-
-                <li>Stand-alone PHP/MySQL(i)|PostgreSQL|SQLite3 application</li>
-                <li>Geolocation aware. (via .OSM data, OpenStreetMap.org)</li>
-                <li>Extensible user Profiles and profile fields</li>
-
-                <li>Multi-site with multiple database support</li>
-                <li>Object oriented HMVC approach</li>
-                <li>Low memory footprint</li>
-                <li>Extensible Database Abstraction from multiple DBMS, with Active-record and query caching</li>
-            </ul>
-
-            <p>For features we hope to implement, and when please check our <a href="#road_map">road-map</a> below. Note that at this stage we are not accepting any feature request beyond our road-map.</p>
-
-
-            <h2 id="road_map">Road-map</h2>
-
-            <p>Our mission is to create a platform thats easy enough to use but complete with all the futures you will expect from a social platform. .</p>
-
-            <h3>Version #0.9.0</h3>
-
-            <ul>
-                <li>First public release</li>
-                <li>Member profiles and messaging</li>
-                <li>Activity and data streams</li>
-                <li>Photo and Video gallery</li>
-                <li>Complete Access Control and Authorization</li>
-                <li>Privacy work-flows and implementation</li>
-                <li>Member Relationships and networking</li>
-                <li>System/Platform management and settings</li>
-            </ul>
-
-            <h3>Version #0.9.1</h3>
-
-            <ul>
-                <li>Bug and security fixes</li>
-                <li>Grouping, Categorization, Lists and Subnetworks</li>
-                <li>In-depth activity analysis and statistics</li>
-            </ul>
-
-
-            <h3>Version #0.9.2</h3>
-
-            <ul>
-                <li>Bug and security fixes</li>
-                <li>Themes, User profile appearance settings and re-styling</li>
-                <li>Testing Phase 1 opens (TP1)</li>
-            </ul>
-
-
-
-            <h3>Version #0.9.3</h3>
-
-            <ul>
-                <li>Bug and security fixes</li>
-                <li>Testing survey phase1 report and implementation</li>
-                <li>Deployment: Platform/Application installation work-flows and auto-updates</li>
-                <li>Protocols, API, RESTful, etc..</li>
-                <li>Testing Phase 2 opens (TP2)</li>
-            </ul>
-
-            <h3>Version #0.9.4</h3>
-
-            <ul>
-                <li>Bug and security fixes ONLY</li>
-                <li>Complete documentation</li>
-            </ul>
-
-            <h3>Version #1.0.0</h3>
-
-            <ul>
-                <li>First stable release</li>
-                <li>Testing Phase 2 opens (TP3)</li>
-                <li>Feature Request Phase 1 opens (FRP1)</li>
-            </ul>
-
-            <p>Following the first stable release, Pilgrimage will adopt a consistent release cycle which will be announced here in due time.</p>
-
-            <!--            <h2>References and External links</h2>
-            
-                        <h3>$this->foo->bar()</h3>
-                        <p>Description</p>
-                        <code>$this->foo->bar('<var>baz</var>')</code>-->
+            <p>Library Classes Docs</p>
 
         </div>
+        
         <!-- END CONTENT -->
-
-
         <div id="footer">
             <p>
-                Previous Topic:&nbsp;&nbsp;<a href="http://github.com/drstonyhills/pilgrimage">View on Github</a>
+                Previous Topic:&nbsp;&nbsp;<a href="architecture.html">Architecture overview</a>
                 &nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
                 <a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-                <a href="http://drstonyhills.github.com/pilgrimage">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-                Next Topic:&nbsp;&nbsp;<a href="#">Installing Pilgrimage</a>
+                <a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+                Next Topic:&nbsp;&nbsp;<a href="utility.html">Utility Classes</a>
             </p>
-            <p><a href="http://drstonyhills.github.com/pilgrimage">Pilgrimage</a> &nbsp;&middot;&nbsp; Copyright &#169; 2011 - 2012 &nbsp;&middot;&nbsp; <a href="http://stonyhillshq.com/">Stonyhills HQ</a></p>
+            <p><a href="../index.html">Pilgrimage</a> &nbsp;&middot;&nbsp; Copyright &#169; 2011 - 2012 &nbsp;&middot;&nbsp; <a href="http://stonyhillshq.com/">Stonyhills HQ</a></p>
         </div>
 
     </body>

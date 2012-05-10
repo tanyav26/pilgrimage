@@ -160,6 +160,7 @@ a:hover {
     padding: 0;
     position: relative;
     padding-left: 27%;
+    min-height: 600px;
 }
 
 #content p {
