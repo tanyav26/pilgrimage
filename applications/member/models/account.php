@@ -42,6 +42,13 @@ class Account extends Platform\Model {
     
     public function display(){}
     
+    /**
+     * Store the user data in the database
+     * 
+     * @param array $data
+     * @return boolean
+     * @throws \Platform\Exception 
+     */
     public function store( $data ){
         
         $encrypt    = \Library\Encrypt::getInstance();
