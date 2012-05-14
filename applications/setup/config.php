@@ -31,12 +31,22 @@ $config["install"]["requirements"] = array(
             "loaded" => true
         ),
         "mcrypt" => array(
-            "title" => _('Encryption Handling'),
+            "title" => _('Cryptography Handling'),
             "installed" => true,
             "loaded" => true
         ),
         "gettext" => array(
             "title" => _('Localization'),
+            "installed" => true,
+            "loaded" => true
+        ),
+        "json" => array(
+            "title" => _('javaScript Object Notation'),
+            "installed" => true,
+            "loaded" => true
+        ),
+        "libxml" => array(
+            "title" => _('XML Manipulation'),
             "installed" => true,
             "loaded" => true
         ),
@@ -54,7 +64,7 @@ $config["install"]["requirements"] = array(
                             "title" => _('sQLite3 Library'),
                             "installed" => true,
                             "loaded"    => true,
-                          //"terminal"  => true
+                          //"terminal"  => true || If we get tot his stage, then the error is terminal
                       )
                    )
                 )

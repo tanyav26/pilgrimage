@@ -1,9 +1,5 @@
-<div style="background: #fff; border: 1px solid #ddd; margin:0; padding: 15px; margin-bottom: 20px">
-    <div class="page-header"><h1><?php echo _('License Agreement'); ?></h1> 
-        <small><?php echo _('Read through carefully and ensure you understand these terms and your rights before installing.'); ?></small>
-    </div>
-    Thank you for choosing the Tuiyo.Social Platform (the "Software"). This software license (the "Agreement") is a legal agreement between you ("you", "licensee"), and Stonyhills LLC (the "Developer", "we", "our" or "us") that describes the terms and conditions applicable to your use of the Software. By clicking 'I ACCEPT' below, you indicate that you have read, understood and assent to be bound by the terms of this Agreement. If you do not agree to the terms of this Agreement, you are not granted any rights whatsoever in the Software, and you will not be able to access or use the Software.
-
+<div style="background: #fff; border: 1px solid #ddd; margin:0; padding: 15px; margin-bottom: 20px"><div class="page-header"><h1><?php echo _('License Agreement'); ?></h1>
+        <small><?php echo _('Read through carefully and ensure you understand these terms and your rights before installing.'); ?></small></div>This software license (the "Agreement") is a legal agreement between you ("you", "licensee"), and Stonyhills LLC (the "Developer", "we", "our" or "us") that describes the terms and conditions applicable to your use of the Software. By clicking 'I ACCEPT' below, you indicate that you have read, understood and assent to be bound by the terms of this Agreement. If you do not agree to the terms of this Agreement, you are not granted any rights whatsoever in the Software, and you will not be able to access or use the Software.
     <strong>SECTION 1.</strong>
 
     <strong>LICENSE GRANT AND RESTRICTIONS.</strong> Subject to the terms and conditions of this Agreement, including the subscription, and payment of the applicable subscription fees (where applicable), the Developer grants you a personal, limited, non-exclusive, non-transferable license, during the initial term of the subscription and any Renewal Term (as defined in Section 4), to electronically access, install and use the Software for which the applicable subscription has been made by you.
