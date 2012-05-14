@@ -129,7 +129,7 @@
         <div class="form-actions">
             <div class="clearfix">
                 <?php if($step>1) : ?>
-                <a href="#" class="btn pull-left" type="button" rel="goback"><?php echo _('Previous Step'); ?></a>
+                <a href="<?php echo $this->link('/setup/install/step'.((int) $this->get('step') - 1) ) ?>" class="btn pull-left" type="button" rel="goback"><?php echo _('Previous Step'); ?></a>
                 <?php endif; ?>
                 <button type="submit" class="btn pull-right"><?php echo ($step === 1) ? "I agree to these Terms" : "Next Step" ?></button>
             </div>
