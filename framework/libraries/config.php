@@ -53,7 +53,9 @@ class Config {
      * @return void;
      */
     public function __construct() {
+        
         $this->validate = Validate::getInstance();
+        
     }
 
     /**
@@ -128,6 +130,12 @@ class Config {
 
         return false;
     }
+    
+    public function getIni(){}
+    public function getDatabasee(){}
+    public function getArray(){}
+    public function getXML(){}
+    
 
     /**
      * Gets an instance of the config element

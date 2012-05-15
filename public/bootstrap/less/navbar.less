@@ -67,8 +67,6 @@
   .brand {
     float: left;
     display: block;
-    padding: 10px 20px 12px;
-    margin-left: -20px; // negative indent to left-align the text down the page
     font-size: 20px;
     font-weight: 200;
     line-height: 1;
@@ -76,8 +74,14 @@
     &.logo{
         text-indent: -9999em;
         min-width: @gridColumnWidth*2;
-        padding: 10px 20px 12px;
-        background: url('../img/logo.png') 25px 50% no-repeat scroll;
+        background: url('../img/logo.png') 0px 0px no-repeat scroll;
+        height: 30px;
+        margin-top: 5px;
+    }
+  }
+  &.canvas{ 
+    .brand{
+        &.logo{ margin: 35px 0px 0; background: url('../img/logo.png') 0px -30px no-repeat scroll;}
     }
   }
   // Plain text in topbar

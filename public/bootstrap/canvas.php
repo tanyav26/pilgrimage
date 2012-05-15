@@ -23,7 +23,12 @@
             <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
         </head>
         <body>
-            <div class="container top-pad"> 
+            <div class="container navbar canvas">
+                <div style="width: 200px; margin: auto">
+                    <a class="brand logo" href="<?php echo $this->link('/'); ?>">Pilgrimage</a>
+                </div>
+            </div>
+            <div class="container top-pad">
                 <tpl:block data="page.block.alerts" />  
                 <tpl:block data="page.block.banner">Banner</tpl:block>
                 <section class="layout-block boxed">
