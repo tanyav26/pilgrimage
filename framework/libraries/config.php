@@ -45,7 +45,26 @@ class Config {
     /**
      * @var mixed 
      */
-    private static $items;
+    private static $params;
+    
+    /**
+     * The Config Database Adaptor
+     * @var type 
+     */
+    public static $database;
+    
+    /**
+     * The Config XML Adaptor
+     * @var type 
+     */
+    public static $xml;
+    
+    /**
+     * The Config INI Adaptor
+     * @var type 
+     */
+    public static $ini;
+    
 
     /**
      * Constructor for the cofig library
@@ -55,6 +74,10 @@ class Config {
     public function __construct() {
         
         $this->validate = Validate::getInstance();
+        $this->database = static::getDatabase();
+        $this->xml      = static::getXML();
+        $this->ini      = static::getIni();
+        $this->writer   = static::getWriter();
         
     }
 
@@ -66,20 +89,20 @@ class Config {
      * @param string $group
      * @return mixed 
      */
-    public static function get($name, $default='', $group='system') {
+    public static function get($name, $default='', $group='system', $adapter = NULL) {
 
         //validate item before using
         $config = (!isset($this) || !is_a($this, "Library\Config")) ? self::getInstance() : $this;
 
-        if (empty($group) && isset($config->items[$name])) {
-            return $config->items[$name];
+        if (empty($group) && isset($config->params[$name])) {
+            return $config->params[$name];
         }
         //Attempt to get from the database?
-        $items = $config->group( $group );
+        $params = $config->group( $group );
 
         //If we have a group;
-        if (is_array($items) && isset($items[$name])) {
-            return $items[$name];
+        if (is_array($params) && isset($params[$name])) {
+            return $params[$name];
         }
         //Empty
         return $default;
@@ -127,15 +150,14 @@ class Config {
 
             return $CONFIG;
         }
-
         return false;
     }
     
-    public function getIni(){}
-    public function getDatabasee(){}
-    public function getArray(){}
-    public function getXML(){}
-    
+    private static function getIni(){}
+    private static function getDatabase(){}
+    private static function getArray(){}
+    private static function getXML(){}
+    private static function getWriter($file="", $config = NULL){}    
 
     /**
      * Gets an instance of the config element
@@ -155,5 +177,4 @@ class Config {
 
         return $instance;
     }
-
 }

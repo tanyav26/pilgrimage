@@ -2,7 +2,8 @@
      margin-bottom: 2*@baseLineHeight;
      position:relative;
     .points{
-        margin-bottom: -21px;
+        position:relative;
+        z-index: 10;
         div{ 
              text-align: center; 
             .marker{
@@ -29,5 +30,10 @@
                 }
             }
         }
+    }
+    .progress{
+        width: 100%;
+        position:relative;
+        top: -21px;
     }
 }

@@ -8,7 +8,7 @@
         <div class="span3 <?php echo ($step > 3) ? 'active' : ''; ?>"><a href="<?php echo $this->link('/setup/install/step4') ?>">Finish</a><span class="marker"></span></div>
     </div>
     <div class="progress mini-bar">
-        <div class="bar" style="width: <?php echo intval(12.5*((2*$step)-1)).'%'; ?>"></div>
+        <div class="bar" style="width: <?php echo intval(12.5*((2*$step)-1)).'%'; ?>">&nbsp;</div>
     </div>
 </div>
 
@@ -44,7 +44,7 @@
         <?php break;
         endswitch; ?>
     </fieldset>
-    <div class="form-actions">
+    <div class="form-actions page-end">
         <div class="clearfix">
             <?php if($step>1) : ?>
             <a href="<?php echo $this->link('/setup/install/step'.((int) $this->get('step') - 1) ) ?>" class="btn pull-left" type="button" rel="goback"><?php echo _('Previous Step'); ?></a>
