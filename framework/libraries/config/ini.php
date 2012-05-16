@@ -41,7 +41,47 @@ use Platform;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/config
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Ini extends \Library\Config {
+final class Ini extends \Library\Object {
+    
+    
+    private static $file = array();
+    
+    /**
+     * Parses an INI configuration file
+     * 
+     * @param type $filename
+     * @return boolean 
+     */
+    public function read( $filename ){
+       
+        //We will only parse the file if it has not already been parsed!;
+        if(!array_key_exists($filename, static::$file)){
+            if(file_exists( $filename)){
+                if((static::$file[$filename] = parse_ini_file($filename))===FALSE){
+                    $this->setError(_("Could not Parse the ini file"));
+                    return false;
+                }else{
+                    //Add the iniParams to $this->params;
+                    return true;
+                }
+            }else{
+                $this->setError(_("The configuration file ({$filename}) does not exists"));
+                return false;
+            }
+        } 
+    }
+    
+    public function getParams(){}
+    
+    public function getSection(){}
+    
+    public function get(){}
+    
+    public function set(){}
+    
+    public function setSection(){}
+    
+    public function save(){}
 
     /**
      * Gets an instance of the config element

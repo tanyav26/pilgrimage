@@ -40,31 +40,30 @@ use Platform;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/config
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Config {
+class Config extends Object {
 
     /**
      * @var mixed 
      */
     private static $params;
-    
+
     /**
      * The Config Database Adaptor
      * @var type 
      */
     public static $database;
-    
+
     /**
      * The Config XML Adaptor
      * @var type 
      */
     public static $xml;
-    
+
     /**
      * The Config INI Adaptor
      * @var type 
      */
     public static $ini;
-    
 
     /**
      * Constructor for the cofig library
@@ -72,13 +71,12 @@ class Config {
      * @return void;
      */
     public function __construct() {
-        
+
         $this->validate = Validate::getInstance();
         $this->database = static::getDatabase();
-        $this->xml      = static::getXML();
-        $this->ini      = static::getIni();
-        $this->writer   = static::getWriter();
-        
+        $this->xml = static::getXML();
+        $this->ini = static::getIni();
+        $this->writer = static::getWriter();
     }
 
     /**
@@ -89,7 +87,7 @@ class Config {
      * @param string $group
      * @return mixed 
      */
-    public static function get($name, $default='', $group='system', $adapter = NULL) {
+    public function get($name, $default = '', $group = 'system', $adapter = NULL) {
 
         //validate item before using
         $config = (!isset($this) || !is_a($this, "Library\Config")) ? self::getInstance() : $this;
@@ -98,7 +96,7 @@ class Config {
             return $config->params[$name];
         }
         //Attempt to get from the database?
-        $params = $config->group( $group );
+        $params = $config->group($group);
 
         //If we have a group;
         if (is_array($params) && isset($params[$name])) {
@@ -152,12 +150,37 @@ class Config {
         }
         return false;
     }
-    
-    private static function getIni(){}
-    private static function getDatabase(){}
-    private static function getArray(){}
-    private static function getXML(){}
-    private static function getWriter($file="", $config = NULL){}    
+
+    /**
+     * Returns an instance of the INI config file handler
+     * 
+     * @return type 
+     */
+    private static function getIni() {
+        return Config\Ini::getInstance();
+    }
+
+    /**
+     * Returns an instance of the Database config handler
+     * 
+     * @return type 
+     */
+    private static function getDatabase() {
+        return Config\Database::getInstance();
+    }
+
+    /**
+     * Returns an instance of the XML config file handler
+     * 
+     * @return type 
+     */
+    private static function getXML() {
+        return Config\Xml::getInstance();
+    }
+
+    private static function getArray() {}
+
+    private static function getWriter($file = "", $config = NULL, $handler="ini") {}
 
     /**
      * Gets an instance of the config element
@@ -177,4 +200,5 @@ class Config {
 
         return $instance;
     }
+
 }

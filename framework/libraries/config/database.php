@@ -41,7 +41,21 @@ use Platform;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/config
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Database extends \Library\Config {
+final class Database extends \Library\Object  {
+    
+    public function getParams(){}
+    
+    public function getSection(){}
+    
+    public function get(){}
+    
+    public function set(){}
+    
+    public function setSection(){}
+    
+    public function save(){}
+    
+    public function read(){}
 
     /**
      * Gets an instance of the config element
