@@ -30,7 +30,7 @@ namespace Platform;
 | For more info visit:  http://www.php.net/error_reporting
 |
 */
-error_reporting( E_ALL );
+error_reporting( E_ALL | E_WARNING | E_NOTICE );
 
 /*
 |---------------------------------------------------------------
@@ -62,8 +62,7 @@ define('APPPATH',   FSPATH.'applications'.DS );
 | question
 |
 */
-require_once ( FSPATH.'config'.DS.'defines'.EXT );
-require_once ( FSPATH.'config'.DS.'config'.EXT );
+require_once ( FSPATH .'framework'.DS.'utilities'.DS.'defines'.EXT );
 
 
 /*

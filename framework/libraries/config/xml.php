@@ -45,17 +45,9 @@ final class Xml extends \Library\Object{
     
     public function getParams(){}
     
-    public function getSection(){}
+    public function saveParams(){}
     
-    public function get(){}
-    
-    public function set(){}
-    
-    public function setSection(){}
-    
-    public function save(){}
-    
-    public function read(){}
+    public function readParams(){}
 
     /**
      * Gets an instance of the config element

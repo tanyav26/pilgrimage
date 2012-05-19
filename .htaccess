@@ -2,6 +2,11 @@ Options +FollowSymLinks
 RewriteEngine on
 RewriteBase /
 
+<FilesMatch "\.(inc)$">
+    Order deny,allow
+    Deny from all
+</FilesMatch>
+
 # All front-end files, redirect to the public folder or CDN
 RewriteRule .*\.(jpg|jpeg|gif|png|bmp|html|htm|phtml|ico|css|js|swf)$ ~livingstonefultang/public/$0 [L,NC]
 

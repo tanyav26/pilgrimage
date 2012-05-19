@@ -157,7 +157,7 @@ class Log extends Object{
         $instance = new self;
 
         //Remember to set the file;
-        self::$file = Config::get();
+        self::$file = Config::Param("logfile","system.log");
 
         return $instance;
     }

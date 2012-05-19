@@ -128,7 +128,7 @@ abstract class Database extends Object {
 
         //Sets the query to be executed;
 
-        $cfg = Config::group('database');
+        $cfg = Config::getParamSection('database');
 
 
         $this->offset = (int) $offset;
@@ -217,11 +217,7 @@ abstract class Database extends Object {
             $instances = array();
         }
 
-        //If the class was already instantiated, just return it
-        if (isset($instance))
-            return $instance;
-
-        $dbparams = Config::group("database");
+        $dbparams = Config::getParamSection("database");
 
         if (!isset($dbparams) OR count($dbparams) == 0) {
             //display some sort of error;
@@ -230,23 +226,27 @@ abstract class Database extends Object {
         }
 
         if (!isset($dbparams['driver'])) {
+            //die;
             //we can't work without this
             exit('we need to know what driver your using');
         }
 
         //serialize
-        $signature = serialize($dbparams);
-        $driver = $dbparams['driver'] = preg_replace('/[^A-Z0-9_\.-]/i', '', $dbparams['driver']);
-
+        $signature  = md5(serialize($dbparams)); 
+        $driver     = $dbparams['driver'] = preg_replace('/[^A-Z0-9_\.-]/i', '', $dbparams['driver']);
+        
         if (!isset($instances[$signature])):
-            $instances[$signature] = \call_user_func("Library\Database\Drivers\\" . $dbparams['driver'] . "\Driver::getInstance", $dbparams);
+            $instances[$signature] = \call_user_func("Library\Database\Drivers\\" . $driver . "\Driver::getInstance", $dbparams);
         endif;
+   
 
         if (!\is_object($instances[$signature])) {
-            exit('Could not instantiate database object for the driver:' . $dbparams['driver']);
+            exit('Could not instantiate database object for the driver:' . $driver);
         }
+        
+        
 
-        $instances[$signature]->driver = $dbparams['driver'];
+        $instances[$signature]->driver = $driver;
 
         return $instances[$signature];
     }

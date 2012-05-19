@@ -22,23 +22,19 @@
 
         <?php //print_R($this); ?>
         <body>
-            <form method="post" action="<?php echo $this->link("/"); ?>">
+            <form method="post" action="<?php echo $this->link("/"); ?>" style="margin-top: 150px">
                 <div role="container" class="container fillfix clearfix" style="max-width: 400px">
                     <div class="row clearfix fillfix">
                         <article>
-                            <h1>The page was not found</h1>
+                            <h1 class="text-embedded">404</h1>
                             <hr />
                             <div>
-                                <p>Sorry, but the page you were trying to view does not exist.</p>
-                                <p>It looks like this was the result of either:</p>
-                                <ul>
-                                    <li>a mistyped address</li>
-                                    <li>an out-of-date link</li>
-                                </ul>
+                                <p>Sorry, but the page you were trying to view does not exist. It looks like this was the result of either: a mistyped address or an out-of-date link</p>
+                              
                             </div>
                             <hr />
                             <div>
-                                <button type="submit" class="btn btn-primary">Homepage</button>
+                                <a  href="<?php echo $this->link("/"); ?>">Homepage</a>
                                 <tpl:import layout="console" />
                             </div>
                         </article>

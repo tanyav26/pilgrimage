@@ -311,9 +311,9 @@ final class Router extends Object {
         Event::trigger('onBeforeRoute', $path);
 
         // Load the routes.php file.
-        @include(FSPATH . 'config/routes' . EXT);
+        @include(FSPATH . 'routes.inc');
 
-        $routers = Folder::itemizeFind("routes.php", APPPATH, 0, TRUE, 1);
+        $routers = Folder::itemizeFind("routes.inc", APPPATH, 0, TRUE, 1);
 
         //print_R($routers);
         foreach ($routers as $i => $routesFile) {
@@ -616,7 +616,6 @@ final class Router extends Object {
         } else {
             $url = $routeid;
         }
-
         //if routeid is a valid url
     }
 
@@ -642,6 +641,16 @@ final class Router extends Object {
         $this->path = $path;
 
         return $this;
+    }
+    
+    /**
+     * Returns the value of the Path property
+     * 
+     * @return type 
+     */
+    public function getPath(){
+        
+        return $this->path;
     }
 
     /**
@@ -694,11 +703,16 @@ final class Router extends Object {
         $session->set("alerts", $alerts);
         
         //We now start a new buffer, to deal with the template!
-        $output->restartBuffer();
+        $buffer = $output->restartBuffer();
         
         //print_R($alerts);
-        header("HTTP/1.1 $code Moved Permanently");
-        header("Location: ".$output->link($url) );
+        //flush();
+        @header("HTTP/1.1 $code Moved Permanently");
+        @header("Location: ".$output->link($url) );
+        
+        //echo $output->link($url);
+        
+        //die;
 
         $this->abort();
     }

@@ -22,6 +22,7 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
+
 namespace Platform;
 
 use Library;
@@ -41,64 +42,69 @@ use Application\System\Controllers;
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/dispatcher
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Dispatcher extends \Library\Object{
+final class Dispatcher extends \Library\Object {
 
     /**
      * The Refering page
      * @var string
      */
     public static $referer;
-    
+
     /**
      * The query being executed
      * @var string 
      */
     public static $query;
-    
+
     /**
      * The resolved task
      * @var type 
      */
     public static $task;
-    
+
     /**
-     *The route map
+     * The route map
      * @var array 
      */
     protected $route;
 
-    
-    public function __construct(){
+    public function __construct() {
         //Determines the referer
     }
-    
-    
-    public function isDispatchable() {}
 
-    public function isAuthenticated() {
-        
-        //$session = Library\Session::getInstance();
-        //return $session->isAuthenticated();
+    public static function isDispatchable( $Route , $Dispatcher) {
         
     }
-    
+
+    public function isAuthenticated() {
+
+        //$session = Library\Session::getInstance();
+        //return $session->isAuthenticated();
+    }
+
     //@TODO create request, execute action, add parameter
     //for dynamic request re-routing
-    public function createRequest(){}
-    
-    public function executeRequest(){}
-    
-    public function addRequestParameter(){}
-    
+    public function createRequest() {
+        
+    }
+
+    public function executeRequest() {
+        
+    }
+
+    public function addRequestParameter() {
+        
+    }
+
     /**
      * Returns the Refering URL
      * 
      * @return string;
      */
-    public static function getReferingURL(){
-        
-        $input      =  \Library\Input::getInstance();
-        $referer    =  $input->getString("HTTP_REFERER", "/", "session");
+    public static function getReferingURL() {
+
+        $input = \Library\Input::getInstance();
+        $referer = $input->getString("HTTP_REFERER", "/", "session");
 
         return $referer;
     }
@@ -107,65 +113,57 @@ final class Dispatcher extends \Library\Object{
      * Executres the routed request
      * @param <type> $route
      */
-    public function execute( $route ) {
-              
+    public function execute($route) {
+
         // get the base controller
-        require_once FSPATH . 'framework' . DS .'utilities'.DS. 'controller' . EXT;
-        //$action  = Controller::getInstance();
-        
-        //Before Dispatch Event
-        Library\Event::trigger('onBeforeDispatch');
-        
+        require_once FSPATH . 'framework' . DS . 'utilities' . DS . 'controller' . EXT;
+
         $application = $route->getApplication();
         $controller = $route->getController();
         $method = $route->getMethod();
 
         $class = "Application\\" . ucfirst($application) . "\Controllers\\" . ucfirst($controller);
-        
+
         //Check for singularity;
-        if(!class_exists( $class )){
-            
-            $word = Inflector::pluralize( $controller );
-            if($word == $controller){ 
-                $word = Inflector::singularize( $word );
+        if (!class_exists($class)) {
+            $word = Inflector::pluralize($controller);
+            if ($word == $controller) {
+                $word = Inflector::singularize($word);
             }
-            $class = "Application\\" . ucfirst($application) . "\Controllers\\" . ucfirst($word);  
+            $class = "Application\\" . ucfirst($application) . "\Controllers\\" . ucfirst($word);
         }
-                              
-        $this->task     = $class::getInstance();
-        $this->route    = $route;
-     
+        
+        $this->route = $route;
+        $this->task = $class::getInstance();
+        
+
         //Execute the method;
         $argmts = $route->getParameter("arguments");
-        $argmts = empty($argmts)?array():$argmts;
-                            
+        $argmts = empty($argmts) ? array() : $argmts;
+
         //First check if the method is actually a subtask of the controller, i.e 
         //i.e if a subcontroller exists to the main controller
-        
-        $_subTask   = $class."\\".ucfirst($method);
-        $_subMethod = (count($argmts)>0 && isset( $argmts[0] ) ) ? $argmts[0] : 'index' ;
-        
+
+        $_subTask = $class . "\\" . ucfirst($method);
+        $_subMethod = (count($argmts) > 0 && isset($argmts[0]) ) ? $argmts[0] : 'index';
+
         //Change the route, to represent the subtask being requested!
-       if(class_exists( $_subTask )){
-           
-           if(method_exists($_subTask, $_subMethod)){
-               $class   = $_subTask ; $this->task = $class::getInstance() ;
-               $method  = $_subMethod;
-               
-               //echo $_subMethod;
-               
-               //remove the first argument from the 
-               if(isset($argmts[0]) && $argmts[0] == $_subMethod ){
-                   unset( $argmts[0] );
-               }
-           }
-       }
-       
-       
-       //If the request arguments have changed, modify in Router
-       $route->setParameter("arguments", array_merge(array(),$argmts) ); //Using array merge to reset the indices
-       
-       
+        if (class_exists($_subTask)) {
+
+            if (method_exists($_subTask, $_subMethod)) {
+                $class = $_subTask;
+                $this->task = $class::getInstance();
+                $method = $_subMethod;
+                //echo $_subMethod;
+                //remove the first argument from the 
+                if (isset($argmts[0]) && $argmts[0] == $_subMethod) {
+                    unset($argmts[0]);
+                }
+            }
+        }
+        //If the request arguments have changed, modify in Router
+        $route->setParameter("arguments", array_merge(array(), $argmts)); //Using array merge to reset the indices
+
         if (!method_exists($class, $method)) {
             if (method_exists($class, "index")) {
                 $method = 'index';
@@ -173,16 +171,11 @@ final class Dispatcher extends \Library\Object{
                 throw new \Platform\Exception("Method $method does not exists in $class");
             }
         }
+        //Before Dispatch Event
+        static::isDispatchable($route, $this);
+        Library\Event::trigger('onBeforeDispatch', $route);
         
-        //Authorise!
-        if($this->isAuthenticated()){
-            //Check if is dispatchable?
-            //$user = User::getInstance();
-            //print_R($user);
-        }
-
         \call_user_func_array(array($this->task, $method), (array) $argmts);
-        
         //Try throw exception;
     }
 
@@ -194,19 +187,19 @@ final class Dispatcher extends \Library\Object{
      * @param type $message
      * @return type 
      */
-    public function redirect($url='', $code=302, $message='') {
-        
+    public function redirect($url = '', $code = 302, $message = '') {
+
         //Before Dispatch Event
         Library\Event::trigger('onBeforeRedirect');
         //echo $url;
-        
         //print_R($this->route);
-        $redirect = empty($url) ? trim( $this->task->redirect ) : $url ;
-        
-        if( empty($redirect) ) return; 
-        
+        $redirect = empty($url) ? trim($this->task->redirect) : $url;
+
+        if (empty($redirect))
+            return;
+
         //Now redirect
-        return $this->route->redirect( $redirect , $code, $message );
+        return $this->route->redirect($redirect, $code, $message);
     }
 
     /**

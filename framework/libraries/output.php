@@ -126,8 +126,8 @@ class Output extends Object {
         $this->variables = array();
         $this->config   = Config::getInstance();
         $this->router   = Router::getInstance();
-        $this->template = $this->config->get('template', 'default');
-        //$this->pageTitle = $this->config->get('');
+        $this->template = $this->config->getParam('template', 'default');
+        //$this->pageTitle = $this->config->getParam('');
         //$this->user     = \Platform\User::getInstance(); //Cannot use this here, because the output class is loaded way before auth and session
         //The Router defined format;
         $this->format   = $this->router->getFormat();
@@ -189,6 +189,11 @@ class Output extends Object {
         //2.output buffer start
         if (!ob_start("ob_gzhandler"))
             ob_start();
+    }
+    
+    
+    final public static function stopBuffer(){
+        ob_end_flush();
     }
 
     /**
@@ -421,7 +426,7 @@ class Output extends Object {
      */
     public function layout($layout, $app='', $ext='.tpl', $variables = array(), $set = false, $setas ='') {
 
-        $load = \Platform\Shared::loader();
+        $load = \Platform\Loader::getInstance();
 
         //Layout
         $file = $load->layout($layout, $app, $ext, FALSE);
@@ -612,7 +617,7 @@ class Output extends Object {
         }
 
         //
-        return $this->template = $this->config->get('template');
+        return $this->template = $this->config->getParam('template');
     }
 
     /**

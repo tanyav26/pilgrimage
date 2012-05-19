@@ -106,9 +106,24 @@ abstract class Controller extends \Library\Object {
         $this->authhandler = "dbauth";
         
         $this->output->set("user", $this->user );
+        
+
+        $installed      =  $this->config->getParam("installed", false ,"database");
+        $application    =  $this->application;
+        $controller     =  $this->controller;
+        
+        //We might have not yet installed
+        if(!$installed && (strtolower($application)!== "setup" ) ){
+            $this->redirect("/setup/install/step1");
+        }elseif( $installed && (strtolower($application)== "setup" && strtolower($controller)== "install")){
+            throw new \Platform\Exception("The system is already installed, you cannot perform any more install actions. Did you want to upgrade instead? try /setup/update/");
+        }
     }
 
     /**
+     * Returns the name of  method/task
+     * 
+     * @return string
      * 
      */
     final public function getMethod() {
@@ -116,6 +131,8 @@ abstract class Controller extends \Library\Object {
     }
 
     /**
+     * Gets the name of the action controller
+     * @return string
      * 
      */
     final public function getController() {

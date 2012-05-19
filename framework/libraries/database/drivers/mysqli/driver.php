@@ -23,7 +23,7 @@
  *
  */
 
-namespace Library\Database\Drivers\MySQL;
+namespace Library\Database\Drivers\MySQLi;
 
 use Library;
 use Platform;
@@ -47,7 +47,7 @@ final class Driver extends Library\Database{
      *
      * @var string
      */
-    var $name = 'mysql';
+    var $name = 'mysqli';
     /**
      *  The null/zero date string
      *
@@ -80,17 +80,19 @@ final class Driver extends Library\Database{
         $select     = array_key_exists('select', $options) ? $options['select'] : true;
 
         // mysql driver exists?
-        if (!function_exists('mysql_connect')) {
+        if (!function_exists('mysqli_real_connect')) {
             $this->errorNum = 1;
-            $this->errorMsg = 'The MySQL extension "mysql" is not available.';
+            $this->errorMsg = 'The MySQLi extension "mysqli" is not available.';
             $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
             return;
         }
-
+        
+        $this->resourceId = mysqli_init();
+        
         // connect to the server
-        if (!($this->resourceId = @mysql_connect($host, $user, $password, true))) {
-            $this->errorNum = 2;
-            $this->errorMsg = 'Could not connect to MySQL';
+        if (!(@mysqli_real_connect($this->resourceId, $host, $user, $password))) {
+            $this->errorNum =  mysqli_connect_errno();
+            $this->errorMsg =  mysqli_connect_error();
             $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
             return;
         }
@@ -102,7 +104,7 @@ final class Driver extends Library\Database{
         if ($this->utf) {
             $this->setUTF();
         }
-
+        
         $this->prefix = $prefix;
         $this->ticker = 0;
         $this->errorNum = 0;
@@ -127,20 +129,13 @@ final class Driver extends Library\Database{
         if (!$database) {
             return false;
         }
-
+        
         //Chooses the database to connect to
-        if (!mysql_select_db($database, $this->resourceId)) {
+        if (!mysqli_select_db($this->resourceId, $database)) {
             $this->errorNum = 3;
             $this->errorMsg = 'Could not connect to database';
             $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
             return false;
-        }
-
-        // if running mysql 5, set sql-mode to mysql40 - thereby circumventing strict mode problems
-        if (strpos($this->getVersion(), '5') === 0) {
-            $statement = $this->prepare("SET sql_mode = 'MYSQL40'");
-            $statement->execute();
-            //@TODO $statement->execute();
         }
 
         return true;
@@ -154,7 +149,7 @@ final class Driver extends Library\Database{
     public function isConnected(){
 
         if (is_resource($this->resourceId)) {
-            return mysql_ping($this->resourceId);
+            return mysqli_ping($this->resourceId);
         }
         return false;
     }
@@ -165,7 +160,7 @@ final class Driver extends Library\Database{
      * @return
      */
     public function getVersion(){
-        
+        return mysqli_get_server_info( $this->resourceId );
     }
 
 
@@ -181,7 +176,7 @@ final class Driver extends Library\Database{
     final public function close(){
         $return = false;
         if (is_resource($this->resourceId)) {
-            $return = mysql_close($this->resourceId);
+            $return = mysqli_close($this->resourceId);
         }
         return $return;
     }
@@ -194,7 +189,7 @@ final class Driver extends Library\Database{
      * @return boolean  True on success, false otherwise.
      */
     final public function test() {
-        return (function_exists('mysql_connect'));
+        return (function_exists('mysqli_connect'));
     }
 
     /**
@@ -205,7 +200,7 @@ final class Driver extends Library\Database{
      */
     final public function connected() {
         if (is_resource($this->resourceId)) {
-            return mysql_ping($this->resourceId);
+            return mysqli_ping($this->resourceId);
         }
         return false;
     }
@@ -227,7 +222,7 @@ final class Driver extends Library\Database{
      * @access	public
      */
     final public function setUTF() {
-        mysql_query("SET NAMES 'utf8'", $this->resourceId);
+        mysqli_query($this->resourceId,"SET NAMES 'utf8'");
     }
 
     /**
@@ -240,7 +235,7 @@ final class Driver extends Library\Database{
      * @abstract
      */
     final public function getEscaped($text, $extra = false) {
-        $result = mysql_real_escape_string($text, $this->resourceId);
+        $result = mysqli_real_escape_string($this->resourceId, $text);
         if ($extra) {
             $result = addcslashes($result, '%_');
         }
@@ -255,8 +250,9 @@ final class Driver extends Library\Database{
      * @return mixed A database resource if successful, FALSE if not.
      */
     final public function exec( $query ='') {
-        
-        if (!is_resource($this->resourceId)) {
+
+        //@TODO how to verify the resource Id
+        if (!is_a($this->resourceId, "mysqli")) {
             $this->setError( _("No valid connection resource found") );
             return false;
         }
@@ -278,14 +274,14 @@ final class Driver extends Library\Database{
 
         $this->errorNum = 0;
         $this->errorMsg = '';
-        $this->cursor = mysql_query($sql, $this->resourceId);
+        $this->cursor = mysqli_query( $this->resourceId, $sql);
 
         if (!$this->cursor) {
-            $this->errorNum = mysql_errno($this->resourceId);
-            $this->errorMsg = mysql_error($this->resourceId) . " SQL=$sql";
+            $this->errorNum = mysqli_errno($this->resourceId);
+            $this->errorMsg = mysqli_error($this->resourceId) . " SQL=$sql";
 
             if ($this->debug) {
-                //Debug error;
+                //Debug the error
             }
             $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
             return false;
@@ -305,13 +301,14 @@ final class Driver extends Library\Database{
      * @return selfss
      */
     public static function getInstance( $options ){
+        
 
         static $instance;
         //If the class was already instantiated, just return it
-        if (isset($instance) ) return $instance ;
+        if (isset($instance) && is_a($instance, "Library\Database\Drivers\MySQLi\Driver") ) return $instance ;
 
         $instance =  new self($options);
-
+        
         return $instance;
     }
 }

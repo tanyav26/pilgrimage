@@ -18,7 +18,7 @@
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
  * @version    Release: 1.0.0
- * @link       http://stonyhillshq/documents/index/carbon4/libraries/config
+ * @link       http://stonyhillshq.com/documents/index/carbon4/libraries/config
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
@@ -76,27 +76,65 @@ class Config extends Object {
         $this->database = static::getDatabase();
         $this->xml = static::getXML();
         $this->ini = static::getIni();
-        $this->writer = static::getWriter();
+        
     }
 
     /**
-     * Returns a config Item, from config files
+     * Returns the configuration array
      * 
-     * @param string $name
-     * @param string $default
-     * @param string $group
-     * @return mixed 
+     * @return array 
      */
-    public function get($name, $default = '', $group = 'system', $adapter = NULL) {
+    final public function getParams() {
+        return $this->params;
+    }
 
+    /**
+     * Sets a param in a configuration section section.
+     * 
+     * Use setParamSection to create a section
+     * if it does not exists before creating one. Use hasParamSection to check for
+     * the existence of that specific section before creating one.
+     * 
+     * @param string $name The name of the param to update
+     * @param mixed $value The value of the param
+     * @param string $section Default section is the system section
+     * @return Return false if the section does not exists. 
+     */
+    public static function setParam($name, $value = NULL, $section = "system") {
+        
+        //Instantiate
+        $config = (!isset($this) || !is_a($this, "Library\Config")) ? self::getInstance() : $this;
+
+        if (!isset($config->params[$section])) {
+            return false;
+            //we already have it;
+        }
+        
+        //Set the param;
+        $config->params[$section][$name] = $value;
+        
+        //Return $this
+        return $config;
+        
+    }
+
+    /**
+     * Returns a config Item, from configuration
+     * 
+     * @param type $name
+     * @param type $default
+     * @param type $section
+     * @param type $adapter 
+     */
+    public static function getParam($name, $default = '', $section = 'system', $adapter = NULL) {
         //validate item before using
         $config = (!isset($this) || !is_a($this, "Library\Config")) ? self::getInstance() : $this;
 
-        if (empty($group) && isset($config->params[$name])) {
+        if (empty($section) && isset($config->params[$name])) {
             return $config->params[$name];
         }
         //Attempt to get from the database?
-        $params = $config->group($group);
+        $params = $config->getParamSection($section);
 
         //If we have a group;
         if (is_array($params) && isset($params[$name])) {
@@ -107,24 +145,123 @@ class Config extends Object {
     }
 
     /**
-     * Returns a config group element
+     * Sets Param section to the config array, or replaces one if already exists
      * 
-     * @param string $groupname
-     * @return mixed 
+     * NOTE: You will need to explicitly saveParams with a handler to add this conifugration permanently
+     * 
+     * Example: 
+     * The following usage will add an save configuration data on the fly to the database;
+     * $config->setParamSection("userdata", array("param1"=>"param1value") );
+     * $config->database->saveParams("userdata");
+     * 
+     * 
+     * @param type $name
+     * @param type $params 
      */
-    public static function group($groupname) {
+    public static function setParamSection($section, $params = array()) {
+
+        static $objects = array();
+
+        //We can only handle arrays at this time
+        if (!is_array($params))
+            return false;
 
         //Instantiate
         $config = (!isset($this) || !is_a($this, "Library\Config")) ? self::getInstance() : $this;
 
-        if (isset($config->items[$groupname])) {
-            return $config->items[$groupname];
+        //We
+        $config->params[$section] = $params;
+
+        return $config;
+    }
+
+    /**
+     * Returns a config group/section element
+     * 
+     * @param type $section
+     * @return type 
+     */
+    public static function getParamSection($section) {
+
+        //Instantiate
+        $config = (!isset($this) || !is_a($this, "Library\Config")) ? self::getInstance() : $this;
+
+        if (isset($config->params[$section])) {
+            return $config->params[$section];
             //we already have it;
         }
-        //OR else go get it!
-        $cfgGroup = $config->items[$groupname] = \Platform\Shared::config($groupname);
+        $_config = static::getConfig();
 
-        return $cfgGroup;
+        if (!isset($_config[$section])) {
+            $cfgSection = FALSE;
+        } else {
+            $cfgSection = $config->params[$section] = $_config[$section];
+        }
+
+        return $cfgSection;
+    }
+
+    /**
+     * Loads all the system configuration
+     * 
+     * @staticvar type $configarray
+     * @param type $ext
+     * @param type $path
+     * @return type 
+     */
+    public static function getConfig($ext = '.inc', $path = "") {
+
+        static $configarray;
+
+        if (!isset($configarray)) {
+
+            if (!\Library\Folder\Files::isFile(FSPATH . 'config' . $ext)) {
+                exit('The configuration file config' . $ext . ' does not exist.');
+            }
+            //Empty config array;
+            $config = array();
+
+            require_once(FSPATH . 'config' . $ext );
+
+            //Get parsable configurations
+            $_INIs = \Library\Folder::itemize(FSPATH . 'config' . DS);
+            $file = \Library\Folder::getFile();
+
+            foreach ($_INIs as $ini):
+                if ($file->setFile($ini)) {
+                    if (strtolower($file->getExtension()) === "ini") {
+                        $_INI = static::getIni();
+                        if ($_INI->readParams($ini) !== FALSE) {
+                            //print_R($INI);
+                            $params = $_INI->getParams($ini);
+                            $config = array_merge($config, $params);
+                            //print_R($config);
+                        }
+                    }
+                }
+            //continue;
+            endforeach;
+
+
+            //Find all the config files in apps
+            $configs = \Library\Folder::itemizeFind("config.inc", APPPATH, 0, TRUE, 1);
+
+            //print_R($routers);
+            foreach ($configs as $i => $configFile) {
+                if (!\Library\Folder::is($configFile)) {
+                    //include the individual app routes
+                    @include rtrim($configFile, DS);
+                }
+            }
+
+            if (!isset($config) OR !is_array($config)) {
+                exit('Your config file does not appear to be formatted correctly.');
+            }
+
+
+            $configarray = & $config;
+        }
+        return $configarray;
     }
 
     /**
@@ -178,9 +315,6 @@ class Config extends Object {
         return Config\Xml::getInstance();
     }
 
-    private static function getArray() {}
-
-    private static function getWriter($file = "", $config = NULL, $handler="ini") {}
 
     /**
      * Gets an instance of the config element
@@ -196,7 +330,10 @@ class Config extends Object {
         if (isset($instance))
             return $instance;
 
+        $params = static::getConfig();
+
         $instance = new self();
+        $instance->params = $params; //Store Params form config files;
 
         return $instance;
     }

@@ -48,13 +48,6 @@ date_default_timezone_set("UTC");
 
 /*
  * ------------------------------------------------------
- *  Load the compatibility override functions
- * ------------------------------------------------------
- */
-require( FSPATH . 'framework'. DS .'utilities'.DS. 'shared' . EXT);
-
-/*
- * ------------------------------------------------------
  *  Set Exception 
  * ------------------------------------------------------
  */
@@ -82,8 +75,9 @@ Debugger::start();
  * ------------------------------------------------------
  */
 Library\Output::startBuffer(); //important order!! Must be called before session start
-Library\Session::start();
 Library\Event::trigger('onStart');
+Library\Session::start();
+
 
 /*
  * ------------------------------------------------------
@@ -104,7 +98,6 @@ $Router = Library\Router::getInstance();
 $Uri    = Library\Uri::getInstance();
 $Output = Library\Output::getInstance();
 
-//$Router->getURL("standard");
 /*
  * ------------------------------------------------------
  *  Output
@@ -117,7 +110,6 @@ $Output->recallAlerts();
  *  Execute & Redirect
  * ------------------------------------------------------
  */
-
 $Dispatcher = Platform\Dispatcher::getInstance();
 
 $Dispatcher->execute($Router->findRoute($Uri->getQuery()));

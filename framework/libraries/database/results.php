@@ -282,7 +282,6 @@ abstract class Results extends \Library\Object {
         //@TODO check the statement is set in the dbo. before continue
 
         if (!isset($options) || !is_array($options) || !isset($options['driver'])) {
-
             exit('we need to know what driver and have a dbo passed');
             //@TODO show some form of error; Or attempt to get it from the dbo passed;
             return false;

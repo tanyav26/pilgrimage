@@ -68,7 +68,7 @@ class Session extends Object {
             session_destroy();
         }
 
-        $config = Config::group("session");
+        $config = Config::getParamSection("session");
 
         //Config Vars  
         foreach ($config as $var => $value) {

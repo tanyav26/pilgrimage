@@ -31,8 +31,8 @@
         <ul class="thumbnails">
             <?php for ($i = 0; $i < 15; $i++): ?>
             <li>
-                <a href="#">
-                    <img class="thumbnail" src="http://placehold.it/32x32" alt="" width="32" height="32" />
+                <a href="#" class="thumbnail">
+                    <img src="http://placehold.it/32x32" alt="" width="32" height="32" />
                 </a>
             </li>
             <?php endfor; ?>

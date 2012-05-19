@@ -49,7 +49,7 @@ class Folder extends \Library\Object {
      * 
      * @param string $path 
      */
-    public function getModifiedDate($path) {
+    public static function getModifiedDate($path) {
         
     }
 
@@ -58,7 +58,7 @@ class Folder extends \Library\Object {
      * 
      * @param string $path 
      */
-    public function getSize($path) {
+    public static function getSize($path) {
         
     }
 
@@ -76,7 +76,7 @@ class Folder extends \Library\Object {
      * 
      * @param string $path 
      */
-    public function create($path) {
+    public static function create($path) {
         
     }
 
@@ -87,7 +87,7 @@ class Folder extends \Library\Object {
      * @param type $toPath
      * @param type $replace 
      */
-    public function move($path, $toPath, $replace=TRUE) {
+    public static function move($path, $toPath, $replace=TRUE) {
         
     }
 
@@ -97,7 +97,7 @@ class Folder extends \Library\Object {
      * @param type $path
      * @param type $backup 
      */
-    public function remove($path, $backup=FALSE) {
+    public static function remove($path, $backup=FALSE) {
         
     }
 
@@ -106,7 +106,7 @@ class Folder extends \Library\Object {
      * 
      * @param type $path 
      */
-    public function hasBackup($path) {
+    public static function hasBackup($path) {
         
     }
 
@@ -115,7 +115,7 @@ class Folder extends \Library\Object {
      * 
      * @param type $path 
      */
-    public function restoreBackup($path) {
+    public static function restoreBackup($path) {
         
     }
 
@@ -123,7 +123,7 @@ class Folder extends \Library\Object {
      *
      * @param type $path 
      */
-    public function getPermission($path) {
+    public static function getPermission($path) {
         
     }
 
@@ -132,7 +132,7 @@ class Folder extends \Library\Object {
      * @param type $path
      * @param type $permission 
      */
-    public function setPermission($path, $permission) {
+    public static function setPermission($path, $permission) {
         
     }
 
@@ -141,7 +141,7 @@ class Folder extends \Library\Object {
      * @param type $path
      * @param type $type 
      */
-    public function pack($path, $type='zip') {
+    public static function pack($path, $type='zip') {
         
     }
 
@@ -180,9 +180,41 @@ class Folder extends \Library\Object {
           )
         );
      */
-    final public function itemize($path, $exclude=array(""), $recursive=FALSE, $recursivelimit=0, $showfiles=FALSE, $sort=TRUE, $long=FALSE) {
+    final public static function itemize($path, $exclude=array(".DS_Store",".git",".svn",".CVS"), $recursive=FALSE, $recursivelimit=0, $showfiles=FALSE, $sort=TRUE, $long=FALSE) {
 
-        echo "itemize";
+        //1. Search $name as a folder or as a file 
+        if (!self::is($path)) { //if in path is a directory
+            return array();
+        }
+
+        $dirh = @opendir($path); //directory handler
+        //$recursion  = 0;
+        $found = array();
+
+        if ($dirh) {
+            while (false !== ($file = readdir($dirh))) {
+                // remove '.' and '..'
+                if ($file == '.' || $file == '..' || in_array($file, $exclude))
+                    continue;
+
+                $recursion = 0;
+                $newPath = $path . $file;
+
+                if (self::is($newPath) && $recursive && ($recursion < $recursiveLimit )) {
+                    //echo self::is($newPath)."<br />"; 
+                    //echo $newPath."<br />";
+                    $newRecursiveLimit  = ((int) $recursiveLimit > 0) ? ((int) $recursiveLimit - 1) : 0;
+                    $items              = self::itemize($name, $newPath, $recursive, $newRecursiveLimit);
+                    $found              = array_merge($items, $found);
+                }
+
+                $found[]  = $newPath;
+            }
+            closedir($dirh);
+        }
+        //@TODO if long, get additional info for each path;
+
+        return $found;
     }
 
     /**
@@ -199,7 +231,7 @@ class Folder extends \Library\Object {
      * @param boolean $sort
      * @param boolean $long 
      */
-    final public function itemizeFind($name, $inPath, $limit=1, $recursive=FALSE, $recursiveLimit=0, $showfiles=FALSE, $sort=TRUE, $long=FALSE) {
+    final public static function itemizeFind($name, $inPath, $limit=1, $recursive=FALSE, $recursiveLimit=0, $showfiles=FALSE, $sort=TRUE, $long=FALSE) {
 
         //1. Search $name as a folder or as a file 
         if (!self::is($inPath)) { //if in path is a directory
@@ -246,7 +278,7 @@ class Folder extends \Library\Object {
      * @param boolean $folder, value to return if is folder
      *  
      */
-    final public function is($path, $folder=TRUE) {
+    final public static function is($path, $folder=TRUE) {
 
         $return = is_dir($path) ? $folder : !$folder;
 
@@ -258,7 +290,7 @@ class Folder extends \Library\Object {
      * 
      * @param type $path 
      */
-    final public function exists($path) {
+    final public static function exists($path) {
         
     }
 
@@ -285,7 +317,7 @@ class Folder extends \Library\Object {
      * 
      * @return File Class Pdf | Image | Xml
      */
-    final public static function getFile( $type ) {
+    final public static function getFile( $type = NULL ) {
 
         return \Library\Folder\Files::getInstance($type);
     }

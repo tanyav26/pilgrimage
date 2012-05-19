@@ -23,7 +23,7 @@
  * 
  */
 
-namespace Library\Folder ;
+namespace Library\Folder;
 
 use Library;
 use Library\Folder\Files;
@@ -41,60 +41,161 @@ use Library\Folder\Files;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/folder/files
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-class Files extends \Library\Folder{
-    
-    protected static $file = '/';
-    
-    public function getModifiedDate($path){}
-    
-    public function getSize($path){}
-    
-    public function getName($path){}
-    
-    public function getExtension(){}
-    
-    public function read( $file ){
-        //@TODO Rewrite; 
-        return file_get_contents( $file );
-    }
-    
-    public function getFileStream( $path ){}
-    
-    public function getMimeType(){}
+class Files extends \Library\Folder {
 
-    public function create($path){}
-    
-    public function move($path, $toPath, $replace=TRUE){}
-    
-    public function delete($path, $backup=FALSE){}
-    
-    public function hasBackup($path){}
+    protected static $file = NULL;
+    protected static $pathinfo = array();
+
+    public static function getModifiedDate($path) {
+        
+    }
+
+    public static function getSize($file) {
+        
+    }
+
+    /**
+     *
+     * @param type $file
+     * @param type $default
+     * @return type 
+     */
+    public function getName($file="", $default="") {
+        
+        $file = ( empty($file) && isset(static::$file) ) ? static::$file : $file;
+
+        if (empty($file)) {
+            return $default;
+        }
+        
+        //Determine the file extension
+        if(!isset(static::$pathinfo[$file]["filename"])){
+           static::$pathinfo[$file] = pathinfo($file);
+        }
+        return static::$pathinfo[$file]["filename"];
+    }
+
+    /**
+     * Gets the file extension;
+     * 
+     * @param type $file
+     * @param type $default
+     * @return string 
+     */
+    public static function getExtension($file = "", $default = NULL) {
+
+        $file = ( empty($file) && isset(static::$file) ) ? static::$file : $file;
+
+        if (empty($file)) {
+            return $default;
+        }
+        
+        //Determine the file extension
+        if(!isset(static::$pathinfo[$file]["extension"])){
+           static::$pathinfo[$file] = pathinfo($file);
+        }
+        return static::$pathinfo[$file]["extension"];
+    }
+
     
     /**
-     * validates file of type, or just isFile;
-     *
-     * @param type $type 
-     * @return boolean
+     * Reads the contents of a file;
      * 
+     * @param type $file
+     * @return type 
      */
-    public function isFile( $type=''){}
-    
-    public function restoreBackup($path){}
-    
-    public function getPermission($path){}
-    
-    public function setPermission($path, $permission){
+    public static function read($file) {
+        //@TODO Rewrite; 
+        return file_get_contents($file);
+    }
+
+    public static function getFileStream($path) {
+        
+    }
+
+    public static function getMimeType() {
+        
+    }
+
+    public static function create($path) {
+        
+    }
+
+    public static function move($path, $toPath, $replace = TRUE) {
+        
+    }
+
+    public static function delete($path, $backup = FALSE) {
+        
+    }
+
+    public static function hasBackup($path) {
+        
+    }
+
+    /**
+     * Validates file of type, or just isFile;
+     * 
+     * @param string $file full file path
+     * @param string $type if the file type is specified validates against this file type
+     * @todo Will fail on files greater than 2GB see PHP is_file docs
+     * @return boolean 
+     */
+    public static function isFile($file = '', $type = NULL) {
+
+        $file = ( empty($file) && isset(static::$file) ) ? static::$file : $file;
+
+        //If we sitill can't decide what file it is, return false;
+        if (empty($file)) {
+            return FALSE;
+        }
+        //If the file does not exists, return false;
+        if (!file_exists($file)) {
+            return false;
+        }
+        return is_file($file);
+    }
+
+    public static function restoreBackup($path) {
+        
+    }
+
+    public static function getPermission($path) {
+        
+    }
+
+    public static function setPermission($path, $permission) {
         return $this;
     }
-      
-    public function setFile( $path ){
-        return $this;
+
+    /**
+     * Sets the file for execution
+     * 
+     * @param string $file
+     * @return object An instance of the file class
+     */
+    public static function setFile( $file ) {
+
+        //Return false if file does not exists;
+        if (!static::isFile($file)) {
+            return false;
+        }
+        //Get the file info
+        static::$file = $file;
+        static::$pathinfo[$file] = pathinfo($file);
+        
+        //Return an instance of the file object;
+        return static::getInstance();
     }
-    
-    public function pack($path, $type='tar.gz'){}
-    
-    public function unpack($path, $type='tar.gz'){}
-    
+
+    public static function pack($path, $type = 'tar.gz') {
+        
+    }
+
+    public static function unpack($path, $type = 'tar.gz') {
+        
+    }
+
     /**
      * Returns an instance of the Files class
      * 
@@ -103,18 +204,26 @@ class Files extends \Library\Folder{
      * @param type $file
      * @return type 
      */
-    public static function getInstance( $type='', $file = NULL){
-        
-        static $instance;
-        
-        //If the class was already instantiated, just return it
-        if (isset($instance[$type]))
-            return $instance[$type];
+    public static function getInstance($type = '') {
 
-        $class = "\Library\Folder\Files\\".ucfirst($type);
-        $instance[$type] = $class::getInstance();
+        static $instance;
+
+        if (!empty($type)):
+            //If the class was already instantiated, just return it
+            if (isset($instance[$type]))
+                return $instance[$type];
+
+            $class = "\Library\Folder\Files\\" . ucfirst($type);
+            $instance[$type] = $class::getInstance();
+        else:
+            if (isset($instance["file"]))
+                return $instance["file"];
+            $type = "file";
+            $instance[$type] = new self();
+
+        endif;
 
         return $instance[$type];
     }
-    
+
 }

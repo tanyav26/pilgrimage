@@ -78,7 +78,7 @@ final class Install extends Platform\Controller {
         }
         
         //Get Requirements
-        $requirements = $this->config->get("requirements", array(), "install");
+        $requirements = $this->config->getParam("requirements", array(), "install");
         $this->set("requirements", $requirements);
        
         

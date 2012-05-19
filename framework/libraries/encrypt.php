@@ -55,7 +55,7 @@ final class Encrypt extends \Library\Object {
      */
     public function __construct() {
 
-        $config = Config::group("encrypt");
+        $config = Config::getParamSection("encrypt");
 
         if (is_array($config) && !empty($config)) {
             foreach ($config as $var => $value) {

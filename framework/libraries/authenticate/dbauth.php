@@ -81,6 +81,7 @@ class DbAuth extends \Library\Authenticate {
         }
 
         $result = $statement->execute();
+        
 
         //If we did not find any user with this id or password;
         if ((int) $result->getAffectedRows() < 1) {

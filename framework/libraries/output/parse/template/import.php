@@ -62,7 +62,7 @@ class Import extends Parse\Template {
         
         //print_R(static::$layouts);
         //If there is a name we will save this layout to static::$layouts
-        $loader     = \Platform\Shared::loader();
+        $loader     = \Platform\Loader::getInstance();
 
         $document   = static::$document;
         $path       = isset($tag['LAYOUT']) ? $tag['LAYOUT'] : null;

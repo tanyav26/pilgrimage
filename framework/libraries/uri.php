@@ -197,7 +197,7 @@ final class Uri {
         //die;
 
         //Do we have the path info included?
-        $sPath = Config::get("path", "/", "system");
+        $sPath = Config::getParam("path", "/", "system");
         
         if (!empty($url)) {
 
@@ -381,7 +381,7 @@ final class Uri {
             $scheme = $link['scheme'] = (isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) != 'off')) ? "https" : "http";
 
             //2. The [host]/[file][path]
-            $host = $link['host'] = $_SERVER['HTTP_HOST'] = Config::get("host", "localhost", "server");
+            $host = $link['host'] = $_SERVER['HTTP_HOST'] = Config::getParam("host", "localhost", "server");
 
             //print_R($_SERVER);
 

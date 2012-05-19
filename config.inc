@@ -22,17 +22,6 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
-$config['database'] = array(
-    'host' => 'localhost',
-    'user' => 'root',
-    'password' => '',
-    'charset' => 'utf8',
-    'prefix' => 'dd_',
-    'collate' => '',
-    'name' => 'networkapp',
-    'select' => TRUE,
-    'driver' => 'MySQL'
-);
 
 $config['session'] = array(
     'store' => 'database',
