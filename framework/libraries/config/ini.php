@@ -91,79 +91,60 @@ final class Ini extends \Library\Object {
      * @param type $file
      * @param type $sections 
      */
-    public function saveParams($file = "", $sections = array()) {
+    public function saveParams($filename, $sections = array()) {
 
         $config = \Library\Config::getInstance();
 
-        $_content = '';
-        $_sections = '';
         $_globals = '';
         $_linebreak = "\n";
 
-        if (!is_array($sections)) {
+        //We can only deal with arrays
+        if (!is_array($sections) || empty($filename) ) {
             //@TODO throw an error;
             return false;
         }
-
         foreach ($sections as $section):
-            
-            $sectionsarray = $config->getParamSection( $section );
-            
+
+            $sectionsarray = $config->getParamSection($section);
+
             if (!empty($sectionsarray) && is_array($sectionsarray)) {
                 // 2 loops to write `globals' on top, alternative: buffer
-                $content .= "\n[" . $section . "]\n";
-                
+                $_globals .= "\n[" . $section . "]\n";
+
                 foreach ($sectionsarray as $param => $value) {
                     if (!is_array($value)) {
-                        $value = static::normalizeValue( $value );
-                        $_globals .= $section . ' = ' . $value . $_linebreak;
+                        $value = static::normalizeValue($value);
+                        $_globals .= $param . ' = ' . $value . $_linebreak;
                     }
                 }
-                
-                $content .= $globals;
-                foreach ($sectionsarray as $section => $item) {
-                    if (is_array($item)) {
-                        $sections .= "\n[" . $section . "]\n";
-                        foreach ($item as $key => $value) {
-                            if (is_array($value)) {
-                                foreach ($value as $arrkey => $arrvalue) {
-                                    $arrvalue = $this->normalizeValue($arrvalue);
-                                    $arrkey = $key . '[' . $arrkey . ']';
-                                    $sections .= $arrkey . ' = ' . $arrvalue
-                                            . $this->linebreak;
-                                }
-                            } else {
-                                $value = $this->normalizeValue($value);
-                                $sections .= $key . ' = ' . $value . $this->linebreak;
-                            }
-                        }
-                    }
-                }
-                $content .= $sections;
             }
         endforeach;
+        //Now write to file
+        if(!\Library\Folder\Files::write(FSPATH.'config'. DS.$filename, $_globals) ){
+            //die;
+            return false;
+        }
         
-        return $content;
+        return true;
     }
 
-        /**
+    /**
      * normalize a Value by determining the Type
      *
      * @param string $value value
      *
      * @return string
      */
-    protected static function normalizeValue( $value ) 
-    {
+    protected static function normalizeValue($value) {
         if (is_bool($value)) {
-            $value = (bool)$value;
+            $value = (bool) $value;
             return $value;
         } elseif (is_numeric($value)) {
-            return (int)$value;
+            return (int) $value;
         }
         return $value;
     }
-    
+
     /**
      * Gets an instance of the config element
      * @property-read object $instance 

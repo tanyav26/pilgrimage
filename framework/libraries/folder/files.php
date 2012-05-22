@@ -60,17 +60,17 @@ class Files extends \Library\Folder {
      * @param type $default
      * @return type 
      */
-    public function getName($file="", $default="") {
-        
+    public function getName($file = "", $default = "") {
+
         $file = ( empty($file) && isset(static::$file) ) ? static::$file : $file;
 
         if (empty($file)) {
             return $default;
         }
-        
+
         //Determine the file extension
-        if(!isset(static::$pathinfo[$file]["filename"])){
-           static::$pathinfo[$file] = pathinfo($file);
+        if (!isset(static::$pathinfo[$file]["filename"])) {
+            static::$pathinfo[$file] = pathinfo($file);
         }
         return static::$pathinfo[$file]["filename"];
     }
@@ -89,15 +89,14 @@ class Files extends \Library\Folder {
         if (empty($file)) {
             return $default;
         }
-        
+
         //Determine the file extension
-        if(!isset(static::$pathinfo[$file]["extension"])){
-           static::$pathinfo[$file] = pathinfo($file);
+        if (!isset(static::$pathinfo[$file]["extension"])) {
+            static::$pathinfo[$file] = pathinfo($file);
         }
         return static::$pathinfo[$file]["extension"];
     }
 
-    
     /**
      * Reads the contents of a file;
      * 
@@ -109,8 +108,50 @@ class Files extends \Library\Folder {
         return file_get_contents($file);
     }
 
-    public static function getFileStream($path) {
+    /**
+     * 
+     * @param type $file
+     * @param type $content 
+     */
+    public static function write($file, $content = "") {
         
+        $stream = static::getFileStream($file);
+        
+        $file;
+        
+        
+        
+        die;
+        //Write the contents
+        fwrite($handle, $content);
+        fclose($handle);
+        
+    }
+    
+    /**
+     *
+     * @param type $file
+     * @param type $mode
+     * @return boolean 
+     */
+    public static function getFileStream($file, $mode = "w+") {
+        
+        //This has to be a file
+        if (!static::isFile($file)) {
+            if (!static::create($file)) {
+                return false;
+            }
+        }
+        
+        //Throw some errors
+        if (($handle = fopen($file, $mode)) === FALSE) { //this fopen with w will attempt to create the file
+            
+            print_R($handle);
+            die;
+            //@Throw error
+            return false;
+        }
+        return $handle;
     }
 
     public static function getMimeType() {
@@ -174,7 +215,7 @@ class Files extends \Library\Folder {
      * @param string $file
      * @return object An instance of the file class
      */
-    public static function setFile( $file ) {
+    public static function setFile($file) {
 
         //Return false if file does not exists;
         if (!static::isFile($file)) {
@@ -183,7 +224,7 @@ class Files extends \Library\Folder {
         //Get the file info
         static::$file = $file;
         static::$pathinfo[$file] = pathinfo($file);
-        
+
         //Return an instance of the file object;
         return static::getInstance();
     }

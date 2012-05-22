@@ -98,6 +98,12 @@ $Router = Library\Router::getInstance();
 $Uri    = Library\Uri::getInstance();
 $Output = Library\Output::getInstance();
 
+//$Config->setParamSection("livingstone", array("age"=>"26","height"=>"173cm"));
+//$Config->setParam("driver","MySQLi","database");
+//$Config->ini->saveParams("setup.ini", array("database","livingstone","system"));
+
+
+
 /*
  * ------------------------------------------------------
  *  Output
