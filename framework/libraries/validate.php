@@ -56,7 +56,27 @@ final class Validate extends \Library\Object {
      * @param type $length
      * @return type 
      */
-    public function string($str, $regExp=null, $length=null) {
+    public function string($str, $regExp=null, $length=null) {   
+        //Validate its a string;
+        if(is_string($str)){
+            return FALSE;
+        }
+        //Patterns
+        if(!empty($regExp)){
+        $return = preg_match($regex, $str);
+            if(!(bool)$return){
+                return FALSE;
+            }
+        }
+        //Validate length;
+        if(!empty($length) && $this->interger( $length )){
+            $length     = (int)$length;
+            $_length    = strlen( $str );
+            //If the intergers don't match;
+            if($length <> $_length){
+                return FALSE;
+            }
+        }
         return TRUE;
     }
 
@@ -68,7 +88,7 @@ final class Validate extends \Library\Object {
      * @return type 
      */
     public function boolean($bool, $value=null) {
-        return TRUE;
+        return is_bool($bool);
     }
 
     /**
@@ -77,18 +97,28 @@ final class Validate extends \Library\Object {
      * @param type $dec
      * @return type 
      */
-    public function decimal($dec) {
-        return TRUE;
+    public function decimal( $decimal ) {
+        
+        $regEx  = '/^\s*[+\-]?(?:\d+(?:\.\d*)?|\.\d+)\s*$/';
+        $return = preg_match($regex, $decimal);
+        
+        return ((int)$return > 0) ? TRUE : FALSE;
     }
 
     /**
-     *
+     * Validates a character is alphanumeric
+     * 
      * @param type $alnum
      * @param type $length
      * @return type 
      */
     public function alphaNumeric($alnum, $length = null) {
-        return TRUE;
+        
+        //Regular Expression
+        $regEx = '/^[A-Za-z0-9_]+$/';
+        
+        //Validate the string;
+        return $this->string($alnum , $regEx , $length );
     }
 
     /**
@@ -119,12 +149,13 @@ final class Validate extends \Library\Object {
     }
 
     /**
-     *
+     * Validates an interger
+     * 
      * @param type $int
      * @return type 
      */
     public function interger($int) {
-        return TRUE;
+        return is_int($int);
     }
 
     /**

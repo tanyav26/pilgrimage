@@ -107,13 +107,15 @@ final class Loader{
     }
 
     /**
-     *
+     * Get table
+     * 
      * @param type $table
+     * @param type $primayId
      * @return type 
      */
     public function table( $table , $primayId = NULL ){
         
-        $dbparams = Library\Config::group("database");
+        $dbparams = Library\Config::getParamSection("database");
         
         $options = array(
             "driver" => preg_replace('/[^A-Z0-9_\.-]/i', '', $dbparams['driver']),
@@ -121,9 +123,9 @@ final class Loader{
             "table"  => $table
         ); 
         
-        $Table   = Library\Database\Table::getInstance( $options );
+        $table   = Library\Database\Table::getInstance( $options );
         
-        return $Table;
+        return $table;
         
     }
 

@@ -24,7 +24,9 @@
  * 
  */
 
-namespace Library;
+namespace Platform;
+
+use Library;
 
 /**
  * Handles versioning
@@ -36,8 +38,7 @@ namespace Library;
  * The Short format returns just the system version number in conventational formats
  * And should be used when comparing system version.
  *
- * @category   Libraries
- * @package    Library
+ * @category   Utility
  * @author     Livingstone Fultang <livingstone.futlang@stonyhillshq.com>
  * @copyright  1997-2012 Stonyhills HQ
  * @license    http://www.gnu.org/licenses/gpl.txt.  GNU GPL License 3.01
@@ -45,11 +46,11 @@ namespace Library;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/version
  * @since      Class available since Release 1.0.0
  */
-class Version extends Object {
+class Version extends \Library\Object  {
 
     /**
      *  *  * @var string Product */
-    static $PRODUCT = 'Do';
+    static $PRODUCT = 'Pilgrimage';
     /**
      *  *  * @var int Main Release Level */
     static $RELEASE = '1.0';
