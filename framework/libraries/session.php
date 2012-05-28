@@ -60,10 +60,10 @@ class Session extends Object {
      * 
      * @param type $namespace 
      */
-    public function __construct($id ='') {
+    public function __construct($id = '') {
 
         //Need to destroy any existing sessions started with session.auto_start
-        if(session_id()) {
+        if (session_id()) {
             session_unset();
             session_destroy();
         }
@@ -74,9 +74,9 @@ class Session extends Object {
         foreach ($config as $var => $value) {
             $this->$var = $value;
         }
-        
+
         $this->registry['default'] = \Library\Session\Registry::getInstance("default");
-        
+
         ini_set('session.use_trans_sid', '0');
         //Libraries
     }
@@ -97,7 +97,7 @@ class Session extends Object {
      * @return void
      */
     final public function start($killPrevious = FALSE) {
-        
+
         //starts this session if not creates a new one      
         $self = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
 
@@ -153,15 +153,15 @@ class Session extends Object {
      */
     final public function create() {
 
-        $self   = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
-        
-        $splash = $self->getSplash();   
+        $self = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
+
+        $splash = $self->getSplash();
         $sessId = self::generateId($splash);
 
         session_id($sessId); //Must be called before the sesion start to generate the Id
         session_cache_limiter('none');
 
-        session_name(md5($self->cookie . $splash['agent']  .$splash['ip'] . $splash['domain']));
+        session_name(md5($self->cookie . $splash['agent'] . $splash['ip'] . $splash['domain']));
 
         session_start();
 
@@ -280,8 +280,8 @@ class Session extends Object {
         $splash = $self->getSplash();
 
         //Do we have a cookie?
-        $sessCookie = md5($self->cookie . $splash['agent']  .$splash['ip'] . $splash['domain']);
-        
+        $sessCookie = md5($self->cookie . $splash['agent'] . $splash['ip'] . $splash['domain']);
+
         $sessId = $input->getCookie($sessCookie);
 
         if (empty($sessId) || !$sessId) {
@@ -321,10 +321,10 @@ class Session extends Object {
 
         //Check the token
         $splash['token'] = $object->session_token;
-       
-        
+
+
         $testId = $self::generateId($splash);
-        
+
 
         if ($testId <> $sessId) {
             self::destroy($sessId);
@@ -359,11 +359,11 @@ class Session extends Object {
         }
         //Update total requests in the default namespace;
         $reqCount = $self->get("totalRequests");
-        $newCount = $reqCount+1;
+        $newCount = $reqCount + 1;
 
         //Set a total Requests Count
-        $self->set("totalRequests",  $newCount );
-        
+        $self->set("totalRequests", $newCount);
+
         //Return the session Id, to pass to self::update
         return $sessId;
     }
@@ -391,7 +391,7 @@ class Session extends Object {
 
         $update = array(
             "session_lastactive" => $now,
-            "session_expires"   => $newExpires
+            "session_expires" => $newExpires
         );
 
         //If isset registry and is not empty, store userdata;
@@ -419,7 +419,7 @@ class Session extends Object {
     final public function restart() {
 
         $id = Session::getId();
-        
+
         Session::destroy($id);
         Session::create();
         Session::gc();
@@ -431,18 +431,20 @@ class Session extends Object {
      * @param type $id
      * @param type $restart 
      */
-    final public function destroy($id="") {
+    final public function destroy($id = "") {
 
         //stops a session
         $self = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
 
-        $id     = !empty($id)? $id : Session::getId();
-        $now    = time();
-        
-        if(empty($id)){return false; }
+        $id = !empty($id) ? $id : Session::getId();
+        $now = time();
 
-        setcookie(session_name(), '', $now- 42000, '/');
-        
+        if (empty($id)) {
+            return false;
+        }
+
+        setcookie(session_name(), '', $now - 42000, '/');
+
         session_unset();
         session_destroy();
 
@@ -660,7 +662,7 @@ class Session extends Object {
      * @param type $namespace
      * @return type 
      */
-    final public function get($varname, $namespace='default') {
+    final public function get($varname, $namespace = 'default') {
         //gets a registry var, stored in a namespace of this session id
         $session = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
 
@@ -683,7 +685,7 @@ class Session extends Object {
      * @param type $namespace
      * @return Session 
      */
-    final public function set($varname, $value, $namespace='default') {
+    final public function set($varname, $value, $namespace = 'default') {
         //stores a value to a varname in a namespace of this session
         $session = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
 
@@ -718,7 +720,7 @@ class Session extends Object {
      * @param type $value
      * @param type $namespace 
      */
-    final public static function remove($varname='', $namespace='default') {
+    final public static function remove($varname = '', $namespace = 'default') {
         //if the registry is empty and the namespace is not default
         //delete the registry;
         //stores a value to a varname in a namespace of this session
@@ -743,7 +745,7 @@ class Session extends Object {
      * @staticvar self $instance
      * @return self 
      */
-    public static function getInstance($id=null) {
+    public static function getInstance($id = null) {
 
         //die;
 
@@ -764,9 +766,9 @@ class Session extends Object {
      * @return void
      */
     public function __destruct() {
- 
+
         //You'd BREAK (a lot of) things if you change this!
-        $this->update( $this->getId() );
+        $this->update($this->getId());
         $this->gc();
         $this->close();
     }

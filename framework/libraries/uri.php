@@ -287,13 +287,10 @@ final class Uri {
         if (empty($routeid)) {
             $routeid = 'index';
         }
-        
-
         //Get the routeMap;
-        $router = Router::getInstance();
-        $route = $router->getRoute($routeid);
-
-        $path = $route['path'];
+        $router     = Router::getInstance();
+        $route      = $router->getRoute($routeid);
+        $path       = $route['path'];
 
         if (is_array($route)) {
             if (isset($route['dynamic'])) {

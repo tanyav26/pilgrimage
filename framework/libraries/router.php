@@ -281,13 +281,11 @@ final class Router extends Object {
                 $params = $segments[$key];
                 unset($segments[$key]);
             }
-
             if (empty($segment)) {
                 unset($segments[$key]);
             }
         }
         $segmentCount = count($segments);
-
 
         //reconstruct
         $this->path = implode("/", $segments);
@@ -302,11 +300,6 @@ final class Router extends Object {
      * @param string $path
      */
     private function whatRoute($path ="", $segments = array(), $segCount = 0) {
-
-        $application = null;
-        $class = null;
-        $method = null;
-        $arguements = null;
 
         Event::trigger('onBeforeRoute', $path);
 
@@ -369,14 +362,10 @@ final class Router extends Object {
         $thisMapSegments = array();
 
         foreach ($this->routes as $rkey => $route) {
-
             //print_r($route);
-
             $thisMapPath = preg_replace('/^\//', '', rtrim($route['path'], "/")); //echo $thisMapPath;
             $thisMapSegments = explode("/", $thisMapPath);
             $thisMapSegCount = count($thisMapSegments);
-
-
 
             if ($thisMapPath == $thisRequestPath) {
                 //So if the paths match
@@ -397,7 +386,6 @@ final class Router extends Object {
                     if (!isset($route['dynamic'])) {
                         continue;
                     }
-
                     //if is dynamic search for sub paths, e.g action maps using segment 1
                     if (isset($thisMapSegments[0]) && !empty($thisMapSegments[0])) {
                         $segment0 = $thisMapSegments[0];
