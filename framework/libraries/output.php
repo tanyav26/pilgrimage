@@ -205,25 +205,10 @@ class Output extends Object {
     final public function link($url, $ssl=null) {
         
         $Uri    = Uri::getInstance();
-        
-        //print_R($Uri);
-        
-        //die;
         $Router = Router::getInstance();
         
         return $Uri::_($url);
         
-        //die;
-        
-        //This can only work on clean URLs
-        if ((strpos($url, '&') !== 0)){
-            return $url;
-        }
-        
-        
-        
-        //@TODO internilization of url etc
-        return $url;
     }
 
     /**
