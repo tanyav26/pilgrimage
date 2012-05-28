@@ -22,6 +22,23 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
+namespace IS;
+
+const INTERGER = 257;
+const BOOLEAN = 258;
+const STRING = 513;
+const STRIPPED = 513;
+const ENCODED = 514;
+const SPECIAL_CHARS=515;
+const RAW = 516;
+const EMAIL = 517;
+const URL = 518;
+const NUMBER = 519;
+const DECIMAL = 520;
+const ESCAPED = 521;
+const CUSTOM = 1024;
+const FLOAT = 259;
+
 
 namespace Library;
 
@@ -127,10 +144,11 @@ final class Input extends Object {
 
         //Temp
         $this->files = array_merge($this->file, $_FILES);
-        //$this->clean();
+
         //Returns an instance of the validate object
         $this->validate = Validate::getInstance();
         $this->router = Router::getInstance(); //Used to back trace the request
+        
         //autosanitize;
         $this->sanitize();
     }
@@ -343,7 +361,6 @@ final class Input extends Object {
                     break;
             }
         }
-
         //uhhhnrrr...
         $variable = $input[$name];
 
@@ -546,7 +563,8 @@ final class Input extends Object {
     }
 
     /**
-     *
+     * Filters an Input variable
+     * 
      * @param interger  $type
      * @param mixed     $variablename
      * @param interger  $filter 
@@ -566,7 +584,7 @@ final class Input extends Object {
      * 
      * @param type $array 
      */
-    public function filterArray($array) {
+    private function filterArray($array) {
         //
     }
 
@@ -589,29 +607,3 @@ final class Input extends Object {
     }
 
 }
-
-/**
- *  Filters input to data type e.g
- * 
- *  For numerical input use the \IS\NUMBER filter
- * 
- *  e.g $input->getInputVar('guestId' , \IS\NUMBER );
- * 
- */
-
-namespace IS;
-
-const INTERGER = 257;
-const BOOLEAN = 258;
-const STRING = 513;
-const STRIPPED = 513;
-const ENCODED = 514;
-const SPECIAL_CHARS=515;
-const RAW = 516;
-const EMAIL = 517;
-const URL = 518;
-const NUMBER = 519;
-const DECIMAL = 520;
-const ESCAPED = 521;
-const CUSTOM = 1024;
-const FLOAT = 259;
