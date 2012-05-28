@@ -231,7 +231,7 @@ abstract class Object {
      * @return void
      */
     final public function abort() {
-        return exit();
+        exit();
     }
 
     /**
