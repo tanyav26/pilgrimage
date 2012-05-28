@@ -40,12 +40,12 @@ namespace Library;
  */
 final class Validate extends \Library\Object {
 
+    /**
+     * Construct the Validate class
+     * @return void 
+     */
     public function __construct() {
-        
-    }
-
-    public function filter() {
-        
+        //Silence is golden
     }
 
     /**
@@ -122,21 +122,25 @@ final class Validate extends \Library\Object {
     }
 
     /**
-     *
+     * Checks that a string is a timestamp
+     * 
      * @param type $tstamp
      * @return type 
      */
     public function timestamp($tstamp) {
-        return TRUE;
+        return ((string)(int)$tstamp === $tstamp) 
+        && ($tstamp <= PHP_INT_MAX)
+        && ($tstamp >= ~PHP_INT_MAX);
     }
 
     /**
-     *
+     * Validate if a string is a flt
+     * 
      * @param type $flt
      * @return type 
      */
     public function float($flt) {
-        return TRUE;
+        return is_int($flt);
     }
 
     /**
@@ -145,7 +149,7 @@ final class Validate extends \Library\Object {
      * @return type 
      */
     public function number($num) {
-        return TRUE;
+        return is_int($num);
     }
 
     /**
@@ -158,26 +162,26 @@ final class Validate extends \Library\Object {
         return is_int($int);
     }
 
-    /**
-     *
-     * @param type $resource
-     * @return type 
-     */
-    public function url($resource) {
-        return TRUE;
-    }
-
-    public function regExp() {
-        
-    }
 
     /**
      * Validates an ip address format
      *
      * @param type $address 
      */
-    public function IP($address) {
+    public function IP( $address ) {
         
+        //Split the IP address of the form  into parts
+        $parts = explode('.', $address);
+        //=4 parts
+        if(sizeof($parts)!=4){
+            return FALSE;
+        }
+        foreach($parts as $part):
+            if(empty($part) || !$this->number($part) || $part > 255 ){
+                return FALSE;
+            }
+        endforeach;
+        return TRUE;
     }
 
     /**
@@ -258,19 +262,4 @@ final class Validate extends \Library\Object {
 
 }
 
-/**
- *  Filters input to data type e.g
- * 
- *  For numerical input use the \MUSTBE\REGEXP filter
- * 
- *  e.g $validate->number('guestEmail' , \MUSTBE\NUMBER );
- * 
- */
 
-namespace MUSTBE;
-
-const REGEXP = 272;
-const URL = 273;
-const EMAIL = 274;
-const IP = 275;
-const FLOAT = 259;
