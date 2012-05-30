@@ -37,28 +37,33 @@ use Library;
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Storage extends Platform\Model {
+final class Install extends Platform\Model {
 
+    static $instance;
     //put your code here
 
     public function display() {}
     
-    public function testConnection(){}
+    private function testConnection(){}
     
-    public function testDatabase(){}
+    private function testDatabase(){}
     
-    public function testDatabaseVersion(){}
+    private function testDatabaseVersion(){}
     
-    public function commit(){
+    public function run(){
+        
         //Stores all user information in the database;
+        $dbName = $this->input->getString("dbname");
+        $this->setError( $dbName );
+        
+        return false;
     }
     
-    public function generateKey(){}
+    private function generateKey(){}
 
 
     public static function getInstance() {
 
-        static $instance;
         //If the class was already instantiated, just return it
         if (isset(static::$instance))
             return static::$instance;

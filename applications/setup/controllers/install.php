@@ -81,8 +81,6 @@ final class Install extends Platform\Controller {
         $requirements = $this->config->getParam("requirements", array(), "install");
         $this->set("requirements", $requirements);
        
-        
-        
         $view->index() ; //sample call;
         $this->output->setPageTitle("Installation | Requirements");
         
@@ -94,27 +92,29 @@ final class Install extends Platform\Controller {
         
         //this is step 1;
         $this->set("step", "3");
-        
-        
         $view->index() ; //sample call;
         
         //To set the pate title use
-        $this->output->setPageTitle("Installation | Config Settings");
+        $this->output->setPageTitle("Installation | Database Config Settings");
         
     }
     
     public function step4(){
         
-        $view = $this->load->view('process') ;
-        
+        $view       = $this->load->view('process') ;
+        $install    = $this->load->model('install') ;
         //this is step 1;
         $this->set("step", "4");
-        
-        
         $view->index() ; //sample call;
         
+        //Check we have all the information we need!
+        if(!$install->run()){
+            $this->alert(_($install->getError()),'Something went wrong','error');
+            $this->redirect("/install/step3");
+        }
+        
         //To set the pate title use
-        $this->output->setPageTitle("Installation | Confirmation");
+        $this->output->setPageTitle("Installation | Final Things");
         
     }
     
@@ -126,9 +126,8 @@ final class Install extends Platform\Controller {
         
         //proceses step 4
         //checks for updates
-        
-        echo "Lauches the application";
-        
+            //$this->alert(_('Your system is now ready. Any other configurations can be made via the Admin Panel'),'Congratulations!','success');
+            //$this->redirect("/install/step3");
         //Sets a redirect;
         
     }

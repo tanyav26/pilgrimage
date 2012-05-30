@@ -46,7 +46,7 @@ final class Process extends Platform\View {
         parent::__construct();
 
         //To set the pate title use
-        $this->output->setPageTitle("Setup");
+        //$this->output->setPageTitle("Setup");
         $this->output->setLayout("canvas");
     }
 
