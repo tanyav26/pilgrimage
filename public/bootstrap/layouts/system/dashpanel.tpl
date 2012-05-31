@@ -1,5 +1,5 @@
 
-<form action="<?php echo $this->link('/system/admin/index!#summary') ?>">
+<form action="/system/admin/index!#summary">
     <div id="placeholder" class="row-fluid" style="height: 300px; margin-bottom: 10px"></div>
     <fieldset>
         <hr />
@@ -35,7 +35,7 @@
 </form>
 
 
-<script type="text/javascript" src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/plugins/jquery.flot.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->getTemplatePath() ?>/js/plugins/jquery.flot.min.js"></script>
 <script type="text/javascript">
     $(function () {
     var a = [],

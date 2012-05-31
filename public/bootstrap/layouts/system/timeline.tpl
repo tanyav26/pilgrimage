@@ -90,7 +90,7 @@
     </fieldset>
     <?php else : ?>
     <div class="alert alert-warning">
-        <a href="<?php echo $this->link('/member/session/start'); ?>">Login now</a> to share a story from your current location, or upload photos
+        <a href="/member/session/start'">Login now</a> to share a story from your current location, or upload photos
     </div>
     <?php endif ; ?>
     <ol class="timeline-items" id="main-timeline">
@@ -110,7 +110,7 @@
                         <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
                         <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
 
-                        <li class="action-delete"><a href="<?php echo $this->link('/system/activity/delete'); ?>"><span class="delete" title="Delete">Delete</span></a></li>
+                        <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
 
                     </ul>
                 </div>
@@ -148,7 +148,7 @@
                         <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
                         <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
 
-                        <li class="action-delete"><a href="<?php echo $this->link('/system/activity/delete'); ?>"><span class="delete" title="Delete">Delete</span></a></li>
+                        <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
 
                     </ul>
                 </div>
@@ -173,7 +173,7 @@
                         <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
                         <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
 
-                        <li class="action-delete"><a href="<?php echo $this->link('/system/activity/delete'); ?>"><span class="delete" title="Delete">Delete</span></a></li>
+                        <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
 
                     </ul>
                 </div>
@@ -201,7 +201,7 @@
                                     <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
                                     <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
 
-                                    <li class="action-delete"><a href="<?php echo $this->link('/system/activity/delete'); ?>"><span class="delete" title="Delete">Delete</span></a></li>
+                                    <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
 
                                 </ul>
                             </div>
@@ -226,7 +226,7 @@
                                     <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
                                     <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
 
-                                    <li class="action-delete"><a href="<?php echo $this->link('/system/activity/delete'); ?>"><span class="delete" title="Delete">Delete</span></a></li>
+                                    <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
 
                                 </ul>
                             </div>
@@ -254,7 +254,7 @@
                         <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
                         <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
 
-                        <li class="action-delete"><a href="<?php echo $this->link('/system/activity/delete'); ?>"><span class="delete" title="Delete">Delete</span></a></li>
+                        <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
                     </ul>
                 </div>
                 <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
@@ -291,7 +291,7 @@
                         <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
                         <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
 
-                        <li class="action-delete"><a href="<?php echo $this->link('/system/activity/delete'); ?>"><span class="delete" title="Delete">Delete</span></a></li>
+                        <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
 
                     </ul>
                 </div>
@@ -316,7 +316,7 @@
                         <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
                         <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
 
-                        <li class="action-delete"><a href="<?php echo $this->link('/system/activity/delete'); ?>"><span class="delete" title="Delete">Delete</span></a></li>
+                        <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
 
                     </ul>
                 </div>
@@ -341,7 +341,7 @@
                         <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
                         <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
 
-                        <li class="action-delete"><a href="<?php echo $this->link('/system/activity/delete'); ?>"><span class="delete" title="Delete">Delete</span></a></li>
+                        <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
                     </ul>
                 </div>
                 <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>
@@ -365,7 +365,7 @@
                         <li class="action-like"><a href="#"><span class="like" title="Like">Like</span></a></li>
                         <li class="action-reply"><a href="#"><span class="reply" title="Reply">Reply</span></a></li>
 
-                        <li class="action-delete"><a href="<?php echo $this->link('/system/activity/delete'); ?>"><span class="delete" title="Delete">Delete</span></a></li>
+                        <li class="action-delete"><a href="/system/activity/delete"><span class="delete" title="Delete">Delete</span></a></li>
                     </ul>
                 </div>
                 <div class="timeline-item-body">Is it just me or is the latest chrome having issues loading assets? whats that with all the Content-Type: null ? for css, js and most files</div>

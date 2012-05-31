@@ -15,14 +15,14 @@
             <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png" />
             <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" />
 
-            <link rel="stylesheet" href="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/css/bootstrap.css" type="text/css" media="screen" />
+            <link rel="stylesheet" href="<?php echo $this->getTemplatePath() ?>/css/bootstrap.css" type="text/css" media="screen" />
 
 
         </head>
 
         <?php //print_R($this); ?>
         <body>
-            <form method="post" action="<?php echo $this->link("/"); ?>" style="margin-top: 150px">
+            <form method="post" action="/" style="margin-top: 150px">
                 <div role="container" class="container fillfix clearfix" style="max-width: 400px">
                     <div class="row clearfix fillfix">
                         <article>
@@ -34,7 +34,7 @@
                             </div>
                             <hr />
                             <div>
-                                <a  href="<?php echo $this->link("/"); ?>">Homepage</a>
+                                <a  href="/">Homepage</a>
                                 <tpl:import layout="console" />
                             </div>
                         </article>
@@ -42,12 +42,10 @@
                 </div>
             </form>
             <!-- scripts concatenated and minified via ant build script-->
-            <script src='/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
-            <script src='/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
-            <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
-
-            <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/bootstrap.min.js" type="text/javascript"></script>
-
+            <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
+            <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/js/bootstrap.min.js" type="text/javascript"></script>
             <!-- end scripts-->
         </body>
 

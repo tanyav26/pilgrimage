@@ -1,4 +1,4 @@
-<form method="POST" action="<?php echo $this->link('/'); ?>" class="form-vertical">
+<form method="POST" action="/" class="form-vertical">
     <fieldset>
        <div class="control-group">
             <label class="control-label" for="site-name"> <?php echo _('Community Name'); ?></label>

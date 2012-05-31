@@ -16,7 +16,7 @@
             <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png" />
             <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" />
 
-            <link rel="stylesheet" href="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/css/bootstrap.css" type="text/css" media="screen" />
+            <link rel="stylesheet" href="<?php echo $this->getTemplatePath() ?>/css/bootstrap.css" type="text/css" media="screen" />
         </head>
         <body>
             <tpl:import layout="navbar" />
@@ -34,7 +34,7 @@
                                 <div class="span4">
                                     <div class="left-pad">  
                                         <div class="row-fluid">
-                                            <form id="form" name="login_form" method="post" action="<?php echo $this->link('/member/session/start'); ?>">                       
+                                            <form id="form" name="login_form" method="post" action="/member/session/start">                       
                                                 <fieldset class="no-margin">
                                                     <legend>Sign in to your account</legend>
                                                     <div class="control-group">
@@ -61,8 +61,8 @@
                                                 <input type="hidden" name="auth_handler" value="dbauth" />
                                                 <input type="hidden" name="redirect" value="" />
                                                 <ul>
-                                                    <li><a href="<?php echo $this->link('/index.php'); ?>"><?php echo _("Forgot your password?"); ?></a></li>
-                                                    <li><a href="<?php echo $this->link('/member/account/create'); ?>"><?php echo _("Don't have an account?"); ?></a></li>
+                                                    <li><a href="/index.php"><?php echo _("Forgot your password?"); ?></a></li>
+                                                    <li><a href="/member/account/create"><?php echo _("Don't have an account?"); ?></a></li>
                                                 </ul>
                                                 <div class="btn-toolbar">
                                                     <div class="btn-group">
@@ -86,14 +86,14 @@
                     <div class="row-fluid">
                         <div class="span8">
                             <ul class="nav nav-pills">
-                                <li><a href="<?php echo $this->link('/system/admin/index'); ?>">Administrator</a></li>
-                                <li><a href="<?php echo $this->link('/about'); ?>">About</a></li>
-                                <li><a href="<?php echo $this->link('/apps'); ?>">Apps</a></li>
+                                <li><a href="/system/admin/index">Administrator</a></li>
+                                <li><a href="/about">About</a></li>
+                                <li><a href="/apps">Apps</a></li>
                                 <li><a href="http://blog.stonyhillshq.com">Blog</a></li>
                                 <li><a href="http://developers.stonyhillshq.com">Developers</a></li>
-                                <li><a href="<?php echo $this->link('/help'); ?>">Help</a></li>
-                                <li><a href="<?php echo $this->link('/legal/privacy'); ?>">Privacy</a></li>
-                                <li><a href="<?php echo $this->link('/legal/terms'); ?>">Terms</a></li>
+                                <li><a href="/help">Help</a></li>
+                                <li><a href="/legal/privacy">Privacy</a></li>
+                                <li><a href="/legal/terms">Terms</a></li>
  
                             </ul>
                         </div>
@@ -108,47 +108,10 @@
                     <tpl:block data="page.block.footer">Footer</tpl:block>
                 </section>
             </div>
-
-            <script src='/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
-            <script src='/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
-            <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
-            <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/bootstrap.min.js" type="text/javascript"></script>
-            <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-            <script type="text/javascript" src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/plugins/jquery.ui.map.full.min.js"></script>
-            <script type="text/javascript" src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/plugins/jquery.ui.map.extensions.js"></script>
-            <script type="text/javaScript">
-                $(function() {
-                    // Also works with: var yourStartLatLng = '59.3426606750, 18.0736160278';
-                    var yourStartLatLng = new google.maps.LatLng(51.5094, -0.127358);
-                    $('.map-canvas').gmap({'streetViewControl': false, 'mapTypeControl':false, 'zoom':15, 'center': yourStartLatLng,'styles':[
-                            {
-                                featureType: "all",
-                                stylers: [
-                                    { saturation: -50 },
-                                    { lightness: 3}
-                                ]
-                            },{
-                                featureType: "road.arterial",
-                                elementType: "geometry"
-                            },{
-                                featureType: "poi.business",
-                                elementType: "labels",
-                                stylers: [
-                                    { visibility: "off" }
-                                ]
-                            }
-                        ], 'maxZoom':16, 'callback': function() {
-                            var self = this;
-                            self.getCurrentPosition(function(position, status) {
-                                if ( status === 'OK' ) {
-                                    self.set('clientPosition', new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-                                    self.addMarker({'position': self.get('clientPosition'), 'bounds': true});
-                                    self.addShape('Circle', { 'strokeWeight': 0, 'fillColor': "#008595", 'fillOpacity': 0.25, 'center': self.get('clientPosition'), 'radius': 15, clickable: false });
-                                }
-                            });   
-                        }});
-                });
-            </script>
+            <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
+            <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/js/bootstrap.min.js" type="text/javascript"></script>
         </body>
 
     </html>

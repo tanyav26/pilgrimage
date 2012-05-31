@@ -192,6 +192,7 @@ final class Uri {
         }
 
         //@TODO make sure that this url does not have the scheme
+        if( preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $url) ) return $url;
         //@TODO make sure that this url does not have the host already
         //@TODO make sure we are internalizing a path and nothing else
         //die;

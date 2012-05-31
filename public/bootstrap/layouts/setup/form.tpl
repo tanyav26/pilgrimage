@@ -2,17 +2,17 @@
 
 <div class="wizard">
     <div class="points row-fluid">
-        <div class="span3 <?php echo ($step > 0) ? 'active' : ''; ?>"> <a href="<?php echo $this->link('/setup/install/step1') ?>">License Agreement</a><span class="marker">&nbsp;</span></div>
-        <div class="span3 <?php echo ($step > 1) ? 'active' : ''; ?>"><a href="<?php echo $this->link('/setup/install/step2') ?>">Requirements</a><span class="marker"></span></div>
-        <div class="span3 <?php echo ($step > 2) ? 'active' : ''; ?>"><a href="<?php echo $this->link('/setup/install/step3') ?>">Configuration</a><span class="marker"></span></div>
-        <div class="span3 <?php echo ($step > 3) ? 'active' : ''; ?>"><a href="<?php echo $this->link('/setup/install/step4') ?>">Finish</a><span class="marker"></span></div>
+        <div class="span3 <?php echo ($step > 0) ? 'active' : ''; ?>"> <a href="/setup/install/step1">License Agreement</a><span class="marker">&nbsp;</span></div>
+        <div class="span3 <?php echo ($step > 1) ? 'active' : ''; ?>"><a href="/setup/install/step2">Requirements</a><span class="marker"></span></div>
+        <div class="span3 <?php echo ($step > 2) ? 'active' : ''; ?>"><a href="/setup/install/step3">Configuration</a><span class="marker"></span></div>
+        <div class="span3 <?php echo ($step > 3) ? 'active' : ''; ?>"><a href="/setup/install/step4">Finish</a><span class="marker"></span></div>
     </div>
     <div class="progress mini-bar">
         <div class="bar" style="width: <?php echo intval(12.5*((2*$step)-1)).'%'; ?>">&nbsp;</div>
     </div>
 </div>
 
-<form id="form" name="setup-form" class="form-vertical" method="POST" action="<?php echo $this->link('/setup/install/step'.((int) $this->get('step') + 1) ) ?>">
+<form id="form" name="setup-form" class="form-vertical" method="POST" action="<?php echo $this->link('/setup/install/step'.((int) $this->get('step') + 1) ); ?>">
     <fieldset>
 
         <?php switch ($step): 
@@ -47,7 +47,7 @@
     <div class="form-actions page-end">
         <div class="clearfix">
             <?php if($step>1) : ?>
-            <a href="<?php echo $this->link('/setup/install/step'.((int) $this->get('step') - 1) ) ?>" class="btn pull-left" type="button" rel="goback"><?php echo _('Previous Step'); ?></a>
+            <a href="/setup/install/step'.((int) $this->get('step') - 1) " class="btn pull-left" type="button" rel="goback"><?php echo _('Previous Step'); ?></a>
             <?php endif; ?>
             <button type="submit" class="btn pull-right"><?php echo ($step === 1) ? "I agree to these Terms" : "Next Step" ?></button>
         </div>

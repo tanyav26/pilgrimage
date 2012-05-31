@@ -7,7 +7,7 @@
         </ul>
     </nav>
     <div class="sidetab default-sidetab padding-20" id="summary" style="display: block;"> 
-        <form action="<?php echo $this->link('/system/admin/index!#summary') ?>">
+        <form action="/system/admin/index!#summary">
             <div class="grid whole">
                 <div class="row clearfix whole">
                     <div class="col half" align="left"><?php echo _('Welcome back! Here is a summary for activity on your site') ?></div>

@@ -2,7 +2,7 @@
 <div class="btn-toolbar no-top-margin">
 
     <div class="btn-group">
-        <a class="btn" href="<?php echo $this->link('/member/settings/account') ?>"><i class="icon icon-edit"></i>&nbsp;Compose new...</a>
+        <a class="btn" href="/member/settings/account"><i class="icon icon-edit"></i>&nbsp;Compose new...</a>
     </div>    
     <div class="btn-group">
         <button class="btn">Live Chat ...</button>

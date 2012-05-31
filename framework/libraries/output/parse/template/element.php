@@ -77,17 +77,23 @@ class Element extends Parse\Template {
         //Search for (?<=\$\{)([a-zA-Z]+)(?=\}) and replace with data
         if( preg_match_all('/(?:(?<=\$\{)).*?(?=\})/i', $content, $matches) ){
               
-            $searches= array();
-            $replace = array(); 
-            
-            $placemarkers = (is_array($matches) && isset($matches[0])) ? $matches[0] : array();
+            $searches       = array();
+            $replace        = array();         
+            $placemarkers   = (is_array($matches) && isset($matches[0])) ? $matches[0] : array();
             
             foreach($placemarkers as $k=>$dataid){
-                $replace[] = self::getData( strval($dataid) ); //default is null 
-                $searches[]= '${'.$dataid.'}';
+                $replace[]  = self::getData( strval($dataid) ); //default is null 
+                $searches[] = '${'.$dataid.'}';
             }
             //Replace with data;
             $content = str_ireplace($searches, $replace, $content);     
+        }
+        
+        //Automatically internalize HREFs! 
+        //@TODO Use call backs of type i.x _XMLAttributeCallbackOn<type> e.g _XMLAttributeCallbackOnHref
+        $references = array("HREF","ACTION");
+        if(in_array(strtoupper($attribute), $references)){
+            $content = \Library\Uri::internal( $content );
         }
         
         $writer->text($content);

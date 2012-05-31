@@ -9,7 +9,7 @@
         <div class="grid">
             <div class="row wrap">
                 <div class="col third" align="left">
-                    <a class="button" title="<?php echo _('Add new themes'); ?>" href="<?php echo $this->link('/system/admin/extensions/add'); ?>" style="width:80px">Add Themes</a>
+                    <a class="button" title="<?php echo _('Add new themes'); ?>" href="/system/admin/extensions/add" style="width:80px">Add Themes</a>
                 </div>
                 <div class="col third" align="center">&nbsp;</div>
                 <div class="col third" align="right">

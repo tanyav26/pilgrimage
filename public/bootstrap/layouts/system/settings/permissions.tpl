@@ -48,7 +48,7 @@
                                 <?php foreach ($e['authority']['permissions'] as $permission): ?>
                                     <tr>
                                         <td><?php echo str_repeat(' - ', (int) $e['authority']['indent']) . sprintf(_("%s"), $e['authority']['authority_title']); ?></td>
-                                        <td><a href="<?php echo $this->link('/system/admin/settings/privacy.json') ?>" rel="modal" title="<?php echo _("Areas affected by this permission") ?>"><span title="<?php echo $permission['permission_area_uri'] ?>" rel="tooltip"><?php echo $permission['permission_title'] ?></span></a></td>
+                                        <td><a href="/system/admin/settings/privacy.json" rel="modal" title="<?php echo _("Areas affected by this permission") ?>"><span title="<?php echo $permission['permission_area_uri'] ?>" rel="tooltip"><?php echo $permission['permission_title'] ?></span></a></td>
                                         <td style="background-color: red; color: #fff"><div class="<?php echo $permission['permission'] ?>"><?php echo _(ucfirst($permission['permission'])) ?></div></td>
                                         <td><?php echo _(ucfirst($permission['permission_type'])) ?></td>
                                         <td><a href="#" class="btn"><?php echo _('Revoke'); ?></a></td>
@@ -81,7 +81,7 @@
 
 
 <div id="add-authority-role" class="modal hide fade">
-    <form method="POST" action="<?php echo $this->link('/system/admin/settings/privacy/permissions/add'); ?>">
+    <form method="POST" action="/system/admin/settings/privacy/permissions/add">
         <div class="modal-header">
             <a href="#" class="close" data-dismiss="modal">×</a>
             <h3>Add authority permission</h3>
@@ -144,7 +144,7 @@
 
 
 <div id="add-authority" class="modal hide fade">
-    <form method="POST" action="<?php echo $this->link('/system/admin/settings/privacy/edit'); ?>">
+    <form method="POST" action="/system/admin/settings/privacy/edit">
         <div class="modal-header">
             <a href="#" class="close" data-dismiss="modal">×</a>
             <h3>Add Authority (Permission Group)</h3>

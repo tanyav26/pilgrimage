@@ -11,7 +11,7 @@
         </ul>
     </div>
     <div class="btn-group">
-        <a class="btn" href="<?php echo $this->link('/member/settings/account') ?>"><i class="icon icon-cog"></i>&nbsp;Edit Information</a>
+        <a class="btn" href="/member/settings/account"><i class="icon icon-cog"></i>&nbsp;Edit Information</a>
     </div>
 </div>
 

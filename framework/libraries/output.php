@@ -454,6 +454,19 @@ class Output extends Object {
 
         return $this->getTemplate();
     }
+    
+    /**
+     * Returns the current template path;
+     * 
+     * @return string; 
+     */
+    final public function getTemplatePath(){
+        
+        $name = $this->getTemplateName();
+        $path = $this->config->getParam("path","/");
+        
+        return $path.$name;
+    }
 
     /**
      * Adds a header type to the output

@@ -87,6 +87,11 @@ class Block extends Parse\Template {
                 //process the callback
                 $callback = $block['callback'];
                 $string = $block['content'];
+                
+                //Parse the block content!
+                //Slows things down! Maybe check if block is parsable
+                //$string = static::$document->parse( $string , static::$document); 
+                
                 //print_R($string);
                 //@TODO Execute the callback after writing
                 $writer->writeRaw( $string );

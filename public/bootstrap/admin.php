@@ -16,11 +16,11 @@
             <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png" />
             <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png" />
 
-            <link rel="stylesheet" href="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/css/bootstrap.css" type="text/css" media="screen" />
+            <link rel="stylesheet" href="<?php echo $this->getTemplatePath() ?>/css/bootstrap.css" type="text/css" media="screen" />
 
-            <script src='/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
-            <script src='/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
-            <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
+            <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-1.7.1.min.js' type="text/javascript"></script>
+            <script src='<?php echo $this->getTemplatePath() ?>/js/libs/jquery-ui.min.js' type="text/javascript"></script>
+            <script src="<?php echo $this->getTemplatePath() ?>/js/libs/modernizr-2.0.6.min.js" type="text/javascript"></script>
         </head>
 
         <body>
@@ -66,9 +66,7 @@
                                             
                                         </div>
                                         <tpl:block data="page.block.side">Sidebar</tpl:block>
-
                                         
-
                                         <div class="widget top-pad">
                                             <div class="widget-body">
                                                 <h2>2,190<small class="pull-right">60%</small></h2>
@@ -108,10 +106,8 @@
                                                     <div class="bar" style="width: 10%;">&nbsp;</div>
                                                 </div>
                                                 <span class="help-block">New content. Post, Check-ins etc. </span>
-
                                             </div>
-                                        </div>
-                                        
+                                        </div>                                     
                                         <hr />
                                         <div class="widget">
                                             <div class="well">
@@ -122,9 +118,6 @@
                                                 </a>
                                             </div>
                                         </div>
-
-
-
                                     </div>
                                 </div>
                             </div>
@@ -135,19 +128,19 @@
                     <div class="row-fluid">
                         <div class="span8">
                             <ul class="nav nav-pills">
-                                <li><a href="<?php echo $this->link('/'); ?>">Home</a></li>
-                                <li><a href="<?php echo $this->link('/about'); ?>">About</a></li>
-                                <li><a href="<?php echo $this->link('/apps'); ?>">Apps</a></li>
+                                <li><a href="/">Home</a></li>
+                                <li><a href="/about">About</a></li>
+                                <li><a href="/apps">Apps</a></li>
                                 <li><a href="http://blog.stonyhillshq.com">Blog</a></li>
                                 <li><a href="http://developers.stonyhillshq.com">Developers</a></li>
-                                <li><a href="<?php echo $this->link('/help'); ?>">Help</a></li>
-                                <li><a href="<?php echo $this->link('/legal/privacy'); ?>">Privacy</a></li>
-                                <li><a href="<?php echo $this->link('/legal/terms'); ?>">Terms</a></li>
+                                <li><a href="/help">Help</a></li>
+                                <li><a href="/legal/privacy">Privacy</a></li>
+                                <li><a href="/legal/terms">Terms</a></li>
                             </ul>
                         </div>
                         <div class="span4">
                             <ul class="nav nav-pills pull-right">
-                                <li><a href="#">© Stonyhills 2012</a></li>
+                                <li><a href="#">©Stonyhills 2012</a></li>
                             </ul>
                         </div>
                     </div>   
@@ -155,8 +148,7 @@
                     <tpl:import layout="console" />
                 </section>
             </div>
-            <script src="/~livingstonefultang/<?php echo $this->getTemplateName() ?>/js/bootstrap.min.js" type="text/javascript"></script>
-
+            <script src="<?php echo $this->getTemplatePath() ?>/js/bootstrap.min.js" type="text/javascript"></script>
         </body>
     </html>
 </tpl:layout>

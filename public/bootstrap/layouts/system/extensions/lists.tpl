@@ -7,7 +7,7 @@
             <div class="grid">
                 <div class="row wrap">
                     <div class="col third" align="left">
-                        <a class="button" title="Add new " href="<?php echo $this->link('/system/admin/extensions/add'); ?>" style="width:60px">Add New</a>
+                        <a class="button" title="Add new " href="/system/admin/extensions/add" style="width:60px">Add New</a>
                     </div>
                     <div class="col third" align="left">
                         <select style="width:100%">
