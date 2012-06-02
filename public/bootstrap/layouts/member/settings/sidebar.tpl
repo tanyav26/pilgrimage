@@ -1,3 +1,4 @@
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
 <div class="btn-toolbar no-top-margin">
     <div class="btn-group">
         <button class="btn">Add New ...</button>
@@ -18,7 +19,7 @@
 
 <!-- System Wide Menu -->
 <div style="margin-top:15px">
-    <?php echo $this->navigation("settingsmenu"); ?>
+    <tpl:menu id="settingsmenu" type="nav-block" />
 </div>
 
-
+</tpl:layout>

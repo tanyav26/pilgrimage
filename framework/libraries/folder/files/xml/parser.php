@@ -429,18 +429,13 @@ class Parser extends Files\Xml {
             //an element. But it works.
             if ($iterator + 1 == $children) {
                 if (empty($key) && !empty($tag) || ($key == 'CHILDREN') && !empty($tag)) {
-
+                    $selfclosing = array("area", "base", "basefont", "br", "col", "frame", "hr", "img", "input", "link", "meta", "param");
                     //empty tags e.g script etc
-                    switch ($tag):
-                        case "script":
-                        case "textarea":
-                        case "span":
+                    if(!in_array($tag, $selfclosing)){
                             $xmlWriter->fullEndElement();
-                            break;
-                        default:
+                    }else{
                             $xmlWriter->endElement();
-                            break;
-                    endswitch;
+                     }
                     //if (!empty($tag)):
                     //endif;
                 }
@@ -576,8 +571,13 @@ class Parser extends Files\Xml {
 
         //Data Handler
         $data = trim($data);
+        
+        if(empty($data)) return true;
+        
+        $data = preg_replace('/  */',' ',$data);
         $data = preg_replace('/^([a-z]+;)/', '&\1', $data);
         $data = preg_replace('/^(#[0-9]+;)/', '&\1', $data);
+        //$data = preg_replace('/  */','&nbsp;', $data);
 
         $children = 0;
 
@@ -606,16 +606,18 @@ class Parser extends Files\Xml {
                         $old .= self::flatten($last['CHILDREN'][$children]);
                         //unset( $last['CHILDREN'][$children] );
                     }
-                    //$old .= " %\${$key}s";
+                    //$old .= "&nbsp;";
+                    //$old .= " %\${$key}s"; 
                     $children = $children + 1;
                     //return;
                     if (($i + 1) == $howmany) {
+                       
                         unset($last['CHILDREN']);
                     }
                 }
             }
             //cocatenate
-            $last['CDATA'] = $old . $data;
+            $last['CDATA'] = $old . $data; //Dealing with Whitespace
 
             //$section++;
         }
@@ -640,10 +642,14 @@ class Parser extends Files\Xml {
             switch (strtoupper($key)):
                 case "ELEMENT" :
                     $tag = strtolower($value);
-                    $xml .=" <$tag";
+                    $xml .="&nbsp;<$tag";
                     break;
                 default :
                     if (!is_array($value) && $key != 'CDATA') {
+                        $references = array("HREF","ACTION");
+                        if( in_array(strtoupper($key) , $references) ){
+                            $value = \Library\Uri::internal( $value );
+                        }
                         $attribute = ' ' . strtolower($key) . '="' . $value . '"';
                         $xml .=$attribute;
                     }

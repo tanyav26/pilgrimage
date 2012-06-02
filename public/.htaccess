@@ -8,3 +8,8 @@
     RewriteRule ^(.*)$ index.php?/$1 [PT,L]
 
 </IfModule>
+
+<FilesMatch "\.(tpl|php)$">
+    Order deny,allow
+    Deny from all
+</FilesMatch>

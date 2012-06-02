@@ -285,6 +285,43 @@ class Output extends Object {
 
         return $printed;
     }
+    
+    final protected function getHandler($format = 'xhtml'){
+        //$this->addToPosition("do:debugger", $console, '', true);
+        //1. Work on the headers, make sure everything is beautiful
+        // seconds, minutes, hours, days
+        //The requested Response format
+        $this->format = $this->router->getFormat(); //Because the output class is loaded before the router, use this to check if the format has changed after routing
+
+        $outputFormat = $this->format;
+        $responseFormat = !empty($outputFormat) ? $outputFormat : $format;
+
+        //Test the format
+        if (!empty($responseFormat)) {
+
+            //If the format is set in the URI, that will be the output format;
+            //If no format is set in the URI, then we can use that passed to the display method
+            $mimeType = !empty($responseFormat) ? $responseFormat : $format;
+            $validTypes = array(
+                "json", "xml", "raw", "pdf", "xhtml"
+            );
+            $mimeType = strtolower($mimeType);
+
+            if (in_array($mimeType, $validTypes)) {
+
+                //Check if the Rendere exists;
+                $renderer = '\Library\Output\Format\\' . ucfirst($mimeType);
+
+                if (!class_exists($renderer)) {
+                    return false;
+                }
+
+                $Document = $renderer::getInstance();
+
+                return $Document;
+            }
+        }
+    }
 
     /**
      * Returns the processed output and displays to the browser
@@ -325,36 +362,10 @@ class Output extends Object {
         //1. Work on the headers, make sure everything is beautiful
         // seconds, minutes, hours, days
         //The requested Response format
-        $this->format = $this->router->getFormat(); //Because the output class is loaded before the router, use this to check if the format has changed after routing
+         $Document = $this->getHandler();
 
-        $outputFormat = $this->format;
-        $responseFormat = !empty($outputFormat) ? $outputFormat : $format;
-
-        //Test the format
-        if (!empty($responseFormat)) {
-
-            //If the format is set in the URI, that will be the output format;
-            //If no format is set in the URI, then we can use that passed to the display method
-            $mimeType = !empty($responseFormat) ? $responseFormat : $format;
-            $validTypes = array(
-                "json", "xml", "raw", "pdf", "xhtml"
-            );
-            $mimeType = strtolower($mimeType);
-
-            if (in_array($mimeType, $validTypes)) {
-
-                //Check if the Rendere exists;
-                $renderer = '\Library\Output\Format\\' . ucfirst($mimeType);
-
-                if (!class_exists($renderer)) {
-                    return false;
-                }
-
-                $Document = $renderer::getInstance();
-
-                return $Document->render($template, $httpCode);
-            }
-        }
+         return $Document->render($template, $httpCode);
+     
     }
 
     /**
@@ -431,6 +442,12 @@ class Output extends Object {
             //Set the parsed layout as a variable
             $this->set($setass, $parsed);
         }
+        
+        //Format Parsed!
+        $handler = $this->getHandler(); 
+        $parsed  = $handler->parse( $parsed , $handler );
+        
+        \Platform\Debugger::log( htmlentities($layout ) );
 
         return $parsed;
     }

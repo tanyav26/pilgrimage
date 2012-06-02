@@ -99,7 +99,7 @@ $config["install"]["requirements"] = array(
     ),
     "server" => array(
         "PHP" => array(
-            "version" => "5.3.0",
+            "version" => "5.4.0",
             "minimal" => ">=",
             "terminal" => true,
             "current" => PHP_VERSION

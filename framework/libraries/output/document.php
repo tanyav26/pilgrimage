@@ -57,11 +57,11 @@ abstract class Document extends Library\Object {
     final public function parse($output, $object=null) {
         //parses the document output buffer
         //1. Set the output as source
-        static::$_source = $output;
+        static::$_source    = $output;
         
         //2. Parse layouts
-        static::$_prepared = Parse::_(static::$_source, $object);
-
+        static::$_prepared  = Parse::_(static::$_source, $object);
+        static::$_prepared  = str_replace('<?xml version="1.0" encoding="UTF-8"?>',NULL,  static::$_prepared );
 
         //4. Return source;
         return static::$_prepared;

@@ -38,11 +38,11 @@ class Index extends Platform\View {
     
     public function index(){
         
-        $indexpage  = $this->output->layout("welcome");
+        $indexpage  = "Welcome page";
         $indexpage2 = "Side panel";
         
-        $this->output->addToPosition("body", $indexpage,  "index panel 1");
-        $this->output->addToPosition("side", $indexpage2, "index panel 2");
+        $this->output->addToPosition("body", $indexpage);
+        $this->output->addToPosition("side", $indexpage2 );
     }
  
     public function display(){
