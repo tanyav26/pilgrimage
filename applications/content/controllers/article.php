@@ -41,7 +41,7 @@ use Application\Content\Views as View;
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Article extends \Platform\Controller {
+final class Article extends Platform\Controller {
 
     public function index() {
         return $this->read();

@@ -67,7 +67,7 @@ class Folder extends \Library\Object {
      * 
      * @param string $path 
      */
-    public function getName($path) {
+    public function name($path) {
         
     }
 

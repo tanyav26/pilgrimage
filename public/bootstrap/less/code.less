@@ -9,15 +9,17 @@ pre {
   #font > #family > .monospace;
   font-size: @baseFontSize - 1;
   color: @grayDark;
-  .border-radius(3px);
+  //.border-radius(3px);
 }
 
-// Inline code
+// Code Block code
 code {
+ display: block;
   padding: 3px 4px;
-  color: #d14;
+  //color: #1e347;
   background-color: #f7f7f9;
   border: 1px solid #e1e1e8;
+  .text-wrap();
 }
 
 // Blocks of code

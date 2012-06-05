@@ -1,5 +1,5 @@
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
 <div id="contenttable">
-
     <form class="wrap">
         <fieldset >
             <h3><?php echo _('System Announcements'); ?></h3>
@@ -90,3 +90,4 @@
         </fieldset>
     </form>
 </div>
+    </tpl:layout>

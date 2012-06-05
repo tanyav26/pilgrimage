@@ -48,19 +48,19 @@ final class Dispatcher extends \Library\Object {
      * The Refering page
      * @var string
      */
-    public static $referer;
+    public $referer;
 
     /**
      * The query being executed
      * @var string 
      */
-    public static $query;
+    public $query;
 
     /**
      * The resolved task
      * @var type 
      */
-    public static $task;
+    public  $task;
 
     /**
      * The route map
@@ -114,7 +114,8 @@ final class Dispatcher extends \Library\Object {
      * @param <type> $route
      */
     public function execute($route) {
-
+        
+      
         // get the base controller
         require_once FSPATH . 'framework' . DS . 'utilities' . DS . 'controller' . EXT;
 
@@ -132,10 +133,10 @@ final class Dispatcher extends \Library\Object {
             }
             $class = "Application\\" . ucfirst($application) . "\Controllers\\" . ucfirst($word);
         }
-        
+        //print_R(\Library\Config::getParams());
         $this->route = $route;
         $this->task = $class::getInstance();
-        
+       
 
         //Execute the method;
         $argmts = $route->getParameter("arguments");

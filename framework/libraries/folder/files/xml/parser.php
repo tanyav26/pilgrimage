@@ -95,7 +95,7 @@ class Parser extends Files\Xml {
     /*
      *  The document ROOT
      */
-    public static $ROOT;
+    public $ROOT = NULL;
 
     /**
      * A bunch of hooks to run at various stages during parsing
@@ -130,7 +130,7 @@ class Parser extends Files\Xml {
         self::$stack = array();
         self::$level = null;
         self::$elements = null;
-        self::$ROOT = null;
+        //self::$ROOT = null;
         self::$eventContext = _("XML Parser Events");
 
         //self::$tree[0] = array();
@@ -329,7 +329,7 @@ class Parser extends Files\Xml {
      * @param type $hooks
      * @return type
      */
-    final public function toXML($ROOT = "", $version = '1.0', $encoding = "UTF-8", $readonly = array()) {
+    final public function toXML($ROOT = "", $version = '1.0', $encoding = "ISO-8859-1", $readonly = array()) {
 
 
         //Use a user supplied root, or try using our root
@@ -346,7 +346,7 @@ class Parser extends Files\Xml {
         $xmlWriter = new \XMLWriter;
         $xmlWriter->openMemory();
         $xmlWriter->startDocument($version, $encoding);
-        $xmlWriter->setIndent(false);
+        $xmlWriter->setIndent(true);
         //$xmlWriter->startElement("ROOT");
         //Recursively write out the xml;
         static::writeXML($xmlWriter, $ROOT, $readonly);
@@ -517,7 +517,7 @@ class Parser extends Files\Xml {
      * @param type $element
      * @return type
      */
-    final protected function callback($element, \XMLWriter $xmlWriter) {
+    final protected static function callback($element, \XMLWriter $xmlWriter) {
 
         if (isset($element['NAMESPACE'])) {
             reset($element['NAMESPACE']);
@@ -570,11 +570,11 @@ class Parser extends Files\Xml {
     public static function cdata($parser, $data) {
 
         //Data Handler
-        $data = trim($data);
+        $data = ltrim($data);
         
         if(empty($data)) return true;
         
-        $data = preg_replace('/  */',' ',$data);
+        //$data = preg_replace('s/\s+</</g',' ',$data);
         $data = preg_replace('/^([a-z]+;)/', '&\1', $data);
         $data = preg_replace('/^(#[0-9]+;)/', '&\1', $data);
         //$data = preg_replace('/  */','&nbsp;', $data);
@@ -642,7 +642,7 @@ class Parser extends Files\Xml {
             switch (strtoupper($key)):
                 case "ELEMENT" :
                     $tag = strtolower($value);
-                    $xml .="&nbsp;<$tag";
+                    $xml .=" <$tag";
                     break;
                 default :
                     if (!is_array($value) && $key != 'CDATA') {

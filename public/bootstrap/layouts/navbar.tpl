@@ -11,18 +11,26 @@
                 <div class="nav-collapse">
 
                     <ul class="nav pull-left">                     
-                        <li><a href="/sign-in">Featured</a></li>
+                        <li><a href="/system/start/featured">Featured</a></li>
                         <li><a href="/system/start/explore">Explore</a></li>
                         <li><a href="/system/activity/stream">Activity</a></li>
                         <li class="divider-vertical"></li>
                         <tpl:condition  data="user.isauthenticated" test="boolean" value="1" >
                             <li class="notification dropdown">
-                                <a href="/sign-in" class="dropdown-toggle" data-toggle="dropdown">4</a>
+                                <a href="/member/notification/list" class="dropdown-toggle" data-toggle="dropdown">40</a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <div class="alert-info alert no-margin">
                                             No new notifications
                                         </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="shareform dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-white icon-plus"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <tpl:import layout="input" />
                                     </li>
                                 </ul>
                             </li>

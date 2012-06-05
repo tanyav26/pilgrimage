@@ -1,7 +1,7 @@
-<?php $alerts = $this->get("alerts");
-foreach ($alerts as $alert) : ?>
-<div class="alert alert-<?php echo $alert['alertType'] ?>">
-    <a class="close" data-dismiss="alert" href="#">×</a>
-    <?php if (!empty($alert['alertTitle'])) : ?><strong><?php echo $alert['alertTitle'] ?></strong> <?php endif; ?><?php echo $alert['alertBody'] ?>
-</div>
-<?php endforeach; ?>
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
+    <tpl:loop data="alerts">
+        <div class="alert alert-${alertType}">
+            <strong><tpl:element type="text" data="alertTitle" /></strong> <tpl:element type="text" data="alertBody" />
+        </div>
+    </tpl:loop>
+</tpl:layout>

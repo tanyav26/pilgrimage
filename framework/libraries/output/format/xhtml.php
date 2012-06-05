@@ -59,7 +59,7 @@ class xHtml extends \Library\Output\Document {
             $this->setResponseCode( (int) $httpCode );
         }
 
-        $this->headers();
+        $this->headers("text/html");
         $template = empty($template) ? $this->output->layout : $template ;
         
         //3.Determine which format of the index we are using
@@ -81,7 +81,7 @@ class xHtml extends \Library\Output\Document {
         
         //print_R(\Platform\Debugger::$log);
         //Print to client
-        print( "<!DOCTYPE html>\n".$document );
+        print( "<!DOCTYPE html>\n".trim($document) );
 
         ob_flush();
         ob_end_flush();

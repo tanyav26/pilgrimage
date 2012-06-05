@@ -209,7 +209,7 @@ final class Input extends Object {
      * @param type $string
      * @return type 
      */
-    public function unserialize($string) {
+    public static function unserialize($string) {
         return unserialize(gzuncompress(base64_decode($string)));
     }
 
@@ -219,7 +219,7 @@ final class Input extends Object {
      * @param string $data
      * @return string 
      */
-    public function serialize($data) {
+    public static function serialize($data) {
         return Output::serialize($data);
     }
 

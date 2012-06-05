@@ -90,7 +90,7 @@ final class Router extends Object {
      * Holds all the predefined Routes
      * @var array
      */
-    public static $routes = array();
+    public $routes = array();
 
     /**
      * Changes to true when successfully mapped

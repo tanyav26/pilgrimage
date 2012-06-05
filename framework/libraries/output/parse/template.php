@@ -158,7 +158,8 @@ abstract class Template extends Output\Parse {
         
     }
 
-    abstract public static function execute($parser, $element, $writer);
+    //Cannot have static abstract methods in php 5.4 this will have to go to an interface
+    //abstract public static function execute($parser, $element, $writer);
 
     /**
      * Returns and instantiated Instance of the template class
@@ -172,7 +173,7 @@ abstract class Template extends Output\Parse {
      * @property-write object $instance
      * @return object template
      */
-    public static function getInstance() {
+    public static function getInstance( $buffer = NULL) {
 
         if (is_object(static::$instance) && is_a(static::$instance, 'template'))
             return static::$instance;

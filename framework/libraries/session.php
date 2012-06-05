@@ -96,22 +96,22 @@ class Session extends Object {
      * @param type $killPrevious 
      * @return void
      */
-    final public function start($killPrevious = FALSE) {
+    final public static function start($killPrevious = FALSE) {
 
         //starts this session if not creates a new one      
-        $self = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
+        //$self = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
 
         //@TODO Check if there is an existing session!
         //If there is any previous and killprevious is false, 
         //simply do a garbage collection and return;
         //if we can't read the session
-        if (( $session = self::read()) !== FALSE) {
-            self::update($session);
+        if (( $session = static::read()) !== FALSE) {
+            static::update($session);
         } else {
-            self::create();
+            static::create();
         }
         //Carbage collection
-        self::gc();
+        static::gc();
     }
 
     /**
@@ -151,7 +151,7 @@ class Session extends Object {
      * 
      * @return void
      */
-    final public function create() {
+    final public static function create() {
 
         $self = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
 
@@ -210,7 +210,7 @@ class Session extends Object {
      * 
      * @return boolean True or false depending on auth status
      */
-    final public function isAuthenticated() {
+    final public static function isAuthenticated() {
 
         $self = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
         $auth = $self->get("handler", "auth");
@@ -240,7 +240,7 @@ class Session extends Object {
      * @param type $name
      * @return type 
      */
-    final public function getNamespace($name = 'default') {
+    final public static function getNamespace($name = 'default') {
         //Returns the Registry object corresponding to the
         //namespace $name from $this->registry
         $self = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
@@ -254,7 +254,7 @@ class Session extends Object {
      * @param type $splash
      * @return type 
      */
-    final public function generateId($splash) {
+    final public static function generateId($splash) {
 
         $encryptor = Encrypt::getInstance();
         $input = Input::getInstance();
@@ -266,12 +266,12 @@ class Session extends Object {
     /**
      * Reads session data from session stores
      *
-     * @param type $id
-     * @return type 
+     * @param string $id
+     * @return Boolean False on failed and session ID on success 
      */
-    final public function read($id = Null) {
+    final public static function read($id = Null) {
 
-        $self = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
+        $self = (!isset($this) || !is_a($this, "Library\Session")) ? static::getInstance() : $this;
 
         $input = Input::getInstance();
         $uri = Uri::getInstance();
@@ -431,7 +431,7 @@ class Session extends Object {
      * @param type $id
      * @param type $restart 
      */
-    final public function destroy($id = "") {
+    final public static function destroy($id = "") {
 
         //stops a session
         $self = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
@@ -685,7 +685,7 @@ class Session extends Object {
      * @param type $namespace
      * @return Session 
      */
-    final public function set($varname, $value, $namespace = 'default') {
+    final public function set($varname, $value=NULL, $namespace = 'default') {
         //stores a value to a varname in a namespace of this session
         $session = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
 

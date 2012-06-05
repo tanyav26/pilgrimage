@@ -122,7 +122,7 @@ final class Uri {
      * 
      * @return type 
      */
-    private function buildQueryString() {
+    private static function buildQueryString() {
 
         //Standard Segment based?
         if (is_array($_GET) && count($_GET) == 1 && trim(key($_GET), '/') != '') {

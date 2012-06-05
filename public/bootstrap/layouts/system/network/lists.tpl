@@ -1,3 +1,4 @@
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
 <div class="sidetabs vertical-tabs">
 
     <!-- Side Tab Navigation -->
@@ -85,3 +86,4 @@
         </form>
     </div>
 </div>
+    </tpl:layout>

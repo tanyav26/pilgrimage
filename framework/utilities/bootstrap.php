@@ -87,7 +87,6 @@ Library\Session::start();
 $Framework = Platform\Framework::getInstance();
 $Application = Platform\Application::getInstance();
 
-
 /*
  * ------------------------------------------------------
  *  Base Classes and Controllers
@@ -97,7 +96,6 @@ $Config = Library\Config::getInstance();
 $Router = Library\Router::getInstance();
 $Uri    = Library\Uri::getInstance();
 $Output = Library\Output::getInstance();
-
 
 /*
  * ------------------------------------------------------
@@ -115,7 +113,6 @@ $Dispatcher = Platform\Dispatcher::getInstance();
 
 $Dispatcher->execute($Router->findRoute($Uri->getQuery()));
 $Dispatcher->redirect();
-
 
 /*
  * ------------------------------------------------------

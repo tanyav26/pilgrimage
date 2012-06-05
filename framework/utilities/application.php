@@ -39,7 +39,7 @@ use Library;
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/application
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Application extends \Library\Object {
+final class Application extends Library\Object {
 
     /**
      * Stores an application object
@@ -57,7 +57,7 @@ final class Application extends \Library\Object {
     public static function getInstance() {
 
         static $instance;
-
+        
         //If the class was already instantiated, just return it
         if (isset($instance))
             return $instance;

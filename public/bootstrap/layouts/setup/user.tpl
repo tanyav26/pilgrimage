@@ -1,4 +1,4 @@
-<tpl:layout name="navbar" xmlns:tpl="http://tuiyo.co.uk/tpl">
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
 <div class="page-header">
     <h1><?php echo _('Additional Details') ; ?></h1><br />
     <small><?php echo _('Please provide details for the superadmin User account. ' ) ; ?></small>

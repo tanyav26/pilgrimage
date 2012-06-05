@@ -291,7 +291,7 @@ abstract class Object {
      * @param type $value
      * @return type
      */
-    public function set($property, $value = null) {
+    public function set($property, $value = null, $overwrite=false) {
 
         $previous = isset($this->$property) ? $this->$property : null;
 

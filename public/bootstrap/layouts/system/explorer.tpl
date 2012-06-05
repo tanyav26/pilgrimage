@@ -1,3 +1,4 @@
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
 <fieldset class="no-margin">   
     <div class="control-group">
         <div class="controls input">
@@ -126,3 +127,4 @@
         </div>
     </div>
 </fieldset>
+</tpl:layout>

@@ -1,3 +1,4 @@
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
 <form class="wrap">
     <fieldset >
         <h3><?php echo _('System Appearance settings'); ?></h3>
@@ -26,3 +27,4 @@
     <input type="file" name="backgroun-image" value="" id="title" style="width: 100%" />
     </fieldset>
 </form>
+    </tpl:layout>

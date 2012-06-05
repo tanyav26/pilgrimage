@@ -50,7 +50,6 @@ class Activity extends Platform\Model {
         
         //@TODO determine the user has permission to post;
         //print_R($this->user);
-        
         $post = array(
            "post_author"    => $this->user->get("userid"),
            "post_content"   => $this->input->getString('post_content','','post')

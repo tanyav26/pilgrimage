@@ -39,8 +39,11 @@ use Library;
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/controller
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-abstract class Controller extends \Library\Object {
+abstract class Controller extends Library\Object {
 
+    //use Library\Singleton;
+    
+    static $instance;
     /**
      * Stores the application/module currently being executed
      * @var string
@@ -80,23 +83,25 @@ abstract class Controller extends \Library\Object {
      * @void
      */
     public function __construct() {
-
+        
         $classes = array(
             'config' => 'Library\Config',
             'input' => 'Library\Input',
             'uri' => 'Library\Uri',
             'lang' => 'Library\i18n',
             'router' => 'Library\Router',
-            'load' => 'Platform\Loader',
-            'user'  => 'Platform\User',
+            'load' => '\Platform\Loader',
+            'user'  => '\Platform\User',
             'validate' => 'Library\Validate',
             'output' => 'Library\Output'
         );
-
+        
         foreach ($classes as $var => $class) {
             $this->$var = $class::getInstance();
         }
+                                        
 
+        //$output = Library\Output::getInstance();
         //testing: throw new Exception("We could not deal with the heat" );
 
         $this->application = $this->router->getApplication();
@@ -196,7 +201,7 @@ abstract class Controller extends \Library\Object {
      * @param string $name
      * @param mixed $value 
      */
-    final public function set($name, $value) {
+    final public function set($name, $value=NULL, $overwrite=FALSE) {
         //Determine all other auto set vars; 
         $this->output->set($name, $value);
     }
@@ -317,7 +322,7 @@ abstract class Controller extends \Library\Object {
         $this->redirect($this->uri->getURL('signin'));
     }
 
-    final public function output($layout = null) {
+    final public function render($layout = null) {
         
         static::$displayed = false;
         
@@ -349,13 +354,6 @@ abstract class Controller extends \Library\Object {
     }
 
     /**
-     * Instantiate the child controller
-     * 
-     * @return object
-     */
-    abstract public static function getInstance();
-
-    /**
      * Displays the output for the request;
      * 
      * @return  
@@ -365,7 +363,7 @@ abstract class Controller extends \Library\Object {
         //Determine Variables that have not been set
         //Set
         if (!static::$displayed) {
-            return $this->output();
+            return $this->render();
         }
     }
 

@@ -81,7 +81,7 @@ class User extends Library\Object {
      * 
      * @return type 
      */
-    public function getAuthenticated(){
+    public static function getAuthenticated(){
         
         $authenticated = Library\Session::isAuthenticated();
         

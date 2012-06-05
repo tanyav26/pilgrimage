@@ -1,4 +1,4 @@
-
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
 <form action="/system/admin/index!#summary">
     <div id="placeholder" class="row-fluid" style="height: 300px; margin-bottom: 10px"></div>
     <fieldset>
@@ -151,3 +151,4 @@ xaxis: { min: ranges.xaxis.from, max: ranges.xaxis.to }
 });
 });
 </script>
+</tpl:layout>

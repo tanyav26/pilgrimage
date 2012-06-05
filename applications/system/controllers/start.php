@@ -69,6 +69,16 @@ class Start extends Platform\Controller {
 
         $this->output->addToPosition("body" , $form); 
     }
+    
+     public function featured(){
+        //To set the pate title use
+        $this->output->setPageTitle("Featured");
+        
+        $form  = "Featured Content";
+       
+
+        $this->output->addToPosition("body" , $form); 
+    }
 
     /**
      * The default page, consider this the homepage
@@ -87,22 +97,27 @@ class Start extends Platform\Controller {
     }
 
     /**
-     * Gets an instance of the start controller
+     * Returns and instantiated Instance of the __CLASS__ class
      * 
-     * @staticvar self $instance
-     * @return self 
+     * NOTE: As of PHP5.3 it is vital that you include constructors in your class
+     * especially if they are defined under a namespace. A method with the same
+     * name as the class is no longer considered to be its constructor
+     * 
+     * @staticvar object $instance
+     * @property-read object $instance To determine if class was previously instantiated
+     * @property-write object $instance 
+     * @return object i18n
      */
     public static function getInstance() {
 
-        static $instance;
-        //If the class was already instantiated, just return it
-        if (isset($instance))
-            return $instance;
+        $class = __CLASS__;
 
-        $instance = new self;
+        if (is_object(static::$instance) && is_a(static::$instance, $class))
+            return static::$instance;
 
-        return $instance;
+        static::$instance = new $class;
+
+        return static::$instance;
     }
-
 }
 

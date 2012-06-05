@@ -1,3 +1,4 @@
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
 <form>
     <fieldset>
         <strong class="timeline-tips-title">Whilst at <a href="#">Bar Loco</a> did you..</strong>
@@ -57,3 +58,4 @@
         </ol>
     </fieldset>
 </form>
+    </tpl:layout>

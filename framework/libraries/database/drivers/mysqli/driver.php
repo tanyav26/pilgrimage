@@ -87,16 +87,32 @@ final class Driver extends Library\Database{
             return;
         }
         
+        
         $this->resourceId = mysqli_init();
         
+        if (!$this->resourceId) {
+            $this->setError('mysqli_init failed');
+        }
+
+        if (!$this->resourceId->options(MYSQLI_INIT_COMMAND, 'SET AUTOCOMMIT = 0')) {
+            $this->setError('Setting MYSQLI_INIT_COMMAND failed');
+        }
+
+        if (!$this->resourceId->options(MYSQLI_OPT_CONNECT_TIMEOUT, 5)) {
+            $this->setError('Setting MYSQLI_OPT_CONNECT_TIMEOUT failed');
+        }
+        
+        //echo $database;        phpinfo();
+        //die;
         // connect to the server
-        if (!(@mysqli_real_connect($this->resourceId, $host, $user, $password))) {
+        if (!$this->resourceId->real_connect($host, $user, $password, $database)) {
             $this->errorNum =  mysqli_connect_errno();
             $this->errorMsg =  mysqli_connect_error();
+            
             $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
             return;
         }
-
+        
         // Determine utf-8 support
         $this->utf = $this->hasUTF();
 
@@ -300,7 +316,7 @@ final class Driver extends Library\Database{
      * @param array $options
      * @return selfss
      */
-    public static function getInstance( $options ){
+    public static function getInstance( $options = array() ){
         
 
         static $instance;

@@ -40,7 +40,7 @@ use Library;
  * @link       http://stonyhillshq/documents/index/carbon4/utilities/debugger
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  */
-final class Debugger extends \Library\Log{
+final class Debugger extends Library\Log{
 
     static $time;
 
@@ -50,7 +50,7 @@ final class Debugger extends \Library\Log{
 
 
     public static function getInstance(){
-        static $instance;
+        static $instance = NULL;
         //If the class was already instantiated, just return it
         if (isset($instance))
             return $instance;

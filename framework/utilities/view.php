@@ -65,7 +65,7 @@ abstract class View extends \Library\Object {
      * @param type $name
      * @param type $value 
      */
-    final public function set($name, $value) {
+    final public function set($name, $value=NULL, $overwrite=FALSE) {
         //Determine all other auto set vars; 
         $this->output->set($name, $value);
     }

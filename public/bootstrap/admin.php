@@ -36,7 +36,7 @@
                             <div class="row-fluid">
                                 <div class="span8">  
                                     <div class="page-header">
-                                        <h1><tpl:element type="text" data="page.title">Administrator</tpl:element><small>&nbsp;23/04/2012</small></h1>
+                                        <h1><tpl:element type="text" data="page.title">Administrator</tpl:element><small>23/04/2012</small></h1>
                                     </div>
                                     <tpl:block data="page.block.body" />
                                 </div>
@@ -71,39 +71,39 @@
                                             <div class="widget-body">
                                                 <h2>2,190<small class="pull-right">60%</small></h2>
                                                 <div class="progress mini-bar progress-success">
-                                                    <div class="bar" style="width: 60%;">&nbsp;</div>
+                                                    <div class="bar" style="width: 60%;"></div>
                                                 </div>
                                                 <span class="help-block">New members in the last 30 days</span>
 
                                                 <h2 class="top-pad">64<small class="pull-right">10%</small></h2>
                                                 <div class="progress mini-bar progress-danger">
-                                                    <div class="bar" style="width: 10%;">&nbsp;</div>
+                                                    <div class="bar" style="width: 10%;"></div>
                                                 </div>
                                                 <span class="help-block">New content. Post, Check-ins etc. </span>
 
 
                                                 <h2 class="top-pad">583<small class="pull-right">53%</small></h2>
                                                 <div class="progress mini-bar progress-bar">
-                                                    <div class="bar" style="width: 53%;">&nbsp;</div>
+                                                    <div class="bar" style="width: 53%;"></div>
                                                 </div>
                                                 <span class="help-block">Relationships forged</span>
 
 
                                                 <h2 class="top-pad">8,943,985<small class="pull-right">90%</small></h2>
                                                 <div class="progress mini-bar">
-                                                    <div class="bar" style="width: 90%;">&nbsp;</div>
+                                                    <div class="bar" style="width: 90%;"></div>
                                                 </div>
                                                 <span class="help-block">Unique visitors this month</span>
 
                                                 <h2 class="top-pad">2,190<small class="pull-right">60%</small></h2>
                                                 <div class="progress mini-bar progress-success">
-                                                    <div class="bar" style="width: 60%;">&nbsp;</div>
+                                                    <div class="bar" style="width: 60%;"></div>
                                                 </div>
                                                 <span class="help-block">New members in the last 30 days</span>
 
                                                 <h2 class="top-pad">64<small class="pull-right">10%</small></h2>
                                                 <div class="progress mini-bar progress-danger">
-                                                    <div class="bar" style="width: 10%;">&nbsp;</div>
+                                                    <div class="bar" style="width: 10%;"></div>
                                                 </div>
                                                 <span class="help-block">New content. Post, Check-ins etc. </span>
                                             </div>

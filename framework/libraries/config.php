@@ -72,10 +72,9 @@ class Config extends Object {
      */
     public function __construct() {
 
-        $this->validate = Validate::getInstance();
-        $this->database = static::getDatabase();
-        $this->xml = static::getXML();
-        $this->ini = static::getIni();
+        static::$database = static::getDatabase();
+        static::$xml = static::getXML();
+        static::$ini = static::getIni();
         
     }
 
@@ -84,8 +83,8 @@ class Config extends Object {
      * 
      * @return array 
      */
-    final public function getParams() {
-        return $this->params;
+    final public static function getParams() {
+        return static::$params;
     }
 
     /**
@@ -103,18 +102,18 @@ class Config extends Object {
     public static function setParam($name, $value = NULL, $section = "system") {
         
         //Instantiate
-        $config = (!isset($this) || !is_a($this, "Library\Config")) ? self::getInstance() : $this;
+        //$config = (!isset($this) || !is_a($this, "Library\Config")) ? self::getInstance() : $this;
 
-        if (!isset($config->params[$section])) {
+        if (!isset(static::$params[$section])) {
             return false;
             //we already have it;
         }
         
         //Set the param;
-        $config->params[$section][$name] = $value;
+        static::$params[$section][$name] = $value;
         
         //Return $this
-        return $config;
+        return static::getInstance();
         
     }
 
@@ -128,13 +127,13 @@ class Config extends Object {
      */
     public static function getParam($name, $default = '', $section = 'system', $adapter = NULL) {
         //validate item before using
-        $config = (!isset($this) || !is_a($this, "Library\Config")) ? self::getInstance() : $this;
+        //$config = (!isset($this) || !is_a($this, "Library\Config")) ? self::getInstance() : $this;
 
-        if (empty($section) && isset($config->params[$name])) {
-            return $config->params[$name];
+        if (empty($section) && isset(static::$params[$name])) {
+            return static::$params[$name];
         }
         //Attempt to get from the database?
-        $params = $config->getParamSection($section);
+        $params = static::getParamSection($section);
 
         //If we have a group;
         if (is_array($params) && isset($params[$name])) {
@@ -167,12 +166,12 @@ class Config extends Object {
             return false;
 
         //Instantiate
-        $config = (!isset($this) || !is_a($this, "Library\Config")) ? self::getInstance() : $this;
+        //$config = (!isset($this) || !is_a($this, "Library\Config")) ? self::getInstance() : $this;
 
         //We
-        $config->params[$section] = $params;
+        static::$params[$section] = $params;
 
-        return $config;
+        return static::getInstance();
     }
 
     /**
@@ -184,10 +183,10 @@ class Config extends Object {
     public static function getParamSection($section) {
 
         //Instantiate
-        $config = (!isset($this) || !is_a($this, "Library\Config")) ? self::getInstance() : $this;
+        //$config = (!isset($this) || !is_a($this, "Library\Config")) ? self::getInstance() : $this;
 
-        if (isset($config->params[$section])) {
-            return $config->params[$section];
+        if (isset(static::$params[$section])) {
+            return static::$params[$section];
             //we already have it;
         }
         $_config = static::getConfig();
@@ -195,7 +194,7 @@ class Config extends Object {
         if (!isset($_config[$section])) {
             $cfgSection = FALSE;
         } else {
-            $cfgSection = $config->params[$section] = $_config[$section];
+            $cfgSection = static::$params[$section] = $_config[$section];
         }
 
         return $cfgSection;
@@ -333,7 +332,7 @@ class Config extends Object {
         $params = static::getConfig();
 
         $instance = new self();
-        $instance->params = $params; //Store Params form config files;
+        static::$params = $params; //Store Params form config files;
 
         return $instance;
     }

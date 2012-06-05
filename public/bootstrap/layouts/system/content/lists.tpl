@@ -1,4 +1,4 @@
-
+<tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
 <form class="form-horizontal">
     <fieldset>
         <div class="row-fluid">
@@ -62,4 +62,5 @@
         </div>
     </fieldset>
 </form>
+</tpl:layout>
 

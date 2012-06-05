@@ -81,7 +81,7 @@ class Output extends Object {
      *
      * @var array
      */
-    protected static $variables = array(
+    protected $variables = array(
         "pageid" => "_page"
     );
 
@@ -122,15 +122,18 @@ class Output extends Object {
      * @return void
      */
     final public function __construct() {
+       
 
         $this->variables = array();
         $this->config   = Config::getInstance();
         $this->router   = Router::getInstance();
         $this->template = $this->config->getParam('template', 'default');
+        
         //$this->pageTitle = $this->config->getParam('');
         //$this->user     = \Platform\User::getInstance(); //Cannot use this here, because the output class is loaded way before auth and session
         //The Router defined format;
         $this->format   = $this->router->getFormat();
+        
     }
     
     /**
@@ -374,7 +377,7 @@ class Output extends Object {
      * @param type $data
      * @return type
      */
-    final public function serialize($data) {
+    final public static function serialize($data) {
         return base64_encode(gzcompress(serialize($data)));
     }
 
@@ -384,7 +387,7 @@ class Output extends Object {
      * @param type $string
      * @return type
      */
-    final public function unserialize($string) {
+    final public static function unserialize($string) {
 
         return Input::unserialize($string);
     }
@@ -677,7 +680,7 @@ class Output extends Object {
      *
      * @return object Output
      */
-    final public function set($param, $value, $overwrite=false) {
+    final public function set($param, $value=null, $overwrite=false) {
 
         //Check if the param already exists
         $existing = $this->get($param, null );
@@ -850,8 +853,8 @@ class Output extends Object {
         //If the class was already instantiated, just return it
         if (isset($instance))
             return $instance;
-
-        $instance = new self;
+        
+        $instance = new Output();
 
         return $instance;
     }

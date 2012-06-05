@@ -110,6 +110,7 @@ final class Driver extends Library\Database{
         $this->quoted = array();
         $this->hasQuoted = false;
         $this->debug    = true;
+       
 
         // select the database
         if ($select) {

@@ -11,7 +11,6 @@
 }
 
 .explorer {
-
     .navbar{ 
         margin-bottom: 0;
     }
@@ -221,12 +220,10 @@
   &.notification{
     margin-left: 10px;
     a{
-        background: 
-        #AF1010;
+        background: #AF1010;
         margin-top: 7px;
         padding: 5px 10px 4px;
-        color: 
-        white;
+        color: white;
         font-weight: bold;
         .border-radius(2px);
         &:hover{ background: #F00; }
@@ -235,10 +232,46 @@
         a{ background: #F00; }
     }
     .dropdown-menu{
-        width: 350px;
+        width: 440px;
         //min-height: 200px;
         padding: 10px 10px;
         margin-top: 16px;
+        margin-left: -220px;
+        &:before{
+            left: 230px;
+        }
+        &::after {
+            left: 230px;
+        }
+    }
+  }
+&.shareform{
+    margin-left: 10px;
+    a{
+        background:#29691D;
+        margin-top: 7px;
+        padding: 5px 10px 4px;
+        color: 
+        white;
+        font-weight: bold;
+        .border-radius(2px);
+        &:hover{ background: #3B8F00; }
+    }
+    &.open{
+        a{ background: #71B649; }
+    }
+    .dropdown-menu{
+        width: 440px;
+        //min-height: 200px;
+        padding: 10px 10px;
+        margin-top: 16px;
+        margin-left: -220px;
+        &:before{
+            left: 230px;
+        }
+        &::after {
+            left: 230px;
+        }
     }
   }
 }
