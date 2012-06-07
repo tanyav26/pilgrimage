@@ -15,8 +15,6 @@
 ### github.com/paulirish/html5-boilerplate-server-configs
 ###
 
-
-
 # ----------------------------------------------------------------------
 # Better website experience for IE users
 # ----------------------------------------------------------------------
@@ -305,10 +303,18 @@ FileETag None
 
 <IfModule mod_rewrite.c>
 
-Options +FollowSymLinks
+Options +FollowSymLinks -MultiViews
 RewriteEngine on
-RewriteBase /
 
+# RewriteBase /
+
+# If you installed in a subfolder and the JS and CSS files are not being served, or you
+# are getting 403s change the value of subfolder to the name of the subfolder you installed in 
+# i.e RewriteBase /<subfolder>/ 
+RewriteBase /~livingstonefultang/
+
+
+RewriteRule ^index\.php$ - [L]
 
 # ----------------------------------------------------------------------
 # Suppress or force the "www." at the beginning of URLs
@@ -474,11 +480,11 @@ AddCharset utf-8 .html .css .js .xml .json .rss .atom
 <IfModule mod_rewrite.c>
 
     # All front-end files, redirect to the public folder or CDN
-    RewriteRule .*\.(jpg|jpeg|gif|png|bmp|html|htm|phtml|ico|css|js|swf)$ ~livingstonefultang/public/$0 [L,NC]
-    RewriteRule ^(?:applications|config|framework)\b.* ~livingstonefultang/index.php/$0 [L]
+    RewriteRule .*\.(jpg|jpeg|gif|png|bmp|html|htm|phtml|ico|css|js|swf)$ public/$0 [L,NC]
+    RewriteRule ^(?:applications|config|framework)\b.* index.php/$0 [L]
 
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d 
-    RewriteRule ^(.*)$ ~livingstonefultang/index.php/$1 [L,QSA]
+    RewriteRule ^(.*)$ index.php/$1 [L,QSA]
 
 </IfModule>
