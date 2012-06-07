@@ -22,43 +22,96 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
+$config = array(
+/*
+|---------------------------------------------------------------
+| SESSION SETTINGS
+|---------------------------------------------------------------
+|
+| By default error reporting is set to ALL.  For security
+| reasons you are encouraged to change this when your site goes live.
+| For more info visit:  http://www.php.net/error_reporting. E Strict became
+| Part of E_ALL as of PHP 5.4.0 so use E_ALL except strict standards
+|
+*/
 
-$config['session'] = array(
-    'store' => 'database',
-    'table' => '?session',
-    'cookie' => 'c4session',
-    'domain' => '',
-    'path' => '/',
-    //The absolute path to the session data file store
-    'datafile' => '/',
-    //The amount of time to keep for,
-    'life' => 60 * 15, //15 minutes
-    //Time to session remberance
-    //If no explicit expiry time is set, session will be remembered for this long
-    'remember' => 60 * 60 * 24 * 14 //14 day
-);
-
-$config['output'] = array(
-    'filters' => array(
-        "doctags" => true,
-        "minimize"=> true
+'session' => 
+    array(
+        'store' => 'file',
+        'table' => '?session',
+        'cookie' => 'c4session',
+        'domain' => '',
+        'path' => '/',
+        'datafile' => '/',//The absolute path to the session data file store
+        'life' => 60 * 15, //15 minutes The amount of time to keep for,
+        //Time to session remberance
+        //If no explicit expiry time is set, session will be remembered for this long
+        'remember' => 60 * 60 * 24 * 14 //14 day
     ),
-    'parsers' => array( 
-        "elements" => true
-    )
-);
+/*
+|---------------------------------------------------------------
+| OUTPUT SETTINGS
+|---------------------------------------------------------------
+|
+| By default error reporting is set to ALL.  For security
+| reasons you are encouraged to change this when your site goes live.
+| For more info visit:  http://www.php.net/error_reporting. E Strict became
+| Part of E_ALL as of PHP 5.4.0 so use E_ALL except strict standards
+|
+*/
 
-$config['encrypt'] = array(
-    'key' => 'awesome-secret'
-);
-
-$config['environment'] = array(
-    'mode' => 1
-); //0 = DEVELOPER, 1 = TEST, 2 = PRODUCTION 
-//The system config key can be overloaded with data from the database. 
-//but for now to test things i am just going to use it on file
-$config['system'] = array(
-    'host' => 'imac.local',
-    'path' => '/~livingstonefultang/',
-    'template' => 'bootstrap'
+'output' => 
+    array(
+        'filters' => array(
+            "doctags" => true,
+            "minimize" => true
+        ),
+        'parsers' => array(
+            "elements" => true
+        )
+    ),
+/*
+|---------------------------------------------------------------
+| ENCRYPTION KEY DUMMY
+|---------------------------------------------------------------
+|
+| By default error reporting is set to ALL.  For security
+| reasons you are encouraged to change this when your site goes live.
+| For more info visit:  http://www.php.net/error_reporting. E Strict became
+| Part of E_ALL as of PHP 5.4.0 so use E_ALL except strict standards
+|
+*/
+'encrypt' => 
+    array(
+        'key' => 'awesome-secret'
+    ),
+/*
+|---------------------------------------------------------------
+| ENVIRONMENT SETTINGS
+|---------------------------------------------------------------
+|
+| By default error reporting is set to ALL.  For security
+| reasons you are encouraged to change this when your site goes live.
+| For more info visit:  http://www.php.net/error_reporting. E Strict became
+| Part of E_ALL as of PHP 5.4.0 so use E_ALL except strict standards
+|
+*/
+'environment' => 
+    array(
+        'mode' => 1//0 = DEVELOPER, 1 = TEST, 2 = PRODUCTION 
+    ),
+/*
+|---------------------------------------------------------------
+| SYSTEM CONFIGURATION SETTINGS
+|---------------------------------------------------------------
+|
+| The system config key can be overloaded with data from the database.
+| but for now to test things i am just going to use it on file
+*/
+'system' => 
+    array(
+        'host' => 'imac.local',
+        'path' => '/~livingstonefultang/',
+        'template' => 'bootstrap'
+    ),
 );

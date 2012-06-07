@@ -234,7 +234,6 @@ class Config extends Object {
                             //print_R($INI);
                             $params = $_INI->getParams($ini);
                             $config = array_merge($config, $params);
-                            //print_R($config);
                         }
                     }
                 }
