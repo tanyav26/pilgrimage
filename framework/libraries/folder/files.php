@@ -25,9 +25,6 @@
 
 namespace Library\Folder;
 
-use Library;
-use Library\Folder\Files;
-
 /**
  * What is the purpose of this class, in one sentence?
  *
@@ -43,19 +40,21 @@ use Library\Folder\Files;
  */
 class Files extends \Library\Folder {
 
+    /**
+     * Path to the file current being processed
+     * @var type 
+     */
     protected static $file = NULL;
-    protected static $pathinfo = array();
-
-    public static function getModifiedDate($path) {
-        
-    }
-
-    public static function getSize($file) {
-        
-    }
 
     /**
-     *
+     * File Path Info
+     * @var type 
+     */
+    protected static $pathinfo = array();
+
+    /**
+     * Get File Name
+     * 
      * @param type $file
      * @param type $default
      * @return type 
@@ -109,69 +108,41 @@ class Files extends \Library\Folder {
     }
 
     /**
+     *  Write File
      * 
      * @param type $file
      * @param type $content 
      */
     public static function write($file, $content = "") {
-        
+
         $stream = static::getFileStream($file);
-        
-        $file;
-        
-        
-        
-        die;
+
         //Write the contents
         fwrite($handle, $content);
         fclose($handle);
-        
     }
-    
+
     /**
-     *
+     * Get the file stream
+     * 
      * @param type $file
      * @param type $mode
      * @return boolean 
      */
     public static function getFileStream($file, $mode = "w+") {
-        
+
         //This has to be a file
         if (!static::isFile($file)) {
             if (!static::create($file)) {
                 return false;
             }
         }
-        
         //Throw some errors
         if (($handle = fopen($file, $mode)) === FALSE) { //this fopen with w will attempt to create the file
-            
-            print_R($handle);
-            die;
             //@Throw error
             return false;
         }
         return $handle;
-    }
-
-    public static function getMimeType() {
-        
-    }
-
-    public static function create($path) {
-        
-    }
-
-    public static function move($path, $toPath, $replace = TRUE) {
-        
-    }
-
-    public static function delete($path, $backup = FALSE) {
-        
-    }
-
-    public static function hasBackup($path) {
-        
     }
 
     /**
@@ -197,18 +168,6 @@ class Files extends \Library\Folder {
         return is_file($file);
     }
 
-    public static function restoreBackup($path) {
-        
-    }
-
-    public static function getPermission($path) {
-        
-    }
-
-    public static function setPermission($path, $permission) {
-        return $this;
-    }
-
     /**
      * Sets the file for execution
      * 
@@ -229,11 +188,114 @@ class Files extends \Library\Folder {
         return static::getInstance();
     }
 
+    /**
+     * Packs a file into an archive
+     * 
+     * @param type $path
+     * @param type $type
+     */
     public static function pack($path, $type = 'tar.gz') {
         
     }
 
+    /**
+     * Unpacks and archived file
+     * 
+     * @param type $path
+     * @param type $type
+     */
     public static function unpack($path, $type = 'tar.gz') {
+        
+    }
+
+    /**
+     * Restores a backed up file
+     * 
+     * @param type $path
+     */
+    public static function restoreBackup($path) {
+        
+    }
+
+    /**
+     * Gets file permissions
+     * 
+     * @param type $path
+     */
+    public static function getPermission($path) {
+        
+    }
+    
+    /**
+     * Sets file permission
+     * 
+     * @param type $path
+     * @param type $permission
+     * @return \Library\Folder\Files
+     */
+    public static function setPermission($path, $permission) {
+        return $this;
+    }
+
+    /**
+     * Get File MIME Type
+     */
+    public static function getMimeType() {
+        
+    }
+
+    /**
+     * Creates a new file
+     * 
+     * @param type $path
+     */
+    public static function create($path) {
+        
+    }
+
+    /**
+     * Move file to a different location
+     * @param type $path
+     * @param type $toPath
+     * @param type $replace
+     */
+    public static function move($path, $toPath, $replace = TRUE) {
+        
+    }
+
+    /**
+     * Delete a file from the file system
+     * 
+     * @param type $path
+     * @param type $backup
+     */
+    public static function delete($path, $backup = FALSE) {
+        
+    }
+
+    /**
+     * Check if a file has been backedup
+     * 
+     * @param type $path
+     */
+    public static function hasBackup($path) {
+        
+    }
+
+    /**
+     * Get file last modified Date
+     * 
+     * @param type $path
+     */
+    public static function getModifiedDate($path) {
+        
+    }
+
+    /**
+     * Get file size
+     * @param type $file
+     */
+    public static function getSize($file) {
         
     }
 
