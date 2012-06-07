@@ -11,10 +11,9 @@
 | NAMESPACE
 |------------------------------------------------------------------------------
 |
-| Library	- The file extension.  Typically ".php"
-| Application	- The name of THIS file (typically "index.php")
+| Library	- All Library Classes
+| Application	- All Applicaition action controllers
 | Platform      - The platform utitlities
-| Packages
 |
 */
 namespace Platform;
@@ -31,7 +30,7 @@ namespace Platform;
 | Part of E_ALL as of PHP 5.4.0 so use E_ALL except strict standards
 |
 */
-error_reporting( E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_ALL ^ E_STRICT);
+error_reporting( E_ERROR | E_WARNING | E_PARSE | E_NOTICE );
 
 /*
 |---------------------------------------------------------------

@@ -83,11 +83,11 @@
                                                         <div class="controls">
                                                             <label class="checkbox">
                                                                 <input type="checkbox" name="user_accepted_terms" value="1" />
-                                                                You agree to our&nbsp;<a href="#">terms and conditions</a>
+                                                                You agree to our <a href="#">terms and conditions</a>
                                                             </label>
                                                             <label class="checkbox">
                                                                 <input type="checkbox" name="user_accepted_terms_2" value="2" />
-                                                                You agree to our&nbsp;<a href="#">privacy policy</a>
+                                                                You agree to our <a href="#">privacy policy</a>
                                                             </label>
                                                         </div>
                                                     </div>

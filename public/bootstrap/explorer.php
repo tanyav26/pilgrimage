@@ -27,7 +27,7 @@
 
                     <div class="modal-header">
                         <a href="#" class="close" data-dismiss="modal">×</a>
-                        <h3><tpl:element type="text" data="page.title">Explore</tpl:element>&nbsp;<small>The world at your fingertips</small></h3>
+                        <h3><tpl:element type="text" data="page.title">Explore</tpl:element> <small>The world at your fingertips</small></h3>
                     </div>
                     <div class="modal-body">
                         <tpl:block data="page.block.alerts" />             

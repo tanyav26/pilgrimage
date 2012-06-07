@@ -20,7 +20,7 @@
                 <div class="row-fluid">
                     <div class="span6">
                         <div id="example_length" class="dataTables_length">
-                            <label><select name="example_length" class="input-small inline-input"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select>&nbsp;Records per page</label>
+                            <label><select name="example_length" class="input-small inline-input"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> Records per page</label>
                         </div>
                     </div>
                     <div class="span6">

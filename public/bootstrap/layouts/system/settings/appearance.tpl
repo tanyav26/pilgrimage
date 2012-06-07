@@ -12,7 +12,7 @@
                 <div class="col third" align="left">
                     <a class="button" title="<?php echo _('Add new themes'); ?>" href="/system/admin/extensions/add" style="width:80px">Add Themes</a>
                 </div>
-                <div class="col third" align="center">&nbsp;</div>
+                <div class="col third" align="center"> </div>
                 <div class="col third" align="right">
                     <button style="margin-right:-3px">List</button>
                     <button style="margin-left:-3px" class="active">Grid</button>

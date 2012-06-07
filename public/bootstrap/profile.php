@@ -30,7 +30,7 @@
                     <div class="row-fluid">
                         <div class="span8">
                             <div class="profile-header">
-                                <h1>Livingstone K. F. Fultang <small>&nbsp;(@drstonyhills)</small></h1>
+                                <h1>Livingstone K. F. Fultang <small> (@drstonyhills)</small></h1>
                             </div>
                         </div>
                         <div class="span4">
@@ -74,9 +74,8 @@
                                     <div class="row-fluid top-pad">
                                         <div class="span4">
                                             <div class="well">
-                                                <h1 class="count-body">189</h1>
-                                                <small>&nbsp;Friends</small>
-                                                
+                                                <h1 class="count-body">189</h1> <small>Friends</small>
+                                            
                                             </div>
                                         </div>
                                         <div class="span4">
@@ -98,9 +97,9 @@
                                             <li class="signup-date">Member since 10 months ago</li>
                                             <li class="signin-date">Last logged in about 6 days ago</li>
                                             <!-- Date of Birth -->
-                                            <li class="company-element">Born on the&nbsp;<a href="#">14th of March</a></li>
+                                            <li class="company-element">Born on the <a href="#">14th of March</a></li>
                                             <!-- Contact Information -->
-                                            <li class="company-element">Works at&nbsp;<a href="#">Stonyhills LLC</a></li>
+                                            <li class="company-element">Works at <a href="#">Stonyhills LLC</a></li>
                                             <li class="email-element"><a href="mailto:livingstonefultang@gmail.com">livingstonefultang@gmail.com</a></li>
                                             <!--CUSTOM SOCIAL INFORMATION-->
                                         </ul>
