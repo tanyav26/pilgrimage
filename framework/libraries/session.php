@@ -100,7 +100,6 @@ class Session extends Object {
 
         //starts this session if not creates a new one      
         //$self = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
-
         //@TODO Check if there is an existing session!
         //If there is any previous and killprevious is false, 
         //simply do a garbage collection and return;
@@ -195,7 +194,6 @@ class Session extends Object {
 
         if (is_a($auth, "Library\Authenticate")) {
             if (isset($auth->authenticated)) {
-
                 //Read Rights if we have a userId
                 $self->authority = $authority->getPermissions($auth);
             }
@@ -292,39 +290,21 @@ class Session extends Object {
         $userIp = md5($input->serialize($input->getVar('REMOTE_ADDR', \IS\STRING, '', 'server')));
         $userAgent = md5($input->serialize($input->getVar('HTTP_USER_AGENT', \IS\STRING, '', 'server')));
         $userDomain = md5($input->serialize((string) $uri->getHost()));
-        //$token = (string) $input->getCookie($sessId);
 
+        //Read the session
+        $_handler = ucfirst($self->store);
+        $handler = "\Library\Session\Handler\\" . $_handler;
+        $object = $handler::read($splash, $self, $sessId);
+
+        //Redecorate 
         $splash = array(
             "ip" => $userIp,
             "agent" => $userAgent,
             "domain" => $userDomain,
-            "token" => ''
+            "token" => $object->session_token
         );
 
-
-        $statement = $dbo->where("session_agent", $dbo->quote($userAgent))
-                        ->where("session_ip", $dbo->quote($userIp))
-                        ->where("session_host", $dbo->quote($userDomain))
-                        ->where("session_key", $dbo->quote($sessId))
-                        ->select("*")->from($self->table)->prepare();
-
-        $result = $statement->execute();
-
-        //Do we have a session that fits this criteria in the db? if not destroy
-        if ((int) $result->rowCount() < 1) {
-
-            self::destroy($sessId);
-            return false; //will lead to re-creation
-        }
-
-        $object = $result->fetchObject();
-
-        //Check the token
-        $splash['token'] = $object->session_token;
-
-
         $testId = $self::generateId($splash);
-
 
         if ($testId <> $sessId) {
             self::destroy($sessId);
@@ -382,7 +362,6 @@ class Session extends Object {
         }
 
         $self = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
-        $database = Database::getInstance();
         $output = Output::getInstance();
         //updates a started session for exp time
         //stores data for the registry
@@ -393,19 +372,20 @@ class Session extends Object {
             "session_lastactive" => $now,
             "session_expires" => $newExpires
         );
-
-        //If isset registry and is not empty, store userdata;
         $self->id = $sessId;
 
+        //If isset registry and is not empty, store userdata;
         if (isset($self->registry) && is_array($self->registry)) {
-
             $userdata = $output->serialize($self->registry);
-            $update["session_registry"] = $database->quote($userdata);
+            $update["session_registry"] = $userdata;
         }
+        //Read the session
+        $_handler = ucfirst($self->store);
+        $handler = "\Library\Session\Handler\\" . $_handler;
 
-
-        //now update the session;
-        $database->update($self->table, $update, array("session_key" => $database->quote($sessId)));
+        if (!$handler::update($update, $self, $self->id)) {
+            return false;
+        }
 
         return true;
     }
@@ -464,7 +444,6 @@ class Session extends Object {
 
         //Writes user data to the db;
         $self = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
-        $database = Database::getInstance();
         $output = Output::getInstance();
 
         //expires 
@@ -483,16 +462,12 @@ class Session extends Object {
 
         //last modified = now;
         //expires = now + life ;
-        $database->insert('?session', array(
-            "session_key" => $database->quote($sessId),
-            "session_ip" => $database->quote($data['ip']),
-            "session_host" => $database->quote($data['domain']),
-            "session_agent" => $database->quote($data['agent']),
-            "session_token" => $database->quote($data['token']),
-            "session_expires" => $expires,
-            "session_lastactive" => time(),
-            "session_registry" => $database->quote($userdata)
-        ));
+        $_handler = ucfirst($self->store);
+        $handler = "\Library\Session\Handler\\" . $_handler;
+
+        if (!$handler::write($userdata, $data, $self, $sessId, $expires)) {
+            return false;
+        }
 
         return true;
     }
@@ -548,8 +523,10 @@ class Session extends Object {
     final private static function gc($forceDelete = '') {
 
         $self = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
-        $database = Database::getInstance();
         $output = Output::getInstance();
+
+        $_handler = ucfirst($self->store);
+        $handler = "\Library\Session\Handler\\" . $_handler;
 
         //Force to expire!
         $now = time();
@@ -559,9 +536,11 @@ class Session extends Object {
 
         //Delete Specific session if specified
         if (isset($forceDelete) && !empty($forceDelete)) {
-            $where = array("session_key" => $database->quote($forceDelete));
+            $where = array("session_key" => $forceDelete);
             //Two queries won't hurt?
-            $database->delete($self->table, $where);
+            if (!$handler::delete($where, $self)) {
+                return false;
+            }
         }
 
         //Delete all expired sessions
@@ -569,7 +548,9 @@ class Session extends Object {
             "session_expires < " => $now
         );
         //clean database store;
-        $database->delete($self->table, $where);
+        if (!$handler::delete($where, $self)) {
+            return false;
+        }
     }
 
     /**
@@ -685,7 +666,7 @@ class Session extends Object {
      * @param type $namespace
      * @return Session 
      */
-    final public function set($varname, $value=NULL, $namespace = 'default') {
+    final public function set($varname, $value = NULL, $namespace = 'default') {
         //stores a value to a varname in a namespace of this session
         $session = (!isset($this) || !is_a($this, "Library\Session")) ? self::getInstance() : $this;
 
