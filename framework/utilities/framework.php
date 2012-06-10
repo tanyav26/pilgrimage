@@ -51,7 +51,10 @@ final class Framework extends Library\Object {
      * The class constructor
      * @return void
      */
-    public function __construct(){}
+    public function __construct(){
+        //Turn off code coverage
+        
+    }
 
     /**
      * Gets an instance of the Framework Class
@@ -60,24 +63,7 @@ final class Framework extends Library\Object {
      * @return self 
      */
     public static function getInstance() {
-        //Check if the platform is installed
-        $vConfig = APPPATH . DS . 'system' . DS . 'config.php' ;
-        $dConfig = ''; //also check for the presence of directive file
-        
-        if (!file_exists($vConfig)) {
-            //
-            $allowed    = array("installation", "install");
-            $Uri        = Library\Uri::getInstance();
-            $path       = $Uri->getPath();
-            $segments   = explode("/", $path);
-            
-            //echo $segments[1];
-            
-            if(!in_array($segments[1], $allowed)){
-               //header('Location: /install/step1');  
-               //exit();
-            }
-        }   
+
         static $instance;
         
         //If the class was already instantiated, just return it

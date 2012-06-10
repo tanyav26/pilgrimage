@@ -50,11 +50,11 @@ class Folder extends \Library\Object {
      * @param string $path 
      */
     public static function getModifiedDate($path) {
-        
+
         //Check for the last modified 
-        $lmodified   = 0;
-        $files      = glob($path . '/*');
-        
+        $lmodified = 0;
+        $files = glob($path . '/*');
+
         foreach ($files as $file) {
             if (is_dir($file)) {
                 $modified = dirmtime($file);
@@ -134,21 +134,61 @@ class Folder extends \Library\Object {
         
     }
 
-    /**
-     *
-     * @param type $path 
+    
+        /**
+     * Sets file permission i.e change the file mode
+     * 
+     * @param type $path
+     * @param type $permission
+     * @return \Library\Folder\Files
      */
-    public static function getPermission($path) {
+    public static function chmod($path, $permission) {   
+        chmod($path,$permission);		
+    }
+    
+    /**
+     * Gets file permissions
+     * 
+     * @param type $path
+     */
+    public static function getPermission($filepath) {
+        
+        return substr(sprintf('%o', fileperms($filepath)), -4);
         
     }
 
     /**
+     * Recursively sets permissions for all files in a folder
      *
      * @param type $path
      * @param type $permission 
      */
-    public static function setPermission($path, $permission) {
+    public static function chmodR($path, $permission) {
         
+        if (!static::is($path))
+            return static::chmod($path, $permission);
+
+        $dirh = @opendir($path);
+        while ($file = readdir($dh)) {
+            if ($file != '.' && $file != '..') {
+                $fullpath = $path . '/' . $file;
+                if (!static::is($fullpath)) {
+                    if (!static::chmod($fullpath, $filemode))
+                        return FALSE;
+                }
+                else {
+                    if (!static::chmodR($fullpath, $filemode))
+                        return FALSE;
+                }
+            }
+        }
+
+        closedir($dirh);
+
+        if (static::chmod($path, $filemode))
+            return TRUE;
+        else
+            return FALSE;
     }
 
     /**

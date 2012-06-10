@@ -313,7 +313,6 @@ abstract class Object {
             foreach ($properties as $k => $v) {
                 $this->$k = $v;
             }
-
             return true;
         }
         return false;
@@ -325,8 +324,8 @@ abstract class Object {
      * @param type $error
      */
     final public static function setError($error) {
-
         array_push(self::$errors, $error);
+        \Platform\Debugger::log($error);
     }
 
     /**

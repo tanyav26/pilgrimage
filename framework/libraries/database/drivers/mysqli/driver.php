@@ -78,41 +78,11 @@ final class Driver extends Library\Database{
         $database   = array_key_exists('name', $options) ? $options['name'] : '';
         $prefix     = array_key_exists('prefix', $options) ? $options['prefix'] : 'dd_';
         $select     = array_key_exists('select', $options) ? $options['select'] : true;
-
-        // mysql driver exists?
-        if (!function_exists('mysqli_real_connect')) {
-            $this->errorNum = 1;
-            $this->errorMsg = 'The MySQLi extension "mysqli" is not available.';
-            $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
-            return;
-        }
         
-        
-        $this->resourceId = mysqli_init();
-        
-        if (!$this->resourceId) {
-            $this->setError('mysqli_init failed');
+        if(!$this->connect($host, $user, $password, $database, $prefix, $select )){
+            return false;
         }
 
-        if (!$this->resourceId->options(MYSQLI_INIT_COMMAND, 'SET AUTOCOMMIT = 0')) {
-            $this->setError('Setting MYSQLI_INIT_COMMAND failed');
-        }
-
-        if (!$this->resourceId->options(MYSQLI_OPT_CONNECT_TIMEOUT, 5)) {
-            $this->setError('Setting MYSQLI_OPT_CONNECT_TIMEOUT failed');
-        }
-        
-        //echo $database;        phpinfo();
-        //die;
-        // connect to the server
-        if (!$this->resourceId->real_connect($host, $user, $password, $database)) {
-            $this->errorNum =  mysqli_connect_errno();
-            $this->errorMsg =  mysqli_connect_error();
-            
-            $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
-            return;
-        }
-        
         // Determine utf-8 support
         $this->utf = $this->hasUTF();
 
@@ -133,6 +103,66 @@ final class Driver extends Library\Database{
         if ($select) {
             $this->database($database);
         }
+    }
+    
+    /**
+     * Connects to the databse using the default DBMS
+     *
+     * @param string $name database name
+     * @param string $server default is localhost
+     * @param string $username if not provided default is used
+     * @param string $password not stored in the class
+     * @return bool TRUE on success and FALSE on failure
+     */
+    public function connect($server = 'localhost', $username = '', $password = '', $database = '' , $prefix='dd_' , $select = true) {
+        
+        if($this->isConnected()){
+            return true;
+        }
+        
+        // mysql driver exists?
+        if (!function_exists('mysqli_real_connect')) {
+            $this->errorNum = 1;
+            $this->errorMsg = 'The MySQLi extension "mysqli" is not available.';
+            $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
+            return false;
+        }
+        
+        $this->resourceId = mysqli_init();
+        
+        if (!$this->resourceId) {
+            $this->setError('mysqli_init failed');
+        }
+
+        if (!$this->resourceId->options(MYSQLI_INIT_COMMAND, 'SET AUTOCOMMIT = 0')) {
+            $this->setError('Setting MYSQLI_INIT_COMMAND failed');
+        }
+
+        if (!$this->resourceId->options(MYSQLI_OPT_CONNECT_TIMEOUT, 5)) {
+            $this->setError('Setting MYSQLI_OPT_CONNECT_TIMEOUT failed');
+        }
+        
+        // connect to the server
+        if (!$this->resourceId->real_connect($server, $username, $password, $database)) {
+            $this->errorNum =  mysqli_connect_errno();
+            $this->errorMsg =  mysqli_connect_error();
+            
+            $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
+            return false;
+        }
+        
+        // select the database
+        if ($select) {
+            if(!$this->database($database)){
+                $this->close();
+                return false;
+            }
+        }
+        
+        $this->prefix = $prefix;
+        
+        return true;
+        
     }
 
    /**
@@ -164,7 +194,7 @@ final class Driver extends Library\Database{
      */
     public function isConnected(){
 
-        if (is_resource($this->resourceId)) {
+        if (is_a($this->resourceId,"mysqli")) {
             return mysqli_ping($this->resourceId);
         }
         return false;
@@ -189,11 +219,14 @@ final class Driver extends Library\Database{
     final public function __destruct() {}
     
     
+    
+    
     final public function close(){
         $return = false;
-        if (is_resource($this->resourceId)) {
+        if (is_a($this->resourceId,"mysqli")) {
             $return = mysqli_close($this->resourceId);
         }
+        $this->resourceId = NULL;
         return $return;
     }
 
@@ -215,7 +248,7 @@ final class Driver extends Library\Database{
      * @return	boolean
      */
     final public function connected() {
-        if (is_resource($this->resourceId)) {
+        if (is_a($this->resourceId,"mysqli")) {
             return mysqli_ping($this->resourceId);
         }
         return false;

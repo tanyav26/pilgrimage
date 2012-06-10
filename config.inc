@@ -37,9 +37,9 @@ $config = array(
 
 'session' => 
     array(
-        'store' => 'file',
+        'store' => 'database',
         'table' => '?session',
-        'cookie' => 'c4session',
+        'cookie' => 'psession',
         'domain' => '',
         'path' => '/',
         'datafile' => '/',//The absolute path to the session data file store
@@ -113,5 +113,28 @@ $config = array(
         'host' => 'imac.local',
         'path' => '/~livingstonefultang/',
         'template' => 'bootstrap'
+    ),
+    
+ /*
+|---------------------------------------------------------------
+| Database Settings
+|---------------------------------------------------------------
+|
+| The Default database settings. Please not that these settings
+| will be overriden by config/setup.ini after installation. 
+|
+*/
+
+'database' => 
+    array(
+        "host" => "localhost",
+        "user" => "root",
+        "password" => "",
+        "name" => "networkapp",
+        "driver" => "MySQLi",
+        "prefix" => "dd_",
+        "collate" => "",
+        "charset" => "utf-8",
+        "select" => true
     ),
 );

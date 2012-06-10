@@ -48,7 +48,7 @@
     <div class="control-group">
         <label class="control-label"><?php echo _('Database RDBMS Driver') ; ?></label>
         <div class="controls input">
-            <select name="language" id="password" style="width:30%">
+            <select id="dbdriver" name="dbdriver" style="width:30%">
                 <option value="MySQLi" selected="selected"><?php echo _('MySQLi') ; ?></option>
                 <option value="MySQL"><?php echo _('MySQL') ; ?></option>
                 <option value="SQLite3" disabled="disabled"><?php echo _('SQLite3') ; ?></option>

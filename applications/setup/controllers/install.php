@@ -103,22 +103,33 @@ final class Install extends Platform\Controller {
         
         $view       = $this->load->view('process') ;
         $install    = $this->load->model('install') ;
-        //this is step 1;
-        $this->set("step", "4");
-        $view->index() ; //sample call;
-        
+
         //Check we have all the information we need!
         if(!$install->run()){
             $this->alert(_($install->getError()),'Something went wrong','error');
             $this->redirect("/install/step3");
         }
-        
-        //To set the pate title use
+        $this->alert( "Awesome! Your database is all setup and ready. Now complete the details below to create a master user account. Please use a valid email address","","success");
+        //sample call; this is step 1;
+        $this->set("step", "4");
+        $view->index() ; 
         $this->output->setPageTitle("Installation | Final Things");
         
     }
     
     public function step5(){
+        
+        $view       = $this->load->view('process') ;
+        $install    = $this->load->model('install') ;
+
+        //Check we have all the information we need!
+        if(!$install->superadmin()){
+            $this->alert(_($install->getError()),'Something went wrong','error');
+            $this->redirect("/install/step4");
+        }
+        $this->alert( "Fantastico. All systems ready to go","","success");
+        
+        //Return the install report as launch
         return $this->launch();
     }
     

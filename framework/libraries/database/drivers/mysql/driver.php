@@ -79,22 +79,9 @@ final class Driver extends Library\Database{
         $prefix     = array_key_exists('prefix', $options) ? $options['prefix'] : 'dd_';
         $select     = array_key_exists('select', $options) ? $options['select'] : true;
 
-        // mysql driver exists?
-        if (!function_exists('mysql_connect')) {
-            $this->errorNum = 1;
-            $this->errorMsg = 'The MySQL extension "mysql" is not available.';
-            $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
-            return;
+        if(!$this->connect($host, $user, $password, $database, $prefix, $select )){
+            return false;
         }
-
-        // connect to the server
-        if (!($this->resourceId = @mysql_connect($host, $user, $password, true))) {
-            $this->errorNum = 2;
-            $this->errorMsg = 'Could not connect to MySQL';
-            $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
-            return;
-        }
-
         // Determine utf-8 support
         $this->utf = $this->hasUTF();
 
@@ -116,6 +103,52 @@ final class Driver extends Library\Database{
         if ($select) {
             $this->database($database);
         }
+        
+    }
+    
+    /**
+     * Connects to the databse using the default DBMS
+     * 
+     * @param type $server
+     * @param type $username
+     * @param type $password
+     * @param type $database
+     * @param type $prefix
+     * @param type $select
+     * @return boolean
+     */
+    public function connect($server = 'localhost', $username = '', $password = '', $database = '' , $prefix='dd_' , $select = true) {
+        //If connected return true;
+        if($this->isConnected()){
+            return true;
+        }
+        // mysql driver exists?
+        if (!function_exists('mysql_connect')) {
+            $this->errorNum = 1;
+            $this->errorMsg = 'The MySQL extension "mysql" is not available.';
+            $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
+            return false;
+        }
+
+        // connect to the server
+        if (!($this->resourceId = @mysql_connect($server, $username, $password, true))) {
+            $this->errorNum = 2;
+            $this->errorMsg = 'Could not connect to MySQL';
+            $this->setError( "[{$this->name}:{$this->errorNum}] {$this->errorMsg}");
+            return false;
+        }
+        
+        // select the database
+        if ($select) {
+            if(!$this->database($database)){
+                $this->close();
+                return false;
+            }
+        }
+        
+        $this->prefix = $prefix;
+        
+        return true;
     }
 
    /**
@@ -184,6 +217,7 @@ final class Driver extends Library\Database{
         if (is_resource($this->resourceId)) {
             $return = mysql_close($this->resourceId);
         }
+        $this->resourceId = NULL;
         return $return;
     }
 

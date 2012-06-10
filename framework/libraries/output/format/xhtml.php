@@ -25,8 +25,8 @@
 
 namespace Library\Output\Format;
 
-use Library;
-use Library\Output;
+//use Library;
+//use Library\Output;
 
 /**
  * What is the purpose of this class, in one sentence?

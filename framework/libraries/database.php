@@ -96,18 +96,6 @@ abstract class Database extends Object {
     
     var $ticker;
 
-    /**
-     * Connects to the databse using the default DBMS
-     *
-     * @param string $name database name
-     * @param string $server default is localhost
-     * @param string $username if not provided default is used
-     * @param string $password not stored in the class
-     * @return bool TRUE on success and FALSE on failure
-     */
-    public function connect($name = '', $server = 'localhost', $username = '', $password = '') {
-        
-    }
 
     /**
      * Returns the datbase connection resource ID
@@ -209,7 +197,7 @@ abstract class Database extends Object {
      * @param array $options
      * @return object Database
      */
-    public static function getInstance($options = array()) {
+    public static function getInstance($options = array(), $reinstantiate = FALSE) {
 
         static $instances = array();
 
@@ -221,31 +209,31 @@ abstract class Database extends Object {
 
         if (!isset($dbparams) OR count($dbparams) == 0) {
             //display some sort of error;
-            //
-            exit('db params not set or not properly formatted');
+            static::setError('db params not set or not properly formatted');
+            return false;
         }
 
         if (!isset($dbparams['driver'])) {
             //die;
             //we can't work without this
-            exit('we need to know what driver your using');
+            static::setError('we need to know what driver your using');
+            return false;
         }
 
         //serialize
         $signature  = md5(serialize($dbparams)); 
         $driver     = $dbparams['driver'] = preg_replace('/[^A-Z0-9_\.-]/i', '', $dbparams['driver']);
         
-        if (!isset($instances[$signature])):
+        if (!isset($instances[$signature]) || $reinstantiate):
             $instances[$signature] = \call_user_func("Library\Database\Drivers\\" . $driver . "\Driver::getInstance", $dbparams);
         endif;
    
 
         if (!\is_object($instances[$signature])) {
-            exit('Could not instantiate database object for the driver:' . $driver);
+            static::setError('Could not instantiate database object for the driver:' . $driver);
+            return false;
         }
         
-        
-
         $instances[$signature]->driver = $driver;
 
         return $instances[$signature];
@@ -377,6 +365,13 @@ abstract class Database extends Object {
      * @return void
      */
     abstract public function getVersion();
+    
+    
+    /**
+     * Driver connect method
+     * @return boolean
+     */
+    abstract public function connect($server = 'localhost', $username = '', $password = '', $dbname = '');
 
     /**
      * Custom Tests, For connectivity test, use Database::isConnected

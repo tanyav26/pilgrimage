@@ -91,12 +91,17 @@ final class Ini extends \Library\Object {
      * @param type $file
      * @param type $sections 
      */
-    public function saveParams($filename, $sections = array()) {
+    public static function saveParams($filename, $sections = array()) {
 
-        $config = \Library\Config::getInstance();
+        $config     = \Library\Config::getInstance();
+        $configfile = \Library\Folder::getFile();
+        $configdir  = FSPATH . 'config' . DS;
+        
+        $permission = $configfile::getPermission($configdir);
 
-        $_globals = '';
-        $_linebreak = "\n";
+        $_globals   = '; the setup configuration file';
+        $_br        = "\n";
+        $_tab       = NULL; //Use "\t" to indent;
 
         //We can only deal with arrays
         if (!is_array($sections) || empty($filename) ) {
@@ -105,7 +110,7 @@ final class Ini extends \Library\Object {
         }
         foreach ($sections as $section):
 
-            $sectionsarray = $config->getParamSection($section);
+            $sectionsarray = $config::getParamSection($section);
 
             if (!empty($sectionsarray) && is_array($sectionsarray)) {
                 // 2 loops to write `globals' on top, alternative: buffer
@@ -114,16 +119,27 @@ final class Ini extends \Library\Object {
                 foreach ($sectionsarray as $param => $value) {
                     if (!is_array($value)) {
                         $value = static::normalizeValue($value);
-                        $_globals .= $param . ' = ' . $value . $_linebreak;
+                        $_globals .= $_tab.$param.' = '.$value.$_br;
                     }
                 }
             }
         endforeach;
-        //Now write to file
-        if(!\Library\Folder\Files::write(FSPATH.'config'. DS.$filename, $_globals) ){
-            //die;
+       
+        //Temporarily chmode the file;
+        $configfile::chmod($configdir, 0755);
+        
+        if(!($setupini  = $configfile::create($configdir.$filename) )){
+            $config->setError("Could not create the setup configuration file. Please check $configdir folder permissions" );
             return false;
         }
+        //Now write to file
+        if(!$configfile::write($configdir.$filename, $_globals) ){
+            $config->setError("Could not write out to the configuration file" );
+            return false;
+        }
+        
+        //Reset  chmode the file;
+        $configfile::chmod($configdir, $permission);
         
         return true;
     }

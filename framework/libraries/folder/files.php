@@ -118,8 +118,10 @@ class Files extends \Library\Folder {
         $stream = static::getFileStream($file);
 
         //Write the contents
-        fwrite($handle, $content);
-        fclose($handle);
+        fwrite($stream, $content);
+        fclose($stream);
+        
+        return true;
     }
 
     /**
@@ -130,13 +132,7 @@ class Files extends \Library\Folder {
      * @return boolean 
      */
     public static function getFileStream($file, $mode = "w+") {
-
-        //This has to be a file
-        if (!static::isFile($file)) {
-            if (!static::create($file)) {
-                return false;
-            }
-        }
+        
         //Throw some errors
         if (($handle = fopen($file, $mode)) === FALSE) { //this fopen with w will attempt to create the file
             //@Throw error
@@ -153,19 +149,16 @@ class Files extends \Library\Folder {
      * @todo Will fail on files greater than 2GB see PHP is_file docs
      * @return boolean 
      */
-    public static function isFile($file = '', $type = NULL) {
+    public static function isFile($filepath = '', $file = True) {
 
-        $file = ( empty($file) && isset(static::$file) ) ? static::$file : $file;
-
-        //If we sitill can't decide what file it is, return false;
-        if (empty($file)) {
-            return FALSE;
-        }
-        //If the file does not exists, return false;
-        if (!file_exists($file)) {
-            return false;
-        }
-        return is_file($file);
+        $return = false;
+        if (!file_exists($filepath)):
+            //die;
+            $return = !$file;
+        else:
+            $return = is_file($filepath) ? $file : !$file;
+        endif;
+        return (bool) $return;
     }
 
     /**
@@ -218,26 +211,6 @@ class Files extends \Library\Folder {
     }
 
     /**
-     * Gets file permissions
-     * 
-     * @param type $path
-     */
-    public static function getPermission($path) {
-        
-    }
-    
-    /**
-     * Sets file permission
-     * 
-     * @param type $path
-     * @param type $permission
-     * @return \Library\Folder\Files
-     */
-    public static function setPermission($path, $permission) {
-        return $this;
-    }
-
-    /**
      * Get File MIME Type
      */
     public static function getMimeType() {
@@ -249,8 +222,13 @@ class Files extends \Library\Folder {
      * 
      * @param type $path
      */
-    public static function create($path) {
-        
+    public static function create($filepath) {
+        //@1 Check that we have permission to write to the directory
+        //@2 Attempt to create the file
+        if (!($file = static::getFileStream($filepath))) {
+            return false;
+        }
+        return $file;
     }
 
     /**

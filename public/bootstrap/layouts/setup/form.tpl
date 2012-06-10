@@ -3,13 +3,13 @@
 
     <div class="wizard">
         <div class="points row-fluid">
-            <div class="span3 <?php echo ($step > 0) ? 'active' : ''; ?>"> <a href="/setup/install/step1">License Agreement</a><span class="marker">&nbsp;</span></div>
+            <div class="span3 <?php echo ($step > 0) ? 'active' : ''; ?>"> <a href="/setup/install/step1">License Agreement</a><span class="marker"></span></div>
             <div class="span3 <?php echo ($step > 1) ? 'active' : ''; ?>"><a href="/setup/install/step2">Requirements</a><span class="marker"></span></div>
             <div class="span3 <?php echo ($step > 2) ? 'active' : ''; ?>"><a href="/setup/install/step3">Configuration</a><span class="marker"></span></div>
             <div class="span3 <?php echo ($step > 3) ? 'active' : ''; ?>"><a href="/setup/install/step4">Finish</a><span class="marker"></span></div>
         </div>
         <div class="progress mini-bar">
-            <div class="bar" style="width: <?php echo intval(12.5*((2*$step)-1)).'%'; ?>">&nbsp;</div>
+            <div class="bar" style="width: <?php echo intval(12.5*((2*$step)-1)).'%'; ?>"></div>
         </div>
     </div>
 
