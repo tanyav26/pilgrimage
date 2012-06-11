@@ -311,7 +311,7 @@ RewriteEngine on
 # If you installed in a subfolder and the JS and CSS files are not being served, or you
 # are getting 403s change the value of subfolder to the name of the subfolder you installed in 
 # i.e RewriteBase /<subfolder>/ 
-RewriteBase /~livingstonefultang/
+RewriteBase /
 
 
 RewriteRule ^index\.php$ - [L]

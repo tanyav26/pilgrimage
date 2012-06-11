@@ -111,7 +111,7 @@ $config = array(
 'system' => 
     array(
         'host' => 'imac.local',
-        'path' => '/~livingstonefultang/',
+        'path' => '/',
         'template' => 'bootstrap'
     ),
     
