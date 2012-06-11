@@ -40,50 +40,138 @@ namespace Library\Session\Handler;
  */
 class File extends \Library\Object {
     
-
-    static $_instance = NULL;
-
+    
+    
     /**
-     *  We don't want our classes to be clonned
+     * Quotes strings for storage in the ini file
      * 
+     * @param type $string
+     * @return type
      */
-    public function __clone() {
-        trigger_error('Cloning ' . __CLASS__ . ' is not allowed.', E_USER_ERROR);
-    }
-
-    /**
-     *  Class cannot be serialized and unserialized
-     *  Exception is the registry class;
-     */
-    public function __wakeup() {
-        trigger_error('Unserializing ' . __CLASS__ . ' is not allowed.', E_USER_ERROR);
+    private static function quote($string){
+        return $string;
     }
     
-    public static function read(){}
-    public static function write(){}
-
     /**
-     * Returns and instantiated Instance of the __CLASS__ class
+     * Reads session data from file
      * 
-     * NOTE: As of PHP5.3 it is vital that you include constructors in your class
-     * especially if they are defined under a namespace. A method with the same
-     * name as the class is no longer considered to be its constructor
-     * 
-     * @staticvar object $instance
-     * @property-read object $instance To determine if class was previously instantiated
-     * @property-write object $instance 
-     * @return object i18n
+     * @param type $splash
+     * @param type $session
+     * @param type $sessionId
      */
-    public static function getInstance() {
+    public static function read($splash, $session, $sessionId){
+        
+        $file = \Library\Folder::getFile();
+        $ini  = \Library\Config::$ini;
+        $store= APPPATH."setup".DS.$session->folder.DS;
+        
+        //We need to know the array;
+        if(!is_array($splash)) return false;
+        
+        $sfile = $store.$sessionId.".ini";
+        
+        if(!$file::isFile($sfile)){
+            //If we can't file the sessionf file;
+            $session::setError("The session file does not exists");
+            return false;
+        }
+        
+        if(!$ini::readParams($sfile)){
+            $session::setError("Could not read the session configuration file");
+            return false;
+        }
+        
+        $sess = $ini::getParams($sfile);
+        
+        if(!is_array($sess)|| empty($sess)){
+            $session::setError("Invalid session file");
+            return false;
+        }
+        
+        //return data as an object;
+        $object = new \stdClass;
+        $object->session_id = $sessionId;
+        $object->session_key = $sess['key'];
+        $object->session_ip  = $sess['ip'];
+        $object->session_host = $sess['domain'];
+        $object->session_agent = $sess['agent'];
+        $object->session_token = $sess['token'];
+        $object->session_expires = $sess['expiry'];
+        $object->session_lastactive = $sess['active'];
+        $object->session_registry = $sess['registry'];
+        
+        return $object;
+       
+    }
+    
+    /**
+     * Updates session data in file store
+     * 
+     * @param type $update
+     * @param type $session
+     * @param type $sessionId
+     */
+    public static function update($update, $session, $sessionId){}   
+    
+    /**
+     * Delete session data from file store
+     * 
+     * @param type $where
+     * @param type $session
+     */
+    public static function delete($where, $session){}
+    
+    /**
+     * Writes session data to file store
+     * 
+     * @param type $userdata
+     * @param type $splash
+     * @param type $session
+     * @param type $sessionId
+     * @param type $expiry
+     */
+    public static function write($userdata, $splash, $session, $sessionId, $expiry){
+         
+        $file = \Library\Folder::getFile();
+        $ini  = \Library\Config::$ini;
+        $store= APPPATH."setup".DS.$session->folder.DS;
+        
+        //We need to know the array;
+        if(!is_array($splash)) return false;
+        
+        $sfile = $store.$sessionId.".ini";
+        
+        //print_R($store);
+        
+        if(!$file::is($store)){
+            if(!$file::create($store)){
+                $session->setError("Could not create the $store folder. Please create this manually and esure you it has the right permissions");
+                return false;
+            }
+        }
 
-        $class = __CLASS__;
-
-        if (is_object(static::$instance) && is_a(static::$instance, $class))
-            return static::$instance;
-
-        static::$instance = new $class;
-
-        return static::$instance;
+        //We create the session file;
+        if (!($sini = $file::create($sfile) )) {
+            $session->setError("Could not create the session file");
+            return false;
+        }        
+        //Temporarily chmode the file;
+        $file::chmod($sfile, 0755);
+        
+        $splash['expiry']   = $expiry;
+        $splash['active']   = time();
+        $splash['key']      = $sessionId;
+        $splash['registry'] = static::quote( "'".$userdata."'" );
+        
+ 
+        
+        //Now write to file
+        if (!$file::write($sfile, $ini::toIniString( $splash ))) {
+            $session->setError("Could not write out to the configuration file");
+            return false;
+        }
+            
+        return true;
     }
 
 }

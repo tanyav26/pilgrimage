@@ -43,6 +43,11 @@ use Platform;
  */
 final class Ini extends \Library\Object {
 
+    /**
+     * Config file params
+     * 
+     * @var type 
+     */
     public static $file = array();
 
     /**
@@ -57,14 +62,14 @@ final class Ini extends \Library\Object {
         if (!array_key_exists($filename, static::$file)) {
             if (file_exists($filename)) {
                 if ((static::$file[$filename] = parse_ini_file($filename, true)) === FALSE) {
-                    $this->setError(_("Could not Parse the ini file"));
+                    static::setError(_("Could not Parse the ini file"));
                     return false;
                 } else {
                     //Add the iniParams to $this->params;
-                    return $this;
+                    return;
                 }
             } else {
-                $this->setError(_("The configuration file ({$filename}) does not exists"));
+                static::setError(_("The configuration file ({$filename}) does not exists"));
                 return false;
             }
         }
@@ -86,6 +91,28 @@ final class Ini extends \Library\Object {
     }
 
     /**
+     * Converts a config array of elements to an ini string
+     * 
+     * @param type $params
+     * @param type $section
+     * @return string
+     */
+    public static function toIniString($params = array(), $section = NULL) {
+        
+        $_br = "\n";
+        $_tab = NULL; //Use "\t" to indent;
+        $_globals = !empty($section)? "\n[" . $section . "]\n" : '';
+
+        foreach ($params as $param => $value) {
+            if (!is_array($value)) {
+                $value = static::normalizeValue($value);
+                $_globals .= $_tab . $param . ' = ' . $value . $_br;
+            }
+        }
+        return $_globals;
+    }
+
+    /**
      * Save configuration param section or sections to an ini file
      * 
      * @param type $file
@@ -93,18 +120,17 @@ final class Ini extends \Library\Object {
      */
     public static function saveParams($filename, $sections = array()) {
 
-        $config     = \Library\Config::getInstance();
+        $config = \Library\Config::getInstance();
         $configfile = \Library\Folder::getFile();
-        $configdir  = FSPATH . 'config' . DS;
-        
+        $configdir = FSPATH . 'config' . DS;
+
         $permission = $configfile::getPermission($configdir);
 
-        $_globals   = '; the setup configuration file';
-        $_br        = "\n";
-        $_tab       = NULL; //Use "\t" to indent;
-
+        $_globals = '; the setup configuration file';
+        $_br = "\n";
+        $_tab = NULL; //Use "\t" to indent;
         //We can only deal with arrays
-        if (!is_array($sections) || empty($filename) ) {
+        if (!is_array($sections) || empty($filename)) {
             //@TODO throw an error;
             return false;
         }
@@ -114,33 +140,26 @@ final class Ini extends \Library\Object {
 
             if (!empty($sectionsarray) && is_array($sectionsarray)) {
                 // 2 loops to write `globals' on top, alternative: buffer
-                $_globals .= "\n[" . $section . "]\n";
-
-                foreach ($sectionsarray as $param => $value) {
-                    if (!is_array($value)) {
-                        $value = static::normalizeValue($value);
-                        $_globals .= $_tab.$param.' = '.$value.$_br;
-                    }
-                }
+                $_globals .= static::toIniString($sectionsarray, $section);
             }
         endforeach;
-       
+
         //Temporarily chmode the file;
-        $configfile::chmod($configdir, 0755);
-        
-        if(!($setupini  = $configfile::create($configdir.$filename) )){
-            $config->setError("Could not create the setup configuration file. Please check $configdir folder permissions" );
+        //$configfile::chmod($configdir, 755);
+
+        if (!($setupini = $configfile::create($configdir . $filename) )) {
+            $config->setError("Could not create the setup configuration file. Please check $configdir folder permissions");
             return false;
         }
         //Now write to file
-        if(!$configfile::write($configdir.$filename, $_globals) ){
-            $config->setError("Could not write out to the configuration file" );
+        if (!$configfile::write($configdir . $filename, $_globals)) {
+            $config->setError("Could not write out to the configuration file");
             return false;
         }
-        
+
         //Reset  chmode the file;
-        $configfile::chmod($configdir, $permission);
-        
+        //$configfile::chmod($configdir, $permission);
+
         return true;
     }
 

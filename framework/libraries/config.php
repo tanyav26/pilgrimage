@@ -279,7 +279,7 @@ class Config extends Object {
 
         if ($CONFIG) {
             //Check that there is an attribute typ;
-            $CONFIG;
+            //$CONFIG;
 
             return $CONFIG;
         }

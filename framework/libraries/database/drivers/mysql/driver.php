@@ -60,6 +60,14 @@ final class Driver extends Library\Database{
      * @var string
      */
     var $nameQuote = '`';
+    
+    
+    /**
+     * Transaction queries
+     * 
+     * @var type 
+     */
+    var $transactions = array();
 
     /**
      * Connects to the databse using the default DBMS
@@ -332,6 +340,62 @@ final class Driver extends Library\Database{
         return $this->cursor;
     }
 
+    
+    /**
+     * Begins a MySQL Transaction
+     * 
+     * @return void;
+     */
+    public function startTransaction(){
+        
+        $this->exec("SET AUTOCOMMIT=0");
+        $this->exec("START TRANSACTION");
+        
+    }
+    
+    /**
+     * Does not execute the query. If execute is required 
+     * 
+     * @param type $sql
+     * @param type $execute
+     * @return boolean
+     */
+    public function query($sql, $execute = FALSE){
+        
+        $query = (empty($sql)) ?  $this->query :  $sql ;
+        $this->transactions[] = $this->replacePrefix( $query ); //just for reference
+        
+        //@TODO;
+        if($execute){
+            $this->exec( $query );
+        }
+        
+        return true;
+    }
+    
+    public function commitTransaction(){
+        
+        if(empty($this->transactions)||!is_array($this->transactions)){
+            $this->setError("No transaction queries found");
+            return false;
+        }
+        //Query transactions
+        foreach($this->transactions as $query){
+            if(!$this->exec($query)){
+                $this->exec("ROLLBACK"); //Rolls back the transaction;
+                return false;
+            }
+        }
+        //Commit the transaction
+        if(!$this->exec("COMMIT")){
+            $this->setError( "The transaction could not be committed");
+            return false;
+        }
+        
+        //$this->exec("SET AUTOCOMMIT=1");
+        
+        return true;
+    }
     /**
      * Gets an instance of the driver
      *

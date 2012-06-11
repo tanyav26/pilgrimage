@@ -200,9 +200,9 @@ final class Uri {
         //Do we have the path info included?
         $sPath = Config::getParam("path", "/", "system");
         
-        if (!empty($url)) {
+        if (!empty($url) && $sPath<> "/") {
 
-            $parts = explode("/", $sPath);
+            $parts    = explode("/", $sPath);
             $segments = explode("/", $url);
             
             //Remove all empty elements

@@ -60,6 +60,13 @@ final class Driver extends Library\Database{
      * @var string
      */
     var $nameQuote = '`';
+    
+    /**
+     * Transaction queries
+     * 
+     * @var type 
+     */
+    var $transactions = array();
 
     /**
      * Connects to the databse using the default DBMS
@@ -340,6 +347,69 @@ final class Driver extends Library\Database{
         //echo $this->cursor;
 
         return $this->cursor;
+    }
+    
+        /**
+     * Begins a database transaction
+     * 
+     * @return void;
+     */
+    public function startTransaction(){
+        
+        if (!is_a($this->resourceId, "mysqli")) {
+            $this->setError( _("No valid connection resource found") );
+            return false;
+        }
+        $this->resourceId->autocommit( FALSE ); //Turns autocommit off;
+        
+    }
+    
+    /**
+     * This method is intended for use in transsactions
+     * 
+     * @param type $sql
+     * @param type $execute
+     * @return boolean
+     */
+    public function query($sql, $execute = FALSE){
+        
+        $query = (empty($sql)) ?  $this->query :  $sql ;
+        $this->transactions[] = $this->replacePrefix( $query ); //just for reference
+        
+        //@TODO;
+        if($execute){
+            $this->exec( $query );
+        }
+        
+        return true;
+    }
+    
+    /**
+     * Commits a transaction or rollbacks on error
+     * 
+     * @return boolean
+     */
+    public function commitTransaction(){
+         
+        if(empty($this->transactions)||!is_array($this->transactions)){
+            $this->setError("No transaction queries found");
+            return false;
+        }
+        //Query transactions
+        foreach($this->transactions as $query){
+            if(!$this->exec($query)){
+                $this->resourceId->rollback(); //Rolls back the transaction;
+                return false;
+            }
+        }
+        //Commit the transaction
+        if(!$this->resourceId->commit()){
+            $this->setError( "The transaction could not be committed");
+            return false;
+        }
+        
+        //$this->resourceId->autocommit( TRUE ); //Turns autocommit back on
+        return true;
     }
 
     /**

@@ -25,11 +25,6 @@
 
 namespace Library;
 
-use Library\Database;
-use Library\Database\Drivers\MySQL as MySQL;
-use Library\Database\Drivers\MySQLi as MySQLi;
-use Library\Database\Drivers\SQLite3 as SQLite3;
-use Library\Database\Drivers\PostgreSQL as PostgreSQL;
 
 /**
  * Database abstraction handler
@@ -93,8 +88,27 @@ abstract class Database extends Object {
     public $limit;
     
     
-    
+    /**
+     * Counts the number of queries executed by exec
+     * 
+     * @var type 
+     */
     var $ticker;
+    
+    
+    /**
+     * Method to check that we are in transaction mode
+     * 
+     * @var boolean
+     */
+    public $tMode = false;
+    
+     /**
+     * Database debug mode
+     * 
+     * @var boolean
+     */
+    public $debug = false;
 
 
     /**
@@ -200,6 +214,8 @@ abstract class Database extends Object {
     public static function getInstance($options = array(), $reinstantiate = FALSE) {
 
         static $instances = array();
+        
+        //If the database has not yet been installed return false;
 
         if (!isset($instances)) {
             $instances = array();
@@ -408,4 +424,27 @@ abstract class Database extends Object {
      * @return void
      */
     abstract public function exec($query='');
+    
+    /**
+     * Begins a database transaction
+     * 
+     * @return void;
+     */
+    abstract public function startTransaction();
+    
+    /**
+     * This method is intended for use in transsactions
+     * 
+     * @return boolean
+     */
+    abstract public function query($sql, $execute =FALSE);
+    
+    /**
+     * Commits a transaction or rollbacks on error
+     * 
+     * @return boolean
+     */
+    abstract public function commitTransaction();
+    
+    
 }

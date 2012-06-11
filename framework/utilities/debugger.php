@@ -87,10 +87,17 @@ final class Debugger extends Library\Log{
         $_memory= memory_get_usage( );
         $units  = array('Bytes','KB','MB','GB','TB','PB');
         $memory = @round($_memory/pow(1024,($i=floor(log($_memory,1024)))),2).' '.$units[$i];
-
+        $queries= '0';
         //Get Query usage
-        $database = \Library\Database::getInstance();
-        $queries  = $database->getTotalQueryCount();
+        //@TODO this smells, a method to detect that the database has been installed;
+        $installed = (bool)\Library\Config::getParam("installed",FALSE,"database");
+        
+        if($installed):
+            
+            $database = \Library\Database::getInstance();
+            $queries  = $database->getTotalQueryCount();
+
+        endif;
         
         //Log usage
         self::log( $now , _("Stop execution time") , "info"  );

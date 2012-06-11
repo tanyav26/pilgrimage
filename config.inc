@@ -37,13 +37,14 @@ $config = array(
 
 'session' => 
     array(
-        'store' => 'database',
+        'store' => 'file', //change to database to use database as session handler
         'table' => '?session',
         'cookie' => 'psession',
         'domain' => '',
         'path' => '/',
         'datafile' => '/',//The absolute path to the session data file store
         'life' => 60 * 15, //15 minutes The amount of time to keep for,
+        'folder'=>'sessions',
         //Time to session remberance
         //If no explicit expiry time is set, session will be remembered for this long
         'remember' => 60 * 60 * 24 * 14 //14 day
@@ -133,6 +134,7 @@ $config = array(
         "name" => "networkapp",
         "driver" => "MySQLi",
         "prefix" => "dd_",
+        "installed"=>false,
         "collate" => "",
         "charset" => "utf-8",
         "select" => true

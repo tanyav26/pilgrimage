@@ -25,8 +25,6 @@
 
 namespace Library\Session\Handler;
 
-use \Library;
-
 /**
  * What is the purpose of this class, in one sentence?
  *
@@ -76,6 +74,7 @@ final class Database extends \Library\Object {
     }
 
     /**
+     * Updates session data in the database;
      * 
      * @param type $userdata
      * @param type $session
@@ -95,6 +94,7 @@ final class Database extends \Library\Object {
     }
 
     /**
+     * Deletes session data from the database
      * 
      * @param type $where
      * @param type $session
@@ -112,6 +112,7 @@ final class Database extends \Library\Object {
     }
 
     /**
+     * Writes session data to the database store
      * 
      * @param type $userdata
      * @param type $splash

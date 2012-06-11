@@ -50,6 +50,7 @@ final class Install extends Platform\Model {
         $database   = \Library\Config\Database::getInstance();
         
         //@TODO create master user account
+        //@TODO Empty the setup/sessions folder
         
         //Completes installation
         $config::setParam("installed", TRUE , "database");
@@ -115,6 +116,12 @@ final class Install extends Platform\Model {
             return false;
         }
         //@TODO run the install.sql script on the connected database
+         $schema = $this->load->model("schema","setup");
+         //print_r($schema::$database);
+        if(!$schema::createTables()){
+            $this->setError( $schema::getError() );
+            return false;
+        }
         
         //set session handler to database if database is connectable
         $config::setParam("store", "database" , "session");

@@ -121,7 +121,7 @@ class Session extends Object {
     final public function getSplash() {
 
         $input = Input::getInstance();
-        $output = Output::getInstance();
+        //$output = Output::getInstance();
         $uri = Uri::getInstance();
 
         $userIp = md5($input->serialize($input->getVar('REMOTE_ADDR', \IS\STRING, '', 'server')));
@@ -273,7 +273,7 @@ class Session extends Object {
 
         $input = Input::getInstance();
         $uri = Uri::getInstance();
-        $dbo = Database::getInstance();
+        //$dbo = Database::getInstance();
 
         $splash = $self->getSplash();
 
@@ -295,6 +295,9 @@ class Session extends Object {
         $_handler = ucfirst($self->store);
         $handler = "\Library\Session\Handler\\" . $_handler;
         $object = $handler::read($splash, $self, $sessId);
+        
+        //If this is not an object then we have a problem
+        if(!is_object($object)) return false;
 
         //Redecorate 
         $splash = array(
