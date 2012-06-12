@@ -54,7 +54,7 @@ class Account extends Platform\Model {
         $encrypt    = \Library\Encrypt::getInstance();
         $table      = $this->load->table("?users");
         
-        $data['user_password'] = $encrypt->hash( $data['user_password'] );       
+        $data['user_password'] = $encrypt->hash( $data['user_password'] ); 
        
         if(!$table->bindData( $data )){  
             //print_R($table->getErrors());
@@ -63,7 +63,9 @@ class Account extends Platform\Model {
         }
        
         if(!$table->save()){
-            echo $this->getError();
+            //print_R($table->getErrors());
+            throw new \Platform\Exception( $table->getError() );
+            return false;
         }
     }
     

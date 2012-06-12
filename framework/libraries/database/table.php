@@ -204,7 +204,8 @@ abstract class Table extends \Library\Object {
                 $datavalue = $this->schema[$k]->Value;
 
                 if (method_exists($validate, $datatype)) {
-                    if (!\call_user_func_array(array($validate, $datatype), array($datavalue))) {
+                    
+                    if (!\call_user_func(array($validate, $datatype), $datavalue)) {
                         //unpair the value
                         unset($this->schema[$k]->Value);
 

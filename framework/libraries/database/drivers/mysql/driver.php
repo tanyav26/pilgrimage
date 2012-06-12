@@ -392,7 +392,8 @@ final class Driver extends Library\Database{
             return false;
         }
         
-        //$this->exec("SET AUTOCOMMIT=1");
+        $this->exec("SET AUTOCOMMIT=1");
+        //$this->exec("COMMIT");
         
         return true;
     }

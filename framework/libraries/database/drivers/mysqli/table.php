@@ -142,7 +142,7 @@ final class Table extends \Library\Database\Table {
             $set[$field] = isset($fieldObject->Value) ? $fieldObject->Value  : $fieldObject->Default;
             
             //Use Quotes in place of empty fields?
-            if(empty($set[$field])|| ($fieldObject->Validate == 'string' ) ){
+            if(empty($set[$field])|| (isset($fieldObject->Validate)&&$fieldObject->Validate == 'string' ) ){
                 $set[$field] = $this->dbo->Quote($set[$field]);
             }
         }

@@ -56,20 +56,21 @@ final class Validate extends \Library\Object {
      * @param type $length
      * @return type 
      */
-    public function string($str, $regExp=null, $length=null) {   
+    public static function string($str, $regExp=null, $length=null) {
+        
         //Validate its a string;
-        if(is_string($str)){
+        if(!is_string($str)){
             return FALSE;
         }
         //Patterns
         if(!empty($regExp)){
-        $return = preg_match($regex, $str);
+        $return = preg_match($regExp, $str);
             if(!(bool)$return){
                 return FALSE;
             }
         }
         //Validate length;
-        if(!empty($length) && $this->interger( $length )){
+        if(!empty($length) && static::interger( $length )){
             $length     = (int)$length;
             $_length    = strlen( $str );
             //If the intergers don't match;
@@ -87,7 +88,7 @@ final class Validate extends \Library\Object {
      * @param type $value
      * @return type 
      */
-    public function boolean($bool, $value=null) {
+    public static function boolean($bool, $value=null) {
         return is_bool($bool);
     }
 
@@ -97,7 +98,7 @@ final class Validate extends \Library\Object {
      * @param type $dec
      * @return type 
      */
-    public function decimal( $decimal ) {
+    public static function decimal( $decimal ) {
         
         $regEx  = '/^\s*[+\-]?(?:\d+(?:\.\d*)?|\.\d+)\s*$/';
         $return = preg_match($regex, $decimal);
@@ -112,13 +113,13 @@ final class Validate extends \Library\Object {
      * @param type $length
      * @return type 
      */
-    public function alphaNumeric($alnum, $length = null) {
+    public static function alphaNumeric($alnum, $length = null) {
         
         //Regular Expression
         $regEx = '/^[A-Za-z0-9_]+$/';
         
         //Validate the string;
-        return $this->string($alnum , $regEx , $length );
+        return static::string($alnum , $regEx , $length );
     }
 
     /**
@@ -127,7 +128,7 @@ final class Validate extends \Library\Object {
      * @param type $tstamp
      * @return type 
      */
-    public function timestamp($tstamp) {
+    public static function timestamp($tstamp) {
         return ((string)(int)$tstamp === $tstamp) 
         && ($tstamp <= PHP_INT_MAX)
         && ($tstamp >= ~PHP_INT_MAX);
@@ -139,7 +140,7 @@ final class Validate extends \Library\Object {
      * @param type $flt
      * @return type 
      */
-    public function float($flt) {
+    public static function float($flt) {
         return is_int($flt);
     }
 
@@ -148,7 +149,7 @@ final class Validate extends \Library\Object {
      * @param type $num
      * @return type 
      */
-    public function number($num) {
+    public static function number($num) {
         return is_int($num);
     }
 
@@ -158,7 +159,7 @@ final class Validate extends \Library\Object {
      * @param type $int
      * @return type 
      */
-    public function interger($int) {
+    public static function interger($int) {
         return is_int($int);
     }
 
@@ -168,7 +169,7 @@ final class Validate extends \Library\Object {
      *
      * @param type $address 
      */
-    public function IP( $address ) {
+    public static function IP( $address ) {
         
         //Split the IP address of the form  into parts
         $parts = explode('.', $address);
@@ -177,7 +178,7 @@ final class Validate extends \Library\Object {
             return FALSE;
         }
         foreach($parts as $part):
-            if(empty($part) || !$this->number($part) || $part > 255 ){
+            if(empty($part) || !static::number($part) || $part > 255 ){
                 return FALSE;
             }
         endforeach;
@@ -190,7 +191,7 @@ final class Validate extends \Library\Object {
      * @param type $email
      * @return boolean 
      */
-    public function email($email) {
+    public static function email($email) {
 
         $isValid = true;
         //$isInValid  = false;
@@ -210,32 +211,32 @@ final class Validate extends \Library\Object {
 
             //Validation
             if ($localLen < 1 || $localLen > 64) {
-                $this->setError(_("The local part of the email is not of valid lengths"));
+                static::setError(_("The local part of the email is not of valid lengths"));
                 return false;
             } else if ($domainLen < 1 || $domainLen > 255) {
-                $this->setError(_("The email domain exceeded maximum length"));
+                static::setError(_("The email domain exceeded maximum length"));
                 return false;
             } else if ($local[0] == '.' || $local[$localLen - 1] == '.') {
-                $this->setError(_("invalid end dot ('.') position in local of email"));
+                static::setError(_("invalid end dot ('.') position in local of email"));
                 return false;
             } else if (preg_match('/\\.\\./', $local)) {
-                $this->setError(_("Two consecutive dots ('.') in local of email"));
+                static::setError(_("Two consecutive dots ('.') in local of email"));
                 return false;
             } else if (!preg_match('/^[A-Za-z0-9\\-\\.]+$/', $domain)) {
-                $this->setError(_("Invalid character in domain part"));
+                static::setError(_("Invalid character in domain part"));
                 return false;
             } else if (preg_match('/\\.\\./', $domain)) {
-                $this->setError(_("Two consecutive dots ('.') in domain of email"));
+                static::setError(_("Two consecutive dots ('.') in domain of email"));
                 return false;
             } else if (!preg_match('/^(\\\\.|[A-Za-z0-9!#%&`_=\\/$\'*+?^{}|~.-])+$/', str_replace("\\\\", "", $local))) {
 
                 if (!preg_match('/^"(\\\\"|[^"])+"$/', str_replace("\\\\", "", $local))) {
-                    $this->setError(_("Invalid character in local of email"));
+                    static::setError(_("Invalid character in local of email"));
                     return false;
                 }
             }
             if ($isValid && !(checkdnsrr($domain, "MX") || checkdnsrr($domain, "A"))) {
-                $this->setError(_("The domain of email not found in DNS"));
+                static::setError(_("The domain of email not found in DNS"));
                 return false;
             }
         }

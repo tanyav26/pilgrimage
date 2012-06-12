@@ -141,10 +141,6 @@ final class Driver extends Library\Database{
             $this->setError('mysqli_init failed');
         }
 
-        if (!$this->resourceId->options(MYSQLI_INIT_COMMAND, 'SET AUTOCOMMIT = 0')) {
-            $this->setError('Setting MYSQLI_INIT_COMMAND failed');
-        }
-
         if (!$this->resourceId->options(MYSQLI_OPT_CONNECT_TIMEOUT, 5)) {
             $this->setError('Setting MYSQLI_OPT_CONNECT_TIMEOUT failed');
         }
@@ -408,7 +404,7 @@ final class Driver extends Library\Database{
             return false;
         }
         
-        //$this->resourceId->autocommit( TRUE ); //Turns autocommit back on
+        $this->resourceId->autocommit( TRUE ); //Turns autocommit back on
         return true;
     }
 
