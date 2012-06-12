@@ -109,7 +109,7 @@ final class Install extends Platform\Controller {
             $this->alert(_($install->getError()),'Something went wrong','error');
             $this->redirect("/install/step3");
         }
-        $this->alert( "Awesome! Your database is all setup and ready. Now complete the details below to create a master user account. Please use a valid email address","","success");
+        $this->alert( "Awesome! Your database is all setup and ready. Now complete the details below to create a master user account. Please use a valid email address","","info");
         //sample call; this is step 1;
         $this->set("step", "4");
         $view->index() ; 

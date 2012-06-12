@@ -1,6 +1,6 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
     <div class="page-header">
-        <h1><?php echo _('System Requirements') ; ?></h1><br />
+<!--        <h1><?php echo _('System Requirements') ; ?></h1><br />-->
         <small><?php echo _('Please ensure that your system passes all the test below.; unless of course you know what you are doing</small>') ; ?>
     </div>
 
