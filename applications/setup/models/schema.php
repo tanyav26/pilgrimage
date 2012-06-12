@@ -378,7 +378,7 @@ final class Schema extends Platform\Model {
             return static::$instance;
 
         static::$instance = new self;
-        static::$database = Library\Database::getInstance();
+        static::$database = Library\Database::getInstance(Library\Config::getParamSection("database"), TRUE );
         
         //Begin trnasation
         static::$database->startTransaction();

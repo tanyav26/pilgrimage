@@ -47,7 +47,7 @@ final class Install extends Platform\Model {
     public function superadmin(){
         
         $config     = \Library\Config::getInstance();
-        $database   = \Library\Config\Database::getInstance();
+        $database   = \Library\Database::getInstance($config::getParamSection("database") , true);
         
         //@TODO create master user account
         //@TODO Empty the setup/sessions folder

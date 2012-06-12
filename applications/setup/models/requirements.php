@@ -95,7 +95,7 @@ final class Requirements extends Platform\Model {
         return $return;
     }
 
-    public function testPermissions() {
+    public function testFolderPermissions() {
         
         //Test install directory is writable, readable
         //Test we are not trying to overide an installation

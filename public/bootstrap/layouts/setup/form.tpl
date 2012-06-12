@@ -9,7 +9,7 @@
             <div class="span3 <?php echo ($step > 3) ? 'active' : ''; ?>"><a href="/setup/install/step4">Finish</a><span class="marker"></span></div>
         </div>
         <div class="progress mini-bar">
-            <div class="bar" style="width: <?php echo intval(12.5*((2*$step)-1)).'%'; ?>"></div>
+            <div class="bar" style="width: <?php echo intval(12.5*((2*$step)-1)).'%'; ?>;"></div>
         </div>
     </div>
 

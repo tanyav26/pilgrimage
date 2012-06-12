@@ -216,7 +216,6 @@ abstract class Database extends Object {
         static $instances = array();
         
         //If the database has not yet been installed return false;
-
         if (!isset($instances)) {
             $instances = array();
         }
@@ -239,6 +238,10 @@ abstract class Database extends Object {
         //serialize
         $signature  = md5(serialize($dbparams)); 
         $driver     = $dbparams['driver'] = preg_replace('/[^A-Z0-9_\.-]/i', '', $dbparams['driver']);
+        
+        if(!class_exists("Library\Database\Drivers\\" . $driver . "\Driver")){
+            return false;
+        }
         
         if (!isset($instances[$signature]) || $reinstantiate):
             $instances[$signature] = \call_user_func("Library\Database\Drivers\\" . $driver . "\Driver::getInstance", $dbparams);

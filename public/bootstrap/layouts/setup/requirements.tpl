@@ -52,9 +52,9 @@
                 style="color:red;font-weight: bold"><?php echo _('Failed'); ?>
                 <?php endif; ?>
         </td>
-    </tr>
-    <?php endforeach; ?>
-</tbody>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
 </table>
 
 
@@ -79,9 +79,9 @@
                 <?php else: ?>
                 style="color:red;font-weight: bold"><?php echo _('Failed'); ?>
                 <?php endif; ?>
-        </td>
-    </tr>    
-    <?php endforeach; ?>
-</tbody>
+            </td>
+        </tr>    
+        <?php endforeach; ?>
+    </tbody>
 </table>
 </tpl:layout>

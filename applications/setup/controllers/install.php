@@ -127,7 +127,7 @@ final class Install extends Platform\Controller {
             $this->alert(_($install->getError()),'Something went wrong','error');
             $this->redirect("/install/step4");
         }
-        $this->alert( "Fantastico. All systems ready to go","","success");
+        $this->alert( "Fantastico. All systems ready to go. Please make a note of the information below. If possible print this screen and keep it for your records","","success");
         
         //Return the install report as launch
         return $this->launch();

@@ -450,7 +450,7 @@ class Output extends Object {
         $handler = $this->getHandler(); 
         $parsed  = $handler->parse( $parsed , $handler );
         
-        \Platform\Debugger::log( htmlentities($layout ) );
+        //\Platform\Debugger::log( htmlentities($layout ) );
 
         return $parsed;
     }

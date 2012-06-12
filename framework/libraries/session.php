@@ -428,8 +428,10 @@ class Session extends Object {
 
         setcookie(session_name(), '', $now - 42000, '/');
 
-        session_unset();
-        session_destroy();
+        if (session_id()) {
+            session_unset();
+            session_destroy();
+        }
 
         //Delete from db;  
         //Do a garbage collection

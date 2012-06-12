@@ -160,7 +160,7 @@ abstract class Object {
         
         $event = array_shift($args);  //remove it once we know the event; 
         $data  = $args; //rest of the arguments;
-        
+        $time   = \microtime( true );
         //if the event is defined
         if (static::isDefined($event)) {
             //for each even execute callback
@@ -171,6 +171,7 @@ abstract class Object {
 
             $events = static::$hooks[$event];
             $results = array();
+            
 
             //triggering the event;
             foreach ($events as $i => $hook) {
@@ -181,7 +182,7 @@ abstract class Object {
                 if (is_callable($callback)) {
 
                     // Log in the console
-                    \Platform\Debugger::log(sprintf(_("Calling %s() at %2s in %3s context"), $callback, $event, $context), $event, "success");
+                    \Platform\Debugger::log(sprintf(_("[{$time}] Calling %s() at %2s in %3s context"), $callback, $event, $context), $event, "success");
 
                     //@TODO Determine Method Name from
                     //CallBack directive to use as indices in results array
@@ -192,7 +193,7 @@ abstract class Object {
             return $results;
         } else {
             //There are no events to trigger
-            \Platform\Debugger::log(sprintf(_("No events triggered for %s in %2s context"), $event, $context), $event, "info");
+            \Platform\Debugger::log(sprintf(_("[{$time}] No events triggered for %s in %2s context"), $event, $context), $event, "info");
 
             return false;
         }
