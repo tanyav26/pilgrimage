@@ -181,15 +181,7 @@ class Files extends \Library\Folder {
         return static::getInstance();
     }
 
-    /**
-     * Packs a file into an archive
-     * 
-     * @param type $path
-     * @param type $type
-     */
-    public static function pack($path, $type = 'tar.gz') {
-        
-    }
+
 
     /**
      * Unpacks and archived file
@@ -201,14 +193,7 @@ class Files extends \Library\Folder {
         
     }
 
-    /**
-     * Restores a backed up file
-     * 
-     * @param type $path
-     */
-    public static function restoreBackup($path) {
-        
-    }
+
 
     /**
      * Get File MIME Type
@@ -229,52 +214,6 @@ class Files extends \Library\Folder {
             return false;
         }
         return $file;
-    }
-
-    /**
-     * Move file to a different location
-     * @param type $path
-     * @param type $toPath
-     * @param type $replace
-     */
-    public static function move($path, $toPath, $replace = TRUE) {
-        
-    }
-
-    /**
-     * Delete a file from the file system
-     * 
-     * @param type $path
-     * @param type $backup
-     */
-    public static function delete($path, $backup = FALSE) {
-        
-    }
-
-    /**
-     * Check if a file has been backedup
-     * 
-     * @param type $path
-     */
-    public static function hasBackup($path) {
-        
-    }
-
-    /**
-     * Get file last modified Date
-     * 
-     * @param type $path
-     */
-    public static function getModifiedDate($path) {
-        
-    }
-
-    /**
-     * Get file size
-     * @param type $file
-     */
-    public static function getSize($file) {
-        
     }
 
     /**

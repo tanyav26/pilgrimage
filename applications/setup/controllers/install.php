@@ -40,6 +40,8 @@ use Application\Install\Views as View;
  */
 final class Install extends Platform\Controller {
     
+    static $instance;
+    
     public function index(){
         return $this->step1();
     }
@@ -78,7 +80,9 @@ final class Install extends Platform\Controller {
         }
         
         //Get Requirements
-        $requirements = $this->config->getParam("requirements", array(), "install");
+        //$requirements = $this->config->getParam("requirements", array(), "install");
+        require_once(APPPATH . 'setup'.DS. 'requirements.inc' );
+        
         $this->set("requirements", $requirements);
        
         $view->index() ; //sample call;
@@ -92,10 +96,10 @@ final class Install extends Platform\Controller {
         
         //this is step 1;
         $this->set("step", "3");
-        $view->index() ; //sample call;
         
         //To set the pate title use
         $this->output->setPageTitle("Installation | Database Config Settings");
+        $view->index() ; //sample call;
         
     }
     
@@ -103,6 +107,11 @@ final class Install extends Platform\Controller {
         
         $view       = $this->load->view('process') ;
         $install    = $this->load->model('install') ;
+        
+        if (!$this->input->methodIs("post")) {
+            $this->alert("No user data recieved",'Something went wrong','error' );
+            $this->redirect("/install/step3");
+        }
 
         //Check we have all the information we need!
         if(!$install->run()){
@@ -112,8 +121,9 @@ final class Install extends Platform\Controller {
         $this->alert( "Awesome! Your database is all setup and ready. Now complete the details below to create a master user account. Please use a valid email address","","info");
         //sample call; this is step 1;
         $this->set("step", "4");
-        $view->index() ; 
+        
         $this->output->setPageTitle("Installation | Final Things");
+        $view->index() ; 
         
     }
     
@@ -121,50 +131,37 @@ final class Install extends Platform\Controller {
         
         $view       = $this->load->view('process') ;
         $install    = $this->load->model('install') ;
+        
+        if (!$this->input->methodIs("post")) {
+            $this->alert("No user data recieved",'Something went wrong','error' );
+            $this->redirect("/install/step3");
+        }
 
         //Check we have all the information we need!
         if(!$install->superadmin()){
             $this->alert(_($install->getError()),'Something went wrong','error');
-            $this->redirect("/install/step4");
+            $this->set("step", "4");
+            $view->index() ; 
+            return $this->output->setPageTitle("Installation | Final Things");
         }
         $this->alert( "Fantastico. All systems ready to go. Please make a note of the information below. If possible print this screen and keep it for your records","","success");
         
         //Return the install report as launch
-        return $this->launch();
-    }
-    
-    public function launch(){
+        $this->output->setPageTitle("Installation Complete");
         
-        //proceses step 4
-        //checks for updates
-            //$this->alert(_('Your system is now ready. Any other configurations can be made via the Admin Panel'),'Congratulations!','success');
-            //$this->redirect("/install/step3");
-        //Sets a redirect;
-        
-    }
-    
-    public function update(){
-        
-        //Performs the update process
-        
-    }
-    
-    public function checkUpdates(){
-        
-        //Checks for available updates
-        
+        return $view->readme();
     }
     
 
     public static function  getInstance() {
         
-        static $instance;
+        static::$instance;
         //If the class was already instantiated, just return it
-        if (isset($instance) ) return $instance ;
+        if (isset(static::$instance) ) return static::$instance ;
 
-        $instance =  new self;
+        static::$instance =  new self;
 
-        return $instance;   
+        return static::$instance;   
     }
 }
 

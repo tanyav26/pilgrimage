@@ -99,16 +99,17 @@ $requirements = array(
     ),
     "server" => array(
         "PHP" => array(
-            "version" => "5.4.0",
+            "version" => "5.3.0",
             "minimal" => ">=",
             "terminal" => true,
             "current" => PHP_VERSION
         )
     ),
-    "folders" => array(
+    "directories" => array(
         "config" => array(
-            "status" => "writable",
-            "path" => DS."config",
+            "title" => "Configuration folder",
+            "writtable" => true,
+            "path" => FSPATH."config",
             "terminal" => true,
         )
     )

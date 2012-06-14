@@ -140,6 +140,11 @@ final class Driver extends Library\Database{
         if (!$this->resourceId) {
             $this->setError('mysqli_init failed');
         }
+        
+        //We want to keep autocomit on all the time exceplt when we are performing a transaction
+        if (!$this->resourceId->options(MYSQLI_INIT_COMMAND, 'SET AUTOCOMMIT = 1')) {
+            $this->setError('Setting MYSQLI_INIT_COMMAND failed');
+        }
 
         if (!$this->resourceId->options(MYSQLI_OPT_CONNECT_TIMEOUT, 5)) {
             $this->setError('Setting MYSQLI_OPT_CONNECT_TIMEOUT failed');

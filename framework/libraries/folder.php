@@ -43,6 +43,7 @@ use Library\Folder\Files;
  */
 class Folder extends \Library\Object {
 
+    static $instance;
     /**
      * Returns the UNIX timestamp representation
      * of the last time the folder was modified
@@ -339,6 +340,89 @@ class Folder extends \Library\Object {
 
         return (bool) $return;
     }
+    
+    /**
+     * Method to delete the contents of a folder
+     * 
+     * @param type $folderpath
+     * @param type $filterByType
+     * @param type $filterByName
+     * @param type $filterExcludeMode
+     */
+    final public static function deleteContents($folderpath, $filterByExtension = array() , $filterByName= array() , $filterExcludeMode = TURE , $recursive = TRUE ){
+        
+        //1. Search $name as a folder or as a file 
+        if (!self::is($folderpath)) { //if in path is a directory
+            return array();
+        }
+        
+
+        $dirh = @opendir($folderpath); //directory handler
+
+        if ($dirh) {
+            while (false !== ($file = readdir($dirh))) {
+                // remove '.' and '..'
+                if($filterExcludeMode){
+                    //Excluding by name as in "file.ext"
+                    if ($file == '.' || $file == '..' || in_array($file, $filterByName))
+                        continue;
+                    //Excluding extension
+                    if(!empty($filterByExtension)){
+                        $fhandler  = static::getFile();
+                        $extension = $fhandler::getExtension( $file );
+                        if(in_array($extension, $filterByExtension))
+                            continue;
+                    }
+                }else{
+                    if ($file == '.' || $file == '..' || !in_array($file, $filterByName))
+                        continue;
+                    //Excluding extension
+                    if(!empty($filterByExtension)){
+                        $fhandler  = static::getFile();
+                        $extension = $fhandler::getExtension( $file );
+                        if(!in_array($extension, $filterByExtension))
+                            continue;
+                    }
+                }
+                
+                //The new path
+                $newPath = $folderpath.DS.$file;
+                
+                //If newpath is a folder and we are deleting recursively
+                if (self::is($newPath) && $recursive) {
+                    self::deleteContents( $newPath , $filterByExtension, $filterByName , $filterExcludeMode , $recursive);
+                }
+                //Now unlink the file
+                if(!static::delete( $newPath )){
+                    static::setError("Could not delete {$newPath}");
+                    return false;
+                }
+            }
+            closedir($dirh);
+        }
+        //@TODO if long, get additional info for each path;
+
+        return true;
+    }
+    
+    
+    /**
+     * Deletes a file or folder if exists
+     * 
+     * @param type $path
+     */
+    final public static function delete($path){
+        
+        //If we have permission to remove this file
+        if (static::isWritable($path)) {
+            if (!@unlink($path)) //This is highly unreliable as unlink returns a warning not a bool
+                return false;
+        }else {
+            if (!@unlink($path)) //This is highly unreliable as unlink returns a warning not a bool
+                return false;
+        }
+        return true;
+    }
 
     /**
      * Determines if a path is credible
@@ -346,7 +430,19 @@ class Folder extends \Library\Object {
      * @param type $path 
      */
     final public static function exists($path) {
+        return file_exists( $path );
+    }
+    
+    /**
+     * Checks if a file or folder is writable 
+     * 
+     * @param type $path
+     */
+    final public static function isWritable($path, $writable = TRUE){
         
+        $return = is_writable($path) ? $writable : !$writable;
+
+        return (bool) $return;
     }
 
     /**

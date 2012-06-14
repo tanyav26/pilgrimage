@@ -78,6 +78,16 @@ final class Process extends Platform\View {
         //The default installation box;
         $this->output->addToPosition("body", $form);
     }
+    
+    
+    public function readme(){
+        
+        //Displays the readme file after installation
+        $readme = $this->output->layout("readme");
+        $this->output->addToPosition("body", $readme );
+        
+    }
+    
 
     final static function getInstance() {
 

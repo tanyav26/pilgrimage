@@ -40,17 +40,44 @@ use Library;
 final class Install extends Platform\Model {
 
     static $instance;
-    //put your code here
 
-    public function display() {}
+    public function display(){ return false; }
     
     public function superadmin(){
         
         $config     = \Library\Config::getInstance();
-        $database   = \Library\Database::getInstance($config::getParamSection("database") , true);
+        //$database   = \Library\Database::getInstance();
         
         //@TODO create master user account
+        //1. Load the model
+        $account = $this->load->model("account", "member");
+        $encrypt = \Library\Encrypt::getInstance();
+        
+
+        //2. Prevalidate passwords and other stuff;
+        $username   = $this->input->getString("user_name",  "","post", FALSE, array());
+        $usernameid = $this->input->getString("user_name_id", "","post",FALSE, array());
+        $userpass   = $this->input->getString("user_password", "", "post", FALSE, array());
+        $userpass2  = $this->input->getString("user_password_2", "", "post", FALSE, array());
+        //3. Encrypt validated password if new users!
+        //4. If not new user, check user has update permission on this user
+        //5. MailOut
+        
+        if(empty($userpass)||empty($username)||empty($usernameid)){
+            //Display a message telling them what can't be empty
+            $this->setError( _('Please provide at least a Name, Username, E-mail and Password') , _('Not enough information!'), "error" );
+            return false;
+        }
+        
+        
+        //6. Store the user
+        if(!$account->store( $this->input->data("post"))){
+            //Display a message telling them what can't be empty
+            $this->setError( _('Could not store the admin user account') , _('Not enough information!'), "error" );
+            return false;
+        }
         //@TODO Empty the setup/sessions folder
+        \Library\Folder::deleteContents( APPPATH."setup".DS."sessions" ); //No need to through an error
         
         //Completes installation
         $config::setParam("installed", TRUE , "database");
@@ -64,6 +91,7 @@ final class Install extends Platform\Model {
         } 
         return true;
     }
+    
     
     public function run(){
              

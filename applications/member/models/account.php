@@ -58,15 +58,16 @@ class Account extends Platform\Model {
        
         if(!$table->bindData( $data )){  
             //print_R($table->getErrors());
-            throw new \Platform\Exception( $table->getError() );
+            $this->setError( $table->getError() );
             return false;
         }
        
         if(!$table->save()){
             //print_R($table->getErrors());
-            throw new \Platform\Exception( $table->getError() );
+            $this->setError( $table->getError() );
             return false;
         }
+        return true;
     }
     
     public function load(){}

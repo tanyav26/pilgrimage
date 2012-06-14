@@ -2,10 +2,10 @@
     <form method="POST" action="/" class="form-vertical">
         <fieldset>
             <div class="control-group">
-                <label class="control-label" for="site-name"> <?php echo _('Community Name'); ?></label>
+                <label class="control-label" for="site-name"> <?php echo _('Website Name'); ?></label>
                 <div class="controls">
                     <input type="text" name="site-name"  class="input-xxxlarge" placeholder="e.g MySocialNetwork" />
-                    <span class="help-block">A unique catchy name to identify your community. This will show as the default page titles</span>
+                    <span class="help-block">A unique catchy name to identify your website. This will show as the default page titles</span>
                 </div>
             </div>                   
             <div class="control-group">
@@ -34,10 +34,10 @@
                 <div class="controls">
                     <select name="site-page-title" class="input-xlarge">
                         <option value="0"><?php echo _('Leave as is'); ?></option>
-                        <option value="1"><?php echo _('Prepend community name'); ?></option>
-                        <option value="2"><?php echo _('Append community name'); ?></option>
+                        <option value="1"><?php echo _('Prepend website name'); ?></option>
+                        <option value="2"><?php echo _('Append website name'); ?></option>
                     </select>
-                    <span class="help-block">By default the page title is the community name.</span>
+                    <span class="help-block">By default the page title is the website name.</span>
                 </div>
             </div>
             <div class="control-group">

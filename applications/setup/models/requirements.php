@@ -80,7 +80,7 @@ final class Requirements extends Platform\Model {
                     }
                 }
             } else {
-                $return["current"] = _("Installed and Loaded");
+                $return["current"] = _("Loaded");
                 if ($directive["loaded"]) {
                     $return["test"] = true;
                 }
@@ -95,12 +95,31 @@ final class Requirements extends Platform\Model {
         return $return;
     }
 
-    public function testFolderPermissions() {
+    public function testFolderPermissions($path, $directive = array()) {
         
         //Test install directory is writable, readable
         //Test we are not trying to overide an installation
+        $return = array(
+            "title" => $directive['path'], "name" => $name, "current" => "Not Writtable", "test" => false
+        );
+
+        if (is_array($directive)) {
+            //If the extension is loaded
+            $return['status']     = ((bool)$directive['writtable']) ? "Writtable" : "Not Writtable";
+           if(\Library\Folder\Files::isWritable($path) && (bool)$directive['writtable']){
+               $return['current'] = "Is Writtable";
+               $return['test']    =  true;
+           }elseif(!\Library\Folder\Files::isWritable($path) && !(bool)$directive['writtable']){
+              $return['test']     =  true; 
+           }
+           
+           if(\Library\Folder\Files::isWritable($path)){
+               $return['current'] = "Is Writtable";
+           }
+        }
+        //Return test result;
+        return $return;
         
-        return false;
     }
 
     /**

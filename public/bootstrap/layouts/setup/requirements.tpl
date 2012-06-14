@@ -84,4 +84,31 @@
         <?php endforeach; ?>
     </tbody>
 </table>
+    
+<table class="table">
+    <thead>
+        <tr>
+            <th class="span5"><?php echo _('Folder Permissions'); ?></th>
+            <th class="span2"><?php echo _('Required'); ?></th>
+            <th class="span3"><?php echo _('Current Status'); ?></th>
+            <th class="span2"><?php echo _('Test'); ?></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->requirements['directories'] as $name => $directive): $d = $this->checker->testFolderPermissions($directive['path'], $directive); ?>
+        <tr>
+            <td><?php echo $d['title']; ?></td>
+            <td><?php echo $d['status']; ?></td>
+            <td><?php echo $d['current']; ?></td>
+            <td
+                <?php if ($d['test']) : ?>
+                style="color:green;font-weight: bold"><?php echo _('Passed'); ?>
+                <?php else: ?>
+                style="color:red;font-weight: bold"><?php echo _('Failed'); ?>
+                <?php endif; ?>
+            </td>
+        </tr>    
+        <?php endforeach; ?>
+    </tbody>
+</table>
 </tpl:layout>
