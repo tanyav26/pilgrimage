@@ -3,20 +3,20 @@
     <h1>Installation Complete!</h1><br />
     <small>Congratulations on completing the installation and first time configuration for your web app. We hope you enjoy using your new site. Before you start exploring, here are a few details you need to make a note of. If possible print them out and keep them safe (Don't let any ONE see them but you). You will probably need them at some point: if things don't work as they should</small>
 </div>
-    <p><a href="/system/admin/settings/configuration" class="pull-left">Visit the Configurations Panel</a><a href="javascript:window.print()" class="pull-right">Print this page</a></p>
+    <p class="clearfix"><a href="/system/admin/settings/configuration" class="pull-left">Admin Panel</a><a href="javascript:window.print()" class="pull-right">Print this page</a></p>
     <table class="table table-striped">
         <tbody>
             <tr>
                 <td class="span4">Admin Full Name</td>
-                <td>Livingstone Fultang</td>
+                <td><tpl:element type="text" data="adminFullName" /></td>
             </tr>
             <tr>
                 <td>Admin User Name ID</td>
-                <td>livingstone.fultang</td>
+                <td><tpl:element type="text" data="adminUserName" /></td>
             </tr>
             <tr>
                 <td>Admin E-mail address</td>
-                <td>livingstonefultang@gmail.com</td>
+                <td><tpl:element type="text" data="adminEmail" /></td>
             </tr>
             <tr>
                 <td>Admin Password</td>
@@ -79,7 +79,7 @@
     </table>
 
     <div class="action top-pad">
-        <a href="/" class="btn btn-success btn-large">Start Exploring</a> or <a href="#">Check for updates</a>
+        <a href="/" class="btn btn-success">Start Exploring</a> or <a href="#">Check for updates</a>
     </div>
 
 </tpl:layout>
