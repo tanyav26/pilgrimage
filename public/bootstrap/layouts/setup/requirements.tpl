@@ -7,10 +7,10 @@
     <table class="table">
         <thead>
             <tr>
-                <th class="span5"><?php echo _('Server Requirements'); ?></th>
+                <th class="span7"><?php echo _('Server Requirements'); ?></th>
                 <th class="span2"><?php echo _('Required'); ?></th>
-                <th class="span3"><?php echo _('Current Status'); ?></th>
-                <th class="span2"><?php echo _('Test'); ?></th>
+                <th class="span2"><?php echo _('Current Status'); ?></th>
+                <th class="span1"><?php echo _('Test'); ?></th>
             </tr>
         </thead>
         <tbody>
@@ -33,10 +33,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th class="span5"><?php echo _('PHP Module Requirements'); ?></th>
+            <th class="span7"><?php echo _('PHP Module Requirements'); ?></th>
             <th class="span2"><?php echo _('Required'); ?></th>
-            <th class="span3"><?php echo _('Current Status'); ?></th>
-            <th class="span2"><?php echo _('Test'); ?></th>
+            <th class="span2"><?php echo _('Current Status'); ?></th>
+            <th class="span1"><?php echo _('Test'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -61,10 +61,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th class="span5"><?php echo _('PHP Directive Requirements'); ?></th>
+            <th class="span7"><?php echo _('PHP Directive Requirements'); ?></th>
             <th class="span2"><?php echo _('Required'); ?></th>
-            <th class="span3"><?php echo _('Current Status'); ?></th>
-            <th class="span2"><?php echo _('Test'); ?></th>
+            <th class="span2"><?php echo _('Current Status'); ?></th>
+            <th class="span1"><?php echo _('Test'); ?></th>
         </tr>
     </thead>
     <tbody>
@@ -88,10 +88,10 @@
 <table class="table">
     <thead>
         <tr>
-            <th class="span5"><?php echo _('Folder Permissions'); ?></th>
+            <th class="span7"><?php echo _('Folder Permissions'); ?></th>
             <th class="span2"><?php echo _('Required'); ?></th>
-            <th class="span3"><?php echo _('Current Status'); ?></th>
-            <th class="span2"><?php echo _('Test'); ?></th>
+            <th class="span2"><?php echo _('Current Status'); ?></th>
+            <th class="span1"><?php echo _('Test'); ?></th>
         </tr>
     </thead>
     <tbody>

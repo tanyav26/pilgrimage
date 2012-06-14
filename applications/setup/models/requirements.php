@@ -153,11 +153,23 @@ final class Requirements extends Platform\Model {
         return $return;
     }
 
+    /**
+     * Checks the current version 
+     * 
+     * @param type $component
+     * @return type
+     */
     public function checkVersion($component) {
 
         return version_compare($component['current'], $component['version'], $component['minimal']);
     }
 
+    /**
+     * Returns an instance of the requirements model
+     * 
+     * @staticvar self $instance
+     * @return \self
+     */
     public static function getInstance() {
 
         static $instance;

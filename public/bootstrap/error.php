@@ -34,7 +34,7 @@
                             </div>
                             <hr />
                             <div>
-                                <a  href="/">Homepage</a>
+                                <a  href="/">Home Page</a>
                                 <tpl:import layout="console" />
                             </div>
                         </article>

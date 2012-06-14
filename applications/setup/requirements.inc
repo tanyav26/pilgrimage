@@ -111,6 +111,12 @@ $requirements = array(
             "writtable" => true,
             "path" => FSPATH."config",
             "terminal" => true,
+        ),
+        "session" => array(
+            "title" => "Sessions folder",
+            "writtable" => true,
+            "path" => APPPATH."setup".DS.'sessions',
+            "terminal" => true,
         )
     )
 );

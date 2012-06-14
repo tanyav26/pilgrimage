@@ -35,7 +35,7 @@
             case 1 :  echo($this->layout("license")); ?>
 
             <span style="display: block"><input type="radio" name="eula_accept" value="1"  /> <?php echo _(' I <strong>ACCEPT</strong> the terms and conditions'); ?></span>
-            <span style="display: block"><input type="radio" name="eula_accept" /> <?php echo _(' I <strong>DO NOT accept</strong> the terms and conditions'); ?> </span>
+            <span style="display: block"><input type="radio" name="eula_accept" value="0" /> <?php echo _(' I <strong>DO NOT accept</strong> the terms and conditions'); ?> </span>
 
             <?php break;
             default : ?>
@@ -50,7 +50,7 @@
                 <?php if($step>1) : ?>
                 <a href="/setup/install/step'.((int) $this->get('step') - 1) " class="btn pull-left" type="button" rel="goback"><?php echo _('Previous Step'); ?></a>
                 <?php endif; ?>
-                <button type="submit" class="btn pull-right"><?php echo ($step === 1) ? "I agree to these Terms" : "Next Step" ?></button>
+                <button type="submit" class="btn pull-right"><?php echo "Next Step" ?></button>
             </div>
         </div>
 
