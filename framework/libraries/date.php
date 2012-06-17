@@ -50,7 +50,12 @@ class Date extends Object {
      * 
      * @return string
      */
-    public static function today(){}
+    public static function today(){
+        
+        date_default_timezone_set('UTC');
+        
+        return date('d/M/Y');
+    }
 
     /**
      * Returns yesterdays date timestamp

@@ -38,7 +38,7 @@ namespace Library;
  * @link       http://stonyhillshq/documents/index/carbon4/libraries/i18n
  * @since      Class available since Release 1.0.0 Jan 15, 2012 3:09:41 AM
  */
-trait Singleton {
+class Singleton {
 
     static $_instance = NULL;
 

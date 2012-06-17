@@ -29,16 +29,16 @@
 
             <div class="container">  
                 <tpl:block data="page.block.alerts" /> 
-                <tpl:block data="page.block.banner">Banner</tpl:block>
+
+
                 <section class="layout-block boxed has-bg">
                     <div class="row-fluid">
                         <div class="span12">
                             <div class="row-fluid">
                                 <div class="span8">  
-                                    <div class="page-header">
-                                        <h1><tpl:element type="text" data="page.title">Administrator</tpl:element><small>23/04/2012</small></h1>
+                                    <div class="page-header no-margin">
+                                        <h1><tpl:element type="text" data="page.title">Administrator</tpl:element><small><?php echo \Library\Date::today(); ?></small></h1>
                                     </div>
-                                    <tpl:block data="page.block.body" />
                                 </div>
                                 <div class="span4">
                                     <div class="left-pad"> 
@@ -61,12 +61,26 @@
                                                 <button class="btn"><i class="icon icon-lock"></i>Privacy</button>
                                             </div>
                                         </div>
-                                        <div style="margin-top:15px">
-                                            <tpl:menu id="adminmenu" type="nav-block" />
-                                            
-                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <tpl:condition  data="page.block.banner" test="isset" value="1" >
+                                <div class="row-fluid layout-banner white-background bordered">
+                                    <tpl:block data="page.block.banner">Banner</tpl:block>
+                                </div>
+                            </tpl:condition>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="row-fluid">
+                                <div class="span8 half-top-pad">  
+                                    <tpl:block data="page.block.body" />
+                                </div>
+                                <div class="span4">
+                                    <div class="left-pad"> 
+                                        <tpl:menu id="adminmenu" type="nav-block" />
                                         <tpl:block data="page.block.side">Sidebar</tpl:block>
-                                        
                                         <div class="widget top-pad">
                                             <div class="widget-body">
                                                 <h2>2,190<small class="pull-right">60%</small></h2>

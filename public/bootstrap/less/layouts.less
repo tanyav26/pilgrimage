@@ -30,8 +30,15 @@
     }
 }
 
+.layout-banner{
+    margin: -1px -@gridGutterWidth -1px; padding: @gridGutterWidth;
+    &.white-background{ background: @white; }
+    &.bordered{ border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
+}
+
 .left-pad{ padding-left:@gridGutterWidth }
 .top-pad{ padding-top:@gridGutterWidth }
+.half-top-pad{ padding-top:(@gridGutterWidth * 0.5)-3 }
 .right-pad{ padding-right:@gridGutterWidth }
 .bottom-pad{ padding-bottom:@gridGutterWidth }
 

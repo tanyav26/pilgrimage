@@ -100,6 +100,23 @@ class Menu extends Parse\Template {
         $li = array();
         
         foreach ($menuItems as $item) {
+            
+            
+            //@TODO Menu Plugins
+            //Search for all plugin placemarkers in menu item names
+            //Search for (?<=\$\{)([a-zA-Z]+)(?=\}) and replace with data
+            if( preg_match_all('/(?:(?<=\%\{)).*?(?=\})/i', $item['menu_title'], $matches) ){
+      
+                $placemarkers   = (is_array($matches) && isset($matches[0])) ? $matches[0] : array();
+                
+                foreach($placemarkers as $k=>$dataid){
+                    //@TODO Now call all menu items plugins
+                    $item['menu_title'] = $dataid;
+                }
+                
+                //Replace with data;
+                continue;    
+            }
 
             //@TODO check if this is the current menu item and set it as active
             $query   = \Library\Uri::getInstance()->getQuery();

@@ -46,8 +46,10 @@ final class Admin extends Platform\View {
         //you can add stuff you want displayed;
         $user = $this->get('user');
         
-        $dashpanel = $this->output->layout("dashpanel");
+        $dashpanel  = $this->output->layout("dashpanel");
+        $dashbanner = $this->output->layout("dashbanner");
         
+        $this->output->addToPosition("banner" , $dashbanner );
         $this->output->addToPosition("body" , $dashpanel );
         
     }

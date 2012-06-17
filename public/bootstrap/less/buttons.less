@@ -65,6 +65,7 @@
   background-color: darken(@white, 10%);
   .opacity(65);
   .box-shadow(none);
+    color: @grayLight;
 }
 
 
@@ -133,7 +134,7 @@
 // Set the backgrounds
 // -------------------------
 .btn-primary {
-  .buttonBackground(@primaryButtonBackground, spin(@primaryButtonBackground, 20));
+  .buttonBackground(#008DFD , @primaryButtonBackground);
 }
 // Warning appears are orange
 .btn-warning {
@@ -141,11 +142,11 @@
 }
 // Danger and error appear as red
 .btn-danger {
-  .buttonBackground(#ee5f5b, #bd362f);
+  .buttonBackground(#DD4B39, #D14836);
 }
 // Success appears as green
 .btn-success {
-  .buttonBackground(#62c462, #51a351);
+  .buttonBackground(#3D9400, #398A00);
 }
 // Info appears as a neutral blue
 .btn-info {

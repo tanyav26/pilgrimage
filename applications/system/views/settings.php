@@ -28,7 +28,7 @@ class Settings extends Platform\View {
 
     public function configurationForm() {
         
-        $this->output->setPageTitle(_("System Settings"));
+        $this->output->setPageTitle(_("System Preferences"));
         
         
         $panel = $this->output->layout('Settings/configuration'); 
@@ -41,7 +41,7 @@ class Settings extends Platform\View {
     public function privacyConfigForm() {
         
         //1. The page Title
-        $this->output->setPageTitle(_("Permissions & Privacy Settings"));
+        $this->output->setPageTitle(_("Access control settings"));
         
         //2. Load Model
         $model = $this->load->model("privacy");
@@ -67,7 +67,6 @@ class Settings extends Platform\View {
         $this->output->setPageTitle(_("Appearance Settings"));
         
         $panel = $this->output->layout('settings/appearance'); 
-
 
         return $this->display($panel);
         
@@ -98,7 +97,7 @@ class Settings extends Platform\View {
     
    public function maintenanceConfigForm() {
         
-        $this->output->setPageTitle(_("Input Settings"));
+        $this->output->setPageTitle(_("Maintenance Settings"));
         
         $panel = $this->output->layout('settings/maintenance'); 
 
