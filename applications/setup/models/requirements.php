@@ -100,21 +100,21 @@ final class Requirements extends Platform\Model {
         //Test install directory is writable, readable
         //Test we are not trying to overide an installation
         $return = array(
-            "title" => $directive['path'], "name" => $name, "current" => "Not Writtable", "test" => false
+            "title" => $directive['path'], "name" => $name, "current" => "Not Writable", "test" => false
         );
 
         if (is_array($directive)) {
             //If the extension is loaded
-            $return['status']     = ((bool)$directive['writtable']) ? "Writtable" : "Not Writtable";
-           if(\Library\Folder\Files::isWritable($path) && (bool)$directive['writtable']){
-               $return['current'] = "Is Writtable";
+            $return['status']     = ((bool)$directive['writable']) ? "Writable" : "Not Writable";
+           if(\Library\Folder\Files::isWritable($path) && (bool)$directive['writable']){
+               $return['current'] = "Is Writable";
                $return['test']    =  true;
-           }elseif(!\Library\Folder\Files::isWritable($path) && !(bool)$directive['writtable']){
+           }elseif(!\Library\Folder\Files::isWritable($path) && !(bool)$directive['writable']){
               $return['test']     =  true; 
            }
            
            if(\Library\Folder\Files::isWritable($path)){
-               $return['current'] = "Is Writtable";
+               $return['current'] = "Is Writable";
            }
         }
         //Return test result;

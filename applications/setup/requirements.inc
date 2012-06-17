@@ -108,13 +108,13 @@ $requirements = array(
     "directories" => array(
         "config" => array(
             "title" => "Configuration folder",
-            "writtable" => true,
+            "writable" => true,
             "path" => FSPATH."config",
             "terminal" => true,
         ),
         "session" => array(
             "title" => "Sessions folder",
-            "writtable" => true,
+            "writable" => true,
             "path" => APPPATH."setup".DS.'sessions',
             "terminal" => true,
         )
