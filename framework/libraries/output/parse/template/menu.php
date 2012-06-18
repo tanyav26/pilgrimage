@@ -149,11 +149,13 @@ class Menu extends Parse\Template {
                 
                 $dropdown = array(
                     "CLASS"=> "dropdown-toggle",
-                    "DATA-TOGGLE"=>"dropdown"
+                    "DATA-TOGGLE"=>"dropdown",
+                    "HREF"  => "#"
                 );
                 $link['CLASS'] .= ' dropdown';
                 
                 $link['CHILDREN'][0] = array_merge( $link['CHILDREN'][0]  , $dropdown );
+                unset($link['CHILDREN'][0]['HREF']);
                 $title = $link['CHILDREN'][0]['CDATA'];
                 unset($link['CHILDREN'][0]['CDATA']);
                 $link['CHILDREN'][0]['CDATA'] = $title.(( $menuType <> "nav-block") ? '<b class="caret"></b>': ""); 
