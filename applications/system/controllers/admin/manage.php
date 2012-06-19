@@ -42,7 +42,6 @@ use Application\System\Controllers as System;
  */
 class Manage extends System\Admin {
 
-
     public function info() {
         $view = $this->load->view('manager');
 
@@ -53,20 +52,26 @@ class Manage extends System\Admin {
 
     public function categories() {
         $view = $this->load->view('manager');
-        
+
         //die;
-
-
         //$view->information(); //sample call;        
         //$this->output();
     }
 
-    public function lists() {
+    public function groups() {
+        $view = $this->load->view('manager');
 
+        //die;
+        //$view->information(); //sample call;        
+        //$this->output();
+    }
+
+
+    public function fields() {
         $view = $this->load->view('manager');
 
 
-        $view->lists(); //sample call;        
+        $view->fields(); //sample call;        
         //$this->output();
     }
 
@@ -74,27 +79,19 @@ class Manage extends System\Admin {
         $view = $this->load->view('manager');
 
 
-        $view->activity(); //sample call;        
-        //$this->output();
-    }
-
-    public function moderation() {
-        $view = $this->load->view('manager');
-
-
         $view->queue(); //sample call;        
         //$this->output();
     }
 
-    public function announcements() {
+    public function emails() {
+        
         $view = $this->load->view('manager');
 
 
-        $view->announcements(); //sample call;        
+        $view->emails(); //sample call;        
         //$this->output();
     }
 
-    
     public static function getInstance() {
 
         static $instance;
@@ -106,5 +103,6 @@ class Manage extends System\Admin {
 
         return $instance;
     }
+
 }
 

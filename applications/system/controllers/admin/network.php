@@ -75,9 +75,9 @@ class Network extends System\Admin {
     
     public function relationships(){}
     
-    public function extended(){}
+    public function authorities(){}
     
-    public function rules(){}
+    public function members(){}
     
 
     public static function  getInstance() {

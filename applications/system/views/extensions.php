@@ -29,7 +29,7 @@ class Extensions extends Platform\View {
     public function installExtensions() {
 
         //To set the pate title use
-        $this->output->setPageTitle("Administrator | Add Extension");
+        $this->output->setPageTitle("Add Extension");
 
 
         //$sidebar    = $this->output->layout( "index_sidebar" );
@@ -44,7 +44,7 @@ class Extensions extends Platform\View {
     public function updateExtensions() {
 
         //To set the pate title use
-        $this->output->setPageTitle("System > Update Extensions");
+        $this->output->setPageTitle("Update Extensions");
 
 
         $sidebar = $this->output->layout("index_sidebar");
@@ -59,7 +59,7 @@ class Extensions extends Platform\View {
     public function lists() {
 
         //To set the pate title use
-        $this->output->setPageTitle("Administrator | Installed Extensions");
+        $this->output->setPageTitle("Installed Extensions");
 
         $dashboard = $this->output->layout("extensions/lists");
 
@@ -70,7 +70,7 @@ class Extensions extends Platform\View {
     public function repositories() {
 
         //To set the pate title use
-        $this->output->setPageTitle("Administrator | Extension Repositories");
+        $this->output->setPageTitle("Extension Repositories");
 
         $dashboard = $this->output->layout("extensions/repositories");
 

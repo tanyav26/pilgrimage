@@ -37,10 +37,10 @@ class Manager extends Platform\View {
         $this->display($dashboard);
     }
 
-    public function announcements() {
+    public function emails() {
 
         //To set the pate title use
-        $this->output->setPageTitle("Administrator | Extension Repositories");
+        $this->output->setPageTitle("Edit &amp; Send Emails");
 
         $dashboard = $this->output->layout("manager/announcements");
 
@@ -48,21 +48,11 @@ class Manager extends Platform\View {
         $this->display($dashboard);
     }
 
-    public function information() {
-
-        //To set the pate title use
-        $this->output->setPageTitle("Administrator | System information");
-
-        $dashboard = $this->output->layout("manager/info");
-
-
-        $this->display($dashboard);
-    }
 
     public function queue() {
 
         //To set the pate title use
-        $this->output->setPageTitle("Administrator | Moderation Queue");
+        $this->output->setPageTitle("Moderate reported activity");
 
         $dashboard = $this->output->layout("manager/moderation");
 
@@ -70,10 +60,10 @@ class Manager extends Platform\View {
         $this->display($dashboard);
     }
 
-    public function activity() {
+    public function fields() {
 
         //To set the pate title use
-        $this->output->setPageTitle("Administrator | Activity Log");
+        $this->output->setPageTitle("Manage post types");
 
         $dashboard = $this->output->layout("manager/log");
 

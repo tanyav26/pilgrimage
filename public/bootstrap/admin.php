@@ -44,7 +44,7 @@
                                     <div class="left-pad"> 
                                         <div class="btn-toolbar no-top-margin">
                                             <div class="btn-group">
-                                                <button class="btn">View As</button>
+                                                <button class="btn">Add New ...</button>
                                                 <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                                                 <ul class="dropdown-menu">
                                                     <li><a href="#">Action</a></li>
@@ -55,10 +55,7 @@
                                                 </ul>
                                             </div>
                                             <div class="btn-group">
-                                                <button class="btn">Edit Info</button>
-                                            </div>
-                                            <div class="btn-group">
-                                                <button class="btn"><i class="icon icon-lock"></i>Privacy</button>
+                                                <button class="btn"><i class="icon icon-lock"></i>Access Control</button>
                                             </div>
                                         </div>
                                     </div>

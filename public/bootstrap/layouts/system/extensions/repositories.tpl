@@ -1,28 +1,44 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
-<div id="contenttable">
-    <form class="wrap">
-        <fieldset >
-            <h3><?php echo _('Extension Repositories'); ?></h3>
-            <p><?php echo _('Add more repositories, from whence to discover popular extensions for your platform'); ?></p>
-            <div class="grid">
-                <div class="row wrap">
-                    <div class="col third" align="left">
-                        <a class="button" title="<?php echo _('Add New Repository') ?> " data-controls-modal="newrepository" data-backdrop="true" data-keyboard="true" ><?php echo _('Add New'); ?></a>
+    <form class="form-horizontal">
+        <fieldset class="no-margin">
+            <div class="content-list">
+                <div class="row-fluid">
+                    <div class="span3">
+                        <div class="btn-group pull-left">
+                            <button class="btn">Bulk Actions</button>
+                            <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col third" align="center">&nbsp;</div>
-                    <div class="col third" align="right">
-                        <button style="margin-right:-3px">List</button>
-                        <button style="margin-left:-3px" class="active">Grid</button>
+                    <div class="span7">
+                        <div class="pagination no-margin" align="center">
+                            <ul>
+                                <li class="active"><a href="#"><i class="icon  icon-th-list"></i> List</a></li>
+                                <li><a href="#"><i class="icon  icon-th"></i> Grid</a></li>
+                            </ul>
+                        </div>
                     </div>
-
+                    <div class="span2">
+                        <div class="btn-group pull-right">
+                            <button class="btn">Length</button>
+                            <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <div class="row wrap"></div>
-            </div>
-
-            <hr class="hr-ccc" />
-
-            <div class="grid">
-                <table id="post_table" width="100%">
+                <table class="table table-striped">
                     <!-- Colgroup -->  
                     <colgroup>  
                         <col class="col-odd" />  
@@ -41,8 +57,10 @@
                             <th scope="col" id="post_date">Date</th>
                         </tr>
                     </thead>
-                    <tfoot></tfoot>
+                    <tfoot>
+                    </tfoot>
                     <tbody>
+                        <?php for ($i = 0; $i < 30; $i++): ?>
                         <tr>
                             <td><input type="checkbox" /></td>
                             <td>Post Title and a summary</td>
@@ -52,40 +70,54 @@
                             <td>Comments</td>
                             <td>Date</td>
                         </tr>
+                        <?php endfor ; ?>
                     </tbody>
                 </table>
             </div>
+            <div class="row-fluid">
+                <div class="span3">
+                    <div class="btn-group pull-left">
+                        <button class="btn">Bulk Actions</button>
+                        <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="span7">
+                    <div class="pagination no-margin" align="center">
+                        <ul>
+                            <li class="disabled"><a href="#">«</a></li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">6</a></li>
+                            <li><a href="#">7</a></li>
+                            <li><a href="#">»</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="span2">
+                    <div class="btn-group pull-right">
+                        <button class="btn">Length</button>
+                        <button class="btn dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </fieldset>
     </form>
+</tpl:layout>
 
-</div>
-
-
-<div id="newrepository" class="modal"  style="display: none">
-    <div class="modal-header">
-        <a href="#" class="close">×</a>
-        <h3>Add Repository</h3>
-    </div>
-    <div class="modal-body">
-        <form>
-            <label><?php echo _('Repository Address'); ?><em class="mandatory">*</em>
-                <span class="small"><?php echo _('URL to the repository source'); ?></span>
-            </label>
-            <input type="text" name="site-name" id="site-name" style="width:500px" placeholder="e.g http://repository.tuiyo.co.uk" />
-            <label style="margin: 15px 0 10px">
-                <input type="checkbox" name="allow-registraion" checked="checked" value="1" />
-                <?php echo _('Verify packages before install?'); ?>
-                <span class="small"></span>
-            </label>
-
-            <label style="margin: 15px 0 10px">
-                <input type="checkbox" name="allow-registraion" checked="checked" value="1" />
-                <?php echo _('Match to repository before intall, to get automatic updates'); ?>
-                <span class="small"></span>
-            </label>
-            <button type="submit" style="margin-top: 10px; margin-left: 0px"><?php echo _('Add Repository'); ?></button>
-        </form>
-    </div>
-    <div class="modal-footer">Footer</div>
-</div>
-    </tpl:layout>

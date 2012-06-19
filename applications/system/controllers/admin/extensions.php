@@ -54,6 +54,7 @@ class Extensions extends System\Admin {
         $view->updateExtensions(); //sample call;        
         //$this->output();
     }
+    
 
     public function add() {
 
@@ -64,7 +65,7 @@ class Extensions extends System\Admin {
         //$this->output();
     }
 
-    public function lists() {
+    public function installed() {
 
         $view = $this->load->view('extensions');
         $this->set("user2", "livingstone");
