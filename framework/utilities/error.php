@@ -42,11 +42,8 @@ use Library;
  */
 class Error extends \Library\Log {
 
-
     const APPLICATION_ERROR = 9033;
-
     const PLATFORM_ERROR = 9032;
-
     const LIBRARY_ERROR = 9031;
 
     /**
@@ -56,9 +53,9 @@ class Error extends \Library\Log {
      * @param type $errorMsg
      */
     final static function raise($errorCode, $errorMsg) {
-
+        
     }
-    
+
     final static function shutdown() {
 
         $shutdownable = array(E_ERROR, E_PARSE, E_CORE_ERROR, E_COMPILE_ERROR);
@@ -156,38 +153,46 @@ class Error extends \Library\Log {
         //Display a parsed error;
         //$output->displayError();
         $label = array(
-	        1 => "error", //Stop the dispatcher! Immediately! At any stage in which its found!!
-	        2 => "warning",
-	        4 => "error", //Stop
-	        8 => "notice",
-	        16 => "error", //Stop
-	        32 => "error",
-	        64 => "error", //Stop
-	        128 => "warning",
-	        256 => "error", //Stop
-	        512 => "error",
-	        1024 => "error",
-	        //2048 => "Php Strict Error",//**ignore**
-	        9031 => "error", //Stop
-	        9032 => "error", //Stop
-	        9033 => "error", //Stop
+            1 => "error", //Stop the dispatcher! Immediately! At any stage in which its found!!
+            2 => "warning",
+            4 => "error", //Stop
+            8 => "notice",
+            16 => "error", //Stop
+            32 => "error",
+            64 => "error", //Stop
+            128 => "warning",
+            256 => "error", //Stop
+            512 => "error",
+            1024 => "error",
+            //2048 => "Php Strict Error",//**ignore**
+            9031 => "error", //Stop
+            9032 => "error", //Stop
+            9033 => "error", //Stop
         );
 
-        $log = "<span style='display:inline; padding-left: 5px'>$errMsg</span>\tOn line <b><a href=\"#\">$line</a></b> of file <span style='display:inline'>$file</span>";
+        $log = "<span class='error-message'>$errMsg</span> On line <b><a href=\"#\">$line</a></b> of file <span class='error-file'>$file</span><br />";
 
         //echo $log;
+        $debugTitle = trim("[$errNo] " . $errType[$errNo]);
+        Debugger::log($log, $debugTitle, $label[$errNo]);
 
-        Debugger::log( $log , trim( $errType[$errNo]." ($errNo)" ) , $label[$errNo] );
 
         $shutdownable = array(1, 4, 16, 64, 256, 9031, 9032, 9033);
 
         //shutdown and display error;
         if (in_array($errNo, $shutdownable)) {
-            
+
+            $output->setPageTitle("404"); //The default title;
+            $showMessage = \Library\Config::getParam("mode", 1, "environment");
+
+            if ((int) $showMessage < 2) {
+                $output->setPageTitle($errType[$errNo]);
+                $output->addToPosition("content", $log . " Check the console for a full backtrace of these errors");
+            }
             //print_R($output);
             //You need to stop the debugger;
             Debugger::stop();
-            
+
             return $output->displayError();
         }
     }
@@ -212,5 +217,6 @@ class Error extends \Library\Log {
 
         return self::handler($errNo, $errMsg, $file, $line, $trace);
     }
+
 }
 

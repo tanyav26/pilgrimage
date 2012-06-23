@@ -102,8 +102,14 @@ final class Debugger extends Library\Log{
         //Log usage
         self::log( $now , _("Stop execution time") , "info"  );
         
+        $output     = \Library\Output::getInstance();
+                
+        $showMessage= \Library\Config::getParam("mode", 1 , "environment");
+        if ((int)$showMessage < 2 ) {
+            $output = \Library\Output::getInstance();
+            $output->set("debug", array("displaylog"=>true ) );
+        }
         //Set the debugger output
-        $output = \Library\Output::getInstance();
         $output->set("debug", array("start"=>static::$time ) );
         $output->set("debug", array("stop"=>$now ) );
         $output->set("debug", array("speed"=>$speed ) );

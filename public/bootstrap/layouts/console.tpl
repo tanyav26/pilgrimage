@@ -1,5 +1,5 @@
 <tpl:layout name="console" xmlns:tpl="http://tuiyo.co.uk/tpl">
-    <tpl:if condition="debug.displaylog"> 
+    <tpl:condition data="debug.displaylog" test="boolean" value="1"> 
         <button data-toggle="modal" data-target="#console" class="btn pull-right" style="margin: 5px;position: fixed;bottom: 0;left: 0;">Console</button>
         <div id="console" class="modal hide fade modal-wide"  style="white-space: wrap; display: none;">
             <div class="modal-header">
