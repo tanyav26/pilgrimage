@@ -40,6 +40,7 @@ use Application\System\Controllers as System;
  * 
  */
 class Settings extends System\Admin {
+    
 
     public function configuration() {
 
@@ -80,6 +81,38 @@ class Settings extends System\Admin {
         $form = $this->load->view('settings');
 
         $form->moderationConfigForm();
+    }
+    
+    public function save(){
+        
+        $referer    = $this->input->getReferer();
+        $view       = $this->load->view('settings') ;
+        $options    = $this->load->model('options') ;
+        
+        //Check that we have post data;
+        if (!$this->input->methodIs("post")) {
+            $this->alert("No configuration data recieved",'Something went wrong','error' );
+            $this->redirect( $referer );
+            return false;
+        }
+        //Get the data;
+        if(($data = $this->input->getArray("options", array(), "post") ) == FALSE ){
+            $this->alert("No input data recieved",'Something went wrong','error' );
+            $this->redirect( $referer );
+            return false; //useless
+        }
+
+        //Check we have all the information we need!
+        if(!$options->save( $data )){
+            $this->alert(_($options->getError()),'Something went wrong','error');
+            $this->redirect( $referer );
+            return false;
+        }
+       
+        $this->alert( "Your configuration settings have now been saved","","success");
+        $this->setredirect( $referer ); //Redirect back to the page sending in the data;
+        
+        return true;
     }
 
     public function input() {

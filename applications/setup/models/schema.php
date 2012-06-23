@@ -214,7 +214,7 @@ final class Schema extends Platform\Model {
         static::$database->query(
             "CREATE TABLE IF NOT EXISTS `?options` (
                 `option_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-                `option_group_id` int(11) NOT NULL DEFAULT '0',
+                `option_group_id` varchar(64) NOT NULL DEFAULT  '',
                 `option_name` varchar(64) NOT NULL DEFAULT '',
                 `option_value` longtext NOT NULL,
                 `option_autoload` varchar(20) NOT NULL DEFAULT 'yes',
