@@ -72,7 +72,8 @@ class Block extends Parse\Template {
         
         if(!isset($tag['DATA'])) return null;
         
-        $data = self::getData($tag['DATA'], $tag['_DEFAULT'] ); //echo $data;
+        $default = isset($tag['_DEFAULT'] ) ? $tag['_DEFAULT'] : null;
+        $data = self::getData($tag['DATA'], $default ); //echo $data;
         //print_R($data);
         //$name = $tag[]
         //if is array loop through each;
@@ -96,8 +97,21 @@ class Block extends Parse\Template {
                 //@TODO Execute the callback after writing
                 $writer->writeRaw( $string );
             }
-            return; // Successfull
+            return true; // Successfull
         }
+        
+        //Using default and return data
+        if(isset($tag['RETURN']) && (bool)$tag['RETURN']){
+            if(isset($tag['CDATA']) && !empty($tag['CDATA'])):
+                $writer->writeRaw( $tag['CDATA'] );
+                return true;
+            endif;
+            
+            if(isset($tag['CHILDREN'])&&!empty($tag['CHILDREN'])):
+                return $tag['CHILDREN'];
+            endif;
+        }
+       return false;
     }
 
     /**

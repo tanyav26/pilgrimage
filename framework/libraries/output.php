@@ -237,8 +237,8 @@ class Output extends Object {
 
         static::$prints = $this->restartBuffer();
         
-        $this->layout = "error";
-        $this->display($format, 404 , "error");
+        $this->layout = "splash";
+        $this->display($format, 404 , "splash");
 
         //Stop any further execution?
         $this->abort();
