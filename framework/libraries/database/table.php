@@ -292,27 +292,11 @@ abstract class Table extends \Library\Object {
 
     abstract public function describe();
 
-    abstract public function insert($data=null);
+    abstract public function insert($data=null, $updateIfExists = TRUE);
 
     abstract public function update($key, $data=null);
 
     abstract public function truncate();
     
-        /**
-     * Method to Insert if a row does not exists, or update if it does exists
-     * NB. Requires a version of MysQL greater than 5.0
-     * 
-     * @return boolean
-     */
-    abstract public function insertIfNotExists();
     
-    /**
-     * Method to update a database row if it exists or inserts a new row if not exits.
-     * Alias of InsertIfNotExists
-     * 
-     * NB Requires a version of MySQL greater than 5.0
-     * 
-     * @return Boolean
-     */
-    abstract public function updateIfExists();
 }

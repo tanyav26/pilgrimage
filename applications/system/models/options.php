@@ -46,9 +46,45 @@ class Options extends Platform\Model {
     public function display(){ return false; }
     
     
-    public function save( $options ){
+    /**
+     * Saves options to the database, inserting if none exists or updating on duplicate key
+     * 
+     * @param type $options
+     * @param type $group
+     * @return boolean
+     */
+    public function save( $options , $group = null ){    
         
-        $dbtable = $this->load->table( "?options" );
+        if(!is_array($options)||empty($options)){
+            $this->setError( "No options passed to be saved");
+            return false;
+        }
+        //Inser the data if not exists, or update if it does exists;
+        $table      = $this->load->table( "?options" );      
+        $shortgun   = "REPLACE INTO ?options (`option_group_id`,`option_name`,`option_value`)\t";
+        //$this->database->startTransaction();
+        $values     = array();
+        foreach($options as $option=>$value):
+            
+            $binder     = "( ".$this->database->quote($group).",".$this->database->quote($option).",".$this->database->quote($value).")";
+            $values[]   = $binder;
+            
+            //$table->insert($binder, T);
+        endforeach;
+        $primaryKey  = $table->keys();
+        $shortgunval = implode(',',$values);
+        $shortgun   .= "VALUES\t".$shortgunval;
+        //$shortgun   .= "\tON DUPLICATE KEY UPDATE ".$primaryKey->Field."=VALUES(`option_group_id`)+VALUES(`option_name`)+VALUES(`option_value`)";
+
+        
+        //echo $shortgun; die;
+        
+        //Run the query directly
+        if(!$this->database->exec($shortgun)){
+            $this->setError( $this->database->getError() );
+            return false;
+        }
+        return true;
     }
     
 

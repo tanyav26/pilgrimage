@@ -85,28 +85,8 @@ final class Table extends \Library\Database\Table {
         
     }
     
+   
     
-    /**
-     * Method to Insert if a row does not exists, or update if it does exists
-     * You must call bindData before this method otherwise will return false
-     * 
-     * NB. Requires a version of MysQL greater than 5.0
-     * 
-     * @return boolean
-     */
-    public function insertIfNotExists(){}
-    
-    /**
-     * Method to update a database row if it exists or inserts a new row if not exits.
-     * You Must call bindData before this method otherwise will return false
-     * 
-     * NB Requires a version of MySQL greater than 5.0
-     * 
-     * @return Boolean
-     */
-    public function updateIfExists(){
-        return $this->insertIfNotExists();
-    }
 
     /**
      * Saves changes to the database
@@ -144,7 +124,10 @@ final class Table extends \Library\Database\Table {
      * @param type $data
      * @return type 
      */
-    public function insert($data=null) {
+    public function insert($data=null, $updateIfExists = FALSE) {
+        
+        $primary    = $this->keys("primary");
+        $set        = array();
         //1. Check if we have data and deal with it!
         if(!is_null($data)){
             if(!$this->bindData($data)){
@@ -152,9 +135,6 @@ final class Table extends \Library\Database\Table {
                 return false;
             }
         }  
-        
-        $primary    = $this->keys();
-        $set        = array();
         
         foreach($this->schema as $field=>$fieldObject){
             
@@ -171,7 +151,15 @@ final class Table extends \Library\Database\Table {
         }
         
         //Insert into the database
-        return $this->dbo->insert( $this->getTableName() , $set );
+        if($updateIfExists):
+           $unique     = $primary->Field;
+           if(empty($unique)){
+               $updateIfExists = FALSE;
+           }
+        endif;
+        
+        //Insert into the database
+        return $this->dbo->insert( $this->getTableName() , $set , $updateIfExists, $unique);
         
     }
 

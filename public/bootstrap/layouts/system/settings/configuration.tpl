@@ -187,7 +187,7 @@
                     </div>
                 </fieldset>
             </div>
-            <input type="hidden" name="test-field" value="Hello!" />
+            <input type="hidden" name="options_group" value="system-config" />
             <div class="tab-pane" id="information">
                 <p class="alert alert-info">This page displays the existing configurations. Updated settings will be displayed here when saved</p>
             </div>

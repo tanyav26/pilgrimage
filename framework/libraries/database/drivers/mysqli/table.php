@@ -121,7 +121,7 @@ final class Table extends \Library\Database\Table {
      * @param type $data
      * @return type 
      */
-    public function insert($data=null) {
+    public function insert($data=null, $updateIfExists = FALSE) {
         //1. Check if we have data and deal with it!
         if(!is_null($data)){
             if(!$this->bindData($data)){
@@ -130,7 +130,7 @@ final class Table extends \Library\Database\Table {
             }
         }  
         
-        $primary    = $this->keys();
+        $primary    = $this->keys("primary");
         $set        = array();
         
         foreach($this->schema as $field=>$fieldObject){
@@ -147,8 +147,15 @@ final class Table extends \Library\Database\Table {
             }
         }
         
+        if($updateIfExists):
+           $unique     = $primary->Field;
+           if(empty($unique)){
+               $updateIfExists = FALSE;
+           }
+        endif;
+        
         //Insert into the database
-        return $this->dbo->insert( $this->getTableName() , $set );
+        return $this->dbo->insert( $this->getTableName() , $set , $updateIfExists, $unique);
         
     }
 
@@ -169,23 +176,6 @@ final class Table extends \Library\Database\Table {
         }  
     }
     
-    /**
-     * Method to Insert if a row does not exists, or update if it does exists
-     * NB. Requires a version of MysQL greater than 5.0
-     * 
-     * @return boolean
-     */
-    public function insertIfNotExists(){}
-    
-    /**
-     * Method to update a database row if it exists or inserts a new row if not exits.
-     * NB Requires a version of MySQL greater than 5.0
-     * 
-     * @return Boolean
-     */
-    public function updateIfExists(){
-        return $this->insertIfNotExists();
-    }
 
     /**
      * Deletes all the records in a tablse

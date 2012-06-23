@@ -57,7 +57,7 @@ class Accessory extends \Library\Database\ActiveRecord {
      * @param <type> $table
      * @param <type> $set
      */
-    final public function insert($table='', $set=NULL) {
+    final public function insert($table = '', $set = NULL, $updateIfExists = FALSE, $updateUnique=NULL) {
 
         if (!is_null($set)) {
             //print_R($set);
@@ -86,8 +86,10 @@ class Accessory extends \Library\Database\ActiveRecord {
         $table = $this->DBO->identifiers($table, TRUE, NULL, FALSE);
         $keys = array_keys($this->arraySet);
         $values = array_values($this->arraySet);
-
-        $shortgunsql = $this->query = "INSERT INTO " . $table . " (" . implode(', ', $keys) . ") VALUES (" . implode(', ', $values) . ")";
+        //$primary    = $this->keys();
+        $keyword = ($updateIfExists) ? "REPLACE":"INSERT";
+        $shortgunsql = $this->query = "{$keyword} INTO " . $table . " (" . implode(', ', $keys) . ") VALUES (" . implode(', ', $values) . ")";  
+ 
 
         $this->DBO->resetRun();
 

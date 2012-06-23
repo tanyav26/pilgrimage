@@ -101,16 +101,24 @@ class Settings extends System\Admin {
             $this->redirect( $referer );
             return false; //useless
         }
+        
+        //Check that we have a group value
+        if(($group = $this->input->getString("options_group", "system-config", "post") ) == FALSE ){
+            $this->alert("No input data group recieved",'Settings not saved','error' );
+            $this->redirect( $referer );
+            return false; //useless
+        }
 
         //Check we have all the information we need!
-        if(!$options->save( $data )){
-            $this->alert(_($options->getError()),'Something went wrong','error');
+        if(!$options->save( $data , $group)){
+            $this->alert($options->getError(),'Something went wrong','error');
             $this->redirect( $referer );
             return false;
         }
        
-        $this->alert( "Your configuration settings have now been saved","","success");
-        $this->setredirect( $referer ); //Redirect back to the page sending in the data;
+        
+        $this->alert( "Your configuration settings have now been saved","Everthing worked","success");
+        $this->redirect( $referer ); //Redirect back to the page sending in the data;
         
         return true;
     }

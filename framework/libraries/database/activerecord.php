@@ -1183,7 +1183,7 @@ abstract class ActiveRecord extends \Library\Object {
      * Inserts a record to a dbms table
      * 
      */
-    abstract public function insert($table='', $set=NULL);
+    abstract public function insert($table='', $set=NULL , $updateIfExists = FALSE, $updateUnique=NULL);
     
     /**
      * Deletes a record from a dbms table

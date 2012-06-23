@@ -43,6 +43,8 @@ use Platform;
  */
 final class Database extends \Library\Object  {
     
+    static $params = array();
+    
     public function getParams(){}
     
     public function saveParams(){}
