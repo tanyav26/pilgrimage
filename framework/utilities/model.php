@@ -102,6 +102,7 @@ abstract class Model extends \Library\Object {
         //Determine all other auto set vars;
         return $this->output->get($name, $default = '', $format = '');
     }
+    
 
     /**
      * The default method for each controller

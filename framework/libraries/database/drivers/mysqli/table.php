@@ -168,6 +168,24 @@ final class Table extends \Library\Database\Table {
             }
         }  
     }
+    
+    /**
+     * Method to Insert if a row does not exists, or update if it does exists
+     * NB. Requires a version of MysQL greater than 5.0
+     * 
+     * @return boolean
+     */
+    public function insertIfNotExists(){}
+    
+    /**
+     * Method to update a database row if it exists or inserts a new row if not exits.
+     * NB Requires a version of MySQL greater than 5.0
+     * 
+     * @return Boolean
+     */
+    public function updateIfExists(){
+        return $this->insertIfNotExists();
+    }
 
     /**
      * Deletes all the records in a tablse

@@ -191,6 +191,7 @@ abstract class Table extends \Library\Object {
             // internal attributes of an object are ignored
             if (!in_array($k, $ignore)) {
                 if ($dataArray && isset($data[$k])) {
+                    //If $data[k] is an array?
                     $this->schema[$k]->Value = $data[$k];
                 } else if ($dataObject && isset($data->$k)) {
                     $this->schema[$k]->Value = $data->$k;
@@ -296,4 +297,22 @@ abstract class Table extends \Library\Object {
     abstract public function update($key, $data=null);
 
     abstract public function truncate();
+    
+        /**
+     * Method to Insert if a row does not exists, or update if it does exists
+     * NB. Requires a version of MysQL greater than 5.0
+     * 
+     * @return boolean
+     */
+    abstract public function insertIfNotExists();
+    
+    /**
+     * Method to update a database row if it exists or inserts a new row if not exits.
+     * Alias of InsertIfNotExists
+     * 
+     * NB Requires a version of MySQL greater than 5.0
+     * 
+     * @return Boolean
+     */
+    abstract public function updateIfExists();
 }

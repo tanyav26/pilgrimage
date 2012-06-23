@@ -84,6 +84,29 @@ final class Table extends \Library\Database\Table {
     public function load($keyid = null) {
         
     }
+    
+    
+    /**
+     * Method to Insert if a row does not exists, or update if it does exists
+     * You must call bindData before this method otherwise will return false
+     * 
+     * NB. Requires a version of MysQL greater than 5.0
+     * 
+     * @return boolean
+     */
+    public function insertIfNotExists(){}
+    
+    /**
+     * Method to update a database row if it exists or inserts a new row if not exits.
+     * You Must call bindData before this method otherwise will return false
+     * 
+     * NB Requires a version of MySQL greater than 5.0
+     * 
+     * @return Boolean
+     */
+    public function updateIfExists(){
+        return $this->insertIfNotExists();
+    }
 
     /**
      * Saves changes to the database

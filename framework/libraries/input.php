@@ -341,13 +341,6 @@ final class Input extends Object {
                         "options" => $options
                     );
                     break;
-                case "array":
-                    $filter = \IS\RAW;
-                    $options = array(
-                        "flags" => FILTER_FLAG_STRIP_LOW,
-                        "options" => $options
-                    );
-                    break;
                 case "object": //@TODO, 
                 case "resource":
                 case "NULL":
@@ -372,6 +365,31 @@ final class Input extends Object {
         return $this->filter($variable, $filter, $options);
     }
 
+    /**
+     * Returns the original refering URL
+     * 
+     * @param type $internalize
+     * @return type
+     */
+    public function getReferer( $internalize = TRUE ){
+        
+        $Session = Session::getInstance();
+        $_url    = $Session->get("referer");
+       
+        if(empty($_url)):
+            $_url     = strtolower($_SERVER['HTTP_REFERER']);
+        endif;
+        
+        if($internalize){
+            $_url = Uri::internal( $_url );
+        }
+        
+        $Session->set("referer", $_url );
+        
+        //Return the refering URL;
+        return (string) $_url;
+    }
+    
     /**
      * Returns the verb curresponding to the 
      * current request method
@@ -468,6 +486,46 @@ final class Input extends Object {
      */
     public function getArray($name, $default = '', $verb='request', $options=array()) {
         
+        if (strtolower($verb) == 'request') {
+            $verb = $this->getVerb();
+        }
+        
+        //just form casting
+        $verb   = strtolower($verb);
+        $input  = $this->$verb;
+
+        //Undefined
+        if (empty($name) || !isset($input) || !isset($input[$name])) {
+            if (isset($default) && !empty($default)) {
+                return $default;
+            } else {
+                return null; //nothing for that name;
+            }
+        }
+        
+        //FILTER_SANITIZE_STRING
+        //FILTER_SANITIZE_STRIPPED
+        //\IS\HTML;
+        $filter     = \IS\CUSTOM;  //FILTER_CALLBACK;
+        $options    = array(
+            "flags" => FILTER_REQUIRE_ARRAY,
+        );
+        
+        //uhhhnrrr...
+        $array = $input[$name];
+
+       //Use the call back filter to clean this array
+
+        //Sub processing for HTML and all that?
+        return (array) $array;
+        
+    }
+    
+    private static function cleanArray(){
+                //Pre treat;
+        if (get_magic_quotes_gpc() && ($input[$name] != $default) && ($verb != 'files')) {
+            $variable = stripslashes($input[$name]); //??
+        }
     }
 
     /**
