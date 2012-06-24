@@ -1,30 +1,13 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
-<form class="wrap">
-    <fieldset >
-        <h3><?php echo _('System Appearance settings'); ?></h3>
-
-        <p>The details requested here are important in governing how the platform works. Read through and complete each accordingly</p>
-
-        <hr class="hr-ccc" />
-
-        <div class="grid">
-            <div class="row wrap">
-                <div class="col third" align="left">
-                    <a class="button" title="<?php echo _('Add new themes'); ?>" href="/system/admin/extensions/add" style="width:80px">Add Themes</a>
-                </div>
-                <div class="col third" align="center"> </div>
-                <div class="col third" align="right">
-                    <button style="margin-right:-3px">List</button>
-                    <button style="margin-left:-3px" class="active">Grid</button>
-                </div>
-            </div>
-        </div>
-    </fieldset>
-    <fieldset>
-        <label> <?php echo _('Background Image'); ?>
-            <span class="small"> &HorizontalLine; <a href="#"><?php echo _('Upload from URL instead?');?></a></span>
-        </label>
-    <input type="file" name="backgroun-image" value="" id="title" style="width: 100%" />
-    </fieldset>
-</form>
-    </tpl:layout>
+    <ul class="nav nav-tabs admin-main-tabs" id="apperancePreferences">
+        <li class="active"><a data-target="#themes" data-toggle="tab">Themes</a></li>
+        <li><a data-target="#navigation" data-toggle="tab">Navigations</a></li>
+        <li><a data-target="#widgets" data-toggle="tab">Widgets</a></li>
+        <li><a data-target="#layouts" data-toggle="tab">Layouts</a></li>
+        <li><a data-target="#optimization" data-toggle="tab">Optimization</a></li>
+        <li><a data-target="#scripts" data-toggle="tab">Scripts</a></li>
+        <li><a data-target="#banners" data-toggle="tab">Banners</a></li>
+    </ul>
+    <form>
+    </form>
+</tpl:layout>

@@ -182,7 +182,6 @@ final class Schema extends Platform\Model {
                 (50, 0, 'Deleted Messages', '/member/messages/trash', NULL, 0, 4, 'link', NULL, 7, 8),
                 (51, 0, 'Drafts', '/member/messages/drafts', NULL, 0, 4, 'link', NULL, 9, 10);"
          );
-        
     }
     
     private static function createMenuGroupTable(){

@@ -25,7 +25,8 @@
   .border-radius(4px);
   @shadow: 0 1px 3px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.1);
   //.box-shadow(@shadow);
-    background: #33363B;
+    background: @navbarBackground;
+    border-bottom: 4px solid @navbarBottomBorder;
 }
 
 // Navbar button for toggling navbar items in responsive layouts
@@ -306,8 +307,8 @@
     width: 1px;
     margin: 0 9px;
     overflow: hidden;
-    background-color: #252525;
-    border-right: 1px solid #434343;
+    background-color: #0C344D;
+    border-right: 1px solid #0B5072;
 }
 
 // Secondary (floated right) nav in topbar
