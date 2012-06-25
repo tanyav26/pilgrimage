@@ -480,7 +480,7 @@ AddCharset utf-8 .html .css .js .xml .json .rss .atom
 <IfModule mod_rewrite.c>
 
     # All front-end files, redirect to the public folder or CDN
-    RewriteRule .*\.(jpg|jpeg|gif|png|bmp|html|htm|phtml|ico|css|js|swf)$ public/$0 [L,NC]
+    RewriteRule .*\.(js|css|gif|png|jpe?g|oga|ogg|m4a|ogv|mp4|m4v|webm|svg|svgz|eot|ttf|otf|woff|ico|webp|appcache|manifest|htc|crx|xpi|safariextz|vcf)$ public/$0 [L,NC]
     RewriteRule ^(?:applications|config|framework)\b.* index.php/$0 [L]
 
     RewriteCond %{REQUEST_FILENAME} !-f
