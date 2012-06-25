@@ -20,6 +20,7 @@
  * @since      Class available since Release 1.0.0 Jan 14, 2012 4:54:37 PM
  * 
  */
+
 namespace Application\System\Controllers\Admin;
 
 use Platform;
@@ -40,55 +41,71 @@ use Application\System\Controllers as System;
  * 
  */
 class Network extends System\Admin {
-    
-    
-    
-    public function add(){
 
-        $view = $this->load->view('network') ; 
-        
+    public function add() {
+
+        $view = $this->load->view('network');
+
         $this->set("user2", "livingstone");
-        
+
         $view->addNetworkMember();
-        
     }
-    
-    public function lists($type=""){
-        
-        $view = $this->load->view('network') ;   
-        
+
+    public function lists($type = "") {
+
+        $view = $this->load->view('network');
+
         //$this->set("user2", "livingstone");
-        
-        $this->set("content-type", $type );
-        
-        $view->listNetworkMembers() ; //sample call; //$this->output();
+
+        $this->set("content-type", $type);
+
+        $view->listNetworkMembers(); //sample call; //$this->output();
     }
-    
-    public function analytics(){
-        
-         $view = $this->load->view('network') ;   
-        
+
+    public function analytics() {
+
+        $view = $this->load->view('network');
+
         //$this->set("user2", "livingstone");
-        
+
         $view->analytics();
     }
-    
-    public function relationships(){}
-    
-    public function authorities(){}
-    
-    public function members(){}
-    
 
-    public static function  getInstance() {
-        
+    public function relationships() {
+        $view = $this->load->view('network');
+
+        //$this->set("user2", "livingstone");
+
+        $view->relationships();
+    }
+
+    public function authorities() {
+        $view = $this->load->view('network');
+
+        //$this->set("user2", "livingstone");
+
+        $view->accessControl();
+    }
+
+    public function members() {
+        $view = $this->load->view('network');
+
+        //$this->set("user2", "livingstone");
+
+        $view->listNetworkMembers();
+    }
+
+    public static function getInstance() {
+
         static $instance;
         //If the class was already instantiated, just return it
-        if (isset($instance) ) return $instance ;
+        if (isset($instance))
+            return $instance;
 
-        $instance =  new self;
+        $instance = new self;
 
-        return $instance;   
+        return $instance;
     }
+
 }
 

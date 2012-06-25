@@ -261,7 +261,7 @@
                 <div class="controls input">
                     <div class="input-append">
                         <span class="uneditable-input input-xlarge">97j2j2g435jp5j1gj42983gg2GJ24j</span>
-                        <a href="http://reset-api-key" class="add-on" title="Reset API Key"><i class="icon-refresh"></i>&nbsp;</a>
+                        <a href="http://reset-api-key" class="add-on" title="Reset API Key"><i class="icon-refresh"></i></a>
                     </div>
                     <span class="help-block">A valuable possession. Keep it safe. Click the refresh button to regenerate if ever you feel unsafe</span>
                 </div>

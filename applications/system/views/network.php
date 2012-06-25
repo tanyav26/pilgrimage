@@ -41,7 +41,7 @@ class Network extends Platform\View {
     
     public function listNetworkMembers() {
         
-        $this->output->setPageTitle(_("Administrator | Network Members Lists"));
+        $this->output->setPageTitle(_("Network Members"));
         
         
         $panel = $this->output->layout('network/lists'); 
@@ -53,10 +53,35 @@ class Network extends Platform\View {
  
     public function analytics(){
          
-        $this->output->setPageTitle(_("Administrator | Network Analytics"));
+        $this->output->setPageTitle(_("Network Analytics"));
         
         
         $panel = $this->output->layout('network/analytics'); 
+
+
+        return $this->display($panel);
+        
+    }
+    
+        public function accessControl(){
+         
+        $this->output->setPageTitle(_("Access Control Manager"));
+        
+        
+        $panel = $this->output->layout('network/accesscontrol'); 
+
+
+        return $this->display($panel);
+        
+    }
+    
+    
+        public function relationships(){
+         
+        $this->output->setPageTitle(_("Network Graph"));
+        
+        
+        $panel = $this->output->layout('network/relationships'); 
 
 
         return $this->display($panel);
