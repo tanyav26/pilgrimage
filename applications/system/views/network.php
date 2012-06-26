@@ -25,87 +25,89 @@ use Library;
  *
  */
 class Network extends Platform\View {
-    
 
     public function addNetworkMember() {
-        
+
         $this->output->setPageTitle(_("Administrator | Add Network Member"));
-        
-        
-        $panel = $this->output->layout('network/add'); 
+
+
+        $panel = $this->output->layout('network/add');
 
 
         return $this->display($panel);
-        
     }
-    
+
     public function listNetworkMembers() {
-        
+
         $this->output->setPageTitle(_("Network Members"));
-        
-        
-        $panel = $this->output->layout('network/lists'); 
+
+
+        $panel = $this->output->layout('network/lists');
 
 
         return $this->display($panel);
-        
     }
- 
-    public function analytics(){
-         
+
+    public function analytics() {
+
         $this->output->setPageTitle(_("Network Analytics"));
-        
-        
-        $panel = $this->output->layout('network/analytics'); 
+
+
+        $panel = $this->output->layout('network/analytics');
 
 
         return $this->display($panel);
-        
     }
-    
-        public function accessControl(){
-         
-        $this->output->setPageTitle(_("Access Control Manager"));
-        
-        
-        $panel = $this->output->layout('network/accesscontrol'); 
+
+    public function accessControl() {
+
+        //1. The page Title
+        $this->output->setPageTitle(_("Access control settings"));
+
+        //2. Load Model
+        $model = $this->load->model("authority");
+
+        //3. Get the authorities list
+        $authorities = $model->getAuthorities();
+
+        //4. Set Properties
+        $this->set("authorities", $authorities);
+
+        //5. The layout
+        $panel = $this->output->layout('network/permissions');
 
 
+        //6. Display
         return $this->display($panel);
-        
     }
-    
-    
-        public function relationships(){
-         
+
+    public function relationships() {
+
         $this->output->setPageTitle(_("Network Graph"));
-        
-        
-        $panel = $this->output->layout('network/relationships'); 
+
+
+        $panel = $this->output->layout('network/relationships');
 
 
         return $this->display($panel);
-        
     }
-      
-    
-    public function display( $panel = ""){
-        
-        return $this->output->addToPosition("body", $panel);  
-        
-    }
-    
-   
-   final static function getInstance(){
-        
-        static $instance;
-        
-        //If the class was already instantiated, just return it
-        if (isset($instance) ) return $instance ;
 
-        $instance =  new self();
+    public function display($panel = "") {
+
+        return $this->output->addToPosition("body", $panel);
+    }
+
+    final static function getInstance() {
+
+        static $instance;
+
+        //If the class was already instantiated, just return it
+        if (isset($instance))
+            return $instance;
+
+        $instance = new self();
 
         return $instance;
     }
-    
+
 }

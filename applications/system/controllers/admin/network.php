@@ -79,12 +79,24 @@ class Network extends System\Admin {
         $view->relationships();
     }
 
-    public function authorities() {
-        $view = $this->load->view('network');
+    public function authorities($edit = "") {
 
-        //$this->set("user2", "livingstone");
-
-        $view->accessControl();
+        $form   = $this->load->view('network');
+        $params = $this->getRequestArgs();
+        
+        //1. Load the model
+        $privacy = $this->load->model("authority");
+        
+        //2. If we are editing the authority, save
+        if ($this->input->methodIs("post")):
+            if(!$privacy->store( $edit , $params)){
+                $errors = $this->getErrorString();
+                $this->alert($errors, null , "error");
+            }  $this->alert(_("Changes have been saved successfully"), "", "success");        
+            $this->redirect( $this->output->link("/system/admin/network/authorities") );
+        endif;
+      
+        $form->accessControl();
     }
 
     public function members() {

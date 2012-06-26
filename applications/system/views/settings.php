@@ -38,22 +38,14 @@ class Settings extends Platform\View {
         
     }
     
-    public function privacyConfigForm() {
+    public function navigationConfigForm() {
         
         //1. The page Title
-        $this->output->setPageTitle(_("Access control settings"));
+        $this->output->setPageTitle(_("Navigation settings"));
         
-        //2. Load Model
-        $model = $this->load->model("privacy");
-        
-        //3. Get the authorities list
-        $authorities = $model->getAuthorities();
-        
-        //4. Set Properties
-        $this->set( "authorities" , $authorities );
         
         //5. The layout
-        $panel = $this->output->layout('settings/permissions'); 
+        $panel = $this->output->layout('settings/navigation'); 
 
 
         //6. Display

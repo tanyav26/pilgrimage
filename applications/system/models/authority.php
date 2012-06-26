@@ -5,7 +5,7 @@ namespace Application\System\Models;
 use Platform;
 use Library;
 
-class Privacy extends Platform\Model {
+class Authority extends Platform\Model {
 
     //put your code here
 

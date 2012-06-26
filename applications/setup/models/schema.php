@@ -154,7 +154,7 @@ final class Schema extends Platform\Model {
                 (20, 19, 'System Preferences', '/system/admin/settings/configuration', '', 20, 1, 'link', '', 38, 47),
                 (21, 19, 'Appearance Settings', '/system/admin/settings/appearance', '', 21, 1, 'link', '', 39, 46),
                 (22, 19, 'Maintenance Settings', '/system/admin/settings/maintenance', '', 22, 1, 'link', '', 40, 45),
-                (23, 19, 'Access Control Settings', '/system/admin/settings/privacy', '', 23, 1, 'link', '', 41, 44),
+                (23, 19, 'Navigation Settings', '/system/admin/settings/navigation', '', 23, 1, 'link', '', 41, 44),
                 (24, 19, '%{ext:settings}', '/system/admin/settings/:application', '', 24, 1, 'method', 'lookup', 42, 43),
                 (25, 0, 'Extensions Manager', '/system/admin/extensions/index', '', 25, 1, 'link', '', 49, 56),
                 (26, 25, 'Installed extensions', '/system/admin/extensions/installed', '', 26, 1, 'link', '', 50, 55),
