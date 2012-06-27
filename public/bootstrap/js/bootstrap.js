@@ -303,6 +303,7 @@
         , selector = $this.attr('data-target')
         , $parent
         , isActive
+        , isPersistent
 
       if (!selector) {
         selector = $this.attr('href')
@@ -313,8 +314,16 @@
       $parent.length || ($parent = $this.parent())
 
       isActive = $parent.hasClass('open')
+      isPersistent = $this.hasClass('persistent')
+      
+      if(isActive && isPersistent){
+          $parent.toggleClass('open')
+          //clearMenus()
+          //return false
+      }
 
       clearMenus()
+      //isPersistent && $parent.toggleClass('open')
       !isActive && $parent.toggleClass('open')
 
       return false
@@ -323,7 +332,7 @@
   }
 
   function clearMenus() {
-    $(toggle).parent().removeClass('open')
+    $(toggle).not('.persistent').parent().removeClass('open')
   }
 
 

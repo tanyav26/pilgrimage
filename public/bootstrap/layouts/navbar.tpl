@@ -27,7 +27,7 @@
                                 </ul>
                             </li>
                             <li class="shareform dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-white icon-plus"></i></a>
+                                <a href="#" class="dropdown-toggle persistent" data-toggle="dropdown"><i class="icon icon-white icon-plus"></i></a>
                                 <ul class="dropdown-menu">
                                     <li>
                                         <tpl:import layout="input" />
