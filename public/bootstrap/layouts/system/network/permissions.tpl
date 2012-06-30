@@ -1,14 +1,14 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
     <?php $authorities = $this->get("authorities"); ?>
     <ul id="permissions-tab" class="nav nav-tabs admin-main-tabs">
+        <li  class="active"><a data-target="#authorities" data-toggle="tab">Authorities</a></li>
+        <li><a data-toggle="tab" data-target="#addauthority">Add Authority</a></li>        
         <li><a data-toggle="tab" data-target="#addauthorityrole">Add Permission</a></li>
-        <li class="active"><a data-target="#permissions" data-toggle="tab">Access Permissions</a></li>        
+        <li><a data-target="#permissions" data-toggle="tab">Access Permissions</a></li>        
         <li><a data-target="#roles" data-toggle="tab">Edit Roles</a></li>
-        <li><a data-toggle="tab" data-target="#addauthority">Add Authority</a></li>
-        <li><a data-target="#authorities" data-toggle="tab">Authority Groups</a></li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane active" id="permissions">
+        <div class="tab-pane" id="permissions">
             <form class="form-horizontal"> 
 
                 <fieldset>
@@ -23,6 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
+
                             <?php
                             foreach ($this->get("authorities") as $e):
                             if (is_array($e['authority']['permissions'])) :
@@ -43,20 +44,28 @@
                             ?>
                         </tbody>
                     </table>
-                    <div class="pagination">
-                        <ul>
-                            <li class="disabled"><a href="#">«</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">»</a></li>
-                        </ul>
-                    </div>
                 </fieldset>
             </form>
         </div>
-        <div class="tab-pane" id="authorities">...</div>
+        <div class="tab-pane active" id="authorities">
+            <table class="table table-striped table-condensed">
+                <thead>
+                    <tr>
+                        <th class="span11">Authority Name</th>
+                        <th class="span1">Edit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($this->get("authorities") as $i): ?>
+                    <tr>
+                        <td><?php echo str_repeat('<span class="tree-indent"></span>', (int) $i['authority']['indent']) . sprintf(_("%s"), $i['authority']['authority_title']); ?></td>
+                        <td><a href="#"><?php echo _('Edit'); ?></a></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+
+        </div>
         <div class="tab-pane" id="roles">...</div>
         <div class="tab-pane" id="settings">...</div>
         <div class="tab-pane" id="addauthorityrole" >

@@ -85,11 +85,11 @@ class Network extends System\Admin {
         $params = $this->getRequestArgs();
         
         //1. Load the model
-        $privacy = $this->load->model("authority");
+        $authority = $this->load->model("authority");
         
         //2. If we are editing the authority, save
         if ($this->input->methodIs("post")):
-            if(!$privacy->store( $edit , $params)){
+            if(!$authority->store( $edit , $params)){
                 $errors = $this->getErrorString();
                 $this->alert($errors, null , "error");
             }  $this->alert(_("Changes have been saved successfully"), "", "success");        

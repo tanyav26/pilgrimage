@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="profile-cover">
-                        <a href="#" class="clearfix cover"><img  src="http://www.xt3radio.nl/wp-content/uploads/2011/09/Varianz015_Cover2.jpg" width="940" height="300" /></a>
+                        <a href="#" class="clearfix cover"><img  src="http://booknerd.ca/wp-content/uploads/2011/11/divergent-veronica-roth_featured.jpg" width="940" height="300" /></a>
                         <div class="profile-avatar">
                             <a href="#" class="clearfix">
                                 <img  src="http://placehold.it/260x250" width="260" height="250" />

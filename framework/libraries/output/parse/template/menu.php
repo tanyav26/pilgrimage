@@ -97,7 +97,8 @@ class Menu extends Parse\Template {
      */
     public static function element( $menuItems , $menuType = "nav-pill" ) {
         
-        $li = array();
+        $li         = array();
+        //$hasActive  = false;
         
         foreach ($menuItems as $item) {
             
@@ -121,7 +122,7 @@ class Menu extends Parse\Template {
             //@TODO check if this is the current menu item and set it as active
             $query   = \Library\Uri::getInstance()->getQuery();
             $active  = ( \Library\Uri::internal( $item['menu_url'] ) <> \Library\Uri::internal( $query ) ) ? false : true;
-           
+            //$hasActive = $active;
             $link  = array(
                 "ELEMENT" => 'li',
                 "CLASS"=> ((isset($item['menu_classes'])&&!empty($item['menu_classes'])) ?  $item['menu_classes'] : "link").(($active)?" active":""),

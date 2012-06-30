@@ -285,7 +285,8 @@
 
  /* DROPDOWN CLASS DEFINITION
   * ========================= */
-
+  $('li.dropdown:has("li.active")').addClass('open active');
+  //alert('li.dropdown:has("li.active")');
   var toggle = '[data-toggle="dropdown"]'
     , Dropdown = function ( element ) {
         var $el = $(element).on('click.dropdown.data-api', this.toggle)
@@ -608,6 +609,8 @@
   * ============ */
 
   $(function () {
+   var activeTab = $('[data-target=' + location.hash + ']');
+       activeTab && activeTab.tab('show');
     $('body').on('click.tab.data-api', '[data-toggle="tab"], [data-toggle="pill"]', function (e) {
       e.preventDefault()
       $(this).tab('show')
