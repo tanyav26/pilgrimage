@@ -193,7 +193,7 @@ abstract class Object {
             return $results;
         } else {
             //There are no events to trigger
-            \Platform\Debugger::log(sprintf(_("[{$time}] No events triggered for %s in %2s context"), $event, $context), $event, "info");
+            //\Platform\Debugger::log(sprintf(_("[{$time}] No events triggered for %s in %2s context"), $event, $context), $event, "info");
 
             return false;
         }

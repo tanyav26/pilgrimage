@@ -8,7 +8,7 @@
         <label class="control-label"><?php echo _('Database Name') ; ?></label>
         <div class="controls input">
             <input type="text" name="dbname" id="dbname" class="input-xxlarge" placeholder="" />
-            <span class="help-block">The name of the database you want to run Pilgrimage from</span>
+            <span class="help-block">The name of the existing database you want to run Pilgrimage from. We won't create the table for you</span>
         </div>
     </div>
 
