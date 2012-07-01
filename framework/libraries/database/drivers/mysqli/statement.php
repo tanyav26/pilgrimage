@@ -167,7 +167,7 @@ final class Statement extends \Library\Database\Results {
 
         //echo $this->getResultId();
 
-        return mysqli_fetch_array($this->getResultId());
+        return mysqli_fetch_array($this->getResultId(), MYSQLI_ASSOC);
     }
 
     /**

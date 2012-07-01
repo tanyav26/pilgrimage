@@ -75,6 +75,58 @@ final class Navigator extends Model {
 
         return $instance;
     }
+    
+    public static function getAllMenus(){
+        
+        $self = static::getInstance();
+       
+        //1. Get all menu items from the table
+        $statement = $self->database->select("m.menu_id, m.menu_parent_id, m.menu_title, m.menu_url, m.menu_classes, m.menu_order, m.menu_group_id, g.menu_group_title, g.menu_group_uid, g.menu_group_iscore, m.menu_type, m.menu_callback, m.menu_iscore, m.lft, m.rgt")->from("?menu m")->join("?menu_group g", "m.menu_group_id=g.menu_group_id", "LEFT")->orderBy("m.menu_id", "ASC")->prepare();
+        $results = $statement->execute();
+
+        $nodes  = array();
+        $groups = array();
+        $rights = array();
+        
+        //print_r($results->fetchAll("object"));
+        while($menu = $results->fetchAssoc()) {
+            
+            $nodes[$menu['menu_group_uid']]['menu_group_id']    = $menu['menu_group_id'];
+            $nodes[$menu['menu_group_uid']]['menu_group_title'] = $menu['menu_group_title'];
+            $nodes[$menu['menu_group_uid']]['menu_group_uid']   = $menu['menu_group_uid'];
+            $nodes[$menu['menu_group_uid']]['menu_group_iscore']   = $menu['menu_group_iscore'];
+            //while($authority = $results->fetchAssoc()){
+            $menu['children'] = array();
+            $menu['indent'] = 0;
+
+            //Now indent
+            if (sizeof($rights[$menu['menu_group_uid']]) > 0) {
+                $lastrgt = end($rights[$menu['menu_group_uid']]);
+                $largestrgt = max($rights[$menu['menu_group_uid']]);
+
+                if ($menu['rgt'] > $lastrgt) {
+                    array_pop($rights[$menu['menu_group_uid']]);
+                }
+                if ($menu['rgt'] > $largestrgt) {
+                    $rights[$menu['menu_group_uid']] = array();
+                }
+            }
+            $menu['indent'] = sizeof($rights[$menu['menu_group_uid']]);
+            $rights[$menu['menu_group_uid']][] = $menu['rgt'];
+
+            $parent         = $menu['menu_parent_id'];
+            $id             = $menu['menu_id'];
+
+            if (array_key_exists($parent, $nodes[$menu['menu_group_uid']]['nodes'])) {
+                $nodes[$menu['menu_group_uid']]['nodes'][$parent]["children"][$id] = $menu;
+            } else {
+                $nodes[$menu['menu_group_uid']]['nodes'][$id] = $menu;
+            }
+        }
+        
+        return $nodes;
+        
+    }
 
     /**
      * Automatically generates a menu, based on the page

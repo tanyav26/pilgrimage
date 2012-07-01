@@ -40,8 +40,38 @@ $requirements = array(
             "installed" => true,
             "loaded" => true
         ),
+        "tokenizer" => array(
+            "title" => _('Rokenizer'),
+            "installed" => true,
+            "loaded" => true
+        ),    
+        "pcre" => array(
+            "title" => _('Perl Compatible RegEx'),
+            "installed" => true,
+            "loaded" => true
+        ),
         "json" => array(
             "title" => _('javaScript Object Notation'),
+            "installed" => true,
+            "loaded" => true
+        ),
+        "iconv" => array(
+            "title" => _('IconV Character-Set Conversion'),
+            "installed" => true,
+            "loaded" => true
+        ),
+        "imap" => array(
+            "title" => _('IMAP extension'),
+            "installed" => true,
+            "loaded" => true
+        ),
+        "mbstring" => array(
+            "title" => _('Multibyte Strings'),
+            "installed" => true,
+            "loaded" => true
+        ),
+        "ctype" => array(
+            "title" => _('Character-Type checking'),
             "installed" => true,
             "loaded" => true
         ),

@@ -28,7 +28,7 @@ class Network extends Platform\View {
 
     public function addNetworkMember() {
 
-        $this->output->setPageTitle(_("Administrator | Add Network Member"));
+        $this->output->setPageTitle(_("Add Network Member"));
 
 
         $panel = $this->output->layout('network/add');
@@ -62,7 +62,7 @@ class Network extends Platform\View {
     public function accessControl() {
 
         //1. The page Title
-        $this->output->setPageTitle(_("Access control settings"));
+        $this->output->setPageTitle(_("Access Control Settings"));
 
         //2. Load Model
         $model = $this->load->model("authority");

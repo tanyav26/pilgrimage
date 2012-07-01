@@ -73,18 +73,18 @@
                                 <div class="span8">
                                     <div class="row-fluid top-pad">
                                         <div class="span4">
-                                            <div class="well">
+                                            <div class="well no-margin">
                                                 <h1 class="count-body">189</h1> <small>Friends</small>
                                             
                                             </div>
                                         </div>
                                         <div class="span4">
-                                            <div class="well">
+                                            <div class="well no-margin">
                                                 Detail
                                             </div>
                                         </div>
                                         <div class="span4">
-                                            <div class="well">
+                                            <div class="well no-margin">
                                                 Detail
                                             </div>
                                         </div>
@@ -92,7 +92,7 @@
                                     </div>
                                 </div>
                                 <div class="span4">
-                                    <div class="left-pad top-pad">
+                                    <div class="left-pad top-pad bottom-pad">
                                         <ul class="page-info">
                                             <li class="signup-date">Member since 10 months ago</li>
                                             <li class="signin-date">Last logged in about 6 days ago</li>
@@ -108,7 +108,7 @@
                             </div>
                             <div class="row-fluid">
                                 <div class="span8 tab-content">
-                                    <hr />
+<!--                                    <hr />-->
                                     <div class="entry tab-pane" id="timelinepane">Timeline</div>
                                     <div class="entry tab-pane active" id="aboutmepane">
                                         <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, <a href="#">links look like this</a>. tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>

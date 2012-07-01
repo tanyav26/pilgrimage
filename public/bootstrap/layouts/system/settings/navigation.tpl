@@ -1,10 +1,13 @@
 <tpl:layout xmlns="http://www.w3.org/1999/xhtml" xmlns:tpl="http://tuiyo.co.uk/tpl">
     <ul class="nav nav-tabs admin-main-tabs" id="navigationPreferences">
-        <li class="active"><a data-target="#general" data-toggle="tab">Admin Menu</a></li>
-        <li><a data-target="#server" data-toggle="tab">Main Menu</a></li>
-        <li><a data-target="#localization" data-toggle="tab">Profile Menu</a></li>
-        <li><a data-target="#information" data-toggle="tab">Dashboard Menu</a></li>
-        <li><a data-target="#information" data-toggle="tab">Settings Menu</a></li>
+        
+        <?php $menus = $this->get('menus'); foreach($menus as $group ) : ?>
+            <?php if($group['menu_group_iscore'] > 0 ): ?>
+                <li><a data-target="#<?php echo $group['menu_group_uid']; ?>" data-toggle="tab"><?php echo $group['menu_group_title']; ?></a></li>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        
+        
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon icon-plus"></i></a>
             <ul class="dropdown-menu">

@@ -43,6 +43,10 @@ class Settings extends Platform\View {
         //1. The page Title
         $this->output->setPageTitle(_("Navigation settings"));
         
+        $menus = \Platform\Navigator::getAllMenus();
+        $this->set("menus", $menus);
+        
+        unset($menus);
         
         //5. The layout
         $panel = $this->output->layout('settings/navigation'); 
