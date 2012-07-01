@@ -12,58 +12,57 @@ class Authority extends Platform\Model {
     public function display() {
         
     }
-    
-    public function storePermissions($params = array()){
-        
+
+    public function storePermissions($params = array()) {
+
         //1. Load Helpers
         $encrypt = \Library\Encrypt::getInstance();
-        
+
         //2. Saniitize the data
-        $authorityAreaTitle         = $this->input->getString("area-title");
-        $authorityAreaURI           = $this->input->getString("area-uri");
-        $authorityAreaAction        = $this->input->getString("area-action");
-        $authorityAreaPermission    = $this->input->getString("area-permission");
-        $authorityId                = $this->input->getInt("area-authority");
-        
+        $authorityAreaTitle = $this->input->getString("area-title");
+        $authorityAreaURI = $this->input->getString("area-uri");
+        $authorityAreaAction = $this->input->getString("area-action");
+        $authorityAreaPermission = $this->input->getString("area-permission");
+        $authorityId = $this->input->getInt("area-authority");
+
         //3. Synchronize and bind to table object
         $table = $this->load->table("?authority_permissions");
-        
+
         $aData = array(
-            "authority_id"          => $authorityId,
-            "permission_area_uri"   => strtolower($authorityAreaURI),
-            "permission"            => strtolower($authorityAreaPermission),
-            "permission_type"       => strtolower($authorityAreaAction),
-            "permission_title"      => $authorityAreaTitle
+            "authority_id" => $authorityId,
+            "permission_area_uri" => strtolower($authorityAreaURI),
+            "permission" => strtolower($authorityAreaPermission),
+            "permission_type" => strtolower($authorityAreaAction),
+            "permission_title" => $authorityAreaTitle
         );
-        
+
         //All fields required;
-        foreach($aData as $k=>$item){
-            if(empty($item)){
-                $this->setError( _("Please complete all permission fields; Provide a title and uri defining the area, a permission type and value") );
+        foreach ($aData as $k => $item) {
+            if (empty($item)) {
+                $this->setError(_("Please complete all permission fields; Provide a title and uri defining the area, a permission type and value"));
                 return false;
             }
         }
-        
+
         if (!$table->bindData($aData)) {
             //print_R($table->getErrors());
-            throw new \Platform\Exception( $table->getError() );
+            throw new \Platform\Exception($table->getError());
             return false;
         }
-        
+
         //Check the Permission Area URI, make sure its not a route id,
         //We need exact URI paths, Throw an error is it does not make sense
-        
+
         if ($table->isNewRow()) {
             
         }
-        
+
         //5. Save the table modifications
         if (!$table->save()) {
             return false;
         }
-        
+
         return true;
-        
     }
 
     /**
@@ -73,13 +72,13 @@ class Authority extends Platform\Model {
      * @return type 
      */
     public function store($data = "", $params = array()) {
-        
-        if(!empty($params)){
-            if(isset($params[0])&&  strtolower($params[0])=="permissions"){
-                return $this->storePermissions( $params );
+
+        if (!empty($params)) {
+            if (isset($params[0]) && strtolower($params[0]) == "permissions") {
+                return $this->storePermissions($params);
             }
         }
-        
+
         //1. Load Helpers
         $encrypt = \Library\Encrypt::getInstance();
 
@@ -120,7 +119,7 @@ class Authority extends Platform\Model {
 
         //4. Are we adding a new row
         if ($table->isNewRow()) {
-            
+
             if (empty($authorityName) || empty($authorityParent) || empty($authorityTitle)) {
                 $this->setError(_('Every new authority must have a defined Title, and must be a subset of the public authority'));
                 return false;
@@ -147,7 +146,7 @@ class Authority extends Platform\Model {
         if (!$table->save()) {
             return false;
         }
-        
+
         return true;
     }
 
@@ -178,25 +177,22 @@ class Authority extends Platform\Model {
         $rows        = $results->fetchAll();
         $authorities = array();
         $right = array();
-        
+
         //print_R($rows);
 
         foreach ($rows as $authority) {
-        //while($authority = $results->fetchAssoc()){
-            if (count($right) > 0) {
+
+             if (count($right) > 0) {
                 while ($right[count($right) - 1] < $authority['rgt']) {
                     array_pop($right);
                 }
             }
             //Authority Indent
-            $authority["indent"] = count($right);
-            
+            $authority["indent"] = sizeof($right);
             //Authority Permissions;
-            if((int)$authority['permissions']>0){
-                
+            if ((int) $authority['permissions'] > 0) {
+
                 $authority['permissions'] = $this->database->select('p.*')->from("?authority_permissions p")->where("p.authority_id =", $authority['authority_id'])->run()->fetchAll();
-                
-                //print_R($authority['permissions']);
             }
 
             $node = array(
@@ -205,8 +201,6 @@ class Authority extends Platform\Model {
             $authorities[] = $node;
             $right[] = $authority['rgt'];
         }
-        
-        //print_R($authorities);
 
         return $authorities;
     }
