@@ -62,6 +62,10 @@ class Settings extends Platform\View {
         
         $this->output->setPageTitle(_("Appearance Settings"));
         
+        //Get the Menus
+        $menus = \Platform\Navigator::getAllMenus();
+        $this->set("menus", $menus);
+        
         $panel = $this->output->layout('settings/appearance'); 
 
         return $this->display($panel);

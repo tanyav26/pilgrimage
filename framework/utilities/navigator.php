@@ -95,12 +95,17 @@ final class Navigator extends Model {
             $nodes[$menu['menu_group_uid']]['menu_group_title'] = $menu['menu_group_title'];
             $nodes[$menu['menu_group_uid']]['menu_group_uid']   = $menu['menu_group_uid'];
             $nodes[$menu['menu_group_uid']]['menu_group_iscore']   = $menu['menu_group_iscore'];
+            
             //while($authority = $results->fetchAssoc()){
             $menu['children'] = array();
             $menu['indent'] = 0;
+            
+            if(!isset($rights[$menu['menu_group_uid']])){
+                $rights[$menu['menu_group_uid']] = array();
+            }
 
             //Now indent
-            if (sizeof($rights[$menu['menu_group_uid']]) > 0) {
+            if (is_array($rights[$menu['menu_group_uid']]) && sizeof($rights[$menu['menu_group_uid']]) > 0) {
                 $lastrgt = end($rights[$menu['menu_group_uid']]);
                 $largestrgt = max($rights[$menu['menu_group_uid']]);
 
@@ -111,11 +116,16 @@ final class Navigator extends Model {
                     $rights[$menu['menu_group_uid']] = array();
                 }
             }
-            $menu['indent'] = sizeof($rights[$menu['menu_group_uid']]);
+            $menu['indent'] = is_array($rights[$menu['menu_group_uid']]) ? sizeof($rights[$menu['menu_group_uid']]) : 0;
             $rights[$menu['menu_group_uid']][] = $menu['rgt'];
 
             $parent         = $menu['menu_parent_id'];
             $id             = $menu['menu_id'];
+            
+           if(!isset($nodes[$menu['menu_group_uid']]['nodes'])){
+                $nodes[$menu['menu_group_uid']]['nodes'] = array();
+            }
+            
 
             if (array_key_exists($parent, $nodes[$menu['menu_group_uid']]['nodes'])) {
                 $nodes[$menu['menu_group_uid']]['nodes'][$parent]["children"][$id] = $menu;
